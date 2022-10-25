@@ -57,6 +57,11 @@ fclean: clean
 	@${RM} ${TARGET}
 	@echo "program deleted"
 
+gitm:
+	git add .
+	git commit
+	git push
+
 re: fclean all
 
 .PHONY: all clean fclean re libftcreat
