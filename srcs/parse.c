@@ -1,21 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 14:56:38 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/10/25 16:45:56 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/10/25 16:11:49 by nfauconn          #+#    #+#             */
+/*   Updated: 2022/10/25 16:48:37 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINI_RT_H
-# define MINI_RT_H
+#include "miniRT.h"
 
-# include "libft.h"
+static bool	correct_filename(char *s)
+{
+	size_t	i;
+	size_t	len;
 
-void	parse(char *scene);
-bool	error_display(char *s);
+	len = ft_strlen(s);
+	if (!ft_strend_cmp(s, ".rt"))
+		return (0);
+	i = 0;
+	while (s[i] && i < len - 3)
+	{
+		if (!is_identifier(s[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
-#endif
+void	parse(char *scene)
+{
+	if (!correct_filename(scene))
+		exit (error_display("invalid scene file -> format : *.rt"));
+	
+}

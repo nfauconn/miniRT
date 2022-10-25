@@ -6,7 +6,7 @@
 /*   By: nfauconn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:03:53 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/10/25 15:05:47 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/10/25 16:42:28 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	main(int ac, char **av)
 {
 	if (ac != 2)
-		ft_printerror("please enter a map file\n");
+		return (error_display("please enter a scene file"));
+	parse(av[1]);
 	return (0);
 }

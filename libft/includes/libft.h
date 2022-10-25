@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/19 15:16:50 by noe              ###   ########.fr       */
+/*   Updated: 2022/10/25 16:41:06 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+# include <sys/types.h>
 # include <unistd.h>
 # include "ft_printf.h"
 
@@ -101,7 +102,6 @@ char		*ft_strrchr(const char *s, int c);
 
 /* CONVERSION */
 int			ft_atoi(const char *s);
-int			ft_atoi_base(const char *s, int base);
 char		*ft_itoa(int n);
 char		**ft_split(char const *s, char c);
 t_list		*ft_strarraytolist(char **tab);
