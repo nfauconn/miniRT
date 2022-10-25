@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 20:43:10 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/13 23:11:49 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/10/25 18:06:36 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t	len;
 	char	*trimed_s;
 
-	if (!s1 || !set)
-		return (NULL);
 	while (*s1 && ft_checkset(set, *s1))
 		s1++;
 	len = ft_strlen(s1);

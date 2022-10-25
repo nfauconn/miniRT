@@ -5,27 +5,29 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/08 19:00:05 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/26 18:53:39 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/10/25 18:05:06 by nfauconn          #+#    #+#             */
+/*   Updated: 2022/10/25 18:05:16 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup(char *s1)
 {
-	char	*tab;
-	int		i;
+	char	*new;
+	size_t	i;
+	size_t	len;
 
-	tab = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1));
-	if (!tab)
-		return (0);
+	len = ft_strlen(s1);
+	new = malloc(sizeof(char) * (len + 1));
+	if (!new)
+		return (NULL);
 	i = 0;
 	while (s1 && s1[i])
 	{
-		tab[i] = s1[i];
+		new[i] = s1[i];
 		i++;
 	}
-	tab[i] = '\0';
-	return (tab);
+	new[i] = '\0';
+	return (new);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strarraydup.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 13:30:54 by noe               #+#    #+#             */
-/*   Updated: 2022/08/19 13:48:51 by noe              ###   ########.fr       */
+/*   Updated: 2022/10/25 18:07:03 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ char	**ft_strarraydup(char **strarray)
 	size_t	i;
 
 	size = ft_strarraysize(strarray);
-	if (size < 0)
-		return (NULL);
 	ret = (char **)malloc(sizeof (char *) * (size + 1));
 	i = 0;
 	while (strarray[i])
