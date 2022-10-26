@@ -12,6 +12,7 @@ BUILD_DIR  = ./objs
 LIBFT_DIR = ./libft
 LIBFT_INC_DIR = ./libft/includes
 LIBFT = ./libft/libft.a
+LIB_MLX	= ./minilibx-linux -lmlx -lXext -lX11
 
 S_EXT = .c
 
@@ -26,7 +27,7 @@ VPATH = ${SRC_DIR}:${INC_DIR}:${BUILD_DIR}
 CC = clang
 CFLAGS = -Wall -Wextra -Werror -g3
 INCLUDES = -I ${INC_DIR} -I ${LIBFT_INC_DIR}
-LD_FLAGS = -L ${LIBFT_DIR}
+LD_FLAGS = -L ${LIBFT_DIR} -L ${LIB_MLX}
 COMP = ${CC} ${CFLAGS}
 RM	 = rm -rf
 
