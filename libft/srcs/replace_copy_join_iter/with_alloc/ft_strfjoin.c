@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strfjoin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 18:56:56 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/06/11 09:42:12 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/08 10:31:56 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_strfjoin(char **to_free, char *to_add)
+void	ft_strfjoin(char **over, char *buff)
 {
 	char	*tmp;
 
-	if (!to_free)
+	if (!over)
 		return ;
-	tmp = *to_free;
-	*to_free = ft_strjoin(*to_free, to_add);
+	tmp = *over;
+	*over = ft_strjoin(*over, buff);
 	free(tmp);
 }

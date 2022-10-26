@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/08/19 15:16:50 by noe              ###   ########.fr       */
+/*   Updated: 2022/10/25 18:16:36 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+# include <sys/types.h>
 # include <unistd.h>
 # include "ft_printf.h"
 
@@ -101,7 +102,6 @@ char		*ft_strrchr(const char *s, int c);
 
 /* CONVERSION */
 int			ft_atoi(const char *s);
-int			ft_atoi_base(const char *s, int base);
 char		*ft_itoa(int n);
 char		**ft_split(char const *s, char c);
 t_list		*ft_strarraytolist(char **tab);
@@ -117,7 +117,7 @@ void		ft_putstr_fd(char *s, int fd);
 void		ft_strarraydisplay(char **tab);
 
 /* GNL */
-int			get_next_line(int fd, char **line);
+char		*get_next_line(int fd);
 
 /* LISTS */
 void		ft_lstadd_back(t_list **alst, t_list *new);
@@ -135,7 +135,7 @@ void		*ft_calloc(size_t count, size_t size);
 void		*ft_memalloc(size_t size);
 void		ft_memdel(void **ap);
 char		*ft_reallocstr(char *str, size_t newlen);
-void		ft_replacefree(void **old, void *new);
+char		*free_replace(char **old, char *new);
 void		ft_strarrayclear(char ***tab);
 void		ft_strdel(char **as);
 
@@ -147,18 +147,15 @@ void		*ft_memcpy(void *dst, const void *src, size_t n);
 void		*ft_memmove(void *dst, const void *src, size_t len);
 void		*ft_memset(void *b, int c, size_t len);
 char		**ft_strarraydup(char **strarray);
-char		*ft_strdup(const char *s1);
+char		*ft_strdup(char *s1);
 void		ft_striteri(char *s, void (*f)(unsigned int, char *));
-char		*ft_strjoin(char const *s1, char const *s2);
-char		*ft_strjoinchar(char *str, char c);
-void		ft_strfdup(char **over, char *buff);
-void		ft_strfjoin(char **to_free, char *to_add);
-char		*ft_strfjoinchar(char *str, char c);
+char		*ft_strjoin(char *s1, char *s2);
+void		ft_strfjoin(char **over, char *buff);
 size_t		ft_strlcat(char *dst, const char *src, size_t dstsize);
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char		*ft_strtrim(char const *s1, char const *set);
-char		*ft_substr(char const *s, unsigned int start, size_t len);
+char		*ft_substr(char *source, size_t start, size_t len);
 int			ft_toupper(int c);
 int			ft_tolower(int c);
 

@@ -41,7 +41,6 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		is_quote} \
 		${addprefix ${CONV}/, \
 		ft_atoi \
-		ft_atoi_base \
 		ft_itoa \
 		ft_lsttostrarray \
 		ft_split \
@@ -89,17 +88,14 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		ft_memalloc \
 		ft_memdel \
 		ft_reallocstr \
-		ft_replacefree \
+		free_replace \
 		ft_strarrayclear \
 		ft_strdel} \
 		${addprefix ${REPLACE_WITH_ALLOC}/, \
 		ft_strarraydup \
 		ft_strdup \
-		ft_strfdup \
 		ft_strjoin \
-		ft_strjoinchar \
 		ft_strfjoin \
-		ft_strfjoinchar \
 		ft_strmapi \
 		ft_strtrim \
 		ft_substr} \

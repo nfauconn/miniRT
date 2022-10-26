@@ -3,74 +3,104 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 16:24:05 by nfauconn          #+#    #+#             */
-/*   Updated: 2021/10/15 12:35:32 by user42           ###   ########.fr       */
+/*   Updated: 2022/10/25 18:13:47 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	fill_line(char **s, char **line)
+static char	*nl_chr(char *s)
 {
-	int		len;
-	char	*tmp;
-
-	len = 0;
-	while ((*s)[len] != '\n' && (*s)[len] != '\0')
-		len++;
-	if ((*s)[len] == '\n')
+	while (*s)
 	{
-		*line = ft_substr(*s, 0, len);
-		tmp = ft_strdup(&((*s)[len + 1]));
-		free(*s);
-		*s = tmp;
-		if ((*s)[0] == '\0')
-			ft_strdel(s);
+		if (*s == '\n')
+			return (s);
+		s++;
 	}
-	else
-	{
-		*line = ft_strdup(*s);
-		ft_strdel(s);
-	}
-	return (1);
+	return (NULL);
 }
 
-static int	output(char **s, char **line, int ret, int fd)
+static char	*all(char **buf, char **rest)
 {
-	if (ret < 0)
-		return (-1);
-	else if (ret == 0 && s[fd] == NULL)
-		return (0);
-	else
-		return (fill_line(&s[fd], line));
-}
-
-int	get_next_line(const int fd, char **line)
-{
-	int			ret;
-	static char	*s[FD_MAX];
-	char		buff[BUFFER_SIZE + 1];
-	char		*tmp;
-
-	if (fd < 0 || line == NULL)
-		return (-1);
-	ret = read(fd, buff, BUFFER_SIZE);
-	while (ret > 0)
+	*buf = malloc(sizeof (char) * (BUFFER_SIZE + 1));
+	if (!*buf)
+		return (NULL);
+	if (!*rest)
 	{
-		buff[ret] = '\0';
-		if (s[fd] == NULL)
-			s[fd] = ft_strdup(buff);
-		else
+		*rest = ft_strdup("");
+		if (!*rest)
 		{
-			tmp = ft_strjoin(s[fd], buff);
-			free(s[fd]);
-			s[fd] = tmp;
+			free(*buf);
+			return (NULL);
 		}
-		if (ft_strchr(s[fd], '\n'))
-			break ;
-		ret = read(fd, buff, BUFFER_SIZE);
 	}
-	return (output(s, line, ret, fd));
+	return (*rest);
+}
+
+static char	*fill_rest(char **rest, t_newstr *line)
+{
+	t_newstr	newrest;
+
+	newrest.len = ft_strlen(*rest) - line->len;
+	newrest.str = ft_substr(*rest, line->len + 1, newrest.len);
+	if (!newrest.str)
+		free(line->str);
+	return (free_replace(rest, newrest.str));
+}
+
+static char	*fill_line(char **rest, char *nl_ptr)
+{
+	t_newstr	line;
+
+	line.str = NULL;
+	if (nl_ptr)
+	{
+		line.len = nl_ptr - *rest;
+		line.str = ft_substr(*rest, 0, line.len + 1);
+		if (!line.str)
+			return (free_replace(rest, NULL));
+		fill_rest(rest, &line);
+		if (!rest)
+			return (NULL);
+	}
+	else
+	{
+		line.str = ft_strdup(*rest);
+		free_replace(rest, NULL);
+		if (!line.str)
+			return (NULL);
+	}
+	return (line.str);
+}
+
+char	*get_next_line(int fd)
+{
+	char		*buf;
+	static char	*rest[PATH_MAX];
+	char		*nl_ptr;
+	ssize_t		ret;
+
+	nl_ptr = NULL;
+	ret = 1;
+	while (ret && !nl_ptr)
+	{
+		if (fd < 0 || fd > PATH_MAX || BUFFER_SIZE < 1 || !all(&buf, &rest[fd]))
+			return (NULL);
+		ret = read(fd, buf, BUFFER_SIZE);
+		if (ret < 0 || (ret == 0 && !*rest[fd]))
+		{
+			free(buf);
+			return (free_replace(&rest[fd], NULL));
+		}
+		buf[ret] = '\0';
+		free_replace(&rest[fd], ft_strjoin(rest[fd], buf));
+		free(buf);
+		if (!rest[fd])
+			return (NULL);
+		nl_ptr = nl_chr(rest[fd]);
+	}
+	return (fill_line(&rest[fd], nl_ptr));
 }
