@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 14:56:38 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/10/25 18:20:15 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:22:18 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINI_RT_H
 # define MINI_RT_H
 
-# include "libft.h"
+# include "../libft/includes/libft.h"
+# include "mlx.h"
 # include <errno.h>
 
 typedef enum e_elements

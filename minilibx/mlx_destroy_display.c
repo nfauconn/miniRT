@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   mlx_destroy_display.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 15:03:53 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/10/26 16:44:16 by rokerjea         ###   ########.fr       */
+/*   Created: 2020/10/03 18:56:35 by mg                #+#    #+#             */
+/*   Updated: 2020/10/04 01:55:35 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "mlx_int.h"
 
-
-int	main(int ac, char **av)
+int	mlx_destroy_display(t_xvar *xvar)
 {
-	if (ac != 2)
-		return (error_display("please enter a scene file"));
-	parse(av[1]);
-	return (0);
+	XCloseDisplay(xvar->display);
 }

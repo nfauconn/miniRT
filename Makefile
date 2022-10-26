@@ -1,70 +1,50 @@
-TARGET = miniRT
+INC_DIR = includes/
+SRC_DIR = srcs/
+OBJ_DIR = objs/
+MLX_DIR = minilibx/
+LIBFT_DIR = libft/
 
-INC_DIR = ./includes
-SRC_DIR  = ./srcs
+SRCS = mlx_window.c
+OBJS = $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 
-PARSING = parsing/
+NAME = test
 
-EXEC = exec/
+CFLAGS = -Werror -Wextra -Wall -g -fsanitize=address
+LINKS = -lmlx -lm -lft -g -fsanitize=address
+INCPATH = -I$(INC_DIR) -I$(MLX_DIR) -I$(LIBFT_DIR)includes/
+LIBPATH = -L$(MLX_DIR) -L$(LIBFT_DIR)
 
-BUILD_DIR  = ./objs
+MLX = $(MLX_DIR)/libmlx.a
+LIBFT = $(LIBFT_DIR)libft.a
 
-LIBFT_DIR = ./libft
-LIBFT_INC_DIR = ./libft/includes
-LIBFT = ./libft/libft.a
-LIB_MLX	= ./minilibx-linux -lmlx -lXext -lX11
+all: $(NAME)
 
-S_EXT = .c
+$(NAME): $(LIBFT) $(MLX) $(OBJ_DIR) $(OBJS)
+	gcc $(OBJS) $(LIBPATH) $(LINKS) -framework OpenGL -framework AppKit -o $(NAME)
 
-SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
-		main \
-		error \
-		parse \
-		}}
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	gcc $(CFLAGS) $(INCPATH) -c $< -o $@
 
-DEPS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.d}}
-OBJS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.o}}
-VPATH = ${SRC_DIR}:${INC_DIR}:${BUILD_DIR}
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
 
-CC = clang
-CFLAGS = -Wall -Wextra -Werror -g3
-INCLUDES = -I ${INC_DIR} -I ${LIBFT_INC_DIR}
-LD_FLAGS = -L ${LIBFT_DIR} -L ${LIB_MLX}
-COMP = ${CC} ${CFLAGS}
-RM	 = rm -rf
+%.o: %.c
+	$(CC) -Wall -Wextra -Werror -I/usr/include -Iminilibx -O3  -c $< -o $@
 
-all: libftcreat ${TARGET}
+$(MLX):
+	make -C $(MLX_DIR)
 
-libftcreat:
-	@make -sC ${LIBFT_DIR}
-
-${TARGET}: ${OBJS} ${LIBFT}
-	@${COMP} ${LD_FLAGS} ${OBJS} -o ${TARGET} -lft
-	@echo "${TARGET} created"
-
--include ${DEPS}
-
-${BUILD_DIR}/%.o: %.c
-	@mkdir -p ${dir $@}
-	@echo create: ${@:%=%}
-	@${COMP} -MMD ${INCLUDES} -c $< -o $@
+$(LIBFT):
+	make -C $(LIBFT_DIR)
 
 clean:
-	@make clean -C libft
-	@${RM} ${BUILD_DIR}
-	@${RM} ${DEPS}
-	@echo "objs deleted"
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	@make fclean -C libft
-	@${RM} ${TARGET}
-	@echo "program deleted"
+	rm -f $(NAME)
 
-gitm:
-	git add .
-	git commit
-	git push
+bonus: all
 
 re: fclean all
 
-.PHONY: all clean fclean re libftcreat
+.PHONY: all clean fclean re mlx libft
