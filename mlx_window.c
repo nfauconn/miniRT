@@ -6,7 +6,7 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 16:16:24 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/10/27 19:28:07 by rokerjea         ###   ########.fr       */
+/*   Updated: 2022/10/27 20:30:18 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,31 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
+int vtoi(float3 vcolor)
+{
+	int color;
+	
+	color = vcolor.z * 255;
+	color += vcolor.y * 255 * 100;
+	color += vcolor.x * 255 * 10000;
+
+	return (color);	
+}
 
 int	ray_color(float3 ray_direction)
 {
     float t;
+	int color;
+	float3 bottom;
+	float3 top;
+
+	bottom = (float3){1.0, 1.0, 1.0};
+	top = (float3){0.5, 0.7, 1.0};
 
 	t = 0.5*(ray_direction.y + 1.0);
 	// printf ("t = %f\n", t);
-    return ((1.0-t)*0x00000000 + t*0x0000CCFF);
+	color = vtoi(((1.0 - t) * bottom) + (t * top));
+    return (color);
 }
 
 float length_squared(float3 vec)
@@ -119,11 +136,12 @@ int	get_background_color(int i, int j, t_graphic graph)
 	float	u;
 	float	v;
 
-	u = i / WIDTH - 1;
-	v = j / HEIGHT - 1;
+	u = i / (float)WIDTH;
+	v = j / (float)HEIGHT;
 	
+	// printf ("u and v are %f and %f\n", u, v);
 	ray_direction = graph.ll_corner + u*graph.horizontal + v*graph.vertical - graph.origin;
-	printf ("ray_direction y = %f\n", ray_direction.y);
+	// printf ("ray_direction y = %f\n", ray_direction.y);
 	ray_direction = unit_direction(ray_direction);
 	//here need unit_direction from ray_direction....
 	int	color = ray_color(ray_direction);
@@ -153,8 +171,14 @@ void	fill_img(t_data data, t_graphic graph)
 t_graphic	graph_setup(void)
 {
 	t_graphic	res;
+	float width;
+	float height;
+
+	width = WIDTH;
+	height = HEIGHT;
 	
-	res.ratio = WIDTH / HEIGHT;
+	res.ratio = width / height;
+	printf ("ratio = %f\n", res.ratio);
 	res.view_heigth = 2.0;
 	res.view_width = res.ratio * res.view_heigth;
 	res.focal_length = (float3){0, 0, 1.0};
@@ -192,3 +216,4 @@ int	main(int argc, char **argv)
 	mlx_hook(libwin.win, 17, 1L << 2, wincloser, &libwin);
 	mlx_loop(libwin.mlx);
 }
+

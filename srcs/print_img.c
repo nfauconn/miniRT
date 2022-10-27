@@ -6,7 +6,7 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 16:14:40 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/10/27 19:18:01 by rokerjea         ###   ########.fr       */
+/*   Updated: 2022/10/27 20:13:06 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,15 @@ int	truc(void)
 	float3 ray_direction;
 	ray_direction = lower_left_corner + u*horizontal + v*vertical - origin;
 	int	color = ray_color(ray_direction);
+}
+
+int vtoi(float3 vcolor)
+{
+	int color;
+	
+	color = vcolor.z * 255;
+	color += vcolor.y * 255 * 100;
+	color += vcolor.x * 255 * 10000;
+
+	return (color);	
 }
