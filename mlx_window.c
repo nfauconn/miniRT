@@ -6,12 +6,12 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 16:16:24 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/10/26 17:35:05 by rokerjea         ###   ########.fr       */
+/*   Updated: 2022/10/27 14:24:37 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/includes/libft.h"
-#include "minilibx/mlx.h"
+#include "mlx/mlx.h"
 
 typedef struct s_libwin
 {
@@ -34,7 +34,7 @@ int	wincloser(t_libwin *libwin)
 	size_t	i;
 
 	i = 0;
-	while (i < 2)
+	while (i < 1)//need check if img exist
 	{
 		if (libwin->img[i])
 		{
@@ -64,6 +64,23 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
+void	fill_img(t_data data, int color)
+{
+	int	i;
+	int	j;
+	i = 0;
+	while (i <= 1200)
+	{
+		j = 0;
+		while (j <= 1024)
+		{
+			my_mlx_pixel_put(&data, i, j, color);
+			j++;
+		}
+		i++;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	(void)argc;
@@ -71,15 +88,15 @@ int	main(int argc, char **argv)
 	t_libwin	libwin;
 	t_data	img;
 
-	ft_putstr_fd("coucou\n", 1);
 	libwin.mlx = mlx_init();
 	libwin.win = mlx_new_window(libwin.mlx, 1200, 1024, "MiniRT");
 
 	img.img = mlx_new_image(libwin.mlx, 1200, 1024);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 								&img.endian);
-	my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
-	
+	fill_img (img, 0x00FF0000);
+	//my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
+	libwin.img[0] = img.img;
 	/*function need mlx instance, windows, img, position start*/
 	mlx_put_image_to_window(libwin.mlx, libwin.win, libwin.img[0], 0, 0);
 	mlx_hook(libwin.win, 2, 1L << 0, keyparser, &libwin);
