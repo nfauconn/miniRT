@@ -1,0 +1,65 @@
+NAME = miniRT
+LIBFT_DIR = libft
+LIB = libft/libft.a
+MLX_DIR = mlx
+SRC_DIR  = srcs
+BUILD_DIR  = objs
+
+CC = clang
+CFLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
+LD_FLAGS = -L libft -L mlx
+MLX_FLAGS = -lm -lmlx -lXext -lX11
+INCLUDES = -I includes -I libft/includes -I mlx
+COMP = ${CC} ${CFLAGS}
+RM	 = rm -rf
+
+SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
+		mlx_window}}
+#		main \
+#		error \
+#		parse \
+#		}}
+
+all: libscreat ${NAME}
+
+libscreat:
+	@make -sC ${LIBFT_DIR}
+	@make -sC ${MLX_DIR}
+
+$(NAME): ${OBJS}
+	@${COMP} ${LD_FLAGS} ${OBJS} -o ${NAME} ${MLX_FLAGS}
+	@echo "${NAME} created"
+
+-include ${DEPS}
+
+${BUILD_DIR}/%.o: %.c
+	@mkdir -p ${dir $@}
+	@echo create: ${@:%=%}
+	@${COMP} ${INCLUDES} -o $@ -c $<
+
+
+val: ${NAME}
+	valgrind ./${NAME}
+
+norm: ${NAME}
+	norminette ${SRCS} includes/*.h ${LIBFT_DIR}
+
+clean:
+	@make clean -C libft --no-print-directory
+	@make clean -C mlx --no-print-directory
+	@rm -rf ${BUILD_DIR}
+	@echo "objs deleted"
+
+fclean: clean
+	@make fclean -C libft --no-print-directory
+	@rm -rf ${NAME}
+	@echo "libs and program deleted"
+
+gitm:
+	git add .
+	git commit
+	git push
+
+re: fclean all
+
+.PHONY: all clean fclean re

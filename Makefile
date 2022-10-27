@@ -1,33 +1,48 @@
-SRCS		= mlx_window.c
+NAME = miniRT
+LIBFT = libft
+LIB = libft/libft.a
+SRC_DIR  = ./srcs
+OBJ_DIR  = ./objs
+CC = clang
+CFLAGS = -Wall -Wextra -Werror -g# -fsanitize=address
+LD_FLAGS = -L libft -L mlx
+MLX_FLAGS = -lm -lmlx -lXext -lX11
+INCLUDES = -I includes -I libft/includes -I mlx
+COMP = ${CC} ${CFLAGS}
+RM	 = rm -rf
+SRCS = mlx_window.c
+OBJS = ${addprefix ${OBJ_DIR}/,${SRCS:.c=.o}}
 
-NAME		= test
+${OBJ_DIR}/%.o: %.c
+	@mkdir -p ${OBJ_DIR}
+	@echo create: ${@:%=%}
+	@${CC} ${CFLAGS} ${INCLUDES} -o $@ -c $<
 
-OBJS		= ${SRCS:.c=.o}
+$(NAME): ${OBJS}
+	@make -C libft
+	@make -C mlx
+	@${CC} ${CFLAGS} ${LD_FLAGS} ${OBJS} -o ${NAME} -lft ${MLX_FLAGS}
+	@echo "${NAME} created"
 
-CC			= gcc
+all: ${NAME}
 
-CFLAGS		= -Wall -Werror -Wextra -g
+val: ${NAME}
+	valgrind ./${NAME}
 
-INCLUDES	= -I libft -I mlx
-
-all:		$(NAME)
-
-.c.o:
-			${CC} ${CFLAGS} ${INCLUDES} -c $< -o ${<:.c=.o}
-
-$(NAME):	${OBJS}
-			make re -C libft --no-print-directory
-			make -C mlx --no-print-directory
-			${CC} ${CFLAGS} ${OBJS} -Llibft -lft -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz ${INCLUDES} -o $(NAME)
+norm: ${NAME}
+	norminette ${SRCS} includes/*.h ${LIBFT}
 
 clean:
-			make clean -C libft --no-print-directory
-			rm -f ${OBJS}
+	@make clean -C libft
+	@make clean -C mlx
+	@rm -rf ${OBJ_DIR}
+	@echo "objs deleted"
 
-fclean:		clean
-			make fclean -C libft --no-print-directory
-			rm -f $(NAME)
+fclean: clean
+	@make fclean -C libft
+	@rm -rf ${NAME}
+	@echo "libs and programs deleted"
 
-re:			fclean all
+re: fclean all
 
-.PHONY:		all clean fclean re
+.PHONY: all clean fclean re
