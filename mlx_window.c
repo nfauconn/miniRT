@@ -6,12 +6,16 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 16:16:24 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/10/27 14:24:37 by rokerjea         ###   ########.fr       */
+/*   Updated: 2022/10/27 19:28:07 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/includes/libft.h"
-#include "mlx/mlx.h"
+#include "includes/miniRT.h"
+#include <stdio.h>
+// #include "libft/includes/libft.h"
+// #include "mlx/mlx.h"
+
+typedef float float3 __attribute__((ext_vector_type(3)));
 
 typedef struct s_libwin
 {
@@ -20,6 +24,18 @@ typedef struct s_libwin
 	void				**img[2];
 	//struct s_mapdata	scene;
 }				t_libwin;
+
+typedef struct	s_graphic
+{
+	float	ratio;
+	float	view_heigth;
+	float	view_width;
+	float3	focal_length;
+	float3	origin;
+	float3	horizontal;
+	float3	vertical;
+	float3	ll_corner;
+}				t_graphic;
 
 typedef struct	s_data {
 	void	*img;
@@ -64,21 +80,93 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void	fill_img(t_data data, int color)
+
+int	ray_color(float3 ray_direction)
 {
+    float t;
+
+	t = 0.5*(ray_direction.y + 1.0);
+	// printf ("t = %f\n", t);
+    return ((1.0-t)*0x00000000 + t*0x0000CCFF);
+}
+
+float length_squared(float3 vec)
+{
+	return (vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
+}
+
+float calcul_length(float3 vector)
+{
+	float res;
+
+	res = sqrt(length_squared(vector));
+	return (res);
+}
+
+float3	unit_direction(float3 vector)
+{
+	float	length;
+	float3	res;
+	
+	length = calcul_length(vector);
+	res = vector / length;
+	return (res);
+}
+
+int	get_background_color(int i, int j, t_graphic graph)
+{
+	float3	ray_direction;
+	float	u;
+	float	v;
+
+	u = i / WIDTH - 1;
+	v = j / HEIGHT - 1;
+	
+	ray_direction = graph.ll_corner + u*graph.horizontal + v*graph.vertical - graph.origin;
+	printf ("ray_direction y = %f\n", ray_direction.y);
+	ray_direction = unit_direction(ray_direction);
+	//here need unit_direction from ray_direction....
+	int	color = ray_color(ray_direction);
+	return (color);
+}
+
+void	fill_img(t_data data, t_graphic graph)
+{
+	int	color;
 	int	i;
 	int	j;
+	
 	i = 0;
-	while (i <= 1200)
+	while (i <= WIDTH)
 	{
 		j = 0;
-		while (j <= 1024)
+		while (j <= HEIGHT)
 		{
+			color = get_background_color(i, j, graph);
 			my_mlx_pixel_put(&data, i, j, color);
 			j++;
 		}
 		i++;
 	}
+}
+
+t_graphic	graph_setup(void)
+{
+	t_graphic	res;
+	
+	res.ratio = WIDTH / HEIGHT;
+	res.view_heigth = 2.0;
+	res.view_width = res.ratio * res.view_heigth;
+	res.focal_length = (float3){0, 0, 1.0};
+	printf ("focal length x, y and z are %f, %f and %f \n", res.focal_length.x, res.focal_length.y, res.focal_length.z);
+	res.origin = (float3){0, 0, 0};
+	printf ("origin x, y and z are %f, %f and %f \n", res.origin.x, res.origin.y, res.origin.z);
+	res.horizontal = (float3){res.view_width, 0, 0};
+	printf ("horzontal x, y and z are %f, %f and %f \n", res.horizontal.x, res.horizontal.y, res.horizontal.z);
+	res.vertical = (float3){0, res.view_heigth, 0};
+	printf ("vertical x, y and z are %f, %f and %f \n", res.vertical.x, res.vertical.y, res.vertical.z);
+	res.ll_corner = res.origin - res.horizontal/2 - res.vertical/2 - res.focal_length;
+	return (res);
 }
 
 int	main(int argc, char **argv)
@@ -87,14 +175,15 @@ int	main(int argc, char **argv)
 	(void)argv;
 	t_libwin	libwin;
 	t_data	img;
+	t_graphic graph;
 
 	libwin.mlx = mlx_init();
-	libwin.win = mlx_new_window(libwin.mlx, 1200, 1024, "MiniRT");
-
-	img.img = mlx_new_image(libwin.mlx, 1200, 1024);
+	libwin.win = mlx_new_window(libwin.mlx, WIDTH, HEIGHT, "MiniRT");
+	img.img = mlx_new_image(libwin.mlx, WIDTH, HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 								&img.endian);
-	fill_img (img, 0x00FF0000);
+	graph = graph_setup();
+	fill_img (img, graph);
 	//my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
 	libwin.img[0] = img.img;
 	/*function need mlx instance, windows, img, position start*/
