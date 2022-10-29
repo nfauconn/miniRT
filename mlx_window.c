@@ -6,7 +6,7 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 16:16:24 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/10/27 20:30:18 by rokerjea         ###   ########.fr       */
+/*   Updated: 2022/10/27 21:14:12 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,11 @@ int vtoi(float3 vcolor)
 	color = vcolor.z * 255;
 	color += vcolor.y * 255 * 100;
 	color += vcolor.x * 255 * 10000;
-
+	
 	return (color);	
 }
 
-int	ray_color(float3 ray_direction)
+int	ray_color(float3 vector)
 {
     float t;
 	int color;
@@ -101,9 +101,11 @@ int	ray_color(float3 ray_direction)
 	bottom = (float3){1.0, 1.0, 1.0};
 	top = (float3){0.5, 0.7, 1.0};
 
-	t = 0.5*(ray_direction.y + 1.0);
-	// printf ("t = %f\n", t);
+	t = 0.5*(vector.y + 1.0);
+	printf ("vector x, y and z are %f, %f and %f \n", vector.x, vector.y, vector.z);
+	printf ("t = %f\n", t);
 	color = vtoi(((1.0 - t) * bottom) + (t * top));
+	printf ("color = %d\n", color);
     return (color);
 }
 
@@ -132,19 +134,20 @@ float3	unit_direction(float3 vector)
 
 int	get_background_color(int i, int j, t_graphic graph)
 {
-	float3	ray_direction;
+	// float3	ray_direction;
 	float	u;
 	float	v;
-
-	u = i / (float)WIDTH;
-	v = j / (float)HEIGHT;
+	(void)graph;
 	
-	// printf ("u and v are %f and %f\n", u, v);
-	ray_direction = graph.ll_corner + u*graph.horizontal + v*graph.vertical - graph.origin;
+	u = i / (float)WIDTH - 1;
+	v = j / (float)HEIGHT - 1;
+	
+	printf ("u and v are %f and %f\n", u, v);
+	// ray_direction = graph.ll_corner + u*graph.horizontal + v*graph.vertical - graph.origin;
 	// printf ("ray_direction y = %f\n", ray_direction.y);
-	ray_direction = unit_direction(ray_direction);
+	// ray_direction = unit_direction(ray_direction);
 	//here need unit_direction from ray_direction....
-	int	color = ray_color(ray_direction);
+	int	color = ray_color(v);
 	return (color);
 }
 
@@ -155,7 +158,7 @@ void	fill_img(t_data data, t_graphic graph)
 	int	j;
 	
 	i = 0;
-	while (i <= WIDTH)
+	while (i <= 500)
 	{
 		j = 0;
 		while (j <= HEIGHT)
@@ -164,6 +167,7 @@ void	fill_img(t_data data, t_graphic graph)
 			my_mlx_pixel_put(&data, i, j, color);
 			j++;
 		}
+		printf ("end of colon\n");
 		i++;
 	}
 }
