@@ -6,7 +6,7 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 16:16:24 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/10/27 21:14:12 by rokerjea         ###   ########.fr       */
+/*   Updated: 2022/10/29 13:14:11 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,20 +134,20 @@ float3	unit_direction(float3 vector)
 
 int	get_background_color(int i, int j, t_graphic graph)
 {
-	// float3	ray_direction;
+	float3	ray_direction;
 	float	u;
 	float	v;
 	(void)graph;
 	
-	u = i / (float)WIDTH - 1;
-	v = j / (float)HEIGHT - 1;
+	u = i / (float)WIDTH;
+	v = j / (float)HEIGHT;
 	
 	printf ("u and v are %f and %f\n", u, v);
-	// ray_direction = graph.ll_corner + u*graph.horizontal + v*graph.vertical - graph.origin;
+	ray_direction = graph.ll_corner + u*graph.horizontal + v*graph.vertical - graph.origin;
 	// printf ("ray_direction y = %f\n", ray_direction.y);
-	// ray_direction = unit_direction(ray_direction);
+	ray_direction = unit_direction(ray_direction);
 	//here need unit_direction from ray_direction....
-	int	color = ray_color(v);
+	int	color = ray_color(ray_direction);
 	return (color);
 }
 
@@ -158,7 +158,7 @@ void	fill_img(t_data data, t_graphic graph)
 	int	j;
 	
 	i = 0;
-	while (i <= 500)
+	while (i <= WIDTH)
 	{
 		j = 0;
 		while (j <= HEIGHT)

@@ -43,6 +43,11 @@ fclean: clean
 	@rm -rf ${NAME}
 	@echo "libs and programs deleted"
 
+gitm:
+	git add .
+	git commit
+	git push
+
 re: fclean all
 
 .PHONY: all clean fclean re
