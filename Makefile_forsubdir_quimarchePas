@@ -1,4 +1,4 @@
-TARGET = miniRT
+NAME = miniRT
 
 INC_DIR = ./includes
 SRC_DIR  = ./srcs
@@ -34,14 +34,14 @@ LD_FLAGS = -L ${LIBFT_DIR} -L ${LIB_MLX} -lmlx_Linux -lXext -lX11
 COMP = ${CC} ${CFLAGS}
 RM	 = rm -rf
 
-all: libftcreat ${TARGET}
+all: libftcreat ${NAME}
 
 libftcreat:
 	@make -sC ${LIBFT_DIR}
 
-${TARGET}: ${OBJS} ${LIBFT}
-	@${COMP} ${LD_FLAGS} ${OBJS} -o ${TARGET}
-	@echo "${TARGET} created"
+${NAME}: ${OBJS} ${LIBFT}
+	@${COMP} ${LD_FLAGS} ${OBJS} -o ${NAME}
+	@echo "${NAME} created"
 
 -include ${DEPS}
 
@@ -58,7 +58,7 @@ clean:
 
 fclean: clean
 	@make fclean -C libft
-	@${RM} ${TARGET}
+	@${RM} ${NAME}
 	@echo "program deleted"
 
 gitm:

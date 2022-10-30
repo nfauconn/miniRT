@@ -1,47 +1,75 @@
+################################################################################
+#                                VARIABLES									   #
+################################################################################
+
+#PROGRAM
 NAME = miniRT
-LIBFT = libft
-LIB = libft/libft.a
+
+#LIBRAIRIES
+LIBFT_DIR = libft
+LIBFT = libft/libft.a
+MLX_DIR = ./mlx
+
+#FILES
 SRC_DIR  = ./srcs
-OBJ_DIR  = ./objs
+S_EXT = .c
+BUILD_DIR  = ./objs
+INC_DIR = ./includes
+LIBFT_INC_DIR = ./libft/includes
+SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
+		main \
+		TESTdegradetry \
+		mlx_display}}
+DEPS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.d}}
+OBJS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.o}}
+VPATH = ${SRC_DIR}
+
+#COMPILING
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -g# -fsanitize=address
-LD_FLAGS = -L libft -L mlx
+CFLAGS = -Wall -Wextra -Werror -g3 # -fsanitize=address
+LD_FLAGS = -L ${LIBFT_DIR} -L ${MLX_DIR}
 MLX_FLAGS = -lm -lmlx -lXext -lX11
-INCLUDES = -I includes -I libft/includes -I mlx
-COMP = ${CC} ${CFLAGS}
-RM	 = rm -rf
-SRCS = mlx_window.c
-OBJS = ${addprefix ${OBJ_DIR}/,${SRCS:.c=.o}}
+INCLUDES = -I ${INC_DIR} -I ${LIBFT_INC_DIR} -I ${MLX_DIR}
+RM = rm -rf
 
-${OBJ_DIR}/%.o: %.c
-	@mkdir -p ${OBJ_DIR}
-	@echo create: ${@:%=%}
-	@${CC} ${CFLAGS} ${INCLUDES} -o $@ -c $<
+################################################################################
+#                                MAIN RULES								       #
+################################################################################
+all: ${NAME}
 
-$(NAME): ${OBJS}
-	@make -C libft
-	@make -C mlx
-	@${CC} ${CFLAGS} ${LD_FLAGS} ${OBJS} -o ${NAME} -lft ${MLX_FLAGS}
+${NAME}: ${OBJS}
+	@make -C ${LIBFT_DIR}
+	@make -C ${MLX_DIR}
+	@${CC} ${CFLAGS} ${LD_FLAGS} ${OBJS} -o ${NAME} ${MLX_FLAGS}
 	@echo "${NAME} created"
 
-all: ${NAME}
+-include ${DEPS}
+
+${BUILD_DIR}/%.o: %.c
+	@mkdir -p ${dir $@}
+	@echo create: ${@:%=%}
+	@${CC} ${CFLAGS} -MMD ${INCLUDES} -o $@ -c $<
+
+################################################################################
+#                              ADDITIONAL RULES								   #
+################################################################################
 
 val: ${NAME}
 	valgrind ./${NAME}
 
 norm: ${NAME}
-	norminette ${SRCS} includes/*.h ${LIBFT}
+	norminette ${SRCS} ${INC_DIR} ${LIBFT_DIR}
 
 clean:
-	@make clean -C libft
-	@make clean -C mlx
-	@rm -rf ${OBJ_DIR}
+	@make clean -C ${LIBFT_DIR}
+	@make clean -C ${MLX_DIR}
+	@${RM} ${BUILD_DIR}
 	@echo "objs deleted"
 
 fclean: clean
-	@make fclean -C libft
-	@rm -rf ${NAME}
-	@echo "libs and programs deleted"
+	@make fclean -C ${LIBFT_DIR}
+	@${RM} ${NAME}
+	@echo "libs and program deleted"
 
 gitm:
 	git add .
