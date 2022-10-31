@@ -63,16 +63,21 @@ float3	unit_direction(float3 vector)
 
 int	get_background_color(int i, int j, t_scene scene)
 {
-	float3	ray_direction;
+	// float3	ray_direction;
+	int		color;
 	float	u;
 	float	v;
 	
 	u = i / (float)WIDTH;
 	v = j / (float)HEIGHT;
-	
-	ray_direction = scene.ll_corner + u*scene.width_vec + v*scene.height_vec - scene.origin;
-	ray_direction = unit_direction(ray_direction);
-	int	color = ray_color(ray_direction);
+	(void)u;
+	// ray_direction = scene.ll_corner + u*scene.width_vec + v*scene.height_vec - scene.origin;
+	// ray_direction = unit_direction(ray_direction);
+	// color = ray_color(ray_direction);
+	if(v > 0.5)
+		color = 0xFFFFFF;
+	else
+		color = 0x00CCFF;
 	return (color);
 }
 
