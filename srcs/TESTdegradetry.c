@@ -16,10 +16,14 @@ int vtoi(float3 color_vec)
 {
 	int color;
 	
-	color = color_vec.z;
-	color += color_vec.y * 256;
-	color += color_vec.x * 256 * 256;
-	
+	// color = color_vec.z;
+	// color += color_vec.y * 256;
+	// color += color_vec.x * 256 * 256;
+	color = color_vec.x;
+	c = (c << 8) | color_vec.y;
+	c = (c << 8) | color_vec.z;
+
+
 	return (color);	
 }
 
@@ -27,10 +31,10 @@ int	ray_color(float3 vector)
 {
     float t;
 	int color;
-	// float3 bottom;
+	float3 bottom;
 	float3 top;
 
-	// bottom = (float3){255.0, 255.0, 255.0};
+	bottom = (float3){255.0, 255.0, 255.0};
 	top = (float3){0.0, 204.0, 255.0};
 
 	//vector.y should be between 1 and -1
