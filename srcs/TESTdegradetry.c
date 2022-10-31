@@ -16,12 +16,12 @@ int vtoi(float3 color_vec)
 {
 	int color;
 	
-	// color = color_vec.z;
-	// color += color_vec.y * 256;
-	// color += color_vec.x * 256 * 256;
-	color = color_vec.x;
-	c = (c << 8) | color_vec.y;
-	c = (c << 8) | color_vec.z;
+	color = color_vec.z;
+	color += color_vec.y * 256;
+	color += color_vec.x * 256 * 256;
+	// color = color_vec.x;
+	// c = (c << 8) | color_vec.y;
+	// c = (c << 8) | color_vec.z;
 
 
 	return (color);	
