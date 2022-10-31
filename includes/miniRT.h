@@ -13,8 +13,8 @@
 #ifndef MINI_RT_H
 # define MINI_RT_H
 
-# define WIDTH 1200
-# define HEIGHT 1024
+# define WIDTH 2560
+# define HEIGHT 1440
 
 # include "libft.h"
 # include "mlx.h"
