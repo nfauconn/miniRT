@@ -16,9 +16,9 @@ int vtoi(float3 color_vec)
 {
 	int color;
 	
-	color = color_vec.z * 255;
-	color += color_vec.y * 255 * 100;
-	color += color_vec.x * 255 * 10000;
+	color = color_vec.z;
+	color += color_vec.y * 256;
+	color += color_vec.x * 256 * 256;
 	
 	return (color);	
 }
@@ -30,11 +30,20 @@ int	ray_color(float3 vector)
 	float3 bottom;
 	float3 top;
 
-	bottom = (float3){1.0, 1.0, 1.0};
-	top = (float3){0.5, 0.7, 1.0};
+	bottom = (float3){255.0, 255.0, 255.0};
+	top = (float3){255.0, 204.0, 255.0};
 
+	//vector.y should be between 1 and -1
+	//1 for top, -1 for bottom
+	//wich mean y vector of any ray from camera CANNOT be > 1 or <-1!
 	t = 0.5*(vector.y + 1.0);
-	color = vtoi(((1.0 - t) * bottom) + (t * top));
+	//if t = 1 we are at top of screen and 1 - t == 0 (color blue)
+	//if t = 0 we are at bottom of screen and t = 0 (color white)
+	// color = vtoi(((1.0 - t) * bottom) + (t * top));
+	if (t > 0.5)
+		color = vtoi(top);
+	else
+		color = vtoi(bottom);
     return (color);
 }
 
@@ -63,21 +72,23 @@ float3	unit_direction(float3 vector)
 
 int	get_background_color(int i, int j, t_scene scene)
 {
-	// float3	ray_direction;
+	float3	ray_direction;
 	int		color;
 	float	u;
 	float	v;
 	
 	u = i / (float)WIDTH;
 	v = j / (float)HEIGHT;
-	(void)u;
-	// ray_direction = scene.ll_corner + u*scene.width_vec + v*scene.height_vec - scene.origin;
+	
+	// creation du vecteur de direction a verifier
+	ray_direction = scene.ll_corner + u*scene.width_vec + v*scene.height_vec - scene.origin;
+	//normalisation du vecteur?
 	// ray_direction = unit_direction(ray_direction);
-	// color = ray_color(ray_direction);
-	if(v > 0.5)
-		color = 0xFFFFFF;
-	else
-		color = 0x00CCFF;
+	color = ray_color(ray_direction);
+	// if(v > 0.5)
+	// 	color = 0xFFFFFF;
+	// else
+	// 	color = 0x00CCFF;
 	return (color);
 }
 
