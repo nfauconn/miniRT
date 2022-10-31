@@ -15,7 +15,7 @@
 int vtoi(float3 color_vec)
 {
 	int color;
-	
+
 	color = color_vec.z;
 	color += color_vec.y * 256;
 	color += color_vec.x * 256 * 256;
@@ -24,7 +24,7 @@ int vtoi(float3 color_vec)
 	// c = (c << 8) | color_vec.z;
 
 
-	return (color);	
+	return (color);
 }
 
 int	ray_color(float3 vector)
@@ -68,7 +68,7 @@ float3	unit_direction(float3 vector)
 {
 	float	length;
 	float3	res;
-	
+
 	length = calcul_length(vector);
 	res = vector / length;
 	return (res);
@@ -80,10 +80,10 @@ int	get_background_color(int i, int j, t_scene scene)
 	int		color;
 	float	u;
 	float	v;
-	
+
 	u = i / (float)WIDTH;
 	v = j / (float)HEIGHT;
-	
+
 	// creation du vecteur de direction a verifier
 	ray_direction = scene.ll_corner + u*scene.width_vec + v*scene.height_vec - scene.origin;
 	//normalisation du vecteur?
@@ -101,7 +101,7 @@ void	fill_img(t_img img, t_scene scene)
 	int	color;
 	int	i;
 	int	j;
-	
+
 	i = 0;
 	while (i <= WIDTH)
 	{
@@ -124,7 +124,7 @@ t_scene	scene_setup(void)
 
 	width = WIDTH;
 	height = HEIGHT;
-	
+
 	res.ratio = width / height;
 	res.height_float = 2.0;
 	res.width_float = res.ratio * res.height_float;
