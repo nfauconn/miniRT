@@ -31,10 +31,10 @@ int	ray_color(float3 vector)
 {
     float t;
 	int color;
-	float3 bottom;
+	// float3 bottom;
 	float3 top;
 
-	bottom = (float3){255.0, 255.0, 255.0};
+	// bottom = (float3){255.0, 255.0, 255.0};
 	top = (float3){0.0, 204.0, 255.0};
 
 	//vector.y should be between 1 and -1
@@ -43,7 +43,7 @@ int	ray_color(float3 vector)
 	t = 0.5*(vector.y + 1.0);
 	//if t = 1 we are at top of screen and 1 - t == 0 (color blue)
 	//if t = 0 we are at bottom of screen and t = 0 (color white)
-	color = vtoi(t * top);
+	color = vtoi(top) * t;
 	// if (t < 0.5)
 	// 	color = vtoi(top);
 	// else
