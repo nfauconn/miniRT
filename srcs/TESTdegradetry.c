@@ -52,12 +52,13 @@ int	ray_color(float3 vector, t_scene scene)
 	// float3 bottom = (float3){255.0, 255.0, 255.0};
 	float3 top = (float3){0.0, 204.0, 255.0};
 	float3	color_red = {255, 0, 0};
+	float3 spheres[3] = {{0, 0, -1}, {-1, -1, -1}, 0};
 
 	t = 0.5*(vector.y + 1.0); // vector.y should be between 1 (top) and -1 (bottom)
 							//if t = 1 we are at top of screen and (1 - t) == 0 (color blue)
 							//if t = 0 we are at bottom of screen and t = 0 (color white)
-	if (hit_sphere((float3){0, 0, 1}, 0.5, vector, scene))
-		color = vtoi(color_red) * (1 - t);
+	if (hit_sphere(spheres[0], 0.5, vector, scene) || hit_sphere(spheres[1], 0.5, vector, scene))
+		color = vtoi(color_red);
 	else
 		color = vtoi(top) * (1 - t);
 	// if (t < 0.5)
@@ -101,7 +102,7 @@ int	get_background_color(int i, int j, t_scene scene)
 	v = j / (float)HEIGHT;
 
 	ray_direction = scene.ll_corner + u*scene.width_vec + v*scene.height_vec - scene.origin;
-	ray_direction = unit_direction(ray_direction); //normalisation du vecteur?
+//	ray_direction = unit_direction(ray_direction); //normalisation du vecteur?
 	color = ray_color(ray_direction, scene);
 	// if(v > 0.5)
 	// 	color = 0xFFFFFF;
