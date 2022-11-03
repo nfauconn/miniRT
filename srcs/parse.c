@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 15:45:14 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/03 17:00:10 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/03 18:40:40 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static ssize_t	find_line_elem(char *line)
 	return (-1);
 }
 
-bool	parse_line(char *line)
+bool	parse_line(t_scene *scene, char *line)
 {
 	bool	ret;
 
@@ -61,9 +61,10 @@ bool	parse_line(char *line)
 
 t_scene	parse(char *scene)
 {
-	int		fd;
-	char	*line;
-	ssize_t	elem_index;
+	int			fd;
+	char		*line;
+	ssize_t		elem_index;
+	t_scene		scene;
 
 	if (!correct_filename(scene))
 		exit(error_display("invalid scene file\nformat : *.rt"));
@@ -74,12 +75,13 @@ t_scene	parse(char *scene)
 	elem_index = -1;
 	while (line)
 	{
-		parse_line(line);
+		parse_line(&scene, line);
 		free(line);
 		line = get_next_line(fd);
 	}
+	return (scene);
 	//if index ok
 }
 
 // NE PAS OUBLIER :
-//	- verif que les 5 elements sont contenus
+//	- verif que les 3 elements uniques sont contenus 1 seule fois
