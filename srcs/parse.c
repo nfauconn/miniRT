@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 16:11:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/03 13:10:38 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/11/03 15:45:14 by nfauconn          #+#    #+#             */
+/*   Updated: 2022/11/03 17:00:10 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
 static bool	correct_filename(char *s)
 {
@@ -37,7 +37,6 @@ static ssize_t	find_line_elem(char *line)
 
 	if (!*line)
 		return (-1);
-
 	i = 0;
 	while (elems[i])
 	{
@@ -48,7 +47,16 @@ static ssize_t	find_line_elem(char *line)
 		i++;
 	}
 	return (-1);
-	//verifier que pas 2fois
+}
+
+bool	parse_line(char *line)
+{
+	bool	ret;
+
+	*elem_index = find_line_elem(line);
+	if (*elem_index < 0 && ft_strcmp(line, "\n"))
+		return(error_display("parsing error"));
+	return (0);
 }
 
 t_scene	parse(char *scene)
@@ -58,18 +66,20 @@ t_scene	parse(char *scene)
 	ssize_t	elem_index;
 
 	if (!correct_filename(scene))
-		exit(error_display("invalid scene file -> format : *.rt"));
+		exit(error_display("invalid scene file\nformat : *.rt"));
 	fd = open(scene, O_RDONLY);
 	if (fd < 0)
 		exit(error_display(strerror(errno)));
 	line = get_next_line(fd);
+	elem_index = -1;
 	while (line)
 	{
-		//index permettant de savoir si les 5 elements sont contenus
-		elem_index = find_line_elem(line);
-		if (elem_index < 0 && ft_strcmp(line, "\n"))
-			exit(error_display("parsing error"));
+		parse_line(line);
+		free(line);
 		line = get_next_line(fd);
 	}
 	//if index ok
 }
+
+// NE PAS OUBLIER :
+//	- verif que les 5 elements sont contenus

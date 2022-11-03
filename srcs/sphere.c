@@ -1,12 +1,12 @@
-#include "miniRT.h"
+#include "minirt.h"
 
-bool	hit_sphere(double3 center, double radius, double3 raydirection, t_scene scene)
+bool	hit_sphere(float3 center, float radius, float3 raydirection, t_scene scene)
 {
-	double3	oc;
-	double	a;
-	double	b;
-	double	c;
-	double	discriminant;
+	float3	oc;
+	float	a;
+	float	b;
+	float	c;
+	float	discriminant;
 
 	oc = scene.origin - center;
 	a = addition_of_elements_multiplication(raydirection, raydirection);

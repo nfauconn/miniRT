@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/03 14:49:13 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/03 16:01:23 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,15 @@ typedef struct s_vector
 
 typedef struct s_float_vector
 {
-	double	x;
-	double	y;
+	float	x;
+	float	y;
 }	t_float_vector;
 
-typedef struct s_double_vector
+typedef struct s_float_vector
 {
-	double	x;
-	double	y;
-}	t_double_vector;
+	float	x;
+	float	y;
+}	t_float_vector;
  */
 typedef struct s_newstr
 {
@@ -161,7 +161,7 @@ int			ft_tolower(int c);
 
 /* SIZE / LEN / MATHS */
 int			ft_nbrlen_base(int nbr, int base);
-double		ft_negative_power(int nb, int power);
+float		ft_negative_power(int nb, int power);
 /* t_v			ft_operate_vector(t_v vector, char operation, int nb);
  */t_ull		ft_power(int nb, int power);
 void		ft_rev_int_tab(int *tab, int size);

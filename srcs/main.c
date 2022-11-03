@@ -6,11 +6,11 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:03:53 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/03 15:03:54 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/03 17:00:10 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
 
 int	main(int ac, char **av)

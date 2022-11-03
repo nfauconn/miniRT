@@ -1,4 +1,4 @@
-#include "miniRT.h"
+#include "minirt.h"
 
 int	wincloser(t_window *w)
 {
