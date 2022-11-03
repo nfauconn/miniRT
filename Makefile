@@ -18,15 +18,19 @@ INC_DIR = ./includes
 LIBFT_INC_DIR = ./libft/includes
 SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		main \
+		error \
+		display \
+		sphere \
+		vector_operations \
 		TESTdegradetry \
-		mlx_display}}
+		}}
 DEPS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.d}}
 OBJS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.o}}
 VPATH = ${SRC_DIR}
 
 #COMPILING
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -g3 # -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -mavx -g3 # -fsanitize=address
 LD_FLAGS = -L ${LIBFT_DIR} -L ${MLX_DIR}
 MLX_FLAGS = -lm -lmlx -lXext -lX11
 INCLUDES = -I ${INC_DIR} -I ${LIBFT_INC_DIR} -I ${MLX_DIR}
@@ -40,7 +44,7 @@ all: ${NAME}
 ${NAME}: ${OBJS}
 	@make -C ${LIBFT_DIR}
 	@make -C ${MLX_DIR}
-	@${CC} ${CFLAGS} ${LD_FLAGS} ${OBJS} -o ${NAME} ${MLX_FLAGS}
+	@${CC} ${CFLAGS} ${LD_FLAGS} ${OBJS} -o ${NAME} ${MLX_FLAGS} -lft
 	@echo "${NAME} created"
 
 -include ${DEPS}

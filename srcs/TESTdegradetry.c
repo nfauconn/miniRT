@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   degradetry.c                                       :+:      :+:    :+:   */
+/*   TESTdegradetry.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 16:16:24 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/10/30 17:04:11 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/03 15:20:31 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int vtoi(float3 color_vec)
+int vtoi(double3 color_vec)
 {
 	int	r;
 	int	g;
@@ -24,35 +24,16 @@ int vtoi(float3 color_vec)
 	return (r << 16 | g << 8 | b);
 }
 
-float	dot(float3 param, float3 param2)
-{
-	return ((param.x * param2.x) + (param.y * param2.y) + (param.z * param2.z));
-}
 
-bool	hit_sphere(float3 center, float radius, float3 raydirection, t_scene scene)
-{
-	float3	oc;
-	float	a;
-	float	b;
-	float	c;
-	float	discriminant;
 
-	oc = scene.origin - center;
-	a = dot(raydirection, raydirection);
-	b = 2.0 * dot(oc, raydirection);
-	c = dot(oc, oc) - radius * radius;
-	discriminant = b * b - 4 * a * c;
-	return (discriminant > 0);
-}
-
-int	ray_color(float3 vector, t_scene scene)
+int	ray_color(double3 vector, t_scene scene)
 {
-    float t;
+    double t;
 	int color;
-	// float3 bottom = (float3){255.0, 255.0, 255.0};
-	float3 top = (float3){0.0, 204.0, 255.0};
-	float3	color_red = {255, 0, 0};
-	float3 spheres[3] = {{0, 0, -1}, {-1, -1, -1}, 0};
+	// double3 bottom = (double3){255.0, 255.0, 255.0};
+	double3 top = (double3){0.0, 204.0, 255.0};
+	double3	color_red = {255, 0, 0};
+	double3 spheres[3] = {{0, 0, -1}, {-1, -1, -1}, 0};
 
 	t = 0.5*(vector.y + 1.0); // vector.y should be between 1 (top) and -1 (bottom)
 							//if t = 1 we are at top of screen and (1 - t) == 0 (color blue)
@@ -68,38 +49,15 @@ int	ray_color(float3 vector, t_scene scene)
     return (color);
 }
 
-float length_squared(float3 vec)
-{
-	return ((vec.x * vec.x) + (vec.y * vec.y) + (vec.z * vec.z));
-}
-
-float calcul_length(float3 vector)
-{
-	float res;
-
-	res = sqrt(length_squared(vector));
-	return (res);
-}
-
-float3	unit_direction(float3 vector)
-{
-	float	length;
-	float3	res;
-
-	length = calcul_length(vector);
-	res = vector / length;
-	return (res);
-}
-
 int	get_background_color(int i, int j, t_scene scene)
 {
-	float3	ray_direction;
+	double3	ray_direction;
 	int		color;
-	float	u;
-	float	v;
+	double	u;
+	double	v;
 
-	u = i / (float)WIDTH;
-	v = j / (float)HEIGHT;
+	u = i / (double)WIDTH;
+	v = j / (double)HEIGHT;
 
 	ray_direction = scene.ll_corner + u*scene.width_vec + v*scene.height_vec - scene.origin;
 //	ray_direction = unit_direction(ray_direction); //normalisation du vecteur?
@@ -133,20 +91,20 @@ void	fill_img(t_img img, t_scene scene)
 
 t_scene	scene_setup(void)
 {
-	t_scene		res;
-	float		width;
-	float		height;
+	t_scene		scene;
+	double		width;
+	double		height;
 
 	width = WIDTH;
 	height = HEIGHT;
 
-	res.ratio = width / height;
-	res.height_float = 2.0;
-	res.width_float = res.ratio * res.height_float;
-	res.focal_length = (float3){0, 0, 1.0};
-	res.origin = (float3){0, 0, 0};
-	res.width_vec = (float3){res.width_float, 0, 0};
-	res.height_vec = (float3){0, res.height_float, 0};
-	res.ll_corner = res.origin - res.width_vec/2 - res.height_vec/2 - res.focal_length;
-	return (res);
+	scene.ratio = width / height;
+	scene.height_double = 2.0;
+	scene.width_double = scene.ratio * scene.height_double;
+	scene.focal_length = (double3){0, 0, 1.0};
+	scene.origin = (double3){0, 0, 0};
+	scene.width_vec = (double3){scene.width_double, 0, 0};
+	scene.height_vec = (double3){0, scene.height_double, 0};
+	scene.ll_corner = scene.origin - scene.width_vec/2 - scene.height_vec/2 - scene.focal_length;
+	return (scene);
 }

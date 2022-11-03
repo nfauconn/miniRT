@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 16:11:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/10/25 18:22:35 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/03 13:10:38 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static ssize_t	find_line_elem(char *line)
 	//verifier que pas 2fois
 }
 
-void	parse(char *scene)
+t_scene	parse(char *scene)
 {
 	int		fd;
 	char	*line;

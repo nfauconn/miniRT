@@ -114,7 +114,6 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		${addprefix ${SIZE_LEN_MATHS}/, \
 		ft_nbrlen_base \
 		ft_negative_power \
-		ft_operate_vector \
 		ft_power \
 		ft_rev_int_tab \
 		ft_sort_int_tab \

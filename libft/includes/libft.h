@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/10/25 18:16:36 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/03 14:49:13 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef enum s_bool
 	OK = 0,
 	FAIL = 1,
 }	t_bool;
-
+/* 
 typedef struct s_vector
 {
 	int	x;
@@ -45,8 +45,8 @@ typedef struct s_vector
 
 typedef struct s_float_vector
 {
-	float	x;
-	float	y;
+	double	x;
+	double	y;
 }	t_float_vector;
 
 typedef struct s_double_vector
@@ -54,7 +54,7 @@ typedef struct s_double_vector
 	double	x;
 	double	y;
 }	t_double_vector;
-
+ */
 typedef struct s_newstr
 {
 	char	*str;
@@ -161,9 +161,9 @@ int			ft_tolower(int c);
 
 /* SIZE / LEN / MATHS */
 int			ft_nbrlen_base(int nbr, int base);
-float		ft_negative_power(int nb, int power);
-t_v			ft_operate_vector(t_v vector, char operation, int nb);
-t_ull		ft_power(int nb, int power);
+double		ft_negative_power(int nb, int power);
+/* t_v			ft_operate_vector(t_v vector, char operation, int nb);
+ */t_ull		ft_power(int nb, int power);
 void		ft_rev_int_tab(int *tab, int size);
 int			*ft_sort_int_tab(int *tab, int size);
 ssize_t		ft_strarraysize(char **tab);

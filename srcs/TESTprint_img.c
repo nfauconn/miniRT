@@ -1,40 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_img.c                                        :+:      :+:    :+:   */
+/*   TESTprint_img.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 16:14:40 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/10/27 20:13:06 by rokerjea         ###   ########.fr       */
+/*   Updated: 2022/11/03 14:46:32 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-typedef float float3 __attribute__((ext_vector_type(3)));
+typedef double double3 __attribute__((ext_vector_type(3)));
 
 int	main(void)
 {
-	float3 x;
+	double3 x;
 
-    float3 vec = (float3){1.0, 2.0, 3.0};
+    double3 vec = (double3){1.0, 2.0, 3.0};
     printf("Notre vecteur = %f %f %f\n", vec.x, vec.y, vec.z);
 	
 	return (0);
 }
 
-float3	ray_pos(float3 origin, float3 direction, float t)
+double3	ray_pos(double3 origin, double3 direction, double t)
 {
-	float3 position;
+	double3 position;
 	
 	position = origin + t * direction;
 	return (position);
 }
 
-int	ray_color(float3 ray_direction)
+int	ray_color(double3 ray_direction)
 {
-    float t;
+    double t;
 
 	t = 0.5*(ray_direction.y() + 1.0);
     return ((1.0-t)*0x00FFFFFF + t*0x0000CCFF);
@@ -43,9 +43,9 @@ int	ray_color(float3 ray_direction)
 // ! need vector length
 
 
-float3 unit_vector(float3 v)
+double3 unit_vector(double3 v)
 {
-	float3 res;
+	double3 res;
 
 	res = v / length(v);
 	return (res);
@@ -54,12 +54,12 @@ float3 unit_vector(float3 v)
 int	truc(void)
 {
 	//here change depending from pixel concerned
-	float3 ray_direction;
+	double3 ray_direction;
 	ray_direction = lower_left_corner + u*horizontal + v*vertical - origin;
 	int	color = ray_color(ray_direction);
 }
 
-int vtoi(float3 vcolor)
+int vtoi(double3 vcolor)
 {
 	int color;
 	
