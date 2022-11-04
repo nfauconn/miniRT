@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 15:45:14 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/03 18:40:40 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/04 12:56:42 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,13 @@ static ssize_t	find_line_elem(char *line)
 
 bool	parse_line(t_scene *scene, char *line)
 {
-	bool	ret;
+	bool		ret;
+	ssize_t		elem_index;
 
-	*elem_index = find_line_elem(line);
-	if (*elem_index < 0 && ft_strcmp(line, "\n"))
+	elem_index = find_line_elem(line);
+	if (elem_index < 0 && ft_strcmp(line, "\n"))
 		return(error_display("parsing error"));
+	//call initializer with func ptr, taking scene as parameter
 	return (0);
 }
 
@@ -63,7 +65,6 @@ t_scene	parse(char *scene)
 {
 	int			fd;
 	char		*line;
-	ssize_t		elem_index;
 	t_scene		scene;
 
 	if (!correct_filename(scene))
@@ -72,7 +73,6 @@ t_scene	parse(char *scene)
 	if (fd < 0)
 		exit(error_display(strerror(errno)));
 	line = get_next_line(fd);
-	elem_index = -1;
 	while (line)
 	{
 		parse_line(&scene, line);

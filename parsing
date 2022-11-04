@@ -1,0 +1,5 @@
+
+- boucle while dans chaque parameter d'elem
+	>en fonction du parametre trouve, appeler le filler correspondant
+- fin : verifier que les elem ont bien tous leurs parametres (et que l ambiant light la camera et les lights existent ?
+verifier presence des 

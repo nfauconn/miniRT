@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/03 18:40:49 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/04 12:17:15 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct 	s_l						//ONE ONLY (sauf bonus)
 //	t_rgb			color;		BONUS	//range [0, 255]
 	t_point			pos;				//range [-height/2, height/2] [-width/2, width/2]
 	float			ratio;				//range [0.0, 1.0]
-//	struct s_l		*next;
+	struct s_l		*next;
 }				t_light;
 
 typedef struct	s_sp
@@ -53,7 +53,7 @@ typedef struct	s_sp
 	t_point			pos;				//range [-height/2, height/2] [-width/2, width/2]
 	float			diameter;
 	float			radius;
-//	struct s_sp		*next;
+	struct s_sp		*next;
 }				t_sphere;
 
 typedef struct	s_pl
@@ -61,7 +61,7 @@ typedef struct	s_pl
 	t_rgb			color;				//range [0, 255]
 	t_point			pos;				//range [-height/2, height/2] [-width/2, width/2]
 	t_vector		orientation;		//range [-1, 1]
-//	struct s_pl		*next;
+	struct s_pl		*next;
 }				t_plan;
 
 typedef struct s_cy
@@ -71,7 +71,7 @@ typedef struct s_cy
 	t_vector		orientation;		//range [-1, 1]
 	float			diameter;
 	float			height;
-//	struct s_cy		*next;
+	struct s_cy		*next;
 }				t_cylinder;
 
 typedef struct	s_scene
