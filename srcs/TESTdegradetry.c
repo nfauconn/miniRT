@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 16:16:24 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/11/03 17:00:10 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/04 19:05:12 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,24 +87,4 @@ void	fill_img(t_img img, t_scene scene)
 		}
 		i++;
 	}
-}
-
-t_scene	scene_setup(void)
-{
-	t_scene		scene;
-	float		width;
-	float		height;
-
-	width = WIDTH;
-	height = HEIGHT;
-
-	scene.ratio = width / height;
-	scene.height_float = 2.0;
-	scene.width_float = scene.ratio * scene.height_float;
-	scene.focal_length = (float3){0, 0, 1.0};
-	scene.origin = (float3){0, 0, 0};
-	scene.width_vec = (float3){scene.width_float, 0, 0};
-	scene.height_vec = (float3){0, scene.height_float, 0};
-	scene.ll_corner = scene.origin - scene.width_vec/2 - scene.height_vec/2 - scene.focal_length;
-	return (scene);
 }

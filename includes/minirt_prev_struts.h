@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   minirt_prev_struts.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/04 19:09:33 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/04 19:05:12 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,59 @@
 # include "mlx.h"
 # include <math.h>
 # include <errno.h>
-# include <sys/types.h>
 
 typedef float			float3 __attribute__((ext_vector_type(3)));
 typedef float			t_point __attribute__((ext_vector_type(3)));
-typedef uint8_t			t_rgb __attribute__((ext_vector_type(3)));
+typedef u_int8_t		t_rgb __attribute__((ext_vector_type(3)));
 typedef float			t_vector __attribute__((ext_vector_type(3)));
 
-typedef struct	s_element
+typedef struct	s_camera				//ONE ONLY
 {
-	t_uint8_t		id;
-	t_point			pos;				//								range [-height/2, height/2] [-width/2, width/2]
-	t_vector		orientation;		//C + cy						range [0.0, 1.0]
-	t_rgb			color;				// A + L + pl + sp + py
-	float			ratio;				// A + L
-	float			radius;				// sp							(diameter / 2)
-	float			height;
+	t_point			pos;				//range [-height/2, height/2] [-width/2, width/2]
+	t_vector		orientation;		//range [0.0, 1.0]
 	float			fov;
-}				t_element;
+}				t_camera;
 
+typedef struct	s_ambiantlight			//ONE ONLY
+{
+	t_rgb			color;				//range [0, 255]
+	float			ratio;				//range [0.0, 1.0]
+}				t_ambiantlight;
+
+typedef struct 	s_l						//ONE ONLY (sauf bonus)
+{
+//	t_rgb			color;		BONUS	//range [0, 255]
+	t_point			pos;				//range [-height/2, height/2] [-width/2, width/2]
+	float			ratio;				//range [0.0, 1.0]
+	struct s_l		*next;
+}				t_light;
+
+typedef struct	s_sp
+{
+	t_rgb			color;				//range [0, 255]
+	t_point			pos;				//range [-height/2, height/2] [-width/2, width/2]
+	float			diameter;
+	float			radius;
+	struct s_sp		*next;
+}				t_sphere;
+
+typedef struct	s_pl
+{
+	t_rgb			color;				//range [0, 255]
+	t_point			pos;				//range [-height/2, height/2] [-width/2, width/2]
+	t_vector		orientation;		//range [-1, 1]
+	struct s_pl		*next;
+}				t_plan;
+
+typedef struct s_cy
+{
+	t_rgb			color;				//range [0, 255]
+	t_point			pos;				//range [-height/2, height/2] [-width/2, width/2]
+	t_vector		orientation;		//range [-1, 1]
+	float			diameter;
+	float			height;
+	struct s_cy		*next;
+}				t_cylinder;
 
 typedef struct	s_scene
 {
@@ -50,12 +84,10 @@ typedef struct	s_scene
 	float3			width_vec;
 	float3			height_vec;
 	float3			ll_corner;
-	t_element		C;
-	t_element		A;
+	t_element		camera;
+	t_element		ambiantlight;
 	t_element		*lights;
-	t_element		*sp;
-	t_element		*cy;
-	t_element		*pl;
+
 }				t_scene;
 
 typedef struct	s_img

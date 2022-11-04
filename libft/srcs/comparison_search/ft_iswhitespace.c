@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/06 13:47:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/05/06 13:50:00 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/11/04 16:21:13 by nfauconn          #+#    #+#             */
+/*   Updated: 2022/11/04 16:21:17 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_is_whitespace(int c)
+int	ft_iswhitespace(int c)
 {
 	return (c == 32 || (c >= 9 && c <= 13));
 }

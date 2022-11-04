@@ -20,6 +20,7 @@ SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		main \
 		error \
 		display \
+		scene_setup \
 		sphere \
 		vector_operations \
 		TESTdegradetry \

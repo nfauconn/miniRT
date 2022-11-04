@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/03 16:01:23 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/04 16:20:59 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef struct s_list
 }	t_list;
 
 /* COMPARISON / SEARCH */
-int			ft_is_whitespace(int c);
+int			ft_iswhitespace(int c);
 int			ft_isalnum(int c);
 int			ft_isalpha(int c);
 int			ft_isascii(int c);
@@ -104,6 +104,7 @@ char		*ft_strrchr(const char *s, int c);
 int			ft_atoi(const char *s);
 char		*ft_itoa(int n);
 char		**ft_split(char const *s, char c);
+char		**ft_split_whitespace(char const *s);
 t_list		*ft_strarraytolist(char **tab);
 char		*ft_ulltoa_base(unsigned long long n, int base, size_t maj);
 char		**ft_lsttostrarray(t_list *lst);

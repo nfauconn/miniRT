@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:03:53 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/03 18:39:22 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/04 17:46:20 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int ac, char **av)
 
 /* 	if (ac != 2)
 		return (error_display("format : ./miniRT <*.rt>"));
-	scene = parse(av[i]);
+	scene = scene_setup(av[1]);
 	display(scene);	 */
 	
 	/*provisoire :*/

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   scene_setup.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 15:45:14 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/04 12:56:42 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/04 19:05:12 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@ static ssize_t	find_line_elem(char *line)
 	i = 0;
 	while (elems[i])
 	{
-		if (i < 3 && !ft_strncmp(line, elems[i], 2))
-			return (i);
-		else if (i > 3 && !ft_strncmp(line, elems[i], 3))
+		if ((i < 3 && !ft_strncmp(line, elems[i], 2))
+			|| (i > 3 && !ft_strncmp(line, elems[i], 3)))
 			return (i);
 		i++;
 	}
@@ -57,6 +56,7 @@ bool	parse_line(t_scene *scene, char *line)
 	elem_index = find_line_elem(line);
 	if (elem_index < 0 && ft_strcmp(line, "\n"))
 		return(error_display("parsing error"));
+	fill_parameters(line, elem_index);
 	//call initializer with func ptr, taking scene as parameter
 	return (0);
 }
@@ -64,6 +64,7 @@ bool	parse_line(t_scene *scene, char *line)
 t_scene	parse(char *scene)
 {
 	int			fd;
+	bool		ret;
 	char		*line;
 	t_scene		scene;
 
@@ -75,8 +76,10 @@ t_scene	parse(char *scene)
 	line = get_next_line(fd);
 	while (line)
 	{
-		parse_line(&scene, line);
+		ret = parse_line(&scene, line);
 		free(line);
+		if (ret < 0)
+			exit(error_display("invalid line in file\n");
 		line = get_next_line(fd);
 	}
 	return (scene);
@@ -85,3 +88,28 @@ t_scene	parse(char *scene)
 
 // NE PAS OUBLIER :
 //	- verif que les 3 elements uniques sont contenus 1 seule fois
+
+t_scene	set_caracteristics(t_scene *scene)
+{
+
+}
+
+t_scene	scene_setup(char *file)
+{
+	t_scene		scene;
+	float		width;
+	float		height;
+
+	width = WIDTH;
+	height = HEIGHT;
+
+	scene.ratio = width / height;
+	scene.height_float = 2.0;
+	scene.width_float = scene.ratio * scene.height_float;
+	scene.focal_length = (float3){0, 0, 1.0};
+	scene.origin = (float3){0, 0, 0};
+	scene.width_vec = (float3){scene.width_float, 0, 0};
+	scene.height_vec = (float3){0, scene.height_float, 0};
+	scene.ll_corner = scene.origin - scene.width_vec/2 - scene.height_vec/2 - scene.focal_length;
+	return (scene);
+}

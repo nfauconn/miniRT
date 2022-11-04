@@ -21,7 +21,7 @@ S_EXT = .c
 
 SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		${addprefix ${COMPARISON_SEARCH}/, \
-		ft_is_whitespace \
+		ft_iswhitespace \
 		ft_isalnum \
 		ft_isalpha \
 		ft_isascii \
@@ -44,6 +44,7 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		ft_itoa \
 		ft_lsttostrarray \
 		ft_split \
+		ft_split_whitespace \
 		ft_strarraytolist \
 		ft_ulltoa_base} \
 		${addprefix ${DISPLAY}/, \
