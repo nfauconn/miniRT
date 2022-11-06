@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 15:45:14 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/04 19:05:12 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/06 19:20:30 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,25 +48,23 @@ static ssize_t	find_line_elem(char *line)
 	return (-1);
 }
 
-bool	parse_line(t_scene *scene, char *line)
+bool	parse_line(char *line)
 {
-	bool		ret;
 	ssize_t		elem_index;
 
 	elem_index = find_line_elem(line);
 	if (elem_index < 0 && ft_strcmp(line, "\n"))
-		return(error_display("parsing error"));
-	fill_parameters(line, elem_index);
+		return (1);
+//	fill_parameters(line, elem_index);
 	//call initializer with func ptr, taking scene as parameter
 	return (0);
 }
 
-t_scene	parse(char *scene)
+void	parse(char *scene)
 {
 	int			fd;
 	bool		ret;
 	char		*line;
-	t_scene		scene;
 
 	if (!correct_filename(scene))
 		exit(error_display("invalid scene file\nformat : *.rt"));
@@ -76,25 +74,19 @@ t_scene	parse(char *scene)
 	line = get_next_line(fd);
 	while (line)
 	{
-		ret = parse_line(&scene, line);
+		ret = parse_line(line);
 		free(line);
-		if (ret < 0)
-			exit(error_display("invalid line in file\n");
+		if (ret)
+			exit(error_display("parsing error\n"));
 		line = get_next_line(fd);
 	}
-	return (scene);
 	//if index ok
 }
 
 // NE PAS OUBLIER :
 //	- verif que les 3 elements uniques sont contenus 1 seule fois
 
-t_scene	set_caracteristics(t_scene *scene)
-{
-
-}
-
-t_scene	scene_setup(char *file)
+t_scene	scene_setup(void)
 {
 	t_scene		scene;
 	float		width;

@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/04 19:09:33 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/06 19:07:12 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <math.h>
 # include <errno.h>
 # include <sys/types.h>
+# include <stdint.h>
 
 typedef float			float3 __attribute__((ext_vector_type(3)));
 typedef float			t_point __attribute__((ext_vector_type(3)));
@@ -29,7 +30,7 @@ typedef float			t_vector __attribute__((ext_vector_type(3)));
 
 typedef struct	s_element
 {
-	t_uint8_t		id;
+	uint8_t		id;
 	t_point			pos;				//								range [-height/2, height/2] [-width/2, width/2]
 	t_vector		orientation;		//C + cy						range [0.0, 1.0]
 	t_rgb			color;				// A + L + pl + sp + py
@@ -95,7 +96,7 @@ int		keyparser(int keycode, t_window *w);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 /* SCENE */
-t_scene	scene_setup(char *file);
+t_scene	scene_setup(void);
 void	fill_img(t_img img, t_scene scene);
 void	display_scene(t_scene scene);
 
