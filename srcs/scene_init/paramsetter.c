@@ -1,16 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_parameters.c                                  :+:      :+:    :+:   */
+/*   paramsetter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:00:45 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/07 22:36:23 by noe              ###   ########.fr       */
+/*   Updated: 2022/11/07 23:03:32 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+//creer 2 fonctions verif de format (is_coordinates / is_float pour verif
+//chaque str de param puis set, et exit clear se charge de free ce qu il faut
+//anyway)
 
 void	set_ambiantlight(t_scene *scene, char **params)
 {

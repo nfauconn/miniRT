@@ -16,17 +16,19 @@ S_EXT = .c
 BUILD_DIR  = ./objs
 INC_DIR = ./includes
 LIBFT_INC_DIR = ./libft/includes
+INIT_DIR = scene_init
 SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		main \
 		error \
 		exit_clear \
-		parse \
-		paramsetter \
 		display \
-		setup_scene \
 		sphere \
 		vector_operations \
 		TESTdegradetry \
+		${addprefix ${INIT_DIR}/,
+		parse \
+		paramsetter \
+		setup_scene} \
 		}}
 DEPS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.d}}
 OBJS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.o}}
@@ -66,7 +68,7 @@ val: ${NAME}
 	valgrind ./${NAME}
 
 norm: ${NAME}
-	norminette ${SRCS} ${INC_DIR} ${LIBFT_DIR}
+	norminette ${SRCS} ${INC_DIR} ${LIBFT_DIR}/${SRCS} ${LIBFT_DIR}/${INC_DIR}
 
 clean:
 	@make clean -C ${LIBFT_DIR}
