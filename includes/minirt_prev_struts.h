@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt_prev_struts.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/04 19:05:12 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/07 19:27:51 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,8 @@ typedef enum e_elements
 }	t_elements;
 
 /* ERROR */
-bool	error_display(char *s);
-bool	error_display2(char *s1, char *s2);
+t_bool	error_display(char *s);
+t_bool	error_display2(char *s1, char *s2);
 
 /* DISPLAY */
 int		wincloser(t_window *w);
@@ -127,7 +127,7 @@ int		keyparser(int keycode, t_window *w);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 /* SCENE */
-t_scene	scene_setup(char *file);
+t_scene	setup_scene(char *file);
 void	fill_img(t_img img, t_scene scene);
 void	display_scene(t_scene scene);
 
@@ -135,6 +135,6 @@ void	display_scene(t_scene scene);
 float	addition_of_elements_multiplication(float3 vector1, float3 vector2);
 
 /* SPHERE */
-bool	hit_sphere(float3 center, float radius, float3 raydirection, t_scene scene);
+t_bool	hit_sphere(float3 center, float radius, float3 raydirection, t_scene scene);
 
 #endif

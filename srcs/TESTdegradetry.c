@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   TESTdegradetry.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 16:16:24 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/11/04 19:05:12 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/07 19:47:42 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int vtoi(float3 color_vec)
 
 
 
-int	ray_color(float3 vector, t_scene scene)
+int	ray_color(float3 vector, t_scene *scene)
 {
     float t;
 	int color;
@@ -49,7 +49,7 @@ int	ray_color(float3 vector, t_scene scene)
     return (color);
 }
 
-int	get_background_color(int i, int j, t_scene scene)
+int	get_background_color(int i, int j, t_scene *scene)
 {
 	float3	ray_direction;
 	int		color;
@@ -59,7 +59,7 @@ int	get_background_color(int i, int j, t_scene scene)
 	u = i / (float)WIDTH;
 	v = j / (float)HEIGHT;
 
-	ray_direction = scene.ll_corner + u*scene.width_vec + v*scene.height_vec - scene.origin;
+	ray_direction = scene->ll_corner + u*scene->width_vec + v*scene->height_vec - scene->origin;
 //	ray_direction = unit_direction(ray_direction); //normalisation du vecteur?
 	color = ray_color(ray_direction, scene);
 	// if(v > 0.5)
@@ -69,7 +69,7 @@ int	get_background_color(int i, int j, t_scene scene)
 	return (color);
 }
 
-void	fill_img(t_img img, t_scene scene)
+void	fill_img(t_img img, t_scene *scene)
 {
 	int	color;
 	int	i;

@@ -19,8 +19,11 @@ LIBFT_INC_DIR = ./libft/includes
 SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		main \
 		error \
+		exit_clear \
+		parse \
+		paramsetter \
 		display \
-		scene_setup \
+		setup_scene \
 		sphere \
 		vector_operations \
 		TESTdegradetry \
@@ -82,5 +85,12 @@ gitm:
 	git push
 
 re: fclean all
+
+littleclean:
+	@${RM} ${BUILD_DIR}
+	@${RM} ${NAME}
+	@echo "deleted build dir & program (libs kept)"
+
+r: littleclean all
 
 .PHONY: all clean fclean re

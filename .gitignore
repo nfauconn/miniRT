@@ -55,3 +55,4 @@ miniRT
 objs/
 libft/objs/
 libft/libft.a
+.vscode/

@@ -17,7 +17,7 @@ int	wincloser(t_window *w)
 		mlx_destroy_window(w->mlx, w->ptr);
 	mlx_destroy_display(w->mlx);
 	free(w->mlx);
-	exit(0);
+	return(0);
 }
 
 int	keyparser(int keycode, t_window *w)
@@ -35,7 +35,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void	display_scene(t_scene scene)
+void	display_scene(t_scene *scene)
 {
 	t_window	w;
 	t_img	img;

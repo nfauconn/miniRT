@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene_setup.c                                      :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/03 15:45:14 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/06 19:20:30 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/11/07 20:18:31 by noe               #+#    #+#             */
+/*   Updated: 2022/11/07 22:43:51 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static bool	correct_filename(char *s)
+static t_bool	correct_filename(char *s)
 {
 	size_t	i;
 	size_t	len;
@@ -48,60 +48,55 @@ static ssize_t	find_line_elem(char *line)
 	return (-1);
 }
 
-bool	parse_line(char *line)
+t_bool	lex_line(char *line)
+{
+	while (*line)
+	{
+		while (ft_iswhitespace(*line))
+			line++;
+		if (!ft_isdigit(*line))
+			return (1);
+		while (ft_isdigit(*line) || *line == '.' || *line == ',')
+			line++;
+	}
+	return (0);
+}
+
+t_bool	parse_line(char *line, t_scene *scene)
 {
 	ssize_t		elem_index;
+	char		**params;
 
 	elem_index = find_line_elem(line);
 	if (elem_index < 0 && ft_strcmp(line, "\n"))
 		return (1);
-//	fill_parameters(line, elem_index);
+	if (lex_line(line))
+		return (1);
+	params = ft_split_whitespace(line);
+	scene->fill_params[elem_index](scene, params);
 	//call initializer with func ptr, taking scene as parameter
 	return (0);
 }
 
-void	parse(char *scene)
+void	parse(char *file, t_scene *scene)
 {
 	int			fd;
-	bool		ret;
+	t_bool		ret;
 	char		*line;
 
-	if (!correct_filename(scene))
-		exit(error_display("invalid scene file\nformat : *.rt"));
-	fd = open(scene, O_RDONLY);
+	if (!correct_filename(file))
+		exit_clear(error_display("invalid scene file\nformat : *.rt"), scene);
+	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		exit(error_display(strerror(errno)));
+		exit_clear(error_display(strerror(errno)), scene);
 	line = get_next_line(fd);
 	while (line)
 	{
-		ret = parse_line(line);
+		ret = parse_line(line, scene);
 		free(line);
 		if (ret)
-			exit(error_display("parsing error\n"));
+			exit_clear(error_display("parsing error\n"), scene);
 		line = get_next_line(fd);
 	}
 	//if index ok
-}
-
-// NE PAS OUBLIER :
-//	- verif que les 3 elements uniques sont contenus 1 seule fois
-
-t_scene	scene_setup(void)
-{
-	t_scene		scene;
-	float		width;
-	float		height;
-
-	width = WIDTH;
-	height = HEIGHT;
-
-	scene.ratio = width / height;
-	scene.height_float = 2.0;
-	scene.width_float = scene.ratio * scene.height_float;
-	scene.focal_length = (float3){0, 0, 1.0};
-	scene.origin = (float3){0, 0, 0};
-	scene.width_vec = (float3){scene.width_float, 0, 0};
-	scene.height_vec = (float3){0, scene.height_float, 0};
-	scene.ll_corner = scene.origin - scene.width_vec/2 - scene.height_vec/2 - scene.focal_length;
-	return (scene);
 }
