@@ -16,7 +16,7 @@ S_EXT = .c
 BUILD_DIR  = ./objs
 INC_DIR = ./includes
 LIBFT_INC_DIR = ./libft/includes
-INIT_DIR = scene_init
+INIT_DIR = setup
 SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		main \
 		error \
@@ -25,10 +25,10 @@ SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		sphere \
 		vector_operations \
 		TESTdegradetry \
-		${addprefix ${INIT_DIR}/,
-		parse \
-		paramsetter \
-		setup_scene} \
+		${addprefix ${INIT_DIR}/, \
+		setup_scene \
+		parse_file \
+		set_params} \
 		}}
 DEPS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.d}}
 OBJS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.o}}
@@ -36,7 +36,7 @@ VPATH = ${SRC_DIR}
 
 #COMPILING
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -mavx -g3 # -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -mavx -g3 -fsanitize=address
 LD_FLAGS = -L ${LIBFT_DIR} -L ${MLX_DIR}
 MLX_FLAGS = -lm -lmlx -lXext -lX11
 INCLUDES = -I ${INC_DIR} -I ${LIBFT_INC_DIR} -I ${MLX_DIR}
@@ -48,8 +48,8 @@ RM = rm -rf
 all: ${NAME}
 
 ${NAME}: ${OBJS}
-	@make -C ${LIBFT_DIR}
-	@make -C ${MLX_DIR}
+	@make -C ${LIBFT_DIR} --no-print-directory
+	@make -C ${MLX_DIR} --no-print-directory
 	@${CC} ${CFLAGS} ${LD_FLAGS} ${OBJS} -o ${NAME} ${MLX_FLAGS} -lft
 	@echo "${NAME} created"
 
@@ -71,13 +71,13 @@ norm: ${NAME}
 	norminette ${SRCS} ${INC_DIR} ${LIBFT_DIR}/${SRCS} ${LIBFT_DIR}/${INC_DIR}
 
 clean:
-	@make clean -C ${LIBFT_DIR}
-	@make clean -C ${MLX_DIR}
+	@make clean -C ${LIBFT_DIR} --no-print-directory
+	@make clean -C ${MLX_DIR} --no-print-directory
 	@${RM} ${BUILD_DIR}
 	@echo "objs deleted"
 
 fclean: clean
-	@make fclean -C ${LIBFT_DIR}
+	@make fclean -C ${LIBFT_DIR} --no-print-directory
 	@${RM} ${NAME}
 	@echo "libs and program deleted"
 

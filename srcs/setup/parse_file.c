@@ -1,34 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 20:18:31 by noe               #+#    #+#             */
-/*   Updated: 2022/11/08 11:56:26 by noe              ###   ########.fr       */
+/*   Updated: 2022/11/08 16:11:09 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-static t_bool	correct_filename(char *s)
-{
-	size_t	i;
-	size_t	len;
-
-	len = ft_strlen(s);
-	if (!ft_strend_cmp(s, ".rt"))
-		return (0);
-	i = 0;
-	while (s[i] && i < len - 3)
-	{
-		if (!is_identifier(s[i]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
 static ssize_t	find_line_elem(char *line)
 {
@@ -68,31 +50,30 @@ t_bool	parse_line(char *line, t_scene *scene)
 	ssize_t		elem_index;
 	char		**params;
 
+	if (!ft_strcmp(line, "\n") || !ft_strncmp(line, "#", 1))
+		return (0);
 	elem_index = find_line_elem(line);
-	if ((elem_index < 0 && ft_strcmp(line, "\n") || lex_line(line)))
+	if (elem_index < 0 || lex_line(line))
 		return (error_display("invalid line in file"));
 	params = ft_split_whitespace(line);
 	if (!params)
 		return(error_display("malloc error"));
 	ret = scene->fill_params[elem_index](scene, params);
-	ft_strarrayclear(params);
-	if (ret)
-		exit_clear(ret, scene);
-	//call initializer with func ptr, taking scene as parameter
-	return (0);
+	ft_strarrayclear(&params);
+	return (ret);
 }
 
-void	parse(char *file, t_scene *scene)
+t_bool	parse_file(char *file, t_scene *scene)
 {
 	int			fd;
 	t_bool		ret;
 	char		*line;
 
-	if (!correct_filename(file))
-		exit_clear(error_display("invalid scene file\nformat : *.rt"), scene);
+	if (!ft_strend_cmp(file, ".rt"))
+		return (error_display("invalid scene file\nformat : *.rt"));
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		exit_clear(error_display(strerror(errno)), scene);
+		return (error_display(strerror(errno)));
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -102,5 +83,7 @@ void	parse(char *file, t_scene *scene)
 			exit_clear(ret, scene);
 		line = get_next_line(fd);
 	}
-	//if index ok
+	//if (all essential params ok)
+		ret = 0;
+	return (ret);
 }

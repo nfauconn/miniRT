@@ -22,8 +22,8 @@ static void	init(t_scene *scene)
 	scene->width_vec = (float3){scene->width_float, 0, 0};
 	scene->height_vec = (float3){0, scene->height_float, 0};
 	scene->ll_corner = scene->origin - scene->width_vec/2 - scene->height_vec/2 - scene->focal_length;
-	scene->C.specs.fov = -1;
-	scene->A.specs.ratio = -1;
+	scene->C = NULL;
+	scene->A = NULL;
 	scene->lights = NULL;
 	scene->sp = NULL;
 	scene->pl = NULL;
@@ -31,17 +31,12 @@ static void	init(t_scene *scene)
 	init_paramsetter(scene);
 }
 
-// NE PAS OUBLIER :
-//	- verif que les 3 elements uniques sont contenus 1 seule fois
-
-t_scene	*setup_scene(char *file)
+void	setup_scene(t_scene *scene, char *file)
 {
-	t_scene		*scene;
+	t_bool	ret;
 
-	scene = malloc(sizeof(t_scene));
-	if (!scene)
-		exit (error_display("malloc error"));
 	init(scene);
-	parse(file, scene);
-	return (scene);
+	ret = parse_file(file, scene);
+	if (ret)
+		exit_clear(FAIL, scene);
 }
