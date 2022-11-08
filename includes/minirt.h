@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/07 22:45:05 by noe              ###   ########.fr       */
+/*   Updated: 2022/11/08 11:41:44 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct	s_scene
 	t_element			*sp;
 	t_element			*cy;
 	t_element			*pl;
-	void				(*fill_params[elements_nb])(struct s_scene *, char **);
+	t_bool				(*fill_params[elements_nb])(struct s_scene *, char **);
 }				t_scene;
 
 typedef struct	s_img
@@ -103,7 +103,7 @@ void	exit_clear(t_bool exit_code, t_scene *scene);
 
 /* PARSING */
 void	parse(char *file, t_scene *scene);
-void	init_paramsetter(t_scene *scene);
+t_bool	init_paramsetter(t_scene *scene);
 
 /* DISPLAY */
 int		wincloser(t_window *w);

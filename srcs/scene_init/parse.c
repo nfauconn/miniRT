@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 20:18:31 by noe               #+#    #+#             */
-/*   Updated: 2022/11/07 22:43:51 by noe              ###   ########.fr       */
+/*   Updated: 2022/11/08 11:56:26 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,20 @@ t_bool	lex_line(char *line)
 
 t_bool	parse_line(char *line, t_scene *scene)
 {
+	t_bool		ret;
 	ssize_t		elem_index;
 	char		**params;
 
 	elem_index = find_line_elem(line);
-	if (elem_index < 0 && ft_strcmp(line, "\n"))
-		return (1);
-	if (lex_line(line))
-		return (1);
+	if ((elem_index < 0 && ft_strcmp(line, "\n") || lex_line(line)))
+		return (error_display("invalid line in file"));
 	params = ft_split_whitespace(line);
-	scene->fill_params[elem_index](scene, params);
+	if (!params)
+		return(error_display("malloc error"));
+	ret = scene->fill_params[elem_index](scene, params);
+	ft_strarrayclear(params);
+	if (ret)
+		exit_clear(ret, scene);
 	//call initializer with func ptr, taking scene as parameter
 	return (0);
 }
@@ -95,7 +99,7 @@ void	parse(char *file, t_scene *scene)
 		ret = parse_line(line, scene);
 		free(line);
 		if (ret)
-			exit_clear(error_display("parsing error\n"), scene);
+			exit_clear(ret, scene);
 		line = get_next_line(fd);
 	}
 	//if index ok

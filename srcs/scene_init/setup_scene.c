@@ -22,6 +22,12 @@ static void	init(t_scene *scene)
 	scene->width_vec = (float3){scene->width_float, 0, 0};
 	scene->height_vec = (float3){0, scene->height_float, 0};
 	scene->ll_corner = scene->origin - scene->width_vec/2 - scene->height_vec/2 - scene->focal_length;
+	scene->C.specs.fov = -1;
+	scene->A.specs.ratio = -1;
+	scene->lights = NULL;
+	scene->sp = NULL;
+	scene->pl = NULL;
+	scene->cy = NULL;
 	init_paramsetter(scene);
 }
 
