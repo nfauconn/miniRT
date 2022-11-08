@@ -1,6 +1,6 @@
 #include "minirt.h"
 
-int	wincloser(t_window *w)
+int	wincloser(t_window *w, t_scene *scene)
 {
 	size_t	i;
 
@@ -17,13 +17,14 @@ int	wincloser(t_window *w)
 		mlx_destroy_window(w->mlx, w->ptr);
 	mlx_destroy_display(w->mlx);
 	free(w->mlx);
+	clear(scene);
 	return(0);
 }
 
-int	keyparser(int keycode, t_window *w)
+int	keyparser(int keycode, t_window *w, t_scene *scene)
 {
 	if (keycode == 65307)
-		wincloser(w);
+		wincloser(w, scene);
 	return (0);
 }
 

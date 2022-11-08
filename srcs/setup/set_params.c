@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:00:45 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/08 15:53:46 by noe              ###   ########.fr       */
+/*   Updated: 2022/11/08 19:31:39 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_bool	set_ambiantlight(t_scene *scene, char **params)
 
 	if (scene->A)
 		return (error_display("can be only one ambiant light"));
-	scene->A = malloc(sizeof (scene->A));
+	scene->A = malloc(sizeof (t_element));
 	if (!scene->A)
 		return (error_display("malloc error"));
 	if (!params[1] || !params[2])

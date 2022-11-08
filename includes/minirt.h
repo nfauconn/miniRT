@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/08 15:53:55 by noe              ###   ########.fr       */
+/*   Updated: 2022/11/08 19:39:45 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ t_bool	error_display(char *s);
 t_bool	error_display2(char *s1, char *s2);
 
 /* END */
+void	clear(t_scene *scene);
 void	exit_clear(t_bool exit_code, t_scene *scene);
 
 /* PARSING */
@@ -106,8 +107,8 @@ t_bool	parse_file(char *file, t_scene *scene);
 void	init_paramsetter(t_scene *scene);
 
 /* DISPLAY */
-int		wincloser(t_window *w);
-int		keyparser(int keycode, t_window *w);
+int		wincloser(t_window *w, t_scene *scene);
+int		keyparser(int keycode, t_window *w, t_scene *scene);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 /* SCENE */

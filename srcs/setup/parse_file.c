@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 20:18:31 by noe               #+#    #+#             */
-/*   Updated: 2022/11/08 16:11:09 by noe              ###   ########.fr       */
+/*   Updated: 2022/11/08 19:34:34 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,42 @@
 static ssize_t	find_line_elem(char *line)
 {
 	ssize_t		i;
-	static char	*elems[7] = {"A ", "C ", "L ", "pl ", "sp ", "cy ", 0};
+	static char	*elems[7] = {"A", "C", "L", "pl", "sp", "cy", 0};
 
 	if (!*line)
 		return (-1);
 	i = 0;
 	while (elems[i])
 	{
-		if ((i < 3 && !ft_strncmp(line, elems[i], 2))
-			|| (i > 3 && !ft_strncmp(line, elems[i], 3)))
+		if ((i < 2 && !ft_strncmp(line, elems[i], 1)
+			&& ft_iswhitespace(line[1]))
+			|| (i > 2 && !ft_strncmp(line, elems[i], 2) 
+			&& ft_iswhitespace(line[2])))
 			return (i);
 		i++;
 	}
 	return (-1);
 }
 
+static t_bool	check_id(char **line)
+{
+	if (**line == 'A' || **line == 'C' || **line == 'L')
+		(*line)++;
+	else
+		(*line) += 2 * sizeof (char);
+	if (!ft_iswhitespace(**line))
+		return (1);
+	return (0);
+}
+
 t_bool	lex_line(char *line)
 {
+	if (check_id(&line) == FAIL)
+		return (1);
 	while (*line)
 	{
+		if (*line == '\n')
+			return (0);
 		while (ft_iswhitespace(*line))
 			line++;
 		if (!ft_isdigit(*line))
@@ -85,5 +102,6 @@ t_bool	parse_file(char *file, t_scene *scene)
 	}
 	//if (all essential params ok)
 		ret = 0;
+	close(fd);
 	return (ret);
 }
