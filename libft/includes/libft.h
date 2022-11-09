@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/08 11:40:33 by noe              ###   ########.fr       */
+/*   Updated: 2022/11/09 18:32:19 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ char		*ft_strrchr(const char *s, int c);
 
 /* CONVERSION */
 int			ft_atoi(const char *s);
+float		ft_atof(char *str);
 char		*ft_itoa(int n);
 char		**ft_split(char const *s, char c);
 char		**ft_split_whitespace(char const *s);

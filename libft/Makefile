@@ -41,6 +41,7 @@ SRCS := ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		is_quote} \
 		${addprefix ${CONV}/, \
 		ft_atoi \
+		ft_atof \
 		ft_itoa \
 		ft_lsttostrarray \
 		ft_split \
