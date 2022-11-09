@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:00:45 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/09 16:41:28 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/09 18:48:53 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ t_bool	set_ambiantlight(t_scene *scene, char **params)
 	if (!scene->A)
 		return (error_display("malloc error"));
 	ft_bzero(scene->A, sizeof (t_element));
-	scene->A->next = NULL; //NECESSARY???????
 	if (!params[1] || !params[2] || params[3])
 		return (error_display("wrong number of elements for ambiant light"));
 	ratio = atof(params[1]); //ecrire un ft atof!!
@@ -63,12 +62,24 @@ t_bool	set_camera(t_scene *scene, char **params)
 	scene->C->specs.fov = fov;
 	return (ret);
 }
-/*
+
 t_bool	set_lights(t_scene *scene, char **params)
 {
+/* 	t_bool		ret;
+	float		ratio; */
+	t_element	*newlight;
 
+	newlight = malloc(sizeof(t_element));
+	if (!newlight)
+		return (error_display("malloc error"));
+	ft_bzero(newlight, sizeof(t_element));
+	if (!params[0] || !params[1] || !params[2] || !params[3] || params[4])
+		return (error_display("wrong number of elements for light"));
+	(void)scene;
+	return(0);
+//	elem_add_back(&scene->L);
 }
-
+/*
 t_bool	set_sphere(t_scene *scene, char **params)
 {
 
@@ -88,8 +99,8 @@ void	init_paramsetter(t_scene *scene)
 {
 	scene->fill_params[ambientlight] = &set_ambiantlight;
  	scene->fill_params[camera] = &set_camera;
-/*	scene->fill_params[lightsource] = &set_lights;
-	scene->fill_params[sphere] = &set_sphere;
+	scene->fill_params[lightsource] = &set_lights;
+/*	scene->fill_params[sphere] = &set_sphere;
 	scene->fill_params[cylinder] = &set_cylinder;
 	scene->fill_params[plan] = &set_plan; */
 }

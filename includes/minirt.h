@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/09 16:31:46 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/09 18:46:21 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef struct	s_scene
 	float3				ll_corner;
 	t_element			*C;
 	t_element			*A;
-	t_element			*lights;
+	t_element			*L;
 	t_element			*sp;
 	t_element			*cy;
 	t_element			*pl;

@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:19:07 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/09 16:35:07 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/09 18:31:33 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ t_bool	convert_rgb(char *s, t_element *elem)
 		ret = error_display("wrong rgb value");
 	else
 	{
-		elem->color.x = atof(rgb[0]);
-		elem->color.y = atof(rgb[1]);
-		elem->color.z = atof(rgb[2]);
+		elem->color.x = ft_atof(rgb[0]);
+		elem->color.y = ft_atof(rgb[1]);
+		elem->color.z = ft_atof(rgb[2]);
 		ret = check_rgb_range(elem->color);
 	}
 	ft_strarrayclear(&rgb);
@@ -71,11 +71,12 @@ t_bool	convert_orientation(char *s, t_element *elem)
 		ret = error_display("wrong orientation value");
 	else
 	{
-		elem->orientation.x = atof(or[0]);
-		elem->orientation.y = atof(or[1]);
-		elem->orientation.z = atof(or[2]);
+		elem->orientation.x = ft_atof(or[0]);
+		elem->orientation.y = ft_atof(or[1]);
+		elem->orientation.z = ft_atof(or[2]);
 		ret = check_orientation_range(elem->orientation);
 	}
+	ft_strarrayclear(&or);
 	return (ret);
 }
 
@@ -91,9 +92,9 @@ t_bool	convert_pos(char *s, t_element *elem)
 		ret = error_display("wrong pos value");
 	else
 	{
-		elem->pos.x = atof(pos[0]);
-		elem->pos.y = atof(pos[1]);
-		elem->pos.z = atof(pos[2]);
+		elem->pos.x = ft_atof(pos[0]);
+		elem->pos.y = ft_atof(pos[1]);
+		elem->pos.z = ft_atof(pos[2]);
 		ret = 0;
 	}
 	ft_strarrayclear(&pos);

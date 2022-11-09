@@ -14,6 +14,7 @@
 
 static void	init(t_scene *scene)
 {
+	ft_bzero(scene, sizeof(t_scene));
 	scene->ratio = WIDTH / HEIGHT;
 	scene->height_float = 2.0;
 	scene->width_float = scene->ratio * scene->height_float;
@@ -22,12 +23,6 @@ static void	init(t_scene *scene)
 	scene->width_vec = (float3){scene->width_float, 0, 0};
 	scene->height_vec = (float3){0, scene->height_float, 0};
 	scene->ll_corner = scene->origin - scene->width_vec/2 - scene->height_vec/2 - scene->focal_length;
-	scene->C = NULL;
-	scene->A = NULL;
-	scene->lights = NULL;
-	scene->sp = NULL;
-	scene->pl = NULL;
-	scene->cy = NULL;
 	init_paramsetter(scene);
 }
 

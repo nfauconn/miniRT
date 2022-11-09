@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 20:18:31 by noe               #+#    #+#             */
-/*   Updated: 2022/11/08 19:34:34 by noe              ###   ########.fr       */
+/*   Updated: 2022/11/09 19:08:38 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static ssize_t	find_line_elem(char *line)
 	{
 		if ((i < 2 && !ft_strncmp(line, elems[i], 1)
 			&& ft_iswhitespace(line[1]))
-			|| (i > 2 && !ft_strncmp(line, elems[i], 2) 
+			|| (i > 2 && !ft_strncmp(line, elems[i], 2)
 			&& ft_iswhitespace(line[2])))
 			return (i);
 		i++;
@@ -53,10 +53,20 @@ t_bool	lex_line(char *line)
 			return (0);
 		while (ft_iswhitespace(*line))
 			line++;
-		if (!ft_isdigit(*line))
-			return (1);
-		while (ft_isdigit(*line) || *line == '.' || *line == ',')
+		if (*line == '-')
 			line++;
+		if (*line && !ft_isdigit(*line))
+			return (1);
+		while (ft_isdigit(*line))
+		{
+			if (ft_isdigit(*line)
+				|| (*line == '-' && ft_isdigit(*(line + 1)))
+				|| (*line == '.' && ft_isdigit(*(line + 1)))
+				|| (*line == ',' && ft_isdigit(*(line + 1))))
+				line++;
+			else
+				return (1);
+		}
 	}
 	return (0);
 }
