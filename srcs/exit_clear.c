@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_clear.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 19:50:55 by noe               #+#    #+#             */
-/*   Updated: 2022/11/08 19:38:37 by noe              ###   ########.fr       */
+/*   Updated: 2022/11/09 14:21:27 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,21 @@
 
 static void	clear_lst(t_element **lst)
 {
-	t_element	*tmp;
+	t_element	*to_free;
 
 	while (*lst)
 	{
-		tmp = *lst;
+		to_free = *lst;
 		*lst = (*lst)->next;
-		free(tmp);
+		free(to_free);
+		printf("*lst = %p\n", *lst);
 	}
 }
 
 void	clear(t_scene *scene)
 {
+	if (!scene)
+		return ;
 	if (scene->A)
 		clear_lst(&scene->A);
 	if (scene->C)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   TESTdegradetry.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 16:16:24 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/11/07 19:47:42 by noe              ###   ########.fr       */
+/*   Updated: 2022/11/09 14:02:04 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	get_background_color(int i, int j, t_scene *scene)
 	return (color);
 }
 
-void	fill_img(t_img img, t_scene *scene)
+void	draw_scene(t_img img, t_scene *scene)
 {
 	int	color;
 	int	i;

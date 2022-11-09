@@ -36,7 +36,7 @@ VPATH = ${SRC_DIR}
 
 #COMPILING
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -mavx -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -mavx -g3 #-fsanitize=address
 LD_FLAGS = -L ${LIBFT_DIR} -L ${MLX_DIR}
 MLX_FLAGS = -lm -lmlx -lXext -lX11
 INCLUDES = -I ${INC_DIR} -I ${LIBFT_INC_DIR} -I ${MLX_DIR}

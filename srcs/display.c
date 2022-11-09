@@ -1,30 +1,21 @@
 #include "minirt.h"
 
-int	wincloser(t_window *w, t_scene *scene)
+int	close_window(t_scene *scene)
 {
-	size_t	i;
-
-	i = 0;
-	while (i < 1)//need check if img exist
-	{
-		if (w->img[i])
-		{
-			mlx_destroy_image(w->mlx, w->img[i]);
-		}
-		i++;
-	}
-	if (w->ptr)
-		mlx_destroy_window(w->mlx, w->ptr);
-	mlx_destroy_display(w->mlx);
-	free(w->mlx);
+	if (scene->img.ptr)
+		mlx_destroy_image(scene->mlx, scene->img.ptr);
+	if (scene->win)
+		mlx_destroy_window(scene->mlx, scene->win);
+	mlx_destroy_display(scene->mlx);
+	free(scene->mlx);
 	clear(scene);
 	return(0);
 }
 
-int	keyparser(int keycode, t_window *w, t_scene *scene)
+int	parse_key(int keycode, t_scene *scene)
 {
 	if (keycode == 65307)
-		wincloser(w, scene);
+		close_window(scene);
 	return (0);
 }
 
@@ -38,20 +29,17 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 
 void	display_scene(t_scene *scene)
 {
-	t_window	w;
-	t_img	img;
-
-	w.mlx = mlx_init();
-	w.ptr = mlx_new_window(w.mlx, WIDTH, HEIGHT, "MiniRT");
-	img.ptr = mlx_new_image(w.mlx, WIDTH, HEIGHT);
-	img.addr = mlx_get_data_addr(img.ptr, &img.bpp, &img.line_length,
-								&img.endian);
-	fill_img (img, scene);
+	scene->mlx = mlx_init();
+	scene->win = mlx_new_window(scene->mlx, WIDTH, HEIGHT, "MiniRT");
+	scene->img.ptr = mlx_new_image(scene->mlx, WIDTH, HEIGHT);
+	scene->img.addr = mlx_get_data_addr(scene->img.ptr, \
+		&scene->img.bpp, &scene->img.line_length, \
+		&scene->img.endian);
+	draw_scene(scene->img, scene);
 	//my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
-	w.img[0] = img.ptr;
-	/*function need mlx instance, windows, img, position start*/
-	mlx_put_image_to_window(w.mlx, w.ptr, w.img[0], 0, 0);
-	mlx_hook(w.ptr, 2, 1L << 0, keyparser, &w);
-	mlx_hook(w.ptr, 17, 1L << 2, wincloser, &w);
-	mlx_loop(w.mlx);
+	mlx_put_image_to_window(scene->mlx, scene->win, scene->img.ptr, 0, 0);
+//MLX LOOP HOOK
+	mlx_key_hook(scene->win, parse_key, scene);
+	mlx_hook(scene->win, 17, 0, close_window, scene);
+	mlx_loop(scene->mlx);
 }

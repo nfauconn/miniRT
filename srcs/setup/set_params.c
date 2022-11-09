@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_params.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:00:45 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/08 19:31:39 by noe              ###   ########.fr       */
+/*   Updated: 2022/11/09 14:13:59 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ t_bool	set_ambiantlight(t_scene *scene, char **params)
 	scene->A = malloc(sizeof (t_element));
 	if (!scene->A)
 		return (error_display("malloc error"));
+	ft_bzero(scene->A, sizeof (scene->A));
 	if (!params[1] || !params[2])
 		return (error_display("missing elements for ambiant light"));
 	if (params[3])

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/08 19:39:45 by noe              ###   ########.fr       */
+/*   Updated: 2022/11/09 14:03:31 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,20 @@ typedef struct	s_element
 	struct s_element	*next;
 }				t_element;
 
+typedef struct	s_img
+{
+	void				*ptr;
+	char				*addr;
+	int					bpp;
+	int					line_length;
+	int					endian;
+}				t_img;
 
 typedef struct	s_scene
 {
+	void				*mlx;
+	void				*win;
+	t_img				img;
 	float				ratio;
 	float				height_float;
 	float				width_float;
@@ -77,23 +88,6 @@ typedef struct	s_scene
 	t_bool				(*fill_params[elements_nb])(struct s_scene *, char **);
 }				t_scene;
 
-typedef struct	s_img
-{
-	void				*ptr;
-	char				*addr;
-	int					bpp;
-	int					line_length;
-	int					endian;
-}				t_img;
-
-typedef struct s_window
-{
-	void				*mlx;
-	void				*ptr;
-	void				**img[2];
-	//struct s_mapdata	scene;
-}				t_window;
-
 /* ERROR */
 t_bool	error_display(char *s);
 t_bool	error_display2(char *s1, char *s2);
@@ -107,13 +101,13 @@ t_bool	parse_file(char *file, t_scene *scene);
 void	init_paramsetter(t_scene *scene);
 
 /* DISPLAY */
-int		wincloser(t_window *w, t_scene *scene);
-int		keyparser(int keycode, t_window *w, t_scene *scene);
+int		close_window(t_scene *scene);
+int		parse_key(int keycode, t_scene *scene);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 /* SCENE */
 void	setup_scene(t_scene *scene, char *file);
-void	fill_img(t_img img, t_scene *scene);
+void	draw_scene(t_img img, t_scene *scene);
 void	display_scene(t_scene *scene);
 
 /* VECTOR */
