@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 16:16:24 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/11/09 14:02:04 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/09 15:12:51 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	get_background_color(int i, int j, t_scene *scene)
 	return (color);
 }
 
-void	draw_scene(t_img img, t_scene *scene)
+void	draw_scene(t_img *img, t_scene *scene)
 {
 	int	color;
 	int	i;
@@ -82,7 +82,7 @@ void	draw_scene(t_img img, t_scene *scene)
 		while (j <= HEIGHT)
 		{
 			color = get_background_color(i, j, scene);
-			my_mlx_pixel_put(&img, i, j, color);
+			my_mlx_pixel_put(img, i, j, color);
 			j++;
 		}
 		i++;

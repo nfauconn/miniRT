@@ -28,7 +28,8 @@ SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		${addprefix ${INIT_DIR}/, \
 		setup_scene \
 		parse_file \
-		set_params} \
+		set_params \
+		convert} \
 		}}
 DEPS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.d}}
 OBJS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.o}}
@@ -36,7 +37,7 @@ VPATH = ${SRC_DIR}
 
 #COMPILING
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -mavx -g3 #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -mavx -g3 -fsanitize=address
 LD_FLAGS = -L ${LIBFT_DIR} -L ${MLX_DIR}
 MLX_FLAGS = -lm -lmlx -lXext -lX11
 INCLUDES = -I ${INC_DIR} -I ${LIBFT_INC_DIR} -I ${MLX_DIR}

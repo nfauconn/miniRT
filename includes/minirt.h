@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/09 14:03:31 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/09 16:31:46 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef struct	s_scene
 {
 	void				*mlx;
 	void				*win;
-	t_img				img;
+	t_img				*img;
 	float				ratio;
 	float				height_float;
 	float				width_float;
@@ -99,6 +99,9 @@ void	exit_clear(t_bool exit_code, t_scene *scene);
 /* PARSING */
 t_bool	parse_file(char *file, t_scene *scene);
 void	init_paramsetter(t_scene *scene);
+t_bool	convert_pos(char *s, t_element *elem);
+t_bool	convert_orientation(char *s, t_element *elem);
+t_bool	convert_rgb(char *s, t_element *elem);
 
 /* DISPLAY */
 int		close_window(t_scene *scene);
@@ -107,7 +110,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 /* SCENE */
 void	setup_scene(t_scene *scene, char *file);
-void	draw_scene(t_img img, t_scene *scene);
+void	draw_scene(t_img *img, t_scene *scene);
 void	display_scene(t_scene *scene);
 
 /* VECTOR */
