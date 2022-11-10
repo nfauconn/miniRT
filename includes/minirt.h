@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/09 18:46:21 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/10 06:30:39 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef enum e_elements
 	elements_nb
 }	t_elements;
 
-typedef union	e_specs
+typedef union	u_specs
 {
 	float				ratio;
 	float				radius;
