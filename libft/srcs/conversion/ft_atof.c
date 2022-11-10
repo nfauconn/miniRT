@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:21:41 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/11/09 18:28:57 by rokerjea         ###   ########.fr       */
+/*   Updated: 2022/11/10 06:39:30 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-float	neg_exponant(int j)
+static float	neg_exponant(int j)
 {
 	float	res;
 
@@ -25,7 +25,7 @@ float	neg_exponant(int j)
 	return (res);
 }
 
-float	small(char c, int j)
+static float	small(char c, int j)
 {
 	float	res;
 
@@ -40,10 +40,10 @@ float	ft_atof(char *str)
 	int		i;
 	int		j;
 
-	while (ft_iswhitespace(str[0]) == 1)
+	while (ft_iswhitespace(str[0]))
 		str++;
 	i = 0;
-	while (ft_isdigit(str[i]) == 1)
+	while (ft_isdigit(str[i]))
 	{
 		res = (res * 10) + (str[i] - '0');
 		i++;
@@ -51,7 +51,7 @@ float	ft_atof(char *str)
 	if (str[i] == '.')
 		i++;
 	j = 1;
-	while (ft_isdigit(str[i]) == 1)
+	while (ft_isdigit(str[i]))
 	{
 		res += small(str[i], j);
 		j++;
@@ -59,14 +59,3 @@ float	ft_atof(char *str)
 	}
 	return (res);
 }
-
-// #include <stdio.h>
-
-// int	main(void)
-// {
-// 	float	test;
-
-// 	test = ft_atof("0.3");
-// 	printf("%f\n", test);
-// 	return (0);
-// }
