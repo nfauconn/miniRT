@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 12:56:42 by noe               #+#    #+#             */
-/*   Updated: 2022/11/10 14:42:25 by noe              ###   ########.fr       */
+/*   Updated: 2022/11/10 15:58:01 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_bool	conv_ratio(char *s, t_element *elem, char *elem_name)
 {
 	float ratio;
 
-	ratio = ft_atof(s);
+	ratio = atof(s);
 	if (ratio < 0.0 || ratio > 1.0)
 		return (error_display2("wrong ratio range for ", elem_name));
 	elem->specs.ratio = ratio;
@@ -27,7 +27,7 @@ t_bool	conv_fov(char *s, t_element *elem, char *elem_name)
 {
 	float	fov;
 
-	fov = ft_atof(s);
+	fov = atof(s);
 	if (fov < 0 || fov > 180)
 		return (error_display2("wrong fov range for ", elem_name));
 	elem->specs.fov = fov;
@@ -38,7 +38,7 @@ t_bool	conv_radius(char *s, t_element *elem, char *elem_name)
 {
 	float	diameter;
 
-	diameter = ft_atof(s);
+	diameter = atof(s);
 	if (diameter <= 0)
 		return (error_display2("wrong radius range for ", elem_name));
 	elem->specs.radius = diameter / 2;
@@ -49,11 +49,11 @@ t_bool	conv_diam_height(char *s1, char *s2, t_element *elem, char *elem_name)
 {
 	float	diam_hght[2];
 
-	diam_hght[0] = ft_atof(s1);
+	diam_hght[0] = atof(s1);
 	if (diam_hght[0] <= 0)
 		return (error_display2("wrong diameter value for ", elem_name));
 	elem->specs.diam_hght[0] = diam_hght[0];
-	diam_hght[1] = ft_atof(s2);
+	diam_hght[1] = atof(s2);
 	if (diam_hght[1] <= 0)
 		return (error_display2("wrong diameter value for ", elem_name));
 	elem->specs.diam_hght[1] = diam_hght[1];

@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:19:07 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/10 13:37:25 by noe              ###   ########.fr       */
+/*   Updated: 2022/11/10 15:58:01 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ t_bool	conv_rgb(char *s, t_element *elem, char *elem_name)
 		ret = error_display2("wrong rgb value for ", elem_name);
 	else
 	{
-		elem->color.x = ft_atof(rgb[0]);
-		elem->color.y = ft_atof(rgb[1]);
-		elem->color.z = ft_atof(rgb[2]);
+		elem->color.x = atof(rgb[0]);
+		elem->color.y = atof(rgb[1]);
+		elem->color.z = atof(rgb[2]);
 		if (check_rgb_range(elem->color))
 			ret = error_display2("wrong rgb value for ", elem_name);
 	}
@@ -74,9 +74,9 @@ t_bool	conv_orientation(char *s, t_element *elem, char *elem_name)
 		ret = error_display2("wrong orientation value for ", elem_name);
 	else
 	{
-		elem->orientation.x = ft_atof(or[0]);
-		elem->orientation.y = ft_atof(or[1]);
-		elem->orientation.z = ft_atof(or[2]);
+		elem->orientation.x = atof(or[0]);
+		elem->orientation.y = atof(or[1]);
+		elem->orientation.z = atof(or[2]);
 		if (check_orientation_range(elem->orientation))
 			ret = error_display2("wrong orientation range for ", elem_name);
 	}
@@ -96,9 +96,9 @@ t_bool	conv_pos(char *s, t_element *elem, char *elem_name)
 		ret = error_display2("wrong pos value for ", elem_name);
 	else
 	{
-		elem->pos.x = ft_atof(pos[0]);
-		elem->pos.y = ft_atof(pos[1]);
-		elem->pos.z = ft_atof(pos[2]);
+		elem->pos.x = atof(pos[0]);
+		elem->pos.y = atof(pos[1]);
+		elem->pos.z = atof(pos[2]);
 		ret = 0;
 	}
 	ft_strarrayclear(&pos);
