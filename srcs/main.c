@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:03:53 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/09 15:44:12 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/10 16:13:43 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,3 @@ int	main(int ac, char **av)
 	display_scene(&scene);
 	return (0);
 }
-
-	/*provisoire :*/
-/* 	(void)ac;
-	(void)av;
-	scene = setup_scene();*/
-	/*************/

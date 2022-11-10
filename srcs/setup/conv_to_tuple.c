@@ -6,13 +6,13 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:19:07 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/10 15:58:01 by noe              ###   ########.fr       */
+/*   Updated: 2022/11/10 17:18:30 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static t_bool	check_rgb_range(t_rgb color)
+/* static t_bool	check_rgb_range(t_rgb color)
 {
 	t_bool	ret;
 
@@ -23,12 +23,12 @@ static t_bool	check_rgb_range(t_rgb color)
 	else
 		ret = 1;
 	return (ret);
-}
+} */ //inoperant bc t_rgb are unsigned char
 
 t_bool	conv_rgb(char *s, t_element *elem, char *elem_name)
 {
-	t_bool	ret;
-	char	**rgb;
+	t_bool		ret;
+	char		**rgb;
 
 	rgb = ft_split(s, ',');
 	if (!rgb)
@@ -38,11 +38,11 @@ t_bool	conv_rgb(char *s, t_element *elem, char *elem_name)
 		ret = error_display2("wrong rgb value for ", elem_name);
 	else
 	{
-		elem->color.x = atof(rgb[0]);
-		elem->color.y = atof(rgb[1]);
-		elem->color.z = atof(rgb[2]);
-		if (check_rgb_range(elem->color))
-			ret = error_display2("wrong rgb value for ", elem_name);
+		elem->color.x = (uint8_t)ft_atoi(rgb[0]);
+		elem->color.y = (uint8_t)ft_atoi(rgb[1]);
+		elem->color.z = (uint8_t)ft_atoi(rgb[2]);
+	/* 	if (check_rgb_range(elem->color))
+			ret = error_display2("wrong rgb value for ", elem_name); */
 	}
 	ft_strarrayclear(&rgb);
 	return (ret);

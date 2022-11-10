@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 20:18:31 by noe               #+#    #+#             */
-/*   Updated: 2022/11/10 15:54:05 by noe              ###   ########.fr       */
+/*   Updated: 2022/11/10 17:08:59 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,13 @@ static ssize_t	find_line_elem(char *line)
 	return (-1);
 }
 
+static size_t	go_trough_whitespaces(char *line, size_t i)
+{
+	while (ft_iswhitespace(line[i]))
+		i++;
+	return (i);
+}
+
 static t_bool	check_id(char *line, size_t *i)
 {
 	if (line[*i] == 'A' || line[*i] == 'C' || line[*i] == 'L')
@@ -46,8 +53,7 @@ static t_bool	check_id(char *line, size_t *i)
 	}
 	if (!ft_iswhitespace(line[*i]))
 		return (1);
-	while (ft_iswhitespace(line[*i]))
-		(*i)++;
+	(*i) = go_trough_whitespaces(line, *i);
 	return (0);
 }
 
@@ -57,26 +63,24 @@ t_bool	lex_line(char *line, size_t i)
 	{
 		if (ft_isdigit(line[i]))
 			i++;
-		else if (line[i] == '.' || line[i] == ',')
+		if (line[i] == '.' || line[i] == ',')
 		{
 			i++;
 			if (!ft_isdigit(line[i]) && line[i] != '-')
 				return (1);
 		}
-		else if (line[i] == '-')
+		if (line[i] == '-')
 		{
+			if (!ft_iswhitespace(line[i - 1]) && line[i - 1] != ',')
+				return (1);
 			i++;
 			if (!ft_isdigit(line[i]))
 				return (1);
 		}
-		else if (line[i] == '\n')
-			return (0);
-		else if (ft_iswhitespace(line[i]))
-			while (ft_iswhitespace(line[i]))
-				i++;
-		else
-			return (1);
+		i = go_trough_whitespaces(line, i);
 	}
+	if (line[i] && line[i] != '\n')
+		return (1);
 	return (0);
 }
 
@@ -122,8 +126,8 @@ t_bool	parse_file(char *file, t_scene *scene)
 			break ;
 		line = get_next_line(fd);
 	}
-	if (!scene->A || !scene->C)
-		ret = 1;
+	if (!ret && (!scene->A || !scene->C))
+		ret = error_display("scene needs at least ambiant light and camera");
 	close(fd);
 	return (ret);
 }
