@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/10 13:34:20 by noe              ###   ########.fr       */
+/*   Updated: 2022/11/10 14:40:04 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ t_bool	conv_orientation(char *s, t_element *elem, char *elem_name);
 t_bool	conv_rgb(char *s, t_element *elem, char *elem_name);
 t_bool	conv_ratio(char *s, t_element *elem, char *elem_name);
 t_bool	conv_fov(char *s, t_element *elem, char *elem_name);
+t_bool	conv_radius(char *s, t_element *elem, char *elem_name);
+t_bool	conv_diam_height(char *s1, char *s2, t_element *elem, char *elem_name);
 void	elem_add_back(t_element **head, t_element *to_add);
 
 /* DISPLAY */
