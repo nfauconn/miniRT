@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_params.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:00:45 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/09 18:48:53 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/10 13:35:13 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,66 +18,50 @@
 
 t_bool	set_ambiantlight(t_scene *scene, char **params)
 {
-	t_bool	ret;
-	float	ratio;
-
+	if (ft_strarraysize(params) != 3)
+		return (error_display("wrong number of elements for ambiant light"));
 	if (scene->A)
 		return (error_display("can be only one ambiant light"));
-	scene->A = malloc(sizeof (t_element));
+	scene->A = ft_calloc(1, sizeof(t_element));
 	if (!scene->A)
 		return (error_display("malloc error"));
-	ft_bzero(scene->A, sizeof (t_element));
-	if (!params[1] || !params[2] || params[3])
-		return (error_display("wrong number of elements for ambiant light"));
-	ratio = atof(params[1]); //ecrire un ft atof!!
-	if (ratio < 0.0 || ratio > 1.0)
-		return (error_display("wrong ratio range for ambiant light"));
-	scene->A->specs.ratio = ratio;
-	ret = convert_rgb(params[2], scene->A);
-	return (ret);
+	if (conv_ratio(params[1], scene->A, params[0])
+		|| conv_rgb(params[2], scene->A, params[0]))
+		return (1);
+	return (0);
 }
 
 t_bool	set_camera(t_scene *scene, char **params)
 {
-	t_bool	ret;
-	float	fov;
-
+	if (ft_strarraysize(params) != 4)
+		return (error_display("wrong number of elements for camera"));
 	if (scene->C)
 		return (error_display("can be only one camera"));
-	scene->C = malloc(sizeof (t_element));
+	scene->C = ft_calloc(1, sizeof(t_element));
 	if (!scene->C)
 		return (error_display("malloc error"));
-	ft_bzero(scene->C, sizeof (t_element));
-	if (!params[0] || !params[1] || !params[2] || !params[3] || params[4])
-		return (error_display("wrong number of elements for camera"));
-	ret = convert_pos(params[1], scene->C);
-	if (ret)
-		return (ret);
-	ret = convert_orientation(params[2], scene->C);
-	if (ret)
-		return (ret);
-	fov = atof(params[3]);
-	if (fov < 0 || fov > 180)
-		return (error_display("wrong fov range for camera"));
-	scene->C->specs.fov = fov;
-	return (ret);
+	if (conv_pos(params[1], scene->C, params[0])
+		|| conv_orientation(params[2], scene->C, params[0])
+		|| conv_fov(params[3], scene->C, params[0]))
+		return (1);
+	return (0);
 }
 
 t_bool	set_lights(t_scene *scene, char **params)
 {
-/* 	t_bool		ret;
-	float		ratio; */
 	t_element	*newlight;
 
-	newlight = malloc(sizeof(t_element));
+	if (ft_strarraysize(params) != 4)
+		return (error_display("wrong number of elements for light"));
+	newlight = ft_calloc(1, sizeof(t_element));
 	if (!newlight)
 		return (error_display("malloc error"));
-	ft_bzero(newlight, sizeof(t_element));
-	if (!params[0] || !params[1] || !params[2] || !params[3] || params[4])
-		return (error_display("wrong number of elements for light"));
-	(void)scene;
-	return(0);
-//	elem_add_back(&scene->L);
+	if (conv_pos(params[1], newlight, params[0])
+		|| conv_ratio(params[2], newlight, params[0])
+		|| conv_rgb(params[3], newlight, params[0]))
+		return (1);
+	elem_add_back(&scene->L, newlight);
+	return (0);
 }
 /*
 t_bool	set_sphere(t_scene *scene, char **params)

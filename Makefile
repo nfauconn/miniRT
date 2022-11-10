@@ -29,7 +29,9 @@ SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		setup_scene \
 		parse_file \
 		set_params \
-		convert} \
+		conv_to_tuple \
+		conv_to_float \
+		elem_add} \
 		}}
 DEPS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.d}}
 OBJS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.o}}

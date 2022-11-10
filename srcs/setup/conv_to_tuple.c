@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convert.c                                          :+:      :+:    :+:   */
+/*   conv_to_tuple.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:19:07 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/09 18:31:33 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/10 13:37:25 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ static t_bool	check_rgb_range(t_rgb color)
 		&& color.x >= 0 && color.z <= 255)
 		ret = 0;
 	else
-		ret = error_display("wrong rgb value");
+		ret = 1;
 	return (ret);
 }
 
-t_bool	convert_rgb(char *s, t_element *elem)
+t_bool	conv_rgb(char *s, t_element *elem, char *elem_name)
 {
 	t_bool	ret;
 	char	**rgb;
@@ -33,14 +33,16 @@ t_bool	convert_rgb(char *s, t_element *elem)
 	rgb = ft_split(s, ',');
 	if (!rgb)
 		return (error_display("malloc error"));
-	if (!rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
-		ret = error_display("wrong rgb value");
+	ret = 0;
+	if (ft_strarraysize(rgb) != 3)
+		ret = error_display2("wrong rgb value for ", elem_name);
 	else
 	{
 		elem->color.x = ft_atof(rgb[0]);
 		elem->color.y = ft_atof(rgb[1]);
 		elem->color.z = ft_atof(rgb[2]);
-		ret = check_rgb_range(elem->color);
+		if (check_rgb_range(elem->color))
+			ret = error_display2("wrong rgb value for ", elem_name);
 	}
 	ft_strarrayclear(&rgb);
 	return (ret);
@@ -55,11 +57,11 @@ static t_bool	check_orientation_range(t_vector v)
 		&& v.z >= 0.0 && v.z <= 1.0)
 		ret = 0;
 	else
-		ret = error_display("wrong orientation range");
+		ret = 1;
 	return (ret);
 }
 
-t_bool	convert_orientation(char *s, t_element *elem)
+t_bool	conv_orientation(char *s, t_element *elem, char *elem_name)
 {
 	t_bool	ret;
 	char	**or;
@@ -67,20 +69,22 @@ t_bool	convert_orientation(char *s, t_element *elem)
 	or = ft_split(s, ',');
 	if (!or)
 		return (error_display("malloc error"));
-	if (!or[0] || !or[1] || !or[2] || or[3])
-		ret = error_display("wrong orientation value");
+	ret = 0;
+	if (ft_strarraysize(or) != 3)
+		ret = error_display2("wrong orientation value for ", elem_name);
 	else
 	{
 		elem->orientation.x = ft_atof(or[0]);
 		elem->orientation.y = ft_atof(or[1]);
 		elem->orientation.z = ft_atof(or[2]);
-		ret = check_orientation_range(elem->orientation);
+		if (check_orientation_range(elem->orientation))
+			ret = error_display2("wrong orientation range for ", elem_name);
 	}
 	ft_strarrayclear(&or);
 	return (ret);
 }
 
-t_bool	convert_pos(char *s, t_element *elem)
+t_bool	conv_pos(char *s, t_element *elem, char *elem_name)
 {
 	t_bool	ret;
 	char	**pos;
@@ -88,8 +92,8 @@ t_bool	convert_pos(char *s, t_element *elem)
 	pos = ft_split(s, ',');
 	if (!pos)
 		return (error_display("malloc error"));
-	if (!pos[0] || !pos[1] || !pos[2] || pos[3])
-		ret = error_display("wrong pos value");
+	if (ft_strarraysize(pos) != 3)
+		ret = error_display2("wrong pos value for ", elem_name);
 	else
 	{
 		elem->pos.x = ft_atof(pos[0]);

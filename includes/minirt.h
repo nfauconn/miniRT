@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/10 06:43:36 by noe              ###   ########.fr       */
+/*   Updated: 2022/11/10 13:34:20 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,12 @@ void	exit_clear(t_bool exit_code, t_scene *scene);
 /* PARSING */
 t_bool	parse_file(char *file, t_scene *scene);
 void	init_paramsetter(t_scene *scene);
-t_bool	convert_pos(char *s, t_element *elem);
-t_bool	convert_orientation(char *s, t_element *elem);
-t_bool	convert_rgb(char *s, t_element *elem);
+t_bool	conv_pos(char *s, t_element *elem, char *elem_name);
+t_bool	conv_orientation(char *s, t_element *elem, char *elem_name);
+t_bool	conv_rgb(char *s, t_element *elem, char *elem_name);
+t_bool	conv_ratio(char *s, t_element *elem, char *elem_name);
+t_bool	conv_fov(char *s, t_element *elem, char *elem_name);
+void	elem_add_back(t_element **head, t_element *to_add);
 
 /* DISPLAY */
 int		close_window(t_scene *scene);
