@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 20:18:31 by noe               #+#    #+#             */
-/*   Updated: 2022/11/09 19:08:38 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/10 06:58:19 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,37 +32,43 @@ static ssize_t	find_line_elem(char *line)
 	return (-1);
 }
 
-static t_bool	check_id(char **line)
+static t_bool	check_id(char *line, size_t *i)
 {
-	if (**line == 'A' || **line == 'C' || **line == 'L')
-		(*line)++;
+	if (line[*i] == 'A' || line[*i] == 'C' || line[*i] == 'L')
+		(*i)++;
 	else
-		(*line) += 2 * sizeof (char);
-	if (!ft_iswhitespace(**line))
+		(*i) += 2;
+	if (!ft_iswhitespace(line[*i]))
 		return (1);
 	return (0);
 }
 
 t_bool	lex_line(char *line)
 {
-	if (check_id(&line) == FAIL)
+	size_t	i;
+
+	i = 0;
+	printf("line = %s\n", line);
+	if (check_id(line, &i) == FAIL)
 		return (1);
-	while (*line)
+	while (line[i])
 	{
-		if (*line == '\n')
+		if (line[i] == '\n')
 			return (0);
-		while (ft_iswhitespace(*line))
-			line++;
-		if (*line == '-')
-			line++;
-		if (*line && !ft_isdigit(*line))
+		while (ft_iswhitespace(line[i]))
+			i++;
+		if (line[i] == '-')
+			i++;
+//		printf("%c\n", line[i]);
+		if (line[i] && !ft_isdigit(line[i]))
 			return (1);
-		while (ft_isdigit(*line))
+		while (ft_isdigit(line[i])
+			|| (line[i] == '-' && ft_isdigit(line[i + 1])))
 		{
-			if (ft_isdigit(*line)
-				|| (*line == '-' && ft_isdigit(*(line + 1)))
-				|| (*line == '.' && ft_isdigit(*(line + 1)))
-				|| (*line == ',' && ft_isdigit(*(line + 1))))
+			if (ft_isdigit(line[i])
+				|| (line[i] == '-' && ft_isdigit(*(line + 1)))
+				|| (line[i] == '.' && ft_isdigit(*(line + 1)))
+				|| (line[i] == ',' && ft_isdigit(*(line + 1))))
 				line++;
 			else
 				return (1);

@@ -6,7 +6,7 @@
 /*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/10 06:30:39 by noe              ###   ########.fr       */
+/*   Updated: 2022/11/10 06:43:36 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ typedef union	u_specs
 typedef struct	s_element
 {
 	uint8_t				id;
-	t_point				pos;				//								range [-height/2, height/2] [-width/2, width/2]
-	t_vector			orientation;		//C + cy						range [0.0, 1.0]
-	t_rgb				color;				// A + L + pl + sp + py
+	t_point				pos;
+	t_vector			orientation;
+	t_rgb				color;
 	t_specs				specs;
 	struct s_element	*next;
 }				t_element;
