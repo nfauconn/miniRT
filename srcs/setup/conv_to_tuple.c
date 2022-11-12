@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_to_tuple.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:19:07 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/10 17:18:30 by noe              ###   ########.fr       */
+/*   Updated: 2022/11/12 13:23:28 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ t_bool	conv_orientation(char *s, t_element *elem, char *elem_name)
 		ret = error_display2("wrong orientation value for ", elem_name);
 	else
 	{
-		elem->orientation.x = atof(or[0]);
-		elem->orientation.y = atof(or[1]);
-		elem->orientation.z = atof(or[2]);
+		elem->orientation.x = ft_atof(or[0]);
+		elem->orientation.y = ft_atof(or[1]);
+		elem->orientation.z = ft_atof(or[2]);
 		if (check_orientation_range(elem->orientation))
 			ret = error_display2("wrong orientation range for ", elem_name);
 	}
@@ -96,9 +96,9 @@ t_bool	conv_pos(char *s, t_element *elem, char *elem_name)
 		ret = error_display2("wrong pos value for ", elem_name);
 	else
 	{
-		elem->pos.x = atof(pos[0]);
-		elem->pos.y = atof(pos[1]);
-		elem->pos.z = atof(pos[2]);
+		elem->pos.x = ft_atof(pos[0]);
+		elem->pos.y = ft_atof(pos[1]);
+		elem->pos.z = ft_atof(pos[2]);
 		ret = 0;
 	}
 	ft_strarrayclear(&pos);

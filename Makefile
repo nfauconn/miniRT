@@ -50,13 +50,14 @@ RM = rm -rf
 ################################################################################
 all: ${NAME}
 
-${NAME}: ${OBJS}
-	@make -C ${LIBFT_DIR} --no-print-directory
+${NAME}: libftcreat ${OBJS}
 	@make -C ${MLX_DIR} --no-print-directory
 	@${CC} ${CFLAGS} ${LD_FLAGS} ${OBJS} -o ${NAME} ${MLX_FLAGS} -lft
-	@echo "${NAME} created"
 
 -include ${DEPS}
+
+libftcreat:
+	@make -C ${LIBFT_DIR} --no-print-directory
 
 ${BUILD_DIR}/%.o: %.c
 	@mkdir -p ${dir $@}
