@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 12:56:42 by noe               #+#    #+#             */
-/*   Updated: 2022/11/12 13:23:28 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/12 14:17:47 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_bool	conv_ratio(char *s, t_element *elem, char *elem_name)
 {
-	float ratio;
+	float	ratio;
 
 	ratio = ft_atof(s);
 	if (ratio < 0.0 || ratio > 1.0)

@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 16:16:24 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/11/09 15:12:51 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/12 16:56:13 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,11 @@ int vtoi(float3 color_vec)
 	int	g;
 	int	b;
 
-	r = (float)(color_vec.x);
-	g = (float)(color_vec.y);
-	b = (float)(color_vec.z);
+	r = (uint8_t)(color_vec.x);
+	g = (uint8_t)(color_vec.y);
+	b = (uint8_t)(color_vec.z);
 	return (r << 16 | g << 8 | b);
 }
-
-
 
 int	ray_color(float3 vector, t_scene *scene)
 {

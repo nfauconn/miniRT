@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/09 18:32:19 by rokerjea         ###   ########.fr       */
+/*   Updated: 2022/11/12 16:06:38 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,8 +164,7 @@ int			ft_tolower(int c);
 /* SIZE / LEN / MATHS */
 int			ft_nbrlen_base(int nbr, int base);
 float		ft_negative_power(int nb, int power);
-/* t_v			ft_operate_vector(t_v vector, char operation, int nb);
- */t_ull		ft_power(int nb, int power);
+t_ull		ft_power(int nb, int power);
 void		ft_rev_int_tab(int *tab, int size);
 int			*ft_sort_int_tab(int *tab, int size);
 ssize_t		ft_strarraysize(char **tab);

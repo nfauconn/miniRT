@@ -3,30 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 20:18:31 by noe               #+#    #+#             */
-/*   Updated: 2022/11/10 17:08:59 by noe              ###   ########.fr       */
+/*   Updated: 2022/11/12 16:03:17 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static ssize_t	find_line_elem(char *line)
+static ssize_t	find_line_elem(char **line)
 {
 	ssize_t		i;
 	static char	*elems[7] = {"A", "C", "L", "pl", "sp", "cy", 0};
 
-	if (!*line)
+	if (!**line)
 		return (-1);
 	i = 0;
 	while (elems[i])
 	{
-		if ((i < 3 && !ft_strncmp(line, elems[i], 1)
-			&& ft_iswhitespace(line[1]))
-			|| (i >= 3 && !ft_strncmp(line, elems[i], 2)
-			&& ft_iswhitespace(line[2])))
+		if ((i < 3 && !ft_strncmp(*line, elems[i], 1)
+			&& ft_iswhitespace((*line)[1]))
+			|| (i >= 3 && !ft_strncmp(*line, elems[i], 2)
+			&& ft_iswhitespace((*line)[2])))
+		{
+			while (ft_isalpha(**line))
+				(*line)++;
+			while (ft_iswhitespace(**line))
+				(*line)++;
 			return (i);
+		}
 		i++;
 	}
 	return (-1);
@@ -37,24 +43,6 @@ static size_t	go_trough_whitespaces(char *line, size_t i)
 	while (ft_iswhitespace(line[i]))
 		i++;
 	return (i);
-}
-
-static t_bool	check_id(char *line, size_t *i)
-{
-	if (line[*i] == 'A' || line[*i] == 'C' || line[*i] == 'L')
-		(*i)++;
-	else
-	{
-		(*i)++;
-		if (line[*i])
-			(*i)++;
-		else
-			return (1);
-	}
-	if (!ft_iswhitespace(line[*i]))
-		return (1);
-	(*i) = go_trough_whitespaces(line, *i);
-	return (0);
 }
 
 t_bool	lex_line(char *line, size_t i)
@@ -86,6 +74,7 @@ t_bool	lex_line(char *line, size_t i)
 
 t_bool	parse_line(char *line, t_scene *scene)
 {
+	char		*start;
 	t_bool		ret;
 	size_t		i;
 	ssize_t		elem_index;
@@ -94,9 +83,11 @@ t_bool	parse_line(char *line, t_scene *scene)
 	if (!ft_strcmp(line, "\n") || !ft_strncmp(line, "#", 1))
 		return (0);
 	i = 0;
-	elem_index = find_line_elem(line);
-	if (elem_index < 0 || check_id(line, &i) || lex_line(line, i))
+	start = line;
+	elem_index = find_line_elem(&line);
+	if (elem_index < 0 || lex_line(line, i))
 		return (error_display("invalid line in file"));
+	line = start;
 	params = ft_split_whitespace(line);
 	if (!params)
 		return(error_display("malloc error"));
@@ -126,7 +117,7 @@ t_bool	parse_file(char *file, t_scene *scene)
 			break ;
 		line = get_next_line(fd);
 	}
-	if (!ret && (!scene->A || !scene->C))
+	if (!ret && (!scene->amblight || !scene->cam))
 		ret = error_display("scene needs at least ambiant light and camera");
 	close(fd);
 	return (ret);

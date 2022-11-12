@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/10 14:40:04 by noe              ###   ########.fr       */
+/*   Updated: 2022/11/12 17:37:03 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 # include <sys/types.h>
 # include <stdint.h>
 
-typedef float			float3 __attribute__((ext_vector_type(3)));
-typedef float			t_point __attribute__((ext_vector_type(3)));
-typedef uint8_t			t_rgb __attribute__((ext_vector_type(3)));
-typedef float			t_vector __attribute__((ext_vector_type(3)));
+typedef float __attribute__((ext_vector_type(3)))	float3;
+typedef float3										t_point;
+typedef float3										t_vector;
+typedef float3										t_rgb;
 
 typedef enum e_elements
 {
@@ -36,10 +36,10 @@ typedef enum e_elements
 	plan,
 	sphere,
 	cylinder,
-	elements_nb
+	elm_nb
 }	t_elements;
 
-typedef union	u_specs
+typedef union u_specs
 {
 	float				ratio;
 	float				radius;
@@ -47,7 +47,7 @@ typedef union	u_specs
 	float				diam_hght[2];
 }	t_specs;
 
-typedef struct	s_element
+typedef struct s_element
 {
 	uint8_t				id;
 	t_point				pos;
@@ -57,7 +57,7 @@ typedef struct	s_element
 	struct s_element	*next;
 }				t_element;
 
-typedef struct	s_img
+typedef struct s_img
 {
 	void				*ptr;
 	char				*addr;
@@ -66,7 +66,7 @@ typedef struct	s_img
 	int					endian;
 }				t_img;
 
-typedef struct	s_scene
+typedef struct s_scene
 {
 	void				*mlx;
 	void				*win;
@@ -79,13 +79,13 @@ typedef struct	s_scene
 	float3				width_vec;
 	float3				height_vec;
 	float3				ll_corner;
-	t_element			*C;
-	t_element			*A;
-	t_element			*L;
+	t_element			*cam;
+	t_element			*amblight;
+	t_element			*lights;
 	t_element			*sp;
 	t_element			*cy;
 	t_element			*pl;
-	t_bool				(*fill_params[elements_nb])(struct s_scene *, char **);
+	t_bool				(*fill_params[elm_nb])(struct s_scene *elem, char **params);
 }				t_scene;
 
 /* ERROR */

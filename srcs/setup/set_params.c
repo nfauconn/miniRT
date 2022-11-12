@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_params.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:00:45 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/10 16:55:48 by noe              ###   ########.fr       */
+/*   Updated: 2022/11/12 13:43:11 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ t_bool	set_ambiantlight(t_scene *scene, char **params)
 {
 	if (ft_strarraysize(params) != 3)
 		return (error_display("wrong number of elements for ambiant light"));
-	if (scene->A)
+	if (scene->amblight)
 		return (error_display("can be only one ambiant light"));
-	scene->A = ft_calloc(1, sizeof(t_element));
-	if (!scene->A)
+	scene->amblight = ft_calloc(1, sizeof(t_element));
+	if (!scene->amblight)
 		return (error_display("malloc error"));
-	if (conv_ratio(params[1], scene->A, params[0])
-		|| conv_rgb(params[2], scene->A, params[0]))
+	if (conv_ratio(params[1], scene->amblight, params[0])
+		|| conv_rgb(params[2], scene->amblight, params[0]))
 		return (1);
 	return (0);
 }
@@ -35,14 +35,14 @@ t_bool	set_camera(t_scene *scene, char **params)
 {
 	if (ft_strarraysize(params) != 4)
 		return (error_display("wrong number of elements for camera"));
-	if (scene->C)
+	if (scene->cam)
 		return (error_display("can be only one camera"));
-	scene->C = ft_calloc(1, sizeof(t_element));
-	if (!scene->C)
+	scene->cam = ft_calloc(1, sizeof(t_element));
+	if (!scene->cam)
 		return (error_display("malloc error"));
-	if (conv_pos(params[1], scene->C, params[0])
-		|| conv_orientation(params[2], scene->C, params[0])
-		|| conv_fov(params[3], scene->C, params[0]))
+	if (conv_pos(params[1], scene->cam, params[0])
+		|| conv_orientation(params[2], scene->cam, params[0])
+		|| conv_fov(params[3], scene->cam, params[0]))
 		return (1);
 	return (0);
 }
@@ -62,7 +62,7 @@ t_bool	set_lights(t_scene *scene, char **params)
 		|| conv_ratio(params[2], newlight, params[0])
 		|| conv_rgb(params[3], newlight, params[0]))
 		ret = 1;
-	elem_add_back(&scene->L, newlight);
+	elem_add_back(&scene->lights, newlight);
 	return (ret);
 }
 
