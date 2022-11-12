@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:00:45 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/12 13:43:11 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/12 18:00:36 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ t_bool	set_cylinder(t_scene *scene, char **params)
 
 void	init_paramsetter(t_scene *scene)
 {
-	scene->fill_params[ambientlight] = &set_ambiantlight;
+	scene->fill_params[ambiantlight] = &set_ambiantlight;
  	scene->fill_params[camera] = &set_camera;
 	scene->fill_params[lightsource] = &set_lights;
 	scene->fill_params[sphere] = &set_sphere;

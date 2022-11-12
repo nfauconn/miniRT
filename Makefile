@@ -99,4 +99,4 @@ littleclean:
 
 r: littleclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re libftcreat val norm littleclean r

@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/12 17:37:03 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/12 17:59:43 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef float3										t_rgb;
 
 typedef enum e_elements
 {
-	ambientlight = 0,
+	ambiantlight = 0,
 	camera,
 	lightsource,
 	plan,
