@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:21:41 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/11/10 06:39:30 by noe              ###   ########.fr       */
+/*   Updated: 2022/11/12 13:17:09 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,37 @@ static float	neg_exponant(int j)
 	return (res);
 }
 
-static float	small(char c, int j)
+static float	small(char *str)
 {
 	float	res;
+	int		j;
 
-	res = c - '0';
-	res *= neg_exponant(j);
+	j = 1;
+	res = 0;
+	while (ft_isdigit(str[0]))
+	{		
+		res += (str[0] - '0') * neg_exponant(j++);
+		str++;
+	}	
 	return (res);
 }
 
 float	ft_atof(char *str)
 {
 	float	res;
+	int		neg;
 	int		i;
-	int		j;
 
 	while (ft_iswhitespace(str[0]))
 		str++;
 	i = 0;
+	neg = 1;
+	if (str[0] == '-')
+	{
+		neg = -1;
+		str++;
+	}
+	res = 0;
 	while (ft_isdigit(str[i]))
 	{
 		res = (res * 10) + (str[i] - '0');
@@ -50,12 +63,6 @@ float	ft_atof(char *str)
 	}
 	if (str[i] == '.')
 		i++;
-	j = 1;
-	while (ft_isdigit(str[i]))
-	{
-		res += small(str[i], j);
-		j++;
-		i++;
-	}
-	return (res);
+	res += small(str + i);
+	return (res * neg);
 }
