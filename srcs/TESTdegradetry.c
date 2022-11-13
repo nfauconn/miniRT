@@ -6,11 +6,25 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 16:16:24 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/11/13 20:29:12 by rokerjea         ###   ########.fr       */
+/*   Updated: 2022/11/13 20:45:27 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+int	convert_unsigned_to_int(float hexa)
+{
+	int	res;
+
+	res = hexa * 255;
+	if (hexa * 255 - res >= 0.5)
+		res += 1;
+	if (res > 255)
+		res = 255;
+	if (res < 0)
+		res = 0;
+	return (res);
+}
 
 int vtoi(float3 color_vec)
 {
@@ -18,29 +32,9 @@ int vtoi(float3 color_vec)
 	int	g;
 	int	b;
 
-	r = color_vec.x * 255;
-	if (color_vec.x * 255 - r >= 0.5)
-		r += 1;
-	if (r > 255)
-		r = 255;
-	if (r < 0)
-		r = 0;
-	g = color_vec.y * 255;
-	// printf("float left = %f\n", color_vec.y * 255 - g);
-	if (color_vec.y * 255 - g >= 0.5)
-		g += 1;
-	// printf ("g = %d\n", g);
-	if (g > 255)
-		g = 255;
-	if (g < 0)
-		g = 0;
-	b = color_vec.z * 255;
-	if (color_vec.z * 255 - b >= 0.5)
-		b += 1;
-	if (b > 255)
-		b = 255;
-	if (b < 0)
-		b = 0;
+	r = convert_unsigned_to_int(color_vec.x);
+	g = convert_unsigned_to_int(color_vec.y);
+	b = convert_unsigned_to_int(color_vec.z);
 	return (r << 16 | g << 8 | b);
 }
 
@@ -63,10 +57,6 @@ int	ray_color(float3 vector, t_scene *scene)
 		float3 res_color = top * (1.0 - t) + bottom * t;
 		color = vtoi(res_color);
 	}
-	// if (t < 0.5)
-	// 	color = vtoi(top);
-	// else
-	// 	color = vtoi(bottom);
     return (color);
 }
 
