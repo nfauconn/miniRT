@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/12 17:59:43 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/13 18:02:47 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	draw_scene(t_img *img, t_scene *scene);
 void	display_scene(t_scene *scene);
 
 /* VECTOR */
-float	addition_of_elements_multiplication(float3 vector1, float3 vector2);
+float	dot(float3 vector1, float3 vector2);
 
 /* SPHERE */
 t_bool	hit_sphere(float3 center, float radius, float3 raydirection, t_scene *scene);
