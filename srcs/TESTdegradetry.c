@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   TESTdegradetry.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 16:16:24 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/11/12 16:56:13 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/13 20:29:12 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,29 @@ int vtoi(float3 color_vec)
 	int	g;
 	int	b;
 
-	r = (uint8_t)(color_vec.x);
-	g = (uint8_t)(color_vec.y);
-	b = (uint8_t)(color_vec.z);
+	r = color_vec.x * 255;
+	if (color_vec.x * 255 - r >= 0.5)
+		r += 1;
+	if (r > 255)
+		r = 255;
+	if (r < 0)
+		r = 0;
+	g = color_vec.y * 255;
+	// printf("float left = %f\n", color_vec.y * 255 - g);
+	if (color_vec.y * 255 - g >= 0.5)
+		g += 1;
+	// printf ("g = %d\n", g);
+	if (g > 255)
+		g = 255;
+	if (g < 0)
+		g = 0;
+	b = color_vec.z * 255;
+	if (color_vec.z * 255 - b >= 0.5)
+		b += 1;
+	if (b > 255)
+		b = 255;
+	if (b < 0)
+		b = 0;
 	return (r << 16 | g << 8 | b);
 }
 
@@ -28,9 +48,9 @@ int	ray_color(float3 vector, t_scene *scene)
 {
     float t;
 	int color;
-	// float3 bottom = (float3){255.0, 255.0, 255.0};
-	float3 top = (float3){0.0, 204.0, 255.0};
-	float3	color_red = {255, 0, 0};
+	float3 bottom = (float3){1.0, 1.0, 1.0};
+	float3 top = (float3){0.5, 0.7, 1.0};
+	float3	color_red = {1, 0, 0};
 	float3 spheres[3] = {{0, 0, -1}, {-1, -1, -1}, 0};
 
 	t = 0.5*(vector.y + 1.0); // vector.y should be between 1 (top) and -1 (bottom)
@@ -39,7 +59,10 @@ int	ray_color(float3 vector, t_scene *scene)
 	if (hit_sphere(spheres[0], 0.5, vector, scene) || hit_sphere(spheres[1], 0.5, vector, scene))
 		color = vtoi(color_red);
 	else
-		color = vtoi(top) * (1 - t);
+	{
+		float3 res_color = top * (1.0 - t) + bottom * t;
+		color = vtoi(res_color);
+	}
 	// if (t < 0.5)
 	// 	color = vtoi(top);
 	// else
