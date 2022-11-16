@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/13 18:02:47 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/16 13:21:00 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 # include <sys/types.h>
 # include <stdint.h>
 
-typedef float __attribute__((ext_vector_type(3)))	float3;
-typedef float3										t_point;
-typedef float3										t_vector;
-typedef float3										t_rgb;
+typedef float __attribute__((ext_vector_type(3)))	t_float3;
+typedef t_float3									t_point;
+typedef t_float3									t_vector;
+typedef t_float3									t_rgb;
 
 typedef enum e_elements
 {
@@ -74,11 +74,11 @@ typedef struct s_scene
 	float				ratio;
 	float				height_float;
 	float				width_float;
-	float3				focal_length;
-	float3				origin;
-	float3				width_vec;
-	float3				height_vec;
-	float3				ll_corner;
+	t_float3			focal_length;
+	t_float3			origin;
+	t_float3			width_vec;
+	t_float3			height_vec;
+	t_float3			ll_corner;
 	t_element			*cam;
 	t_element			*amblight;
 	t_element			*lights;
@@ -119,9 +119,20 @@ void	draw_scene(t_img *img, t_scene *scene);
 void	display_scene(t_scene *scene);
 
 /* VECTOR */
-float	dot(float3 vector1, float3 vector2);
+float	dot(t_float3 vector1, t_float3 vector2);
 
 /* SPHERE */
-t_bool	hit_sphere(float3 center, float radius, float3 raydirection, t_scene *scene);
+t_bool	hit_sphere(t_float3 center, float radius, t_float3 raydirection, t_scene *scene);
 
+/* UTILS - TUPLE */
+/*
+t_bool		same_tuple(t_float4 tup1, t_float4 tup2);
+t_bool		tuple_bool(t_int4 tuple);
+float		addition_of_squared_elements(t_float4 vector);
+float		length(t_float4 vector);
+t_bool		same_float(float f1, float f2);
+t_float4	unit_direction(t_float4 vector);
+float		dot_product(t_float4 tup1, t_float4 tup2);
+t_float4	cross_product(t_float4 tup1, t_float4 tup2);
+*/
 #endif

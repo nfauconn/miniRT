@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 14:19:18 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/12 14:19:20 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/16 12:03:11 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ static void	init(t_scene *scene)
 	scene->ratio = WIDTH / HEIGHT;
 	scene->height_float = 2.0;
 	scene->width_float = scene->ratio * scene->height_float;
-	scene->focal_length = (float3){0, 0, 1.0};
-	scene->origin = (float3){0, 0, 0};
-	scene->width_vec = (float3){scene->width_float, 0, 0};
-	scene->height_vec = (float3){0, scene->height_float, 0};
+	scene->focal_length = (t_float3){0, 0, 1.0};
+	scene->origin = (t_float3){0, 0, 0};
+	scene->width_vec = (t_float3){scene->width_float, 0, 0};
+	scene->height_vec = (t_float3){0, scene->height_float, 0};
 	scene->ll_corner = scene->origin - scene->width_vec/2 - scene->height_vec/2 - scene->focal_length;
 	init_paramsetter(scene);
 }

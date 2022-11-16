@@ -1,8 +1,8 @@
 #include "minirt.h"
 
-t_bool	hit_sphere(float3 center, float radius, float3 raydirection, t_scene *scene)
+t_bool	hit_sphere(t_float3 center, float radius, t_float3 raydirection, t_scene *scene)
 {
-	float3	oc;
+	t_float3	oc;
 	float	a;
 	float	b;
 	float	c;

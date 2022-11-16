@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 18:10:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/13 19:47:00 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/16 13:37:21 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	get_background_color(int x, int y, t_scene *scene)
 	int			color;
 	float		u = x / (float)WIDTH;
 	float		v = y / (float)HEIGHT;
-	
+
 	return (color);
 }
 

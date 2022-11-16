@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/13 18:02:47 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/16 12:03:11 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <math.h>
 # include <errno.h>
 
-typedef float			float3 __attribute__((ext_vector_type(3)));
+typedef float			t_float3 __attribute__((ext_vector_type(3)));
 typedef float			t_point __attribute__((ext_vector_type(3)));
 typedef u_int8_t		t_rgb __attribute__((ext_vector_type(3)));
 typedef float			t_vector __attribute__((ext_vector_type(3)));
@@ -79,11 +79,11 @@ typedef struct	s_scene
 	float			ratio;
 	float			height_float;
 	float			width_float;
-	float3			focal_length;
-	float3			origin;
-	float3			width_vec;
-	float3			height_vec;
-	float3			ll_corner;
+	t_float3			focal_length;
+	t_float3			origin;
+	t_float3			width_vec;
+	t_float3			height_vec;
+	t_float3			ll_corner;
 	t_element		camera;
 	t_element		ambiantlight;
 	t_element		*lights;
@@ -132,9 +132,9 @@ void	fill_img(t_img img, t_scene scene);
 void	display_scene(t_scene scene);
 
 /* VECTOR */
-float	dot(float3 vector1, float3 vector2);
+float	dot(t_float3 vector1, t_float3 vector2);
 
 /* SPHERE */
-t_bool	hit_sphere(float3 center, float radius, float3 raydirection, t_scene scene);
+t_bool	hit_sphere(t_float3 center, float radius, t_float3 raydirection, t_scene scene);
 
 #endif
