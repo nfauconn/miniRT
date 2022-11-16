@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:22:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/16 18:53:42 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/16 19:00:11 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ ssize_t	sphere_id()
 	return(id);
 }
 
-int	main()
+int	main()dd
 {
 	t_point		origin = {0, 0, -5};
 	t_vector	direction = {0, 0, 1};
