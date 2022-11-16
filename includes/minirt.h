@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/16 13:21:00 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/16 19:18:42 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ float	dot(t_float3 vector1, t_float3 vector2);
 t_bool	hit_sphere(t_float3 center, float radius, t_float3 raydirection, t_scene *scene);
 
 /* UTILS - TUPLE */
+float	dot3(t_float3 tup1, t_float3 tup2);
 /*
 t_bool		same_tuple(t_float4 tup1, t_float4 tup2);
 t_bool		tuple_bool(t_int4 tuple);
