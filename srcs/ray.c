@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:22:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/16 14:18:17 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/16 18:53:42 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@ typedef struct s_ray
 	t_point	origin;
 	t_point	direction;
 }	t_ray;
+
+typedef struct s_intersection
+{
+	size_t	count;
+	float	pos[2];
+}	t_intersect;
 
 t_ray	ray(t_point origin, t_vector direction)
 {
@@ -36,21 +42,54 @@ t_point	position(t_ray ray, float t)
 	return (ray.origin + ray.direction * t);
 }
 
+// r.origin{0, 0, -5} + r.dir * t = {0, 0, -1}
+// r.origin.z + r.dir * t = sphere.z
+// r.dir * t = sphere.z - r.origin.z
+// t = (-1 - r.origin.z) / r.dir.z
+t_intersect	center_sp_intersect(ssize_t sphere, t_ray r)
+{
+	t_intersect	xs;
+
+	(void)sphere;
+	xs.count = 2;
+	xs.pos[0] = (-1 - r.origin.z) / r.direction.z;
+	xs.pos[1] = (1 - r.origin.z) / r.direction.z;
+	return (xs);
+}
+
+// r.origin{0, 1, -5} + r.direction.z * ? = tangente{0, 1, 0}
+// r.dir.z * ? = 0 - r.origin.z
+// ? = (0 -r.origin.z) / r.dir.z
+t_intersect	tangent_sp_intersect(ssize_t sphere, t_ray r)
+{
+	t_intersect	xs;
+
+	(void)sphere;
+	xs.count = 2;
+	xs.pos[0] = -r.origin.z / r.direction.z;
+	xs.pos[1] = xs.pos[0];
+	return (xs);
+}
+
+ssize_t	sphere_id()
+{
+	static ssize_t	id = -1;
+
+	id++;
+	return(id);
+}
+
 int	main()
 {
-	t_point		origin = {2, 3, 4};
-	t_vector	direction = {1, 0, 0};
+	t_point		origin = {0, 0, -5};
+	t_vector	direction = {0, 0, 1};
 	t_ray		r;
-	t_point		pos;
+	ssize_t		s;
+	t_intersect	xs;
 
 	r = ray(origin, direction);
-	pos = position(r, 0);
-	printf("pos.x = %f\npos.y = %f\npos.z = %f\n", pos.x, pos.y, pos.z);
-	pos = position(r, 1);
-	printf("pos.x = %f\npos.y = %f\npos.z = %f\n", pos.x, pos.y, pos.z);
-	pos = position(r, -1);
-	printf("pos.x = %f\npos.y = %f\npos.z = %f\n", pos.x, pos.y, pos.z);
-	pos = position(r, 2.5);
-	printf("pos.x = %f\npos.y = %f\npos.z = %f\n", pos.x, pos.y, pos.z);
+	s = sphere_id();
+	xs = center_intersect(s, r);
+	xs = tangent_intersect(s, r);
 	return (0);
 }
