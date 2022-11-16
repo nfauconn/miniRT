@@ -297,16 +297,33 @@ Test(tuple_test, normalize3)
 	cr_expect(same_float(1, length(v)) == 1);
 }
 
-float	dot( )
+float	dot_product(float4 tup1, float4 tup2)
 {
-
+	return ((tup1.x * tup2.x) \
+		+ (tup1.y * tup2.y) \
+		+ (tup1.z * tup2.z) \
+		+ (tup1.w * tup2.w));
 }
 
-Test(tuple_test, dot)
+float4	cross_product(float4 tup1, float4 tup2)
+{
+	float4	res;
+
+	res.x = tup1.y * tup2.z - tup1.z * tup2.y;
+	res.y = tup1.z * tup2.x - tup1.x * tup2.z;
+	res.z = tup1.x * tup2.y - tup1.y * tup2.x;
+	res.w = 0;
+	return (res);
+}
+
+Test(tuple_test, cross_product)
 {
 	float4 v = create_vector(1, 2, 3);
 	float4 v2 = create_vector(2, 3, 4);
-	cr_expect(same_float(dot(v, v2), 20.0) == 1);
+	float4 v3 = create_vector(-1, 2, -1);
+	float4 v4 = create_vector(1, -2, 1);
+	cr_expect(same_tuple(cross_product(v, v2), v3) == 1);
+	cr_expect(same_tuple(cross_product(v2, v), v4) == 1);
 }
 // Test (tuple_test, test1)
 // {
