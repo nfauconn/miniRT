@@ -191,7 +191,7 @@ Test(tuple_test, opposite2)
 	float4 tup1 = create_vector(1, -2, 3);
 	float4 tup2 = create_vector(0, 0, 0);
 	cr_expect(same_tuple(tup1, tup2) == 0);
-	tup1 = -tup1;
+	tup1 = (float4){0, 0, 0, 0}	- tup1;
 	float4	tup3 = create_vector(-1, 2, -3);
 	cr_expect(same_tuple(tup1, tup3) == 1);
 }
@@ -272,10 +272,10 @@ Test(tuple_test, normalize1)
 {
 	float4 v = create_vector(4, 0, 0);
 	float4 w = create_vector(1, 0, 0);
+	float4	res;
+	res = unit_direction(v);
 
-	v = unit_direction(v);
-
-	cr_expect(same_tuple(v, w) == 1);
+	cr_expect(same_tuple(res, w) == 1);
 }
 
 Test(tuple_test, normalize2)
@@ -291,10 +291,10 @@ Test(tuple_test, normalize2)
 Test(tuple_test, normalize3)
 {
 	float4 v = create_vector(1, 2, 3);
+	float4 w;
+	w = unit_direction(v);
 
-	v = unit_direction(v);
-
-	cr_expect(same_float(1, length(v)) == 1);
+	cr_expect(same_float(1, length(w)) == 1);
 }
 
 float	dot_product(float4 tup1, float4 tup2)
