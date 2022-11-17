@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:22:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/17 15:05:18 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/17 15:36:54 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,21 @@ typedef struct s_intersection
 }	t_intersect;
 
 
-ssize_t	sphere_id()
+typedef struct s_sphere
 {
+	ssize_t	id;
+	t_point	center;
+}	t_sphere;
+
+t_sphere	sphere_id()
+{
+	t_sphere		s;
 	static ssize_t	id = -1;
 
 	id++;
-	return(id);
+	s.id = id;
+	s.center = (t_point){0, 0, 0};
+	return(s);
 }
 
 t_ray	ray(t_point orig, t_vector dest)
@@ -59,7 +68,7 @@ t_intersect	set_xs(size_t count, float pos1, float pos2)
 }
 
 // r.orig{0, 0, -5} + r.dir * t = {0, 0, -1} <=> r.orig.z + r.dir * t = sphere.z <=> r.dir * t = sphere.z - r.orig.z <=> t = (-1 - r.orig.z) / r.dir.z
-t_intersect	intersect(ssize_t sphere, t_ray r)
+t_intersect	intersect(t_sphere s, t_ray r)
 {
 	t_intersect	xs;
 	t_point		pos;
@@ -71,7 +80,7 @@ t_intersect	intersect(ssize_t sphere, t_ray r)
 		return (set_xs(0, 0, 0));
 	t = -r.orig.z / r.dest.z; //to find what is t for position.z = 0
 	pos = position(r, t);
-	if (same_tuple(pos, (t_point){0, 0, 0}))
+	if (same_tuple(pos, s.center))
 	{
 		xs.count = 2;
 		xs.pos[0] = (-1 - r.orig.z) / r.dest.z;
@@ -83,7 +92,7 @@ t_intersect	intersect(ssize_t sphere, t_ray r)
 }
 
 // r.orig{0, 1, -5} + r.dest.z * ? = tangente{0, 1, 0} <=> r.dir.z * ? = 0 - r.orig.z <=> ? = (0 -r.orig.z) / r.dir.z
-/* t_intersect	tangent_sp_intersect(ssize_t sphere, t_ray r)
+/* t_intersect	tangent_sp_intersect(t_sphere sphere, t_ray r)
 {
 	t_intersect	xs;
 
@@ -99,12 +108,11 @@ int	main()
 	t_point		orig = {0, 1, -5};
 	t_vector	dest = {0, 0, 1};
 	t_ray		r;
-	ssize_t		s;
+	t_sphere		s;
 	t_intersect	xs;
 
 	r = ray(orig, dest);
 	s = sphere_id();
 	xs = intersect(s, r);
-//	xs = tangent_sp_intersect(s, r);
 	return (0);
 }
