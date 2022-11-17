@@ -17,13 +17,13 @@ BUILD_DIR  = ./objs
 INC_DIR = ./includes
 LIBFT_INC_DIR = ./libft/includes
 INIT_DIR = setup
+UTILS_DIR = utils
 SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		main \
 		error \
 		exit_clear \
 		display \
 		sphere \
-		vector_operations \
 		TESTdegradetry \
 		${addprefix ${INIT_DIR}/, \
 		setup_scene \
@@ -32,7 +32,7 @@ SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		conv_to_tuple \
 		conv_to_float \
 		elem_add} \
-		${addprefix ${UTILS}/, \
+		${addprefix ${UTILS_DIR}/, \
 		tuple} \
 		}}
 DEPS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.d}}

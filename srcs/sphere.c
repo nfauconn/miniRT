@@ -9,9 +9,9 @@ t_bool	hit_sphere(t_float3 center, float radius, t_float3 raydirection, t_scene 
 	float	discriminant;
 
 	oc = scene->origin - center;
-	a = dot(raydirection, raydirection);
-	b = 2.0 * dot(oc, raydirection);
-	c = dot(oc, oc) - radius * radius;
+	a = dot3(raydirection, raydirection);
+	b = 2.0 * dot3(oc, raydirection);
+	c = dot3(oc, oc) - radius * radius;
 	discriminant = b * b - 4 * a * c;
 	return (discriminant > 0);
 }

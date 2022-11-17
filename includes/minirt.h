@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/16 19:18:42 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/17 14:49:50 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef float __attribute__((ext_vector_type(3)))	t_float3;
 typedef t_float3									t_point;
 typedef t_float3									t_vector;
 typedef t_float3									t_rgb;
+typedef int __attribute__((ext_vector_type(3)))		t_int3;
 
 typedef enum e_elements
 {
@@ -125,15 +126,13 @@ float	dot(t_float3 vector1, t_float3 vector2);
 t_bool	hit_sphere(t_float3 center, float radius, t_float3 raydirection, t_scene *scene);
 
 /* UTILS - TUPLE */
-float	dot3(t_float3 tup1, t_float3 tup2);
-/*
-t_bool		same_tuple(t_float4 tup1, t_float4 tup2);
-t_bool		tuple_bool(t_int4 tuple);
-float		addition_of_squared_elements(t_float4 vector);
-float		length(t_float4 vector);
+float		dot3(t_float3 tup1, t_float3 tup2);
+t_bool		same_tuple(t_float3 tup1, t_float3 tup2);
+t_bool		tuple_bool(t_int3 tuple);
+float		addition_of_squared_elements(t_float3 vector);
+float		length(t_float3 vector);
 t_bool		same_float(float f1, float f2);
-t_float4	unit_direction(t_float4 vector);
-float		dot_product(t_float4 tup1, t_float4 tup2);
-t_float4	cross_product(t_float4 tup1, t_float4 tup2);
-*/
+t_float3	unit_direction(t_float3 vector);
+t_float3	cross_product(t_float3 tup1, t_float3 tup2);
+
 #endif
