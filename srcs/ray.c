@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:22:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/17 17:53:34 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/19 23:05:32 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,35 @@ typedef struct s_ray
 	t_point		dest;
 }	t_ray;
 
-typedef struct s_sphere
+typedef struct s_obj
 {
-	ssize_t		id;
+	uint8_t		id;
+	ssize_t		no;
 	t_point		center;
-}	t_sphere;
+}	t_obj;
+
+typedef struct s_tvalues_for_ray
+{
+	size_t		count;
+	float		t[2];
+	t_obj		obj;
+}	t_tvalues_for_ray;
 
 typedef struct s_intersection
 {
-	size_t		count;
-	float		t1;
-	float		t2;
-	t_sphere	s;
-}	t_intersect;
+	float					t;
+	t_obj					obj;
+	struct s_intersection	*next;
+}	t_intersection;
 
-t_sphere	sphere_id()
+t_obj	init_sphere() //will be added some atributes later in the chapter
 {
-	t_sphere		s;
-	static ssize_t	id = -1;
+	t_obj			s;
+	static ssize_t	no = -1;
 
-	id++;
-	s.id = id;
+	no++;
+	s.id = sphere;
+	s.no = no;
 	s.center = (t_point){0, 0, 0};
 	return(s);
 }
@@ -60,60 +68,116 @@ t_point	position(t_ray ray, float t)
 	return (ray.orig + ray.dest * t);
 }
 
-t_intersect	set_xs(t_sphere s, float discriminant, float a, float b)
+t_tvalues_for_ray	set_tvalues(t_obj obj, uint8_t count, float t1, float t2)
 {
-	t_intersect	xs;
+	t_tvalues_for_ray	tvalues_for_ray;
 
-	xs.s = s;
-	if (discriminant < 0)
-	{
-		xs.count = 0;
-		xs.t1 = 0;
-		xs.t2 = 0;
-	}
-	else
-	{
-		xs.count = 2;
-		xs.t1 = (-b - sqrt(discriminant)) / (2 * a);
-		xs.t2 = (-b + sqrt(discriminant)) / (2 * a);
-	}
-	return (xs);
+	tvalues_for_ray.obj = obj;
+	tvalues_for_ray.count = count;
+	tvalues_for_ray.t[0] = t1;
+	tvalues_for_ray.t[1] = t2;
+	return (tvalues_for_ray);
 }
 
-t_intersect	intersect(t_sphere s, t_ray r)
+t_tvalues_for_ray sp_tvalues(t_obj s, t_ray r)
 {
-	t_intersect	xs;
 	t_vector	sphere_to_ray;
 	float		a;
 	float		b;
 	float		c;
 	float		discriminant;
+	float		t1;
+	float		t2;
 
 	sphere_to_ray = r.orig - s.center;
 	a = dot3(r.dest, r.dest);
 	b = 2 * dot3(r.dest, sphere_to_ray);
 	c = dot3(sphere_to_ray, sphere_to_ray) - 1;
 	discriminant = pow(b, 2) - 4 * a * c;
-	xs = set_xs(s, discriminant, a, b);
-	return (xs);
+	if (discriminant < 0)
+		return (set_tvalues(s, 0, 0, 0));
+	t1 = (-b - sqrt(discriminant)) / (2 * a);
+	t2 = (-b + sqrt(discriminant)) / (2 * a);
+	return (set_tvalues(s, 2, t1, t2));
+}
+
+t_tvalues_for_ray	tvalues_for_ray(t_obj obj, t_ray r)
+{
+	t_tvalues_for_ray	tvalues_for_ray;
+
+//	if (obj.id == sphere)
+		tvalues_for_ray = sp_tvalues(obj, r);
+	return (tvalues_for_ray);
+}
+
+t_intersection	*create_intersection(float t, t_obj obj)
+{
+	t_intersection	*i;
+
+	i = malloc(sizeof(t_intersection));
+	if (!i)
+		return (NULL);
+	i->t = t;
+	i->obj = obj;
+	return (i);
+}
+
+void	interaddback(t_intersection **head, t_intersection *new)
+{
+	t_intersection	*tmp;
+
+	if (!*head)
+		*head = new;
+	else
+	{
+		tmp = *head;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
+	}
+	new->next = NULL;
+}
+
+void	free_interlst(t_intersection **lst)
+{
+	t_intersection	*to_free;
+
+	while (*lst)
+	{
+		to_free = *lst;
+		*lst = (*lst)->next;
+		free(to_free);
+	}
 }
 
 int	main()
 {
-	t_point		orig = {0, 0, 5};
-	t_vector	dest = {0, 0, 1};
-	t_ray		r;
-	t_sphere	s;
-	t_sphere	s1;
-	t_sphere	s2;
-	t_intersect	xs;
+	size_t				i = 0;
+	t_point				orig[5] = {{0, 0, -5}, {0, 1, -5}, {0, 2, -5}, 0, {0, 0, 5}};
+	size_t				origins_nb = 5;
+	size_t				origins_no = 0;
+	t_vector			dest = {0, 0, 1};
+	t_obj				s = init_sphere();
+	t_intersection		*interlst = NULL;
 
-	r = ray(orig, dest);
-	s = sphere_id();
-	s1 = sphere_id();
-	s2 = sphere_id();
-	xs = intersect(s, r);
-	xs = intersect(s1, r);
-	xs = intersect(s2, r);
+	t_ray				r[origins_nb];
+	t_tvalues_for_ray	tvals[origins_nb];
+	t_intersection		*inter;
+
+	while (origins_no < origins_nb)
+	{
+		r[origins_no] = ray(orig[origins_no], dest);
+		tvals[origins_no] = tvalues_for_ray(s, r[origins_no]);
+		while (i < tvals[origins_no].count)
+		{
+			inter = create_intersection(tvals[origins_no].t[i], s);
+			interaddback(&interlst, inter);
+			i++;
+		}
+		i = 0;
+		origins_no++;
+	}
+
+	free_interlst(&interlst);
 	return (0);
 }
