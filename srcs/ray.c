@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:22:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/19 23:17:49 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/19 23:40:01 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,11 @@ int	main()
 		tvals[origins_no] = tvalues_for_ray(s, r[origins_no]);
 		while (i < tvals[origins_no].count)
 		{
-			inter = create_intersection(tvals[origins_no].t[i], s);
-			interaddback(&interlst, inter);
+			if (tvals[origins_no].t[i] > 0)
+			{
+				inter = create_intersection(tvals[origins_no].t[i], s);
+				interaddback(&interlst, inter);
+			}
 			i++;
 		}
 		i = 0;
