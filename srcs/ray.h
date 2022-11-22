@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:11:12 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/19 23:15:48 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/22 18:36:32 by noe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,17 @@ typedef struct s_tvalues_for_ray
 	t_obj		obj;
 }	t_tvalues_for_ray;
 
-typedef struct s_intersection
+typedef struct s_inter
 {
 	float					t;
 	t_obj					obj;
-	struct s_intersection	*next;
-}	t_intersection;
+	struct s_inter	*next;
+}	t_inter;
 
 
-t_intersection	*create_intersection(float t, t_obj obj);
-void			interaddback(t_intersection **head, t_intersection *new);
-void			free_interlst(t_intersection **lst);
+t_inter	*create_inter(float t, t_obj obj);
+void			interaddback(t_inter **head, t_inter *new);
+void			free_interlst(t_inter **lst);
 
 
 #endif
