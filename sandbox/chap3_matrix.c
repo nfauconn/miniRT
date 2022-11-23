@@ -6,7 +6,7 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:12:44 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/11/19 23:43:25 by rokerjea         ###   ########.fr       */
+/*   Updated: 2022/11/23 13:43:27 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -752,7 +752,7 @@ t_m4x4_f	inversion(t_m4x4_f matr)
 {
 	t_m4x4_f	res;
 	float		deter;
-	
+
 	res = cofactor_matrix(matr);
 	// printf_4fmatr(res);
 	res = matrix_transpose(res);
@@ -775,4 +775,28 @@ Test(matrix, inversion)
 	t_m4x4_f res = inversion(matrix);
 	// printf_4fmatr(res);
 	cr_expect(same_matrix(res, matrix2) == 1);
+}
+
+Test(matrix, inversion2)
+{
+	float tabf[16] = {8, -5, 9, 2, 7, 5, 6, 1, -6, 0, 9, 6, -3, 0, -9, -4};
+	t_m4x4_f matrix = matrix_4xf_create(tabf);
+	float tabf2[16] = {-0.15385, -0.15385, -0.28205, -0.53846, -0.07692, 0.12308, 0.02564, 0.03077, 0.35897, 0.35897, 0.43590, 0.92308, -0.69231, -0.69231, -0.76923, -1.92308};
+	t_m4x4_f matrix2 = matrix_4xf_create(tabf2);
+	cr_expect(same_matrix(matrix2, inversion(matrix)));
+	float tabf3[16] = {9, 3, 0, 9, -5, -2, -6, -3, -4, 9, 6, 4, -7, 6, 6, 2};
+	t_m4x4_f matrix3 = matrix_4xf_create(tabf3);
+	float tabf4[16] = {-0.04074, -0.07778, 0.14444, -0.22222, -0.07778, 0.03333, 0.36667, -0.33333, -0.02901, -0.14630, -0.10926, 0.12963, 0.17778, 0.06667, -0.26667, 0.33333};
+	t_m4x4_f matrix4 = matrix_4xf_create(tabf4);
+	cr_expect(same_matrix(matrix4, inversion(matrix3)));
+}
+
+Test(matrix, inversion3)
+{
+	float tabf[16] = {3, -9, 7, 3, 3, -8, 2, -9, -4, 4, 4, 1, -6, 5, -1, 1};
+	t_m4x4_f matrix = matrix_4xf_create(tabf);
+	float tabf2[16] = {8, 2, 2, 2, 3, -1, 7, 0, 7, 0, 5, 4, 6, -2, 0, 5};
+	t_m4x4_f matrix2 = matrix_4xf_create(tabf2);
+	t_m4x4_f matrix3 = matrix * matrix2;
+	cr_expect(same_matrix(matrix, matrix3 * inversion(matrix2)));
 }
