@@ -33,7 +33,8 @@ SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		conv_to_float \
 		elem_add} \
 		${addprefix ${UTILS_DIR}/, \
-		tuple} \
+		tuple \
+		matrix} \
 		}}
 DEPS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.d}}
 OBJS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.o}}
@@ -41,9 +42,9 @@ VPATH = ${SRC_DIR}
 
 #COMPILING
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -mavx -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -fenable-matrix -mavx -g3 -fsanitize=address
 LD_FLAGS = -L ${LIBFT_DIR} -L ${MLX_DIR}
-MLX_FLAGS = -lm -lmlx -lXext -lX11
+LIBS_FLAGS = -lmlx -lXext -lX11 -lm -lft
 INCLUDES = -I ${INC_DIR} -I ${LIBFT_INC_DIR} -I ${MLX_DIR}
 RM = rm -rf
 
@@ -54,7 +55,7 @@ all: ${NAME}
 
 ${NAME}: libftcreat ${OBJS}
 	@make -C ${MLX_DIR} --no-print-directory
-	@${CC} ${CFLAGS} ${LD_FLAGS} ${OBJS} -o ${NAME} ${MLX_FLAGS} -lft
+	@${CC} ${CFLAGS} ${LD_FLAGS} ${OBJS} -o ${NAME} ${LIBS_FLAGS}
 
 -include ${DEPS}
 

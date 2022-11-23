@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:22:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/19 23:40:01 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/23 12:55:19 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_obj	init_sphere() //will be added some atributes later in the chapter
 	return(s);
 }
 
+//create a ray struct with his origin point & his dest vector
 t_ray	ray(t_point orig, t_vector dest)
 {
 	t_ray	ray;
@@ -42,6 +43,8 @@ t_point	position(t_ray ray, float t)
 	return (ray.orig + ray.dest * t);
 }
 
+//create a struct containing all intersections of a ray with a given obj
+// (sphere can only have 2 but maybe more are needed for other objects)
 t_tvalues_for_ray	set_tvalues(t_obj obj, uint8_t count, float t1, float t2)
 {
 	t_tvalues_for_ray	tvalues_for_ray;
@@ -53,6 +56,7 @@ t_tvalues_for_ray	set_tvalues(t_obj obj, uint8_t count, float t1, float t2)
 	return (tvalues_for_ray);
 }
 
+//find inter of the given ray with a sphere
 t_tvalues_for_ray sp_tvalues(t_obj s, t_ray r)
 {
 	t_vector	sphere_to_ray;
@@ -75,46 +79,64 @@ t_tvalues_for_ray sp_tvalues(t_obj s, t_ray r)
 	return (set_tvalues(s, 2, t1, t2));
 }
 
-t_tvalues_for_ray	tvalues_for_ray(t_obj obj, t_ray r)
+// add to interlst the new t values found with the given ray
+// does not ignore negative t values, as it seems util for chapter 9 with boolean operations
+void	add_obj_inters(t_obj obj, t_ray r, t_inter **interlst)
 {
+	size_t				i;
 	t_tvalues_for_ray	tvalues_for_ray;
+	t_inter				*inter;
 
-//	if (obj.id == sphere)
+	if (obj.id == sphere)
 		tvalues_for_ray = sp_tvalues(obj, r);
-	return (tvalues_for_ray);
+	i = 0;
+	while (i < tvalues_for_ray.count)
+	{
+		inter = create_inter(tvalues_for_ray.t[i], obj);
+		interaddback(interlst, inter);
+		i++;
+	}
+}
+
+ // find the intersection that has the lowest nonnegative t value
+ t_inter	*find_hit(t_inter **interlst)
+{
+	t_inter	*tmp;
+	t_inter	*hit;
+
+	tmp = *interlst;
+	hit = tmp;
+	while (tmp)
+	{
+		if (tmp->t >= 0 && tmp->t < hit->t)
+			hit = tmp;
+		tmp = tmp->next;
+	}
+	if (hit->t < 0)
+		return (NULL);
+	return (hit);
 }
 
 int	main()
 {
-	size_t				i = 0;
-	t_point				orig[5] = {{0, 0, -5}, {0, 1, -5}, {0, 2, -5}, 0, {0, 0, 5}};
+	t_point				orig[5] = {{0, 0, -5, pt}, {0, 1, -5, pt}, \
+									{0, 2, -5, pt}, 0, {0, 0, 5, pt}};
 	size_t				origins_nb = 5;
 	size_t				origins_no = 0;
-	t_vector			dest = {0, 0, 1};
-	t_obj				s = init_sphere();
-	t_intersection		*interlst = NULL;
-
+	t_vector			dest = {0, 0, 1, vec};
+	t_obj				obj;
+	t_inter				*interlst = NULL;
 	t_ray				r[origins_nb];
-	t_tvalues_for_ray	tvals[origins_nb];
-	t_intersection		*inter;
+	t_inter				*hit;
 
+	obj = init_sphere();
 	while (origins_no < origins_nb)
 	{
 		r[origins_no] = ray(orig[origins_no], dest);
-		tvals[origins_no] = tvalues_for_ray(s, r[origins_no]);
-		while (i < tvals[origins_no].count)
-		{
-			if (tvals[origins_no].t[i] > 0)
-			{
-				inter = create_intersection(tvals[origins_no].t[i], s);
-				interaddback(&interlst, inter);
-			}
-			i++;
-		}
-		i = 0;
+		add_obj_inters(obj, r[origins_no], &interlst);
 		origins_no++;
 	}
-
+	hit = find_hit(&interlst);
 	free_interlst(&interlst);
 	return (0);
 }
