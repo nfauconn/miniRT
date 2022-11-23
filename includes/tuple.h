@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:12:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/23 16:12:21 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/23 18:49:05 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 enum e_point_vector
 {
-	pt = 0,
-	vec
+	vec = 0,
+	pt
 };
 
 bool		same_tuple(t_float4 tup1, t_float4 tup2);

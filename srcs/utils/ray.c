@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:22:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/23 18:13:06 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/23 18:49:28 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ t_tvalues_for_ray	sp_tvalues(t_obj s, t_ray r)
 	float		t2;
 
 	sphere_to_ray = r.orig - s.center;
-	a = dot3(r.dest, r.dest);
-	b = 2 * dot3(r.dest, sphere_to_ray);
-	c = dot3(sphere_to_ray, sphere_to_ray) - 1;
+	a = dot_product(r.dest, r.dest);
+	b = 2 * dot_product(r.dest, sphere_to_ray);
+	c = dot_product(sphere_to_ray, sphere_to_ray) - 1;
 	discriminant = pow(b, 2) - 4 * a * c;
 	if (discriminant < 0)
 		return (set_tvalues(s, 0, 0, 0));

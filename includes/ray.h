@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:11:12 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/23 18:20:20 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/23 19:08:48 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_obj
 	uint8_t		id;
 	ssize_t		no;
 	t_point		center;
+	t_m4x4_f	transform;
 }	t_obj;
 
 typedef struct s_tvalues_for_ray
@@ -38,9 +39,9 @@ typedef struct s_tvalues_for_ray
 
 typedef struct s_inter
 {
-	float					t;
-	t_obj					obj;
-	struct s_inter	*next;
+	float				t;
+	t_obj				obj;
+	struct s_inter		*next;
 }	t_inter;
 
 

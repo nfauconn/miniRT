@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:21:09 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/23 18:00:16 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/23 18:41:45 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -307,8 +307,6 @@ int	isnotincol(int	j, int col)
 	return (1);
 }
 
-
-
 //0 <= j <= 15
 //0 <= line <= 3
 int	isnotinline_4x4(int	j, int line)
@@ -348,7 +346,6 @@ void	printf_3fmatr(t_m3x3_f	matrixaim)
 		i++;
 	}
 }
-
 
 bool	same_matrix_3x3(t_m3x3_f matrixaim, t_m3x3_f res)
 {

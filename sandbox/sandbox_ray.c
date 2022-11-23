@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.c                                              :+:      :+:    :+:   */
+/*   sandbox_ray.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:22:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/23 13:51:00 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/23 19:02:40 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "ray.h"
+# include "matrix.h"
 
 t_obj	init_sphere(void)
 {
@@ -22,6 +23,7 @@ t_obj	init_sphere(void)
 	s.id = sphere;
 	s.no = no;
 	s.center = (t_point){0, 0, 0};
+	s.transform = identity_matr();
 	return (s);
 }
 
@@ -118,26 +120,47 @@ t_inter	*find_hit(t_inter **interlst)
 	return (hit);
 }
 
+t_ray	transform_ray(t_ray prev_r, t_m4x4_f matrix)
+{
+	t_ray	r;
+
+	r.orig = matrix_tuple_mult(matrix, prev_r.orig);
+	r.dest = matrix_tuple_mult(matrix, prev_r.dest);
+	return (r);
+}
+
+t_obj	set_transform(t_obj obj, t_m4x4_f transfo_matrix)
+{
+	obj.transform = transfo_matrix;
+	return (obj);
+}
+
 int	main(void)
 {
-	t_point				orig[5] = {{0, 0, -5, pt}, {0, 1, -5, pt}, \
-									{0, 2, -5, pt}, 0, {0, 0, 5, pt}};
-	size_t				origins_nb = 5;
+	t_point				orig[6] = {{0, 0, -5, pt}, {0, 1, -5, pt}, \
+									{0, 2, -5, pt}, 0, {0, 0, 5, pt}, \
+									{1, 2, 3, pt}};
+	size_t				origins_nb = 6;
 	size_t				origins_no = 0;
-	t_vector			dest = {0, 0, 1, vec};
+	t_vector			dest[2] = {{0, 0, 1, vec}, {0, 1, 0, vec}};
 	t_obj				obj;
 	t_inter				*interlst = NULL;
 	t_ray				r[origins_nb];
+	t_ray				r2[origins_nb];
 	t_inter				*hit;
 
 	obj = init_sphere();
 	while (origins_no < origins_nb)
 	{
-		r[origins_no] = ray(orig[origins_no], dest);
+		r[origins_no] = ray(orig[origins_no], dest[0]);
 		add_obj_inters(obj, r[origins_no], &interlst);
 		origins_no++;
 	}
 	hit = find_hit(&interlst);
+	r[5] = ray(orig[5], dest[1]);
+	r2[5] = transform_ray(r[5], translation(3, 4, 5));
+	r2[5] = transform_ray(r[5], scaling(2, 3, 4));
+	obj = set_transform(obj, translation(2, 3, 4));
 	free_interlst(&interlst);
 	return (0);
 }
