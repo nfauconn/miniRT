@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tuple.c                                            :+:      :+:    :+:   */
+/*   tuple4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:34:33 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/11/16 19:28:51 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/23 12:49:24 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ t_float4	unit_direction(t_float4 vector)
 //cree un float resultant de la multiplication de deux vecteur
 //used for calculating the angle between to vectors
 //and the "cosine" between two unit vector
-float	dot4(t_float4 tup1, t_float4 tup2)
+float	dot_product(t_float4 tup1, t_float4 tup2)
 {
 	return ((tup1.x * tup2.x) \
 		+ (tup1.y * tup2.y) \

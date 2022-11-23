@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chap3_matrix.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:12:44 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/11/19 23:43:25 by rokerjea         ###   ########.fr       */
+/*   Updated: 2022/11/23 12:39:21 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ float4	get_vcol(int i, t_m4x4_f matrix2)
 }
 
 float	dot_product(float4 tuple1, float4 tuple2)
-{	
+{
 	return ((tuple1.x * tuple2.x) \
 		+ (tuple1.y * tuple2.y) \
 		+ (tuple1.z * tuple2.z) \

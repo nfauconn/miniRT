@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:22:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/22 19:20:49 by noe              ###   ########.fr       */
+/*   Updated: 2022/11/23 12:55:19 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,10 +119,11 @@ void	add_obj_inters(t_obj obj, t_ray r, t_inter **interlst)
 
 int	main()
 {
-	t_point				orig[5] = {{0, 0, -5}, {0, 1, -5}, {0, 2, -5}, 0, {0, 0, 5}};
+	t_point				orig[5] = {{0, 0, -5, pt}, {0, 1, -5, pt}, \
+									{0, 2, -5, pt}, 0, {0, 0, 5, pt}};
 	size_t				origins_nb = 5;
 	size_t				origins_no = 0;
-	t_vector			dest = {0, 0, 1};
+	t_vector			dest = {0, 0, 1, vec};
 	t_obj				obj;
 	t_inter				*interlst = NULL;
 	t_ray				r[origins_nb];

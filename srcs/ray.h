@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:11:12 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/22 18:36:32 by noe              ###   ########.fr       */
+/*   Updated: 2022/11/23 12:16:13 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_inter
 }	t_inter;
 
 
-t_inter	*create_inter(float t, t_obj obj);
+t_inter			*create_inter(float t, t_obj obj);
 void			interaddback(t_inter **head, t_inter *new);
 void			free_interlst(t_inter **lst);
 

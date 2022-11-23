@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 16:16:24 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/11/16 13:15:55 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/23 12:46:36 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	convert_float_to_int(float hexa)
 	return (res);
 }
 
-int rgbvtoi(t_float3 color_vec)
+int rgbvtoi(t_float4 color_vec)
 {
 	int	r;
 	int	g;
@@ -38,31 +38,24 @@ int rgbvtoi(t_float3 color_vec)
 	return (r << 16 | g << 8 | b);
 }
 
-int	ray_color(t_float3 vector, t_scene *scene)
+int	ray_color(t_float4 vector)
 {
     float t;
 	int color;
-	t_float3 bottom = (t_float3){1.0, 1.0, 1.0};
-	t_float3 top = (t_float3){0.5, 0.7, 1.0};
-	t_float3	color_red = {1, 0, 0};
-	t_float3 spheres[3] = {{0, 0, -1}, {-1, -1, -1}, 0};
+	t_float4 bottom = (t_float4){1.0, 1.0, 1.0, pt};
+	t_float4 top = (t_float4){0.5, 0.7, 1.0, pt};
 
 	t = 0.5*(vector.y + 1.0); // vector.y should be between 1 (top) and -1 (bottom)
 							//if t = 1 we are at top of screen and (1 - t) == 0 (color blue)
 							//if t = 0 we are at bottom of screen and t = 0 (color white)
-	if (hit_sphere(spheres[0], 0.5, vector, scene) || hit_sphere(spheres[1], 0.5, vector, scene))
-		color = rgbvtoi(color_red);
-	else
-	{
-		t_float3 res_color = top * (1.0 - t) + bottom * t;
-		color = rgbvtoi(res_color);
-	}
+	t_float4 res_color = top * (1.0 - t) + bottom * t;
+	color = rgbvtoi(res_color);
     return (color);
 }
 
 int	get_background_color(int i, int j, t_scene *scene)
 {
-	t_float3	ray_direction;
+	t_float4	ray_direction;
 	int		color;
 	float	u;
 	float	v;
@@ -71,12 +64,7 @@ int	get_background_color(int i, int j, t_scene *scene)
 	v = j / (float)HEIGHT;
 
 	ray_direction = scene->ll_corner + u*scene->width_vec + v*scene->height_vec - scene->origin;
-//	ray_direction = unit_direction(ray_direction); //normalisation du vecteur?
-	color = ray_color(ray_direction, scene);
-	// if(v > 0.5)
-	// 	color = 0xFFFFFF;
-	// else
-	// 	color = 0x00CCFF;
+	color = ray_color(ray_direction);
 	return (color);
 }
 
