@@ -6,11 +6,12 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 16:16:24 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/11/23 12:46:36 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/23 16:08:53 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+# include "minirt.h"
+# include "tuple.h"
 
 int	convert_float_to_int(float hexa)
 {

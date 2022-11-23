@@ -6,15 +6,15 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:34:33 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/11/23 12:54:29 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/23 15:57:13 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "tuple.h"
 
 /* verifie que les deux tuples en arguments on les memes valeurs
 a une precision de 0.00001 */
-t_bool	same_tuple(t_float4 tup1, t_float4 tup2)
+bool	same_tuple(t_float4 tup1, t_float4 tup2)
 {
 	float	epsilon;
 
@@ -26,7 +26,7 @@ t_bool	same_tuple(t_float4 tup1, t_float4 tup2)
 }
 
 /* verifie si un tuple de bolleen a un element valant 0 --> fail */
-t_bool	tuple_bool(t_int4 tuple)
+bool	tuple_bool(t_int4 tuple)
 {
 	if (tuple.x == 0 || tuple.y == 0 || tuple.z == 0 || tuple.w == 0)
 		return (0);
@@ -35,7 +35,7 @@ t_bool	tuple_bool(t_int4 tuple)
 
 /* verifie que les deux arguments float ont la meme valeur,
 avec 0.00001 de precision(epsilon)*/
-t_bool	same_float(float f1, float f2)
+bool	same_float(float f1, float f2)
 {
 	float	epsilon;
 

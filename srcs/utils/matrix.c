@@ -6,11 +6,11 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:21:09 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/23 12:39:21 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/23 18:00:16 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "matrix.h"
 
 t_m4x4_f	matrix_4xf_create(float *f)
 {
@@ -34,6 +34,98 @@ t_m4x4_f	matrix_4xf_create(float *f)
 	return (matrix);
 }
 
+t_m3x3_f	matrix_3xf_create(float *f)
+{
+	t_m3x3_f matrix;
+	int	j;
+	int	k;
+	int	i;
+
+	i = 0;
+	j = 0;
+	while (j < 3)
+	{
+		k = 0;
+		while (k < 3)
+		{
+			matrix[j][k] = f[i++];
+			k++;
+		}
+		j++;
+	}
+	return (matrix);
+}
+
+static t_float4	add_f_to_tuple(int i, float val, t_float4 res)
+{
+	if (i == 0)
+		res.x = val;
+	if (i == 1)
+		res.y = val;
+	if (i == 2)
+		res.z = val;
+	if (i == 3)
+		res.w = val;
+	return(res);
+}
+
+//matr[0][0] to matr[3][3]
+t_float4	submatrix3_to_2(t_m3x3_f matr, int line, int col)
+{
+	t_float4	res;
+	int	i;
+	int	j;
+	int	k;
+
+	i = 0;
+	k = 0;
+	while (i < 3)
+	{
+		j = 0;
+		while (j< 3)
+		{
+			if (i != line && j != col)
+				res = add_f_to_tuple(k++, matr[i][j], res);
+			j++;
+		}
+		i++;
+	}
+	return (res);
+}
+
+static t_m3x3_f	add_f_to_matrice_3f(int i, float val, t_m3x3_f res)
+{
+	res[i / 3][i % 3] = val;
+	return (res);
+}
+
+t_m3x3_f	submatrix4_to_3(t_m4x4_f matr, int line, int col)
+{
+	t_m3x3_f	res;
+	int	i;
+	int	j;
+	int	k;
+
+	i = 0;
+	k = 0;
+	while(i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			// printf ("%f\n", tab[j]);
+			if (i != line && j != col)
+			{
+				res = add_f_to_matrice_3f(k++, matr[i][j], res);
+			}
+			j++;
+		}
+		i++;
+	}
+	// printf_3fmatr(res);
+	return (res);
+}
+
 bool	same_matrix(t_m4x4_f matrix1, t_m4x4_f matrix2)
 {
 	int	j;
@@ -55,28 +147,6 @@ bool	same_matrix(t_m4x4_f matrix1, t_m4x4_f matrix2)
 		j++;
 	}
 	return (1);
-}
-
-t_float4	get_vline(int i, t_m4x4_f matrix)
-{
-	t_float4	res;
-
-	res.x = matrix[i][0];
-	res.y = matrix[i][1];
-	res.z = matrix[i][2];
-	res.w = matrix[i][3];
-	return (res);
-}
-
-t_float4	get_vcol(int i, t_m4x4_f matrix2)
-{
-	t_float4	res;
-
-	res.x = matrix2[0][i];
-	res.y = matrix2[1][i];
-	res.z = matrix2[2][i];
-	res.w = matrix2[3][i];
-	return (res);
 }
 
 float	dot_product_ma(t_m4x4_f matrix, int line, t_m4x4_f matrix2, int col)
@@ -126,6 +196,66 @@ t_float4	matrix_tuple_mult(t_m4x4_f matrix, t_float4 tup)
 	return (res);
 }
 
+t_m4x4_f	divide_matr_by_scalar(t_m4x4_f res, float deter)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while(i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			// printf ("line %d, col %d, val was = %f ", i, j, res[i][j]);
+			res[i][j] = res[i][j] / deter;
+			// printf ("val is = %f\n", res[i][j]);
+			j++;
+		}
+		i++;
+	}
+	return (res);
+}
+
+void	printf_4fmatr(t_m4x4_f	matrixaim)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			printf ("line %d, col %d, val = %f\n", i, j, matrixaim[i][j]);
+			j++;
+		}
+		i++;
+	}
+}
+
+t_float4	get_vline(int i, t_m4x4_f matrix)
+{
+	t_float4	res;
+
+	res.x = matrix[i][0];
+	res.y = matrix[i][1];
+	res.z = matrix[i][2];
+	res.w = matrix[i][3];
+	return (res);
+}
+
+t_float4	get_vcol(int i, t_m4x4_f matrix2)
+{
+	t_float4	res;
+
+	res.x = matrix2[0][i];
+	res.y = matrix2[1][i];
+	res.z = matrix2[2][i];
+	res.w = matrix2[3][i];
+	return (res);
+}
 t_m4x4_f	matrix_transpose(t_m4x4_f matrix)
 {
 	t_m4x4_f	res;
@@ -178,42 +308,6 @@ int	isnotincol(int	j, int col)
 }
 
 
-t_float4	add_f_to_tuple(int i, float val, t_float4 res)
-{
-	if (i == 0)
-		res.x = val;
-	if (i == 1)
-		res.y = val;
-	if (i == 2)
-		res.z = val;
-	if (i == 3)
-		res.w = val;
-	return(res);
-}
-
-//matr[0][0] to matr[3][3]
-t_float4	submatrix3_to_2(t_m3x3_f matr, int line, int col)
-{
-	t_float4	res;
-	int	i;
-	int	j;
-	int	k;
-
-	i = 0;
-	k = 0;
-	while (i < 3)
-	{
-		j = 0;
-		while (j< 3)
-		{
-			if (i != line && j != col)
-				res = add_f_to_tuple(k++, matr[i][j], res);
-			j++;
-		}
-		i++;
-	}
-	return (res);
-}
 
 //0 <= j <= 15
 //0 <= line <= 3
@@ -237,12 +331,6 @@ int	isnotincol_4x4(int	j, int col)
 	return (1);
 }
 
-t_m3x3_f	add_f_to_matrice_3f(int i, float val, t_m3x3_f res)
-{
-	res[i / 3][i % 3] = val;
-	return (res);
-}
-
 void	printf_3fmatr(t_m3x3_f	matrixaim)
 {
 	int	i;
@@ -261,54 +349,6 @@ void	printf_3fmatr(t_m3x3_f	matrixaim)
 	}
 }
 
-t_m3x3_f	submatrix4_to_3(t_m4x4_f matr, int line, int col)
-{
-	t_m3x3_f	res;
-	int	i;
-	int	j;
-	int	k;
-
-	i = 0;
-	k = 0;
-	while(i < 4)
-	{
-		j = 0;
-		while (j < 4)
-		{
-			// printf ("%f\n", tab[j]);
-			if (i != line && j != col)
-			{
-				res = add_f_to_matrice_3f(k++, matr[i][j], res);
-			}
-			j++;
-		}
-		i++;
-	}
-	// printf_3fmatr(res);
-	return (res);
-}
-
-t_m3x3_f	matrix_3xf_create(float *f)
-{
-	t_m3x3_f matrix;
-	int	j;
-	int	k;
-	int	i;
-
-	i = 0;
-	j = 0;
-	while (j < 3)
-	{
-		k = 0;
-		while (k < 3)
-		{
-			matrix[j][k] = f[i++];
-			k++;
-		}
-		j++;
-	}
-	return (matrix);
-}
 
 bool	same_matrix_3x3(t_m3x3_f matrixaim, t_m3x3_f res)
 {
@@ -416,46 +456,6 @@ t_m4x4_f	cofactor_matrix(t_m4x4_f matr)
 	}
 	return (res);
 }
-
-t_m4x4_f	divide_matr_by_scalar(t_m4x4_f res, float deter)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while(i < 4)
-	{
-		j = 0;
-		while (j < 4)
-		{
-			// printf ("line %d, col %d, val was = %f ", i, j, res[i][j]);
-			res[i][j] = res[i][j] / deter;
-			// printf ("val is = %f\n", res[i][j]);
-			j++;
-		}
-		i++;
-	}
-	return (res);
-}
-
-void	printf_4fmatr(t_m4x4_f	matrixaim)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < 4)
-	{
-		j = 0;
-		while (j < 4)
-		{
-			printf ("line %d, col %d, val = %f\n", i, j, matrixaim[i][j]);
-			j++;
-		}
-		i++;
-	}
-}
-
 t_m4x4_f	inversion(t_m4x4_f matr)
 {
 	t_m4x4_f	res;

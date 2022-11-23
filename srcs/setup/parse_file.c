@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 20:18:31 by noe               #+#    #+#             */
-/*   Updated: 2022/11/12 16:03:17 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/23 15:45:45 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static size_t	go_trough_whitespaces(char *line, size_t i)
 	return (i);
 }
 
-t_bool	lex_line(char *line, size_t i)
+bool	lex_line(char *line, size_t i)
 {
 	while (ft_isdigit(line[i]) || line[i] == '-')
 	{
@@ -72,10 +72,10 @@ t_bool	lex_line(char *line, size_t i)
 	return (0);
 }
 
-t_bool	parse_line(char *line, t_scene *scene)
+bool	parse_line(char *line, t_scene *scene)
 {
 	char		*start;
-	t_bool		ret;
+	bool		ret;
 	size_t		i;
 	ssize_t		elem_index;
 	char		**params;
@@ -96,10 +96,10 @@ t_bool	parse_line(char *line, t_scene *scene)
 	return (ret);
 }
 
-t_bool	parse_file(char *file, t_scene *scene)
+bool	parse_file(char *file, t_scene *scene)
 {
 	int			fd;
-	t_bool		ret;
+	bool		ret;
 	char		*line;
 
 	if (!ft_strend_cmp(file, ".rt"))

@@ -6,11 +6,12 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 14:19:18 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/23 12:47:59 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/23 16:09:34 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+# include "minirt.h"
+# include "tuple.h"
 
 static void	init(t_scene *scene)
 {
@@ -28,7 +29,7 @@ static void	init(t_scene *scene)
 
 void	setup_scene(t_scene *scene, char *file)
 {
-	t_bool	ret;
+	bool	ret;
 
 	init(scene);
 	ret = parse_file(file, scene);

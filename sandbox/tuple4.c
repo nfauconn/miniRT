@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:34:33 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/11/23 12:49:24 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/23 15:45:45 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	is_equal(float x, float y)
 
 //verifie que le vector identifie un point
 //en comparant le dernier float du tuple a 1
-t_bool	is_point(t_float4 tuple)
+bool	is_point(t_float4 tuple)
 {
 	if (tuple.w == 1.0)
 		return (1);
@@ -37,7 +37,7 @@ t_bool	is_point(t_float4 tuple)
 
 //verifie que le vector identifie un vecteur
 //en comparant le dernier float du tuple a 0
-t_bool	is_vector(t_float4 tuple)
+bool	is_vector(t_float4 tuple)
 {
 	if (tuple.w == 1.0)
 		return (0);

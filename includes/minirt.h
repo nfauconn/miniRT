@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/23 12:54:56 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/23 16:12:34 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,7 @@
 # define WIDTH 2560
 # define HEIGHT 1440
 
-# include "libft.h"
-# include "mlx.h"
-# include <math.h>
-# include <errno.h>
-# include <sys/types.h>
-# include <stdint.h>
-
-typedef float __attribute__((ext_vector_type(4)))	t_float4;
-typedef t_float4									t_point;
-typedef t_float4									t_vector;
-typedef t_float4									t_rgb;
-typedef int __attribute__((ext_vector_type(4)))		t_int4;
-typedef float  __attribute__((matrix_type(4, 4)))	t_m4x4_f;
-typedef t_m4x4_f									t_m3x3_f;
-typedef int __attribute__((matrix_type(4, 4)))		t_m4x4_i;
-
-enum e_point_vector
-{
-	pt = 0,
-	vec
-};
+# include "extern_libs.h"
 
 typedef enum e_elements
 {
@@ -78,68 +58,54 @@ typedef struct s_img
 
 typedef struct s_scene
 {
-	void				*mlx;
-	void				*win;
-	t_img				*img;
-	float				ratio;
-	float				height_float;
-	float				width_float;
-	t_float4			focal_length;
-	t_float4			origin;
-	t_float4			width_vec;
-	t_float4			height_vec;
-	t_float4			ll_corner;
-	t_element			*cam;
-	t_element			*amblight;
-	t_element			*lights;
-	t_element			*sp;
-	t_element			*cy;
-	t_element			*pl;
-	t_bool				(*fill_params[elm_nb])(struct s_scene *elem, char **params);
+	void			*mlx;
+	void			*win;
+	t_img			*img;
+	float			ratio;
+	float			height_float;
+	float			width_float;
+	t_float4		focal_length;
+	t_float4		origin;
+	t_float4		width_vec;
+	t_float4		height_vec;
+	t_float4		ll_corner;
+	t_element		*cam;
+	t_element		*amblight;
+	t_element		*lights;
+	t_element		*sp;
+	t_element		*cy;
+	t_element		*pl;
+	bool			(*fill_params[6])(struct s_scene *, char **);
 }				t_scene;
 
-/* ERROR */
-t_bool	error_display(char *s);
-t_bool	error_display2(char *s1, char *s2);
-
-/* END */
-void	clear(t_scene *scene);
-void	exit_clear(t_bool exit_code, t_scene *scene);
-
 /* PARSING */
-t_bool	parse_file(char *file, t_scene *scene);
+bool	parse_file(char *file, t_scene *scene);
 void	init_paramsetter(t_scene *scene);
-t_bool	conv_pos(char *s, t_element *elem, char *elem_name);
-t_bool	conv_orientation(char *s, t_element *elem, char *elem_name);
-t_bool	conv_rgb(char *s, t_element *elem, char *elem_name);
-t_bool	conv_ratio(char *s, t_element *elem, char *elem_name);
-t_bool	conv_fov(char *s, t_element *elem, char *elem_name);
-t_bool	conv_radius(char *s, t_element *elem, char *elem_name);
-t_bool	conv_diam_height(char *s1, char *s2, t_element *elem, char *elem_name);
+bool	conv_pos(char *s, t_element *elem, char *elem_name);
+bool	conv_orientation(char *s, t_element *elem, char *elem_name);
+bool	conv_rgb(char *s, t_element *elem, char *elem_name);
+bool	conv_ratio(char *s, t_element *elem, char *elem_name);
+bool	conv_fov(char *s, t_element *elem, char *elem_name);
+bool	conv_radius(char *s, t_element *elem, char *elem_name);
+bool	conv_diam_height(char *s1, char *s2, t_element *elem, char *elem_name);
 void	elem_add_back(t_element **head, t_element *to_add);
-
-/* DISPLAY */
-int		close_window(t_scene *scene);
-int		parse_key(int keycode, t_scene *scene);
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 /* SCENE */
 void	setup_scene(t_scene *scene, char *file);
 void	draw_scene(t_img *img, t_scene *scene);
 void	display_scene(t_scene *scene);
 
-/* SPHERE */
+/* DISPLAY */
+int		close_window(t_scene *scene);
+int		parse_key(int keycode, t_scene *scene);
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
+/* ERROR */
+bool	error_display(char *s);
+bool	error_display2(char *s1, char *s2);
 
-/* UTILS - TUPLE */
-t_bool		same_tuple(t_float4 tup1, t_float4 tup2);
-t_bool		tuple_bool(t_int4 tuple);
-t_bool		same_float(float f1, float f2);
-float		addition_of_squared_elements(t_float4 vector);
-float		length(t_float4 vector);
-t_float4	unit_direction(t_float4 vector);
-float		dot_product(t_float4 tup1, t_float4 tup2);
-float		dot3(t_float4 tup1, t_float4 tup2);
-t_float4	cross_product(t_float4 tup1, t_float4 tup2);
+/* END */
+void	clear(t_scene *scene);
+void	exit_clear(bool exit_code, t_scene *scene);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 12:56:42 by noe               #+#    #+#             */
-/*   Updated: 2022/11/12 14:17:47 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/23 15:45:45 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_bool	conv_ratio(char *s, t_element *elem, char *elem_name)
+bool	conv_ratio(char *s, t_element *elem, char *elem_name)
 {
 	float	ratio;
 
@@ -23,7 +23,7 @@ t_bool	conv_ratio(char *s, t_element *elem, char *elem_name)
 	return (0);
 }
 
-t_bool	conv_fov(char *s, t_element *elem, char *elem_name)
+bool	conv_fov(char *s, t_element *elem, char *elem_name)
 {
 	float	fov;
 
@@ -34,7 +34,7 @@ t_bool	conv_fov(char *s, t_element *elem, char *elem_name)
 	return (0);
 }
 
-t_bool	conv_radius(char *s, t_element *elem, char *elem_name)
+bool	conv_radius(char *s, t_element *elem, char *elem_name)
 {
 	float	diameter;
 
@@ -45,7 +45,7 @@ t_bool	conv_radius(char *s, t_element *elem, char *elem_name)
 	return (0);
 }
 
-t_bool	conv_diam_height(char *s1, char *s2, t_element *elem, char *elem_name)
+bool	conv_diam_height(char *s1, char *s2, t_element *elem, char *elem_name)
 {
 	float	diam_hght[2];
 

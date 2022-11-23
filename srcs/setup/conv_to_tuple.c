@@ -6,15 +6,15 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:19:07 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/13 15:03:32 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/23 15:45:45 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static t_bool	check_rgb_range(t_rgb color)
+static bool	check_rgb_range(t_rgb color)
 {
-	t_bool	ret;
+	bool	ret;
 
 	if (color.x >= 0 && color.x <= 255
 		&& color.y >= 0 && color.y <= 255
@@ -25,9 +25,9 @@ static t_bool	check_rgb_range(t_rgb color)
 	return (ret);
 }
 
-t_bool	conv_rgb(char *s, t_element *elem, char *elem_name)
+bool	conv_rgb(char *s, t_element *elem, char *elem_name)
 {
-	t_bool		ret;
+	bool		ret;
 	char		**rgb;
 
 	rgb = ft_split(s, ',');
@@ -48,9 +48,9 @@ t_bool	conv_rgb(char *s, t_element *elem, char *elem_name)
 	return (ret);
 }
 
-static t_bool	check_orientation_range(t_vector v)
+static bool	check_orientation_range(t_vector v)
 {
-	t_bool	ret;
+	bool	ret;
 
 	if (v.x >= 0.0 && v.x <= 1.0
 		&& v.y >= 0.0 && v.y <= 1.0
@@ -61,9 +61,9 @@ static t_bool	check_orientation_range(t_vector v)
 	return (ret);
 }
 
-t_bool	conv_orientation(char *s, t_element *elem, char *elem_name)
+bool	conv_orientation(char *s, t_element *elem, char *elem_name)
 {
-	t_bool	ret;
+	bool	ret;
 	char	**or;
 
 	or = ft_split(s, ',');
@@ -84,9 +84,9 @@ t_bool	conv_orientation(char *s, t_element *elem, char *elem_name)
 	return (ret);
 }
 
-t_bool	conv_pos(char *s, t_element *elem, char *elem_name)
+bool	conv_pos(char *s, t_element *elem, char *elem_name)
 {
-	t_bool	ret;
+	bool	ret;
 	char	**pos;
 
 	pos = ft_split(s, ',');
