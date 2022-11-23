@@ -6,11 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:12:44 by rokerjea          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/11/23 13:43:27 by rokerjea         ###   ########.fr       */
-=======
-/*   Updated: 2022/11/23 12:39:21 by nfauconn         ###   ########.fr       */
->>>>>>> 432679750ce0b836757de39f34d9e0da2ec0bd27
+/*   Updated: 2022/11/23 14:54:19 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -803,4 +799,280 @@ Test(matrix, inversion3)
 	t_m4x4_f matrix2 = matrix_4xf_create(tabf2);
 	t_m4x4_f matrix3 = matrix * matrix2;
 	cr_expect(same_matrix(matrix, matrix3 * inversion(matrix2)));
+}
+
+t_m4x4_f	identity_matr(void)
+{
+	float tabf[16] = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
+	t_m4x4_f matrix = matrix_4xf_create(tabf);
+	return (matrix);
+}
+
+t_m4x4_f	translation(float x, float y, float z)
+{
+	t_m4x4_f	res;
+
+	res = identity_matr();
+	res[0][3] = x;
+	res[1][3] = y;
+	res[2][3] = z;
+	return (res);
+}
+
+Test(matrix, translation)
+{
+	t_m4x4_f	matr_transf = translation(5, -3, 2);
+	// t_m4x4_f	matr_inv = inversion(matr_transf);
+	float4	test = (float4){-3, 4, 5, 1};
+	float4	res = matrix_tuple_mult(matr_transf, test);
+	float4	point = (float4){2, 1, 7, 1};
+	// printf("%f, %f, %f, %f\n", res.x, res.y, res.z, res.w);
+	cr_expect(same_tuple(point, res) == 1);
+}
+
+Test(matrix, translation2)
+{
+	t_m4x4_f	matr_transf = translation(5, -3, 2);
+	t_m4x4_f	matr_inv = inversion(matr_transf);
+	float4	test = (float4){-3, 4, 5, 1};
+	float4	res = matrix_tuple_mult(matr_inv, test);
+	float4	point = (float4){-8, 7, 3, 1};
+	// printf("%f, %f, %f, %f\n", res.x, res.y, res.z, res.w);
+	cr_expect(same_tuple(point, res) == 1);
+}
+
+Test(matrix, translation3)
+{
+	t_m4x4_f	matr_transf = translation(5, -3, 2);
+	float4	test = (float4){-3, 4, 5, 0};
+	float4	res = matrix_tuple_mult(matr_transf, test);
+	float4	point = (float4){-3, 4, 5, 0};
+	// printf("%f, %f, %f, %f\n", res.x, res.y, res.z, res.w);
+	cr_expect(same_tuple(point, res) == 1);
+}
+
+t_m4x4_f	scaling(float x, float y, float z)
+{
+	t_m4x4_f	res;
+
+	res = identity_matr();
+	res[0][0] = x;
+	res[1][1] = y;
+	res[2][2] = z;
+	return (res);
+}
+
+Test(matrix, scaling1)
+{
+	t_m4x4_f	matr_scale = scaling(2, 3, 4);
+	float4	mult = (float4){-4, 6, 8, 0};
+	float4	res = matrix_tuple_mult(matr_scale, mult);
+	float4	aim = (float4){-8, 18, 32, 0};
+	cr_expect(same_tuple(aim, res) == 1);
+}
+
+Test(matrix, scaling2)
+{
+	t_m4x4_f	matr_scale = scaling(2, 3, 4);
+	float4	mult = (float4){-4, 6, 8, 1};
+	float4	res = matrix_tuple_mult(matr_scale, mult);
+	float4	aim = (float4){-8, 18, 32, 1};
+	cr_expect(same_tuple(aim, res) == 1);
+}
+
+Test(matrix, scaling3)
+{
+	t_m4x4_f	matr_scale = scaling(2, 3, 4);
+	t_m4x4_f	matr_inv = inversion(matr_scale);
+	float4	mult = (float4){-4, 6, 8, 1};
+	float4	res = matrix_tuple_mult(matr_inv, mult);
+	float4	aim = (float4){-2, 2, 2, 1};
+	cr_expect(same_tuple(aim, res) == 1);
+}
+
+Test(matrix, reflection)
+{
+	t_m4x4_f	matr_scale = scaling(-1, 1, 1);
+	float4	mult = (float4){2, 3, 4, 0};
+	float4	res = matrix_tuple_mult(matr_scale, mult);
+	float4	aim = (float4){-2, 3, 4};
+	cr_expect(same_tuple(aim, res) == 1);
+}
+
+t_m4x4_f	rotation_x(float angle)
+{
+	t_m4x4_f	res;
+
+	res = identity_matr();
+	res[1][1] = cos(angle);
+	res[1][2] = -sin(angle);
+	res[2][1] = sin(angle);
+	res[2][2] = cos(angle);
+	return (res);
+}
+
+Test(matrix, rotate_x)
+{
+	float4	p = (float4){0, 1, 0, 0};
+	t_m4x4_f	half_quart = rotation_x(M_PI / 4);
+	float4	half_quart_res = matrix_tuple_mult(half_quart, p);
+	t_m4x4_f	full_quart = rotation_x(M_PI / 2);
+	float4	full_quart_res = matrix_tuple_mult(full_quart, p);
+	float4	aim_1 = (float4){0, sqrt(2) / 2, sqrt(2) / 2, 0};
+	float4	aim_2 = (float4){0, 0, 1, 0};
+	cr_expect(same_tuple(half_quart_res, aim_1) == 1);
+	cr_expect(same_tuple(full_quart_res, aim_2) == 1);
+}
+
+t_m4x4_f	rotation_y(float angle)
+{
+	t_m4x4_f	res;
+
+	res = identity_matr();
+	res[0][0] = cos(angle);
+	res[0][2] = sin(angle);
+	res[2][0] = -sin(angle);
+	res[2][2] = cos(angle);
+	return (res);
+}
+
+Test(matrix, rotate_y)
+{
+	float4	p = (float4){0, 0, 1, 0};
+	t_m4x4_f	half_quart = rotation_y(M_PI / 4);
+	float4	half_quart_res = matrix_tuple_mult(half_quart, p);
+	t_m4x4_f	full_quart = rotation_y(M_PI / 2);
+	float4	full_quart_res = matrix_tuple_mult(full_quart, p);
+	float4	aim_1 = (float4){sqrt(2) / 2, 0, sqrt(2) / 2, 0};
+	float4	aim_2 = (float4){1, 0, 0, 0};
+	cr_expect(same_tuple(half_quart_res, aim_1) == 1);
+	cr_expect(same_tuple(full_quart_res, aim_2) == 1);
+}
+
+t_m4x4_f	rotation_z(float angle)
+{
+	t_m4x4_f	res;
+
+	res = identity_matr();
+	res[0][0] = cos(angle);
+	res[0][1] = -sin(angle);
+	res[1][0] = sin(angle);
+	res[1][1] = cos(angle);
+	return (res);
+}
+
+Test(matrix, rotation_z)
+{
+	float4	p = (float4){0, 1, 0, 0};
+	t_m4x4_f	half_quart = rotation_z(M_PI / 4);
+	float4	half_quart_res = matrix_tuple_mult(half_quart, p);
+	t_m4x4_f	full_quart = rotation_z(M_PI / 2);
+	float4	full_quart_res = matrix_tuple_mult(full_quart, p);
+	float4	aim_1 = (float4){-(sqrt(2) / 2), sqrt(2) / 2, 0, 0};
+	float4	aim_2 = (float4){-1, 0, 0, 0};
+	cr_expect(same_tuple(half_quart_res, aim_1) == 1);
+	cr_expect(same_tuple(full_quart_res, aim_2) == 1);
+}
+
+t_m4x4_f	shearing(float	*tab)
+{
+	t_m4x4_f	res;
+
+	res = identity_matr();
+	res[0][1] = tab[0];
+	res[0][2] = tab[1];
+	res[1][0] = tab[2];
+	res[1][2] = tab[3];
+	res[2][0] = tab[4];
+	res[2][1] = tab[5];
+	return (res);
+}
+
+Test(matrix, shearing1)
+{
+	float	tab[6] = {1, 0, 0, 0, 0, 0};
+	t_m4x4_f 	transf = shearing(tab);
+	float4	p = (float4){2, 3, 4, 0};
+	float4	aim = (float4){5, 3, 4, 0};
+	p = matrix_tuple_mult(transf, p);
+	cr_expect(same_tuple(p, aim) == 1);
+}
+Test(matrix, shearing2)
+{
+	float	tab[6] = {0, 1, 0, 0, 0, 0};
+	t_m4x4_f 	transf = shearing(tab);
+	float4	p = (float4){2, 3, 4, 0};
+	float4	aim = (float4){6, 3, 4, 0};
+	p = matrix_tuple_mult(transf, p);
+	cr_expect(same_tuple(p, aim) == 1);
+}
+Test(matrix, shearing3)
+{
+	float	tab[6] = {0, 0, 1, 0, 0, 0};
+	t_m4x4_f 	transf = shearing(tab);
+	float4	p = (float4){2, 3, 4, 0};
+	float4	aim = (float4){2, 5, 4, 0};
+	p = matrix_tuple_mult(transf, p);
+	cr_expect(same_tuple(p, aim) == 1);
+}
+Test(matrix, shearing4)
+{
+	float	tab[6] = {0, 0, 0, 1, 0, 0};
+	t_m4x4_f 	transf = shearing(tab);
+	float4	p = (float4){2, 3, 4, 0};
+	float4	aim = (float4){2, 7, 4, 0};
+	p = matrix_tuple_mult(transf, p);
+	cr_expect(same_tuple(p, aim) == 1);
+}
+Test(matrix, shearing5)
+{
+	float	tab[6] = {0, 0, 0, 0, 1, 0};
+	t_m4x4_f 	transf = shearing(tab);
+	float4	p = (float4){2, 3, 4, 0};
+	float4	aim = (float4){2, 3, 6, 0};
+	p = matrix_tuple_mult(transf, p);
+	cr_expect(same_tuple(p, aim) == 1);
+}
+Test(matrix, shearing6)
+{
+	float	tab[6] = {0, 0, 0, 0, 0, 1};
+	t_m4x4_f 	transf = shearing(tab);
+	float4	p = (float4){2, 3, 4, 0};
+	float4	aim = (float4){2, 3, 7, 0};
+	p = matrix_tuple_mult(transf, p);
+	cr_expect(same_tuple(p, aim) == 1);
+}
+
+t_m4x4_f	chained_transfo(t_m4x4_f one, t_m4x4_f two, t_m4x4_f three)
+{
+	t_m4x4_f	res;
+
+	res = matrix_mult(three, two);
+	res = matrix_mult(res, one);
+	return (res);
+}
+
+Test(matrix, chaining)
+{
+	float4 p = (float4){1, 0, 1, 1};
+	t_m4x4_f	A = rotation_x(M_PI / 2);
+	t_m4x4_f	B = scaling(5, 5, 5);
+	t_m4x4_f	C = translation(10, 5, 7);
+
+	float4 p2 = matrix_tuple_mult(A, p);
+	float4 p2aim = (float4){1, -1, 0, 1};
+	cr_expect(same_tuple(p2, p2aim) == 1);
+
+	float4 p3 = matrix_tuple_mult(B, p2);
+	float4 p3aim = (float4){5, -5, 0, 1};
+	cr_expect(same_tuple(p3, p3aim) == 1);
+
+	float4 p4 = matrix_tuple_mult(C, p3);
+	float4 p4aim = (float4){15, 0, 7, 1};
+	// printf("%f, %f, %f, %f\n", p4.x, p4.y, p4.z, p4.w);
+	cr_expect(same_tuple(p4, p4aim) == 1);
+
+	t_m4x4_f	fuse = chained_transfo(A, B, C);
+	float4	pres = matrix_tuple_mult(fuse, p);
+	cr_expect(same_tuple(pres, p4aim) == 1);
 }
