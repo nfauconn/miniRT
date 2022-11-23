@@ -19,6 +19,7 @@
 /* CREATION */
 t_m4x4_f	matrix_4xf_create(float *f);
 t_m3x3_f	matrix_3xf_create(float *f);
+t_m4x4_f	identity_matr(void);
 
 /* SUBMATRIX */
 t_m3x3_f	submatrix4_to_3(t_m4x4_f matr, int line, int col);
@@ -53,5 +54,12 @@ bool		is_matrice_invertible(t_m4x4_f matrix);;
 t_m4x4_f	cofactor_matrix(t_m4x4_f matr);
 void		printf_4fmatr(t_m4x4_f	matrixaim);
 t_m4x4_f	inversion(t_m4x4_f matr);
+t_m4x4_f	translation(float x, float y, float z);
+t_m4x4_f	scaling(float x, float y, float z);
+t_m4x4_f	rotation_x(float angle);
+t_m4x4_f	rotation_y(float angle);
+t_m4x4_f	rotation_z(float angle);
+t_m4x4_f	shearing(float	*tab);
+t_m4x4_f	chained_transfo(t_m4x4_f one, t_m4x4_f two, t_m4x4_f three);
 
 #endif
