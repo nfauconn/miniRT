@@ -471,3 +471,90 @@ t_m4x4_f	inversion(t_m4x4_f matr)
 	return (res);
 }
 
+t_m4x4_f	identity_matr(void)
+{
+	float tabf[16] = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
+	t_m4x4_f matrix = matrix_4xf_create(tabf);
+	return (matrix);
+}
+
+t_m4x4_f	translation(float x, float y, float z)
+{
+	t_m4x4_f	res;
+
+	res = identity_matr();
+	res[0][3] = x;
+	res[1][3] = y;
+	res[2][3] = z;
+	return (res);
+}
+
+t_m4x4_f	scaling(float x, float y, float z)
+{
+	t_m4x4_f	res;
+
+	res = identity_matr();
+	res[0][0] = x;
+	res[1][1] = y;
+	res[2][2] = z;
+	return (res);
+}
+
+t_m4x4_f	rotation_x(float angle)
+{
+	t_m4x4_f	res;
+
+	res = identity_matr();
+	res[1][1] = cos(angle);
+	res[1][2] = -sin(angle);
+	res[2][1] = sin(angle);
+	res[2][2] = cos(angle);
+	return (res);
+}
+
+t_m4x4_f	rotation_y(float angle)
+{
+	t_m4x4_f	res;
+
+	res = identity_matr();
+	res[0][0] = cos(angle);
+	res[0][2] = sin(angle);
+	res[2][0] = -sin(angle);
+	res[2][2] = cos(angle);
+	return (res);
+}
+
+t_m4x4_f	rotation_z(float angle)
+{
+	t_m4x4_f	res;
+
+	res = identity_matr();
+	res[0][0] = cos(angle);
+	res[0][1] = -sin(angle);
+	res[1][0] = sin(angle);
+	res[1][1] = cos(angle);
+	return (res);
+}
+
+t_m4x4_f	shearing(float	*tab)
+{
+	t_m4x4_f	res;
+
+	res = identity_matr();
+	res[0][1] = tab[0];
+	res[0][2] = tab[1];
+	res[1][0] = tab[2];
+	res[1][2] = tab[3];
+	res[2][0] = tab[4];
+	res[2][1] = tab[5];
+	return (res);
+}
+
+t_m4x4_f	chained_transfo(t_m4x4_f one, t_m4x4_f two, t_m4x4_f three)
+{
+	t_m4x4_f	res;
+
+	res = matrix_mult(three, two);
+	res = matrix_mult(res, one);
+	return (res);
+}
