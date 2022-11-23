@@ -23,8 +23,7 @@ SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		error \
 		exit_clear \
 		display \
-		sphere \
-		TESTdegradetry \
+		drawscene \
 		${addprefix ${INIT_DIR}/, \
 		setup_scene \
 		parse_file \
@@ -34,6 +33,8 @@ SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		elem_add} \
 		${addprefix ${UTILS_DIR}/, \
 		tuple \
+		ray \
+		rayutils \
 		matrix} \
 		}}
 DEPS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.d}}

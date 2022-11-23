@@ -6,14 +6,15 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:11:12 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/23 12:16:13 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/23 18:20:20 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAY_H
 #define RAY_H
 
-#include "minirt.h"
+# include "minirt.h"
+# include "tuple.h"
 
 typedef struct s_ray
 {
@@ -43,9 +44,15 @@ typedef struct s_inter
 }	t_inter;
 
 
-t_inter			*create_inter(float t, t_obj obj);
-void			interaddback(t_inter **head, t_inter *new);
-void			free_interlst(t_inter **lst);
-
+t_inter				*create_inter(float t, t_obj obj);
+void				interaddback(t_inter **head, t_inter *new);
+void				free_interlst(t_inter **lst);
+t_obj				init_sphere(void);
+t_ray				ray(t_point orig, t_vector dest);
+t_point				position(t_ray ray, float t);
+t_tvalues_for_ray	set_tvalues(t_obj obj, uint8_t count, float t1, float t2);
+t_tvalues_for_ray	sp_tvalues(t_obj s, t_ray r);
+void				add_obj_inters(t_obj obj, t_ray r, t_inter **interlst);
+t_inter				*find_hit(t_inter **interlst);
 
 #endif
