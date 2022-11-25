@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:11:12 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/23 19:08:48 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/25 19:01:43 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ typedef struct s_obj
 	t_m4x4_f	transform;
 }	t_obj;
 
-typedef struct s_tvalues_for_ray
+typedef struct s_xs
 {
 	size_t		count;
 	float		t[2];
 	t_obj		obj;
-}	t_tvalues_for_ray;
+}	t_xs;
 
 typedef struct s_inter
 {
@@ -44,16 +44,23 @@ typedef struct s_inter
 	struct s_inter		*next;
 }	t_inter;
 
+/* RAY */
+t_ray		ray(t_point orig, t_vector dest);
+t_point		position(t_ray ray, float t);
 
-t_inter				*create_inter(float t, t_obj obj);
-void				interaddback(t_inter **head, t_inter *new);
-void				free_interlst(t_inter **lst);
-t_obj				init_sphere(void);
-t_ray				ray(t_point orig, t_vector dest);
-t_point				position(t_ray ray, float t);
-t_tvalues_for_ray	set_tvalues(t_obj obj, uint8_t count, float t1, float t2);
-t_tvalues_for_ray	sp_tvalues(t_obj s, t_ray r);
-void				add_obj_inters(t_obj obj, t_ray r, t_inter **interlst);
-t_inter				*find_hit(t_inter **interlst);
+/* SPHERE */
+t_obj		init_sphere(void);
+t_xs		sp_xs(t_obj s, t_ray r);
+
+/* INTERSECTION */
+void		add_obj_inters(t_obj obj, t_ray r, t_inter **interlst);
+t_inter		*create_inter(float t, t_obj obj);
+void		interaddback(t_inter **head, t_inter *new);
+t_inter		*find_hit(t_inter **interlst);
+void		free_interlst(t_inter **lst);
+
+/* TRANFORM */
+t_ray		transform_ray(t_ray prev_r, t_m4x4_f matrix);
+t_obj		set_transform(t_obj obj, t_m4x4_f transfo_matrix);
 
 #endif

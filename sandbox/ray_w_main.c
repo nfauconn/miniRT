@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.c                                              :+:      :+:    :+:   */
+/*   ray_w_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:22:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/25 19:43:32 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/25 20:25:29 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,21 +89,33 @@ void	add_obj_inters(t_obj obj, t_ray r, t_inter **interlst)
 	}
 }
 
-/*  find the intersection that has the lowest nonnegative t value*/
-t_inter	*find_hit(t_inter **interlst)
+int	main(void)
 {
-	t_inter	*tmp;
-	t_inter	*hit;
+	t_point				orig[6] = {{0, 0, -5, pt}, {0, 1, -5, pt}, \
+									{0, 2, -5, pt}, 0, {0, 0, 5, pt}, \
+									{1, 2, 3, pt}};
+	size_t				origins_nb = 6;
+//	size_t				origins_no = 0;
+	t_vector			dest[2] = {{0, 0, 1, vec}, {0, 1, 0, vec}};
+	t_obj				obj;
+	t_inter				*interlst = NULL;
+	t_ray				r[origins_nb];
+//	t_ray				r2[origins_nb];
+//	t_inter				*hit;
 
-	tmp = *interlst;
-	hit = tmp;
-	while (tmp)
+	obj = init_sphere();
+	obj = set_transform(obj, scaling(2, 2, 2));
+/* 	while (origins_no < origins_nb)
 	{
-		if (tmp->t >= 0 && tmp->t < hit->t)
-			hit = tmp;
-		tmp = tmp->next;
-	}
-	if (hit->t < 0)
-		return (NULL);
-	return (hit);
+		r[origins_no] = ray(orig[origins_no], dest[0]);
+		add_obj_inters(obj, r[origins_no], &interlst);
+		origins_no++;
+	} */
+//	hit = find_hit(&interlst);
+//	r2[0] = transform_ray(r[5], translation(3, 4, 5));
+//	r2[0] = transform_ray(r[5], scaling(2, 2, 2));
+	r[0] = ray(orig[0], dest[0]);
+	add_obj_inters(obj, r[0], &interlst);
+	free_interlst(&interlst);
+	return (0);
 }
