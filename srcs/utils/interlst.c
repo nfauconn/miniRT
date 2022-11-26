@@ -59,3 +59,21 @@ void	free_interlst(t_inter **lst)
 		free(to_free);
 	}
 }
+
+/* add to interlst the new t values found with the given ray
+   does not ignore negative t values, as it seems util for chapter 8
+   with boolean operations */
+void	add_obj_inters(t_xs xs, t_inter **interlst)
+{
+	size_t				i;
+	t_inter				*inter;
+
+	i = -1;
+	while (i < xs.count)
+	{
+		inter = create_inter(xs.t[i], xs.obj);
+		interaddback(interlst, inter);
+		i++;
+	}
+}
+
