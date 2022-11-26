@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:22:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/26 14:13:27 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/26 17:37:51 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,10 @@ t_xs	intersect(t_obj obj, t_ray r)
 	t_xs	xs;
 
 	r = transform_ray(r, inversion(obj.transform));
-//	ft_bzero(&xs, sizeof(xs));
-//	if (obj.id == sphere)
+	if (obj.id == sphere)
 		xs = sp_xs(obj, r);
+	else
+		ft_bzero(&xs, sizeof(xs));
 	xs.obj = obj;
 	return (xs);
 }
@@ -101,24 +102,7 @@ t_xs	intersect(t_obj obj, t_ray r)
 
 */
 
-/* add to interlst the new t values found with the given ray
-   does not ignore negative t values, as it seems util for chapter 9
-   with boolean operations */
-void	add_obj_inters(t_xs xs, t_inter **interlst) // INTERSECTIONS
-{
-	size_t				i;
-	t_inter				*inter;
-
-	i = 0;
-	while (i < xs.count)
-	{
-		inter = create_inter(xs.t[i], xs.obj); // INTERSECTION
-		interaddback(interlst, inter);
-		i++;
-	}
-}
-
-/* 
+/*
 
 int	main(void)
 {

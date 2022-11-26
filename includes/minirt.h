@@ -6,15 +6,15 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/23 16:12:34 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/26 14:15:19 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define WIDTH 2560
-# define HEIGHT 1440
+# define WIDTH 100
+# define HEIGHT 100
 
 # include "extern_libs.h"
 
@@ -92,7 +92,7 @@ void	elem_add_back(t_element **head, t_element *to_add);
 
 /* SCENE */
 void	setup_scene(t_scene *scene, char *file);
-void	draw_scene(t_img *img, t_scene *scene);
+void	draw_scene(t_img *img);
 void	display_scene(t_scene *scene);
 
 /* DISPLAY */
