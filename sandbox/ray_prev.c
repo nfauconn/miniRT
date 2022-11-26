@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:22:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/26 14:13:27 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/26 14:24:54 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,62 +63,51 @@ t_xs	intersect(t_obj obj, t_ray r)
 	t_xs	xs;
 
 	r = transform_ray(r, inversion(obj.transform));
-//	ft_bzero(&xs, sizeof(xs));
-//	if (obj.id == sphere)
+	ft_bzero(&xs, sizeof(xs));
+	if (obj.id == sphere)
 		xs = sp_xs(obj, r);
 	xs.obj = obj;
 	return (xs);
 }
 
-/* /!\ !!!!!!! not if transform ray
-** obj = init_sphere()
-** dest = {0, 0, 1, vec}
-** r = ray({0, 0, -5, pt} - dest)  ==> origin before sphere, ray intersect center
-** xs = intersection(r,s)
-	xs.count = 2
-	xs.t[0] = 4
-	xs.t[1] = 6
-
-** same but orig = {0, 1, -5, pt} :   ==> tangent
-	xs.count = 2
-	xs.t[0] = 5
-	xs.t[1] = 5
-
-** same but orig = {0, 2, -5, pt} :   ==> misses sphere
-	xs.count = 0
-	xs.t[0] = 0
-	xs.t[1] = 0
-
-** same but orig = {0, 0, 0, pt} : 	==> origin of ray = center of sphere
-	xs.count = 2
-	xs.t[0] = -1
-	xs.t[1] = 1
-
-** same but orig = {0, 0, 5, pt} : 	==> a sphere is behind a ray
-	xs.count = 2
-	xs.t[0] = -6
-	xs.t[1] = -4
-
-*/
-
 /* add to interlst the new t values found with the given ray
    does not ignore negative t values, as it seems util for chapter 9
    with boolean operations */
-void	add_obj_inters(t_xs xs, t_inter **interlst) // INTERSECTIONS
+void	add_obj_inters(t_obj obj, t_ray r, t_inter **interlst)
 {
 	size_t				i;
+	t_xs	xs;
 	t_inter				*inter;
 
+	xs = intersect(obj, r);
 	i = 0;
 	while (i < xs.count)
 	{
-		inter = create_inter(xs.t[i], xs.obj); // INTERSECTION
+		inter = create_inter(xs.t[i], obj);
 		interaddback(interlst, inter);
 		i++;
 	}
 }
 
-/* 
+/*  find the intersection that has the lowest nonnegative t value*/
+t_inter	*find_hit(t_inter **interlst)
+{
+	t_inter	*tmp;
+	t_inter	*hit;
+
+	tmp = *interlst;
+	hit = tmp;
+	while (tmp)
+	{
+		if (tmp->t >= 0 && tmp->t < hit->t)
+			hit = tmp;
+		tmp = tmp->next;
+	}
+	if (hit->t < 0)
+		return (NULL);
+	return (hit);
+}
+
 
 int	main(void)
 {
@@ -137,13 +126,13 @@ int	main(void)
 
 	obj = init_sphere();
 	obj = set_transform(obj, scaling(2, 2, 2));
-
+/*
 	while (origins_no < origins_nb)
 	{
 		r[origins_no] = ray(orig[origins_no], dest[0]);
 		add_obj_inters(obj, r[origins_no], &interlst);
 		origins_no++;
-	}
+	} */
 //	hit = find_hit(&interlst);
 //	r2[0] = transform_ray(r[5], translation(3, 4, 5));
 //	r2[0] = transform_ray(r[5], scaling(2, 2, 2));
@@ -152,4 +141,4 @@ int	main(void)
 	add_obj_inters(xs, &interlst);
 	free_interlst(&interlst);
 	return (0);
-} */
+}
