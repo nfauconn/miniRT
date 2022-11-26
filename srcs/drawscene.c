@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   TESTdegradetry.c                                   :+:      :+:    :+:   */
+/*   drawscene.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/26 16:16:24 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/11/23 16:08:53 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/11/13 18:10:19 by nfauconn          #+#    #+#             */
+/*   Updated: 2022/11/26 19:44:30 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minirt.h"
-# include "tuple.h"
+#include "minirt.h"
+#include "ray.h"
 
 int	convert_float_to_int(float hexa)
 {
@@ -39,52 +39,52 @@ int rgbvtoi(t_float4 color_vec)
 	return (r << 16 | g << 8 | b);
 }
 
-int	ray_color(t_float4 vector)
+void	draw_scene(t_img *img)
 {
-    float t;
-	int color;
-	t_float4 bottom = (t_float4){1.0, 1.0, 1.0, pt};
-	t_float4 top = (t_float4){0.5, 0.7, 1.0, pt};
+	size_t		x;
+	size_t		y;
+	float		width_pixels = WIDTH;
+	float		wall_size = 7 * width_pixels / 100 ;
+	float		pixel_size = wall_size / width_pixels;
+	float		half = wall_size / 2;
+	float		wall_z = 10; // pos of screen relatively to sphere(0, 0, 0)
+	float		world_x;
+	float		world_y;
+	t_ray		r;
+	t_point		ray_origin = {0, 0, -5, pt};
+	t_point		position;
+	int			color_sp = rgbvtoi((t_vector){1, 0, 0, vec});
+	t_obj		shape = init_sphere();
+	t_xs		xs;
+	t_inter		xs_hit;
 
-	t = 0.5*(vector.y + 1.0); // vector.y should be between 1 (top) and -1 (bottom)
-							//if t = 1 we are at top of screen and (1 - t) == 0 (color blue)
-							//if t = 0 we are at bottom of screen and t = 0 (color white)
-	t_float4 res_color = top * (1.0 - t) + bottom * t;
-	color = rgbvtoi(res_color);
-    return (color);
-}
-
-int	get_background_color(int i, int j, t_scene *scene)
-{
-	t_float4	ray_direction;
-	int		color;
-	float	u;
-	float	v;
-
-	u = i / (float)WIDTH;
-	v = j / (float)HEIGHT;
-
-	ray_direction = scene->ll_corner + u*scene->width_vec + v*scene->height_vec - scene->origin;
-	color = ray_color(ray_direction);
-	return (color);
-}
-
-void	draw_scene(t_img *img, t_scene *scene)
-{
-	int	color;
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i <= WIDTH)
+	y = 0;
+	printf("coucou\n");
+	while (y < width_pixels)
 	{
-		j = 0;
-		while (j <= HEIGHT)
+		world_y = half - pixel_size * y; // compute the world y coordinate (top = +half, bottom = -half)
+		x = 0;
+		while (x < width_pixels)
 		{
-			color = get_background_color(i, j, scene);
-			my_mlx_pixel_put(img, i, j, color);
-			j++;
+			world_x = -half + pixel_size * x;
+			position = (t_point){world_x, world_y, wall_z, pt};
+			r = ray(ray_origin, unit_direction(position - ray_origin));
+			xs = intersect(shape, r);
+			if (xs.count > 0)
+			{
+				xs_hit = hit(xs);
+				if (xs_hit.t >= 0)
+				{
+//					printf("hit at (%zu, %zu) \n", x, y);
+					my_mlx_pixel_put(img, x, y, color_sp);
+				}
+			}
+//			printf("x++\n");
+			x++;
 		}
-		i++;
+//		printf("y++\n");
+//		sleep(1);
+		y++;
 	}
+	printf("finish\n");
 }

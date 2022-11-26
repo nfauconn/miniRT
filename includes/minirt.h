@@ -6,15 +6,15 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/26 14:15:19 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/26 19:40:27 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define WIDTH 100
-# define HEIGHT 100
+# define WIDTH 300
+# define HEIGHT 300
 
 # include "extern_libs.h"
 
