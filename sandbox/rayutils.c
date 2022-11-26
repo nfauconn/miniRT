@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:08:51 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/25 20:21:09 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/26 14:24:14 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,11 @@ t_obj	init_sphere(void)
 }
 
 /*  find the intersection that has the lowest nonnegative t value*/
-t_inter	*find_hit(t_inter **interlst)
+t_inter	hit(t_xs xs)
 {
-	t_inter	*tmp;
-	t_inter	*hit;
+	t_inter	hit;
 
-	tmp = *interlst;
-	hit = tmp;
-	while (tmp)
-	{
+	hit =
 		if (tmp->t >= 0 && tmp->t < hit->t)
 			hit = tmp;
 		tmp = tmp->next;
