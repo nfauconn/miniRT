@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:11:12 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/25 19:01:43 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/11/26 15:01:57 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,12 @@ t_obj		init_sphere(void);
 t_xs		sp_xs(t_obj s, t_ray r);
 
 /* INTERSECTION */
-void		add_obj_inters(t_obj obj, t_ray r, t_inter **interlst);
+t_xs		intersect(t_obj obj, t_ray r);
+t_inter		intersection(float t, t_obj obj);
+t_inter		hit(t_xs xs);
+
+/* INTERS LIST */
+void		add_obj_inters(t_xs xs, t_inter **interlst);
 t_inter		*create_inter(float t, t_obj obj);
 void		interaddback(t_inter **head, t_inter *new);
 t_inter		*find_hit(t_inter **interlst);
