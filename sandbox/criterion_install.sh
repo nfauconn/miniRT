@@ -13,7 +13,7 @@ export "PATH=/mnt/nfs/homes/rokerjea/.local/bin:$PATH"
 #dowloading criterion on a usable folder
 cd
 
-git clone git@github.com:Snaipe/Criterion.git
+git clone --recursive git@github.com:Snaipe/Criterion.git
 
 cd Criterion
 
