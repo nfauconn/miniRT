@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 14:38:22 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/16 12:03:11 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/02 14:13:53 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ float magnitude(t_float3 vector)
 	return (res);
 }
 
-t_float3	unit_direction(t_float3 vector)
+t_float3	normalize(t_float3 vector)
 {
 	t_float3	res;
 

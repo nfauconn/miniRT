@@ -27,27 +27,7 @@ bool	is_vector(float4 tuple)
 	return(1);
 }
 
-float4	create_point(float x, float y, float z)
-{
-	float4	point;
 
-	point.x = x;
-	point.y = y;
-	point.z = z;
-	point.w = 1.0;
-	return (point);
-}
-
-float4	create_vector(float x, float y, float z)
-{
-	float4	point;
-
-	point.x = x;
-	point.y = y;
-	point.z = z;
-	point.w = 0.0;
-	return (point);
-}
 
 bool	same_tuple(float4 tup1, float4 tup2)
 {
@@ -260,7 +240,7 @@ Test(tuple_test, magnitude)
 	cr_expect(same_float(length(tuple1), sqrt(14.0)) == 1);
 }
 
-float4	unit_direction(float4 vector)
+float4	normalize(float4 vector)
 {
 	float4	res;
 
@@ -273,7 +253,7 @@ Test(tuple_test, normalize1)
 	float4 v = create_vector(4, 0, 0);
 	float4 w = create_vector(1, 0, 0);
 	float4	res;
-	res = unit_direction(v);
+	res = normalize(v);
 
 	cr_expect(same_tuple(res, w) == 1);
 }
@@ -283,7 +263,7 @@ Test(tuple_test, normalize2)
 	float4 v = create_vector(1, 2, 3);
 	float4 w = create_vector(0.26726, 0.53452, 0.80178);
 
-	v = unit_direction(v);
+	v = normalize(v);
 
 	cr_expect(same_tuple(v, w) == 1);
 }
@@ -292,7 +272,7 @@ Test(tuple_test, normalize3)
 {
 	float4 v = create_vector(1, 2, 3);
 	float4 w;
-	w = unit_direction(v);
+	w = normalize(v);
 
 	cr_expect(same_float(1, length(w)) == 1);
 }

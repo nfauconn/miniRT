@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:34:33 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/11/23 15:45:45 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/02 14:13:49 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ bool	same_float(float f1, float f2)
 //un nouveau vecteur avec la meme direction,
 //mais avec un magnitude (longueur) de 1
 //used for scaling calculs to same proportions
-t_float4	unit_direction(t_float4 vector)
+t_float4	normalize(t_float4 vector)
 {
 	t_float4	res;
 
