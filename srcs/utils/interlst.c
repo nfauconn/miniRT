@@ -20,7 +20,7 @@ t_inter		*find_hit(t_inter **interlst)
 	return (hit);
 }
 
-t_inter	*create_inter(float t, t_obj obj)
+t_inter	*create_inter(float t, t_elem obj)
 {
 	t_inter	*i;
 

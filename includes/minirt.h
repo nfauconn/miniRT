@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/26 19:40:27 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/02 13:28:41 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef enum e_elements
 	sphere,
 	cylinder,
 	elm_nb
-}	t_elements;
+}	t_elems;
 
 typedef union u_specs
 {
@@ -37,15 +37,23 @@ typedef union u_specs
 	float				diam_hght[2];
 }	t_specs;
 
-typedef struct s_element
+typedef struct s_id
 {
-	uint8_t				id;
+	uint8_t	shape;
+	size_t	no;
+}	t_id;
+
+typedef struct s_elem
+{
+	t_id				id;
+	t_point				center;
 	t_point				pos;
 	t_vector			orientation;
 	t_rgb				color;
+	t_m4x4_f			transform;
 	t_specs				specs;
-	struct s_element	*next;
-}				t_element;
+	struct s_elem		*next;
+}				t_elem;
 
 typedef struct s_img
 {
@@ -69,26 +77,27 @@ typedef struct s_scene
 	t_float4		width_vec;
 	t_float4		height_vec;
 	t_float4		ll_corner;
-	t_element		*cam;
-	t_element		*amblight;
-	t_element		*lights;
-	t_element		*sp;
-	t_element		*cy;
-	t_element		*pl;
+	t_elem			*cam;
+	t_elem			*amblight;
+	t_elem			*lights;
+	t_elem			*objs;
+/* 	t_elem			*sp;
+	t_elem			*cy;
+	t_elem			*pl; */
 	bool			(*fill_params[6])(struct s_scene *, char **);
 }				t_scene;
 
 /* PARSING */
 bool	parse_file(char *file, t_scene *scene);
 void	init_paramsetter(t_scene *scene);
-bool	conv_pos(char *s, t_element *elem, char *elem_name);
-bool	conv_orientation(char *s, t_element *elem, char *elem_name);
-bool	conv_rgb(char *s, t_element *elem, char *elem_name);
-bool	conv_ratio(char *s, t_element *elem, char *elem_name);
-bool	conv_fov(char *s, t_element *elem, char *elem_name);
-bool	conv_radius(char *s, t_element *elem, char *elem_name);
-bool	conv_diam_height(char *s1, char *s2, t_element *elem, char *elem_name);
-void	elem_add_back(t_element **head, t_element *to_add);
+bool	conv_pos(char *s, t_elem *elem, char *elem_name);
+bool	conv_orientation(char *s, t_elem *elem, char *elem_name);
+bool	conv_rgb(char *s, t_elem *elem, char *elem_name);
+bool	conv_ratio(char *s, t_elem *elem, char *elem_name);
+bool	conv_fov(char *s, t_elem *elem, char *elem_name);
+bool	conv_radius(char *s, t_elem *elem, char *elem_name);
+bool	conv_diam_height(char *s1, char *s2, t_elem *elem, char *elem_name);
+void	elem_add_back(t_elem **head, t_elem *to_add, uint8_t shape, ssize_t no);
 
 /* SCENE */
 void	setup_scene(t_scene *scene, char *file);

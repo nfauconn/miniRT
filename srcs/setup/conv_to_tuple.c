@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:19:07 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/23 15:45:45 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/02 13:03:51 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static bool	check_rgb_range(t_rgb color)
 	return (ret);
 }
 
-bool	conv_rgb(char *s, t_element *elem, char *elem_name)
+bool	conv_rgb(char *s, t_elem *elem, char *elem_name)
 {
 	bool		ret;
 	char		**rgb;
@@ -61,7 +61,7 @@ static bool	check_orientation_range(t_vector v)
 	return (ret);
 }
 
-bool	conv_orientation(char *s, t_element *elem, char *elem_name)
+bool	conv_orientation(char *s, t_elem *elem, char *elem_name)
 {
 	bool	ret;
 	char	**or;
@@ -84,7 +84,7 @@ bool	conv_orientation(char *s, t_element *elem, char *elem_name)
 	return (ret);
 }
 
-bool	conv_pos(char *s, t_element *elem, char *elem_name)
+bool	conv_pos(char *s, t_elem *elem, char *elem_name)
 {
 	bool	ret;
 	char	**pos;

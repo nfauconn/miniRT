@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   elem_add.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noe <noe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 13:02:04 by noe               #+#    #+#             */
-/*   Updated: 2022/11/10 13:05:46 by noe              ###   ########.fr       */
+/*   Updated: 2022/12/02 13:24:07 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	elem_add_back(t_element **head, t_element *to_add)
+void	elem_add_back(t_elem **head, t_elem *to_add, uint8_t shape, ssize_t no)
 {
-	t_element *elem;
+	t_elem *elem;
 
 	if (!*head)
 	{
@@ -26,5 +26,7 @@ void	elem_add_back(t_element **head, t_element *to_add)
 	while (elem->next)
 		elem = elem->next;
 	elem->next = to_add;
+	to_add->id.shape = shape;
+	to_add->id.no = no;
 	to_add->next = NULL;
 }

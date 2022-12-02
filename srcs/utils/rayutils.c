@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:08:51 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/26 15:07:48 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/02 13:27:34 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,20 @@ t_point	position(t_ray ray, float t)
 	return (ray.orig + ray.dest * t);
 }
 
-t_obj	init_sphere(void)
+t_elem	init_sphere(void)
 {
-	t_obj			s;
+	t_elem			s;
 	static ssize_t	no = -1;
 
 	no++;
-	s.id = sphere;
-	s.no = no;
+	s.id.shape = sphere;
+	s.id.no = no;
 	s.center = (t_point){0, 0, 0};
 	s.transform = identity_matr();
 	return (s);
 }
 
-t_inter	intersection(float t, t_obj obj)
+t_inter	intersection(float t, t_elem obj)
 {
 	t_inter	i;
 

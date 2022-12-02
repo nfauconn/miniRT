@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:22:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/26 14:13:27 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/02 13:01:43 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "matrix.h"
 
 /* find inter of the given ray with a sphere */
-t_xs	sp_xs(t_obj s, t_ray r)
+t_xs	sp_xs(t_elem s, t_ray r)
 {
 	t_vector	sphere_to_ray;
 	float		a;
@@ -49,7 +49,7 @@ t_ray	transform_ray(t_ray prev_r, t_m4x4_f matrix)
 	return (r);
 }
 
-t_obj	set_transform(t_obj obj, t_m4x4_f transfo_matrix)
+t_elem	set_transform(t_elem obj, t_m4x4_f transfo_matrix)
 {
 	obj.transform = transfo_matrix;
 	return (obj);
@@ -58,7 +58,7 @@ t_obj	set_transform(t_obj obj, t_m4x4_f transfo_matrix)
 /* INTERSECT
 ** create a struct containing all intersections of a ray with a given obj
 ** (sphere can only have 2 but maybe more are needed for other objects) */
-t_xs	intersect(t_obj obj, t_ray r)
+t_xs	intersect(t_elem obj, t_ray r)
 {
 	t_xs	xs;
 
@@ -128,7 +128,7 @@ int	main(void)
 	size_t				origins_nb = 6;
 //	size_t				origins_no = 0;
 	t_vector			dest[2] = {{0, 0, 1, vec}, {0, 1, 0, vec}};
-	t_obj				obj;
+	t_elem				obj;
 	t_inter				*interlst = NULL;
 	t_ray				r[origins_nb];
 	t_xs				xs;

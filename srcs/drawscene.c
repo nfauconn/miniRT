@@ -6,12 +6,13 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 18:10:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/26 19:44:30 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/02 13:01:43 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "ray.h"
+#include "matrix.h"
 
 int	convert_float_to_int(float hexa)
 {
@@ -54,7 +55,7 @@ void	draw_scene(t_img *img)
 	t_point		ray_origin = {0, 0, -5, pt};
 	t_point		position;
 	int			color_sp = rgbvtoi((t_vector){1, 0, 0, vec});
-	t_obj		shape = init_sphere();
+	t_elem		shape = init_sphere();
 	t_xs		xs;
 	t_inter		xs_hit;
 
@@ -69,6 +70,7 @@ void	draw_scene(t_img *img)
 			world_x = -half + pixel_size * x;
 			position = (t_point){world_x, world_y, wall_z, pt};
 			r = ray(ray_origin, unit_direction(position - ray_origin));
+			shape.transform = shearing((float[6]){1, 0, 0, 0, 0, 0}) * scaling(0.5, 1, 1);
 			xs = intersect(shape, r);
 			if (xs.count > 0)
 			{
