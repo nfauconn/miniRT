@@ -6,11 +6,33 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:34:33 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/11/23 15:57:13 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/02 15:13:03 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tuple.h"
+
+t_float4	create_point(float x, float y, float z)
+{
+	t_float4	point;
+
+	point.x = x;
+	point.y = y;
+	point.z = z;
+	point.w = 1.0;
+	return (point);
+}
+
+t_float4	create_vector(float x, float y, float z)
+{
+	t_float4	point;
+
+	point.x = x;
+	point.y = y;
+	point.z = z;
+	point.w = 0.0;
+	return (point);
+}
 
 /* verifie que les deux tuples en arguments on les memes valeurs
 a une precision de 0.00001 */
@@ -71,7 +93,7 @@ float	length(t_float4 vector)
 un nouveau vecteur avec la meme direction,
 mais avec un magnitude (longueur) de 1
 used for scaling calculs to same proportions */
-t_float4	unit_direction(t_float4 vector)
+t_float4	normalize(t_float4 vector)
 {
 	t_float4	res;
 

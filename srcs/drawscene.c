@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 18:10:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/02 13:01:43 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/02 14:14:00 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	draw_scene(t_img *img)
 		{
 			world_x = -half + pixel_size * x;
 			position = (t_point){world_x, world_y, wall_z, pt};
-			r = ray(ray_origin, unit_direction(position - ray_origin));
+			r = ray(ray_origin, normalize(position - ray_origin));
 			shape.transform = shearing((float[6]){1, 0, 0, 0, 0, 0}) * scaling(0.5, 1, 1);
 			xs = intersect(shape, r);
 			if (xs.count > 0)

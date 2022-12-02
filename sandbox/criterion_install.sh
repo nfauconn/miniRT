@@ -8,10 +8,10 @@ python3 -m pip install ninja
 #creation of new PATH variable to find meson and ninja
 #(could probably be done another way, because this method need to re-export that variable
 #each time you launch a new shell)
-export "PATH=/mnt/nfs/homes/rokerjea/.local/bin:$PATH"
+export "PATH=/mnt/nfs/homes/nfauconn/.local/bin:$PATH"
 
 #dowloading criterion on a usable folder
-cd
+cd ~
 
 git clone --recursive git@github.com:Snaipe/Criterion.git
 

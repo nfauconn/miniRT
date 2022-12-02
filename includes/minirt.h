@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/02 13:28:41 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/02 14:14:39 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,6 @@ typedef struct s_scene
 	t_elem			*amblight;
 	t_elem			*lights;
 	t_elem			*objs;
-/* 	t_elem			*sp;
-	t_elem			*cy;
-	t_elem			*pl; */
 	bool			(*fill_params[6])(struct s_scene *, char **);
 }				t_scene;
 
