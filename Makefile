@@ -104,4 +104,48 @@ littleclean:
 
 r: littleclean all
 
+################################################################################
+#                              		TESTS							   		   #
+################################################################################
+
+CRITERION_DIR = /mnt/nfs/homes/rokerjea/sgoinfre/Criterion/
+
+test: libftcreat
+	clear
+	@${CC} -o matrix srcs/utils/matrix.c sandbox/chap3_matrix.c ${INCLUDES} -I${CRITERION_DIR}include -L${CRITERION_DIR}build/src ${CFLAGS} -lm -lcriterion
+	@./matrix
+	@rm matrix
+
+test2: libftcreat
+	clear
+	@${CC} -o ray srcs/utils/ray.c srcs/utils/interlst.c libft/libft.a srcs/utils/tuple.c srcs/utils/matrix.c srcs/utils/rayutils.c sandbox/chap5_sphere_tests.c ${INCLUDES} -I${CRITERION_DIR}include -L${CRITERION_DIR}build/src ${CFLAGS} -lm -lcriterion
+	@./ray
+	@rm ray
+
+TEST3_SRC = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
+		error \
+		exit_clear \
+		display \
+		${addprefix ${INIT_DIR}/, \
+		setup_scene \
+		parse_file \
+		set_params \
+		conv_to_tuple \
+		conv_to_float \
+		elem_add} \
+		${addprefix ${UTILS_DIR}/, \
+		tuple \
+		ray \
+		rayutils \
+		interlst \
+		matrix} \
+		}\
+		sandbox/chap7_scene}
+
+test3:	libftcreat
+	clear
+	@${CC} -o world ${TEST3_SRC} ${LD_FLAGS} ${INCLUDES} -I${CRITERION_DIR}include -L${CRITERION_DIR}build/src ${CFLAGS} -lcriterion ${LIBS_FLAGS}
+	@./world
+	@rm world
+
 .PHONY: all clean fclean re libftcreat val norm littleclean r
