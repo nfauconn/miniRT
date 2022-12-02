@@ -135,8 +135,8 @@ TEST_LNFLAGS = ${LN_CR_FLAGS} ${LN_FLAGS}
 test: libftcreat ${OBJS} ${TEST_OBJ}
 	@make -C ${MLX_DIR} --no-print-directory
 	@${CC} ${CFLAGS} ${OBJS} ${TEST_OBJ} -o ${TEST_NAME} ${TEST_LDFLAGS} ${TEST_LNFLAGS}
-#	@./${TEST_NAME}
-#	@${RM} {TEST_NAME}
+	@./${TEST_NAME}
+	@${RM} {TEST_NAME} ${TEST_DEPS} ${TEST_OBJ}
 
 -include ${DEPS}
 -include ${TEST_DEPS}
