@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   chap3_matrix.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:12:44 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/11/23 14:54:19 by rokerjea         ###   ########.fr       */
+/*   Updated: 2022/11/25 21:37:32 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "/mnt/nfs/homes/rokerjea/sgoinfre/Criterion/include/criterion/criterion.h"
+#include "matrix.h"
 # include <math.h>
 # include <stdio.h>
 # include <signal.h>
@@ -58,27 +59,27 @@ bool	same_float(float f1, float f2)
 // 	return (1);
 // }
 
-t_m4x4_f	matrix_4xf_create(float *f)
-{
-	t_m4x4_f matrix;
-	int	j;
-	int	k;
-	int	i;
+// t_m4x4_f	matrix_4xf_create(float *f)
+// {
+// 	t_m4x4_f matrix;
+// 	int	j;
+// 	int	k;
+// 	int	i;
 	
-	i = 0;
-	j = 0;
-	while (j < 4)
-	{
-		k = 0;
-		while (k < 4)
-		{
-			matrix[j][k] = f[i++];
-			k++;
-		}
-		j++;		
-	}
-	return (matrix);	
-}
+// 	i = 0;
+// 	j = 0;
+// 	while (j < 4)
+// 	{
+// 		k = 0;
+// 		while (k < 4)
+// 		{
+// 			matrix[j][k] = f[i++];
+// 			k++;
+// 		}
+// 		j++;		
+// 	}
+// 	return (matrix);	
+// }
 
 Test(matrix, matrix_create)
 {
@@ -86,8 +87,8 @@ Test(matrix, matrix_create)
 	float tabf[16] = {1, 2, 3, 4, 5.5, 6.5, 7.5, 8.5, 9, 10, 11, 12, 13.5, 14.5, 15.5, 16.5};
 	matrix = matrix_4xf_create(tabf);
 	// printf ("%f\n", matrix[0][0]);
-	cr_expect(same_float(matrix[0][0], 1) == 1);
-	cr_expect(same_float(matrix[0][3], 4) == 1);
+	cr_expect(same_float(matrix[0][0], 1));
+	cr_expect(same_float(matrix[0][3], 4));
 	cr_expect(same_float(matrix[1][0], 5.5) == 1);
 	cr_expect(same_float(matrix[1][2], 7.5) == 1);
 	cr_expect(same_float(matrix[2][2], 11) == 1);
@@ -96,31 +97,31 @@ Test(matrix, matrix_create)
 	cr_expect(same_float(matrix[3][3], 16.5) == 1);
 }
 
-bool	same_matrix(t_m4x4_f matrix1, t_m4x4_f matrix2)
-{
-	int	j;
-	int	k;
-	float	epsilon;
+// bool	same_matrix(t_m4x4_f matrix1, t_m4x4_f matrix2)
+// {
+// 	int	j;
+// 	int	k;
+// 	float	epsilon;
 
-	epsilon = 0.00001;
-	j = 0;
-	while (j < 4)
-	{
-		k = 0;
-		while (k < 4)
-		{
-			if (matrix1[j][k] >= matrix2[j][k] + epsilon
-				|| matrix1[j][k] <= matrix2[j][k] - epsilon)
-				{
-					// printf ("%f != %f\n", matrix1[j][k], matrix2[j][k]);
-					return(0);
-				}
-			k++;
-		}
-		j++;		
-	}
-	return (1);
-}
+// 	epsilon = 0.00001;
+// 	j = 0;
+// 	while (j < 4)
+// 	{
+// 		k = 0;
+// 		while (k < 4)
+// 		{
+// 			if (matrix1[j][k] >= matrix2[j][k] + epsilon
+// 				|| matrix1[j][k] <= matrix2[j][k] - epsilon)
+// 				{
+// 					// printf ("%f != %f\n", matrix1[j][k], matrix2[j][k]);
+// 					return(0);
+// 				}
+// 			k++;
+// 		}
+// 		j++;
+// 	}
+// 	return (1);
+// }
 
 Test(matrix, matrix_compare)
 {
@@ -143,27 +144,27 @@ Test(matrix, matrix_compare)
 // // }
 
 
-float4	get_vline(int i, t_m4x4_f matrix)
-{
-	float4	res;
+// float4	get_vline(int i, t_m4x4_f matrix)
+// {
+// 	float4	res;
 
-	res.x = matrix[i][0];
-	res.y = matrix[i][1];
-	res.z = matrix[i][2];
-	res.w = matrix[i][3];
-	return (res);
-}
+// 	res.x = matrix[i][0];
+// 	res.y = matrix[i][1];
+// 	res.z = matrix[i][2];
+// 	res.w = matrix[i][3];
+// 	return (res);
+// }
 
-float4	get_vcol(int i, t_m4x4_f matrix2)
-{
-	float4	res;
+// float4	get_vcol(int i, t_m4x4_f matrix2)
+// {
+// 	float4	res;
 
-	res.x = matrix2[0][i];
-	res.y = matrix2[1][i];
-	res.z = matrix2[2][i];
-	res.w = matrix2[3][i];
-	return (res);
-}
+// 	res.x = matrix2[0][i];
+// 	res.y = matrix2[1][i];
+// 	res.z = matrix2[2][i];
+// 	res.w = matrix2[3][i];
+// 	return (res);
+// }
 
 float	dot_product(float4 tuple1, float4 tuple2)
 {
@@ -173,36 +174,36 @@ float	dot_product(float4 tuple1, float4 tuple2)
 		+ (tuple1.w * tuple2.w));
 }
 
-float	dot_product_ma(t_m4x4_f matrix, int line, t_m4x4_f matrix2, int col)
-{
-	float4	tuple1;
-	float4	tuple2;
+// float	dot_product_ma(t_m4x4_f matrix, int line, t_m4x4_f matrix2, int col)
+// {
+// 	float4	tuple1;
+// 	float4	tuple2;
 
-	tuple1 = get_vline(line, matrix);
-	tuple2 = get_vcol(col, matrix2);
-	return (dot_product(tuple1, tuple2));
-}
+// 	tuple1 = get_vline(line, matrix);
+// 	tuple2 = get_vcol(col, matrix2);
+// 	return (dot_product(tuple1, tuple2));
+// }
 
-t_m4x4_f	matrix_mult(t_m4x4_f matrix, t_m4x4_f matrix2)
-{
-	t_m4x4_f	res;
-	int	i;
-	int	j;
+// t_m4x4_f	matrix_mult(t_m4x4_f matrix, t_m4x4_f matrix2)
+// {
+// 	t_m4x4_f	res;
+// 	int	i;
+// 	int	j;
 	
-	i = 0;
-	j = 0;
-	while (i < 4)
-	{
-		j = 0;
-		while (j < 4)
-		{
-			res[i][j] = dot_product_ma(matrix, i, matrix2, j);
-			j++;
-		}
-		i++;
-	}
-	return (res);
-}
+// 	i = 0;
+// 	j = 0;
+// 	while (i < 4)
+// 	{
+// 		j = 0;
+// 		while (j < 4)
+// 		{
+// 			res[i][j] = dot_product_ma(matrix, i, matrix2, j);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	return (res);
+// }
 
 Test(matrix, matrix_mult)
 {	float tabf[16] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2};
@@ -229,21 +230,21 @@ bool	same_tuple(float4 tup1, float4 tup2)
 	return (1);
 }
 
-float4	matrix_tuple_mult(t_m4x4_f matrix, float4 tup)
-{
-	float4	res;
-	float4	line;
-	int	i;
+// float4	matrix_tuple_mult(t_m4x4_f matrix, float4 tup)
+// {
+// 	float4	res;
+// 	float4	line;
+// 	int	i;
 
-	i = 0;
-	while (i < 16)
-	{
-		line = get_vline(i / 4, matrix);
-		res[i / 4] = dot_product(line, tup);
-		i += 4;
-	}
-	return (res);
-}
+// 	i = 0;
+// 	while (i < 16)
+// 	{
+// 		line = get_vline(i / 4, matrix);
+// 		res[i / 4] = dot_product(line, tup);
+// 		i += 4;
+// 	}
+// 	return (res);
+// }
 
 Test(matrix, matrix_tuple_mult)
 {	float tabf[16] = {1, 2, 3, 4, 2, 4, 4, 2, 8, 6, 4, 1, 0, 0, 0, 1};
@@ -270,25 +271,25 @@ Test(matrix, identity_matrix)
 	cr_expect(same_tuple(test2, res) == 1, "multiplication of identity mtrx by tuple");
 }
 
-t_m4x4_f	matrix_transpose(t_m4x4_f matrix)
-{
-	t_m4x4_f	res;
-	int	i;
-	int	j;
+// t_m4x4_f	matrix_transpose(t_m4x4_f matrix)
+// {
+// 	t_m4x4_f	res;
+// 	int	i;
+// 	int	j;
 
-	i = 0;
-	while (i < 4)
-	{
-		j = 0;
-		while (j < 4)
-		{
-			res[i][j] = matrix[j][i];
-			j++;
-		}
-		i++;
-	}
-	return (res);
-}
+// 	i = 0;
+// 	while (i < 4)
+// 	{
+// 		j = 0;
+// 		while (j < 4)
+// 		{
+// 			res[i][j] = matrix[j][i];
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	return (res);
+// }
 
 Test(matrix, transposing_matrix)
 {
@@ -308,13 +309,13 @@ Test(matrix, transposing_matrix)
 	cr_expect(same_matrix(matrixres2, matrix2) == 1);
 }
 
-float	determinant2x2(float4 matrix)
-{
-	float	res;
+// float	determinant2x2(float4 matrix)
+// {
+// 	float	res;
 	
-	res = matrix.x * matrix.w - matrix.y * matrix.z;
-	return (res);
-}
+// 	res = matrix.x * matrix.w - matrix.y * matrix.z;
+// 	return (res);
+// }
 
 Test(matrix, determinant2x2)
 {
@@ -337,86 +338,86 @@ Test(matrix, determinant2x2)
 
 //0 <= j <= 8
 //0 <= line <= 2
-int	isnotinline(int	j, int line)
-{
-	if (j >= 0 && j <= 2 && line == 0)
-		return (0);
-	if (j >= 3 && j <= 5 && line == 1)
-		return (0);
-	if (j >= 6 && j <= 8 && line == 2)
-		return (0);
-	return (1);
-}
+// int	isnotinline(int	j, int line)
+// {
+// 	if (j >= 0 && j <= 2 && line == 0)
+// 		return (0);
+// 	if (j >= 3 && j <= 5 && line == 1)
+// 		return (0);
+// 	if (j >= 6 && j <= 8 && line == 2)
+// 		return (0);
+// 	return (1);
+// }
 
-//0 3 6  (col 0)
-//1 4 7  (col 1)
-//2 5 8  (col 2)
-int	isnotincol(int	j, int col)
-{
-	if (j % 3  == col)
-		return (0);
-	return (1);
-}
+// //0 3 6  (col 0)
+// //1 4 7  (col 1)
+// //2 5 8  (col 2)
+// int	isnotincol(int	j, int col)
+// {
+// 	if (j % 3  == col)
+// 		return (0);
+// 	return (1);
+// }
 
 
-float4	add_f_to_tuple(int i, float val, float4 res)
-{
-	if (i == 0)
-		res.x = val;
-	if (i == 1)
-		res.y = val;
-	if (i == 2)
-		res.z = val;
-	if (i == 3)
-		res.w = val;
-	return(res);
-}
+// float4	add_f_to_tuple(int i, float val, float4 res)
+// {
+// 	if (i == 0)
+// 		res.x = val;
+// 	if (i == 1)
+// 		res.y = val;
+// 	if (i == 2)
+// 		res.z = val;
+// 	if (i == 3)
+// 		res.w = val;
+// 	return(res);
+// }
 
 //matr[0][0] to matr[3][3]
-float4	submatrix3_to_2(t_m3x3_f matr, int line, int col)
-{
-	float4	res;
-	int	i;
-	int	j;
-	int	k;
+// float4	submatrix3_to_2(t_m3x3_f matr, int line, int col)
+// {
+// 	float4	res;
+// 	int	i;
+// 	int	j;
+// 	int	k;
 	
-	i = 0;
-	k = 0;
-	while (i < 3)
-	{
-		j = 0;
-		while (j< 3)
-		{
-			if (i != line && j != col)
-				res = add_f_to_tuple(k++, matr[i][j], res);
-			j++;
-		}
-		i++;
-	}
-	return (res);
-}
+// 	i = 0;
+// 	k = 0;
+// 	while (i < 3)
+// 	{
+// 		j = 0;
+// 		while (j< 3)
+// 		{
+// 			if (i != line && j != col)
+// 				res = add_f_to_tuple(k++, matr[i][j], res);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	return (res);
+// }
 
 //0 <= j <= 15
 //0 <= line <= 3
-int	isnotinline_4x4(int	j, int line)
-{
-	if (j >= 0 && j <= 3 && line == 0)
-		return (0);
-	if (j >= 4 && j <= 7 && line == 1)
-		return (0);
-	if (j >= 8 && j <= 11 && line == 2)
-		return (0);
-	if (j >= 12 && j <= 15 && line == 3)
-		return (0);
-	return (1);
-}
+// int	isnotinline_4x4(int	j, int line)
+// {
+// 	if (j >= 0 && j <= 3 && line == 0)
+// 		return (0);
+// 	if (j >= 4 && j <= 7 && line == 1)
+// 		return (0);
+// 	if (j >= 8 && j <= 11 && line == 2)
+// 		return (0);
+// 	if (j >= 12 && j <= 15 && line == 3)
+// 		return (0);
+// 	return (1);
+// }
 
-int	isnotincol_4x4(int	j, int col)
-{
-	if (j % 4  == col)
-		return (0);
-	return (1);
-}
+// int	isnotincol_4x4(int	j, int col)
+// {
+// 	if (j % 4  == col)
+// 		return (0);
+// 	return (1);
+// }
 
 // t_matrix3	convert_tab_to_matr_3x3(float	tab[9])
 // {
@@ -435,77 +436,77 @@ int	isnotincol_4x4(int	j, int col)
 // 	// printf("\n");
 // 	return (res);
 // }
-t_m3x3_f	add_f_to_matrice_3f(int i, float val, t_m3x3_f res)
-{
-	res[i / 3][i % 3] = val;
-	return (res);
-}
-void	printf_3fmatr(t_m3x3_f	matrixaim)
-{
-	int	i;
-	int	j;
+// t_m3x3_f	add_f_to_matrice_3f(int i, float val, t_m3x3_f res)
+// {
+// 	res[i / 3][i % 3] = val;
+// 	return (res);
+// }
+// void	printf_3fmatr(t_m3x3_f	matrixaim)
+// {
+// 	int	i;
+// 	int	j;
 
-	i = 0;
-	while (i < 3)
-	{
-		j = 0;
-		while (j < 3)
-		{
-			printf ("line %d, col %d, val = %f\n", i, j, matrixaim[i][j]);
-			j++;
-		}
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (i < 3)
+// 	{
+// 		j = 0;
+// 		while (j < 3)
+// 		{
+// 			printf ("line %d, col %d, val = %f\n", i, j, matrixaim[i][j]);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }
 
-t_m3x3_f	submatrix4_to_3(t_m4x4_f matr, int line, int col)
-{
-	t_m3x3_f	res;
-	int	i;
-	int	j;
-	int	k;
+// t_m3x3_f	submatrix4_to_3(t_m4x4_f matr, int line, int col)
+// {
+// 	t_m3x3_f	res;
+// 	int	i;
+// 	int	j;
+// 	int	k;
 	
-	i = 0;
-	k = 0;
-	while(i < 4)
-	{
-		j = 0;
-		while (j < 4)
-		{
-			// printf ("%f\n", tab[j]);
-			if (i != line && j != col)
-			{
-				res = add_f_to_matrice_3f(k++, matr[i][j], res);
-			}
-			j++;
-		}		
-		i++;
-	}
-	// printf_3fmatr(res);
-	return (res);
-}
+// 	i = 0;
+// 	k = 0;
+// 	while(i < 4)
+// 	{
+// 		j = 0;
+// 		while (j < 4)
+// 		{
+// 			// printf ("%f\n", tab[j]);
+// 			if (i != line && j != col)
+// 			{
+// 				res = add_f_to_matrice_3f(k++, matr[i][j], res);
+// 			}
+// 			j++;
+// 		}		
+// 		i++;
+// 	}
+// 	// printf_3fmatr(res);
+// 	return (res);
+// }
 
-t_m3x3_f	matrix_3xf_create(float *f)
-{
-	t_m3x3_f matrix;
-	int	j;
-	int	k;
-	int	i;
+// t_m3x3_f	matrix_3xf_create(float *f)
+// {
+// 	t_m3x3_f matrix;
+// 	int	j;
+// 	int	k;
+// 	int	i;
 	
-	i = 0;
-	j = 0;
-	while (j < 3)
-	{
-		k = 0;
-		while (k < 3)
-		{
-			matrix[j][k] = f[i++];
-			k++;
-		}
-		j++;		
-	}
-	return (matrix);	
-}
+// 	i = 0;
+// 	j = 0;
+// 	while (j < 3)
+// 	{
+// 		k = 0;
+// 		while (k < 3)
+// 		{
+// 			matrix[j][k] = f[i++];
+// 			k++;
+// 		}
+// 		j++;		
+// 	}
+// 	return (matrix);	
+// }
 
 Test(matrix, submatrix)
 {
@@ -518,31 +519,31 @@ Test(matrix, submatrix)
 	cr_expect(same_tuple(aim, res) == 1);
 }
 
-bool	same_matrix_3x3(t_m3x3_f matrixaim, t_m3x3_f res)
-{
+// bool	same_matrix_3x3(t_m3x3_f matrixaim, t_m3x3_f res)
+// {
 
-	// printf_3fmatr(matrixaim);
-	// printf_3fmatr(res);
-	int	i;
-	int	j;
+// 	// printf_3fmatr(matrixaim);
+// 	// printf_3fmatr(res);
+// 	int	i;
+// 	int	j;
 
-	i = 0;
-	while (i < 3)
-	{
-		j = 0;
-		while (j < 3)
-		{
-			if (matrixaim[i][j] != res[i][j])
-			{
-				// printf ("fail at line %d, col %d, 1 = %f, 2 = %f\n", i, j, matrixaim[i][j], res[i][j]);
-				return(0);
-			}
-			j++;
-		}
-		i++;		
-	}
-	return (1);
-}
+// 	i = 0;
+// 	while (i < 3)
+// 	{
+// 		j = 0;
+// 		while (j < 3)
+// 		{
+// 			if (matrixaim[i][j] != res[i][j])
+// 			{
+// 				// printf ("fail at line %d, col %d, 1 = %f, 2 = %f\n", i, j, matrixaim[i][j], res[i][j]);
+// 				return(0);
+// 			}
+// 			j++;
+// 		}
+// 		i++;		
+// 	}
+// 	return (1);
+// }
 
 // bool	testeurmatr3(t_m3x3_f aim, t_m3x3_f res)
 // {
@@ -565,13 +566,13 @@ Test(matrix, submatrix2)
 	cr_expect(same_matrix_3x3(matrixaim, res) == 1);
 }
 
-float	minor_of_3x3(t_m3x3_f matrix, int line, int col)
-{
-	float4	sub;
+// float	minor_of_3x3(t_m3x3_f matrix, int line, int col)
+// {
+// 	float4	sub;
 
-	sub = submatrix3_to_2(matrix, line, col);
-	return (determinant2x2(sub));
-}
+// 	sub = submatrix3_to_2(matrix, line, col);
+// 	return (determinant2x2(sub));
+// }
 
 Test(matrix, minor)
 {
@@ -585,17 +586,17 @@ Test(matrix, minor)
 	cr_expect(same_float(determinant2, 24) == 0);	
 }
 
-float	cofactor(t_m3x3_f matrix, int line, int col)
-{
-	float4	sub;
-	float	res;
+// float	cofactor(t_m3x3_f matrix, int line, int col)
+// {
+// 	float4	sub;
+// 	float	res;
 
-	sub = submatrix3_to_2(matrix, line, col);
-	res = determinant2x2(sub);
-	if (line + col % 2 == 1)
-		res *= -1;
-	return (res);
-}
+// 	sub = submatrix3_to_2(matrix, line, col);
+// 	res = determinant2x2(sub);
+// 	if (line + col % 2 == 1)
+// 		res *= -1;
+// 	return (res);
+// }
 
 Test(matrix, cofactor)
 {
@@ -608,15 +609,15 @@ Test(matrix, cofactor)
 	cr_expect(same_float(-25, cofactortest) == 1);
 }
 
-float	determinant3x3(t_m3x3_f matrix)
-{
-	float	res;
+// float	determinant3x3(t_m3x3_f matrix)
+// {
+// 	float	res;
 	
-	res = matrix[0][0] * cofactor(matrix, 0, 0);
-	res += matrix[0][1] * cofactor(matrix, 0, 1);
-	res += matrix[0][2] * cofactor(matrix, 0, 2);
-	return (res);
-}
+// 	res = matrix[0][0] * cofactor(matrix, 0, 0);
+// 	res += matrix[0][1] * cofactor(matrix, 0, 1);
+// 	res += matrix[0][2] * cofactor(matrix, 0, 2);
+// 	return (res);
+// }
 
 Test(matrix, determinant3x3)
 {
@@ -632,36 +633,36 @@ Test(matrix, determinant3x3)
 	cr_expect (same_float(determinanttest, -196) == 1);
 }
 
-float	cofactor4x(t_m4x4_f matrix, int line, int col)
-{
-	t_m3x3_f	sub;
-	float	res;
+// float	cofactor4x(t_m4x4_f matrix, int line, int col)
+// {
+// 	t_m3x3_f	sub;
+// 	float	res;
 
-	sub = submatrix4_to_3(matrix, line, col);
-	// printf_3fmatr(sub);
-	res = determinant3x3(sub);
-	if ((line + col) % 2 == 1)
-		res *= -1;
-	return (res);
-}
+// 	sub = submatrix4_to_3(matrix, line, col);
+// 	// printf_3fmatr(sub);
+// 	res = determinant3x3(sub);
+// 	if ((line + col) % 2 == 1)
+// 		res *= -1;
+// 	return (res);
+// }
 
-float	determinant_4xf(t_m4x4_f matrix)
-{
-	return (matrix[0][0] * cofactor4x(matrix, 0, 0)
-		+ matrix[0][1] * cofactor4x(matrix, 0, 1)
-		+ matrix[0][2] * cofactor4x(matrix, 0, 2)
-		+ matrix[0][3] * cofactor4x(matrix, 0, 3));
-}
+// float	determinant_4xf(t_m4x4_f matrix)
+// {
+// 	return (matrix[0][0] * cofactor4x(matrix, 0, 0)
+// 		+ matrix[0][1] * cofactor4x(matrix, 0, 1)
+// 		+ matrix[0][2] * cofactor4x(matrix, 0, 2)
+// 		+ matrix[0][3] * cofactor4x(matrix, 0, 3));
+// }
 
-bool	is_matrice_invertible(t_m4x4_f matrix)
-{
-	float	deter;
+// bool	is_matrice_invertible(t_m4x4_f matrix)
+// {
+// 	float	deter;
 	
-	deter = determinant_4xf(matrix);
-	if (deter == 0)
-		return (0);
-	return (1);
-}
+// 	deter = determinant_4xf(matrix);
+// 	if (deter == 0)
+// 		return (0);
+// 	return (1);
+// }
 
 Test(matrix, determinant4x4)
 {
@@ -689,79 +690,79 @@ Test(matrix, is_invertible)
 	cr_expect(is_matrice_invertible(matrix2) == 0);
 }
 
-t_m4x4_f	cofactor_matrix(t_m4x4_f matr)
-{
-	t_m4x4_f	res;
-	int			i;
-	int			j;
+// t_m4x4_f	cofactor_matrix(t_m4x4_f matr)
+// {
+// 	t_m4x4_f	res;
+// 	int			i;
+// 	int			j;
 
-	i = 0;
-	while (i < 4)
-	{
-		j = 0;
-		while (j < 4)
-		{
-			res[i][j] = cofactor4x(matr, i, j);
-			j++;
-		}
-		i++;
-	}
-	return (res);
-}
+// 	i = 0;
+// 	while (i < 4)
+// 	{
+// 		j = 0;
+// 		while (j < 4)
+// 		{
+// 			res[i][j] = cofactor4x(matr, i, j);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	return (res);
+// }
 
-t_m4x4_f	divide_matr_by_scalar(t_m4x4_f res, float deter)
-{
-	int	i;
-	int	j;
+// t_m4x4_f	divide_matr_by_scalar(t_m4x4_f res, float deter)
+// {
+// 	int	i;
+// 	int	j;
 
-	i = 0;
-	while(i < 4)
-	{
-		j = 0;
-		while (j < 4)
-		{
-			// printf ("line %d, col %d, val was = %f ", i, j, res[i][j]);
-			res[i][j] = res[i][j] / deter;
-			// printf ("val is = %f\n", res[i][j]);
-			j++;
-		}
-		i++;
-	}
-	return (res);
-}
+// 	i = 0;
+// 	while(i < 4)
+// 	{
+// 		j = 0;
+// 		while (j < 4)
+// 		{
+// 			// printf ("line %d, col %d, val was = %f ", i, j, res[i][j]);
+// 			res[i][j] = res[i][j] / deter;
+// 			// printf ("val is = %f\n", res[i][j]);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	return (res);
+// }
 
-void	printf_4fmatr(t_m4x4_f	matrixaim)
-{
-	int	i;
-	int	j;
+// void	printf_4fmatr(t_m4x4_f	matrixaim)
+// {
+// 	int	i;
+// 	int	j;
 
-	i = 0;
-	while (i < 4)
-	{
-		j = 0;
-		while (j < 4)
-		{
-			printf ("line %d, col %d, val = %f\n", i, j, matrixaim[i][j]);
-			j++;
-		}
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (i < 4)
+// 	{
+// 		j = 0;
+// 		while (j < 4)
+// 		{
+// 			printf ("line %d, col %d, val = %f\n", i, j, matrixaim[i][j]);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }
 
-t_m4x4_f	inversion(t_m4x4_f matr)
-{
-	t_m4x4_f	res;
-	float		deter;
+// t_m4x4_f	inversion(t_m4x4_f matr)
+// {
+// 	t_m4x4_f	res;
+// 	float		deter;
 
-	res = cofactor_matrix(matr);
-	// printf_4fmatr(res);
-	res = matrix_transpose(res);
-	// printf_4fmatr(res);
-	deter = determinant_4xf(matr);
-	// printf ("deter = %f\n", deter);
-	res = divide_matr_by_scalar(res, deter);
-	return (res);
-}
+// 	res = cofactor_matrix(matr);
+// 	// printf_4fmatr(res);
+// 	res = matrix_transpose(res);
+// 	// printf_4fmatr(res);
+// 	deter = determinant_4xf(matr);
+// 	// printf ("deter = %f\n", deter);
+// 	res = divide_matr_by_scalar(res, deter);
+// 	return (res);
+// }
 
 Test(matrix, inversion)
 {
@@ -801,23 +802,23 @@ Test(matrix, inversion3)
 	cr_expect(same_matrix(matrix, matrix3 * inversion(matrix2)));
 }
 
-t_m4x4_f	identity_matr(void)
-{
-	float tabf[16] = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
-	t_m4x4_f matrix = matrix_4xf_create(tabf);
-	return (matrix);
-}
+// t_m4x4_f	identity_matr(void)
+// {
+// 	float tabf[16] = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
+// 	t_m4x4_f matrix = matrix_4xf_create(tabf);
+// 	return (matrix);
+// }
 
-t_m4x4_f	translation(float x, float y, float z)
-{
-	t_m4x4_f	res;
+// t_m4x4_f	translation(float x, float y, float z)
+// {
+// 	t_m4x4_f	res;
 
-	res = identity_matr();
-	res[0][3] = x;
-	res[1][3] = y;
-	res[2][3] = z;
-	return (res);
-}
+// 	res = identity_matr();
+// 	res[0][3] = x;
+// 	res[1][3] = y;
+// 	res[2][3] = z;
+// 	return (res);
+// }
 
 Test(matrix, translation)
 {
@@ -851,16 +852,16 @@ Test(matrix, translation3)
 	cr_expect(same_tuple(point, res) == 1);
 }
 
-t_m4x4_f	scaling(float x, float y, float z)
-{
-	t_m4x4_f	res;
+// t_m4x4_f	scaling(float x, float y, float z)
+// {
+// 	t_m4x4_f	res;
 
-	res = identity_matr();
-	res[0][0] = x;
-	res[1][1] = y;
-	res[2][2] = z;
-	return (res);
-}
+// 	res = identity_matr();
+// 	res[0][0] = x;
+// 	res[1][1] = y;
+// 	res[2][2] = z;
+// 	return (res);
+// }
 
 Test(matrix, scaling1)
 {
@@ -899,17 +900,17 @@ Test(matrix, reflection)
 	cr_expect(same_tuple(aim, res) == 1);
 }
 
-t_m4x4_f	rotation_x(float angle)
-{
-	t_m4x4_f	res;
+// t_m4x4_f	rotation_x(float angle)
+// {
+// 	t_m4x4_f	res;
 
-	res = identity_matr();
-	res[1][1] = cos(angle);
-	res[1][2] = -sin(angle);
-	res[2][1] = sin(angle);
-	res[2][2] = cos(angle);
-	return (res);
-}
+// 	res = identity_matr();
+// 	res[1][1] = cos(angle);
+// 	res[1][2] = -sin(angle);
+// 	res[2][1] = sin(angle);
+// 	res[2][2] = cos(angle);
+// 	return (res);
+// }
 
 Test(matrix, rotate_x)
 {
@@ -924,17 +925,17 @@ Test(matrix, rotate_x)
 	cr_expect(same_tuple(full_quart_res, aim_2) == 1);
 }
 
-t_m4x4_f	rotation_y(float angle)
-{
-	t_m4x4_f	res;
+// t_m4x4_f	rotation_y(float angle)
+// {
+// 	t_m4x4_f	res;
 
-	res = identity_matr();
-	res[0][0] = cos(angle);
-	res[0][2] = sin(angle);
-	res[2][0] = -sin(angle);
-	res[2][2] = cos(angle);
-	return (res);
-}
+// 	res = identity_matr();
+// 	res[0][0] = cos(angle);
+// 	res[0][2] = sin(angle);
+// 	res[2][0] = -sin(angle);
+// 	res[2][2] = cos(angle);
+// 	return (res);
+// }
 
 Test(matrix, rotate_y)
 {
@@ -949,17 +950,17 @@ Test(matrix, rotate_y)
 	cr_expect(same_tuple(full_quart_res, aim_2) == 1);
 }
 
-t_m4x4_f	rotation_z(float angle)
-{
-	t_m4x4_f	res;
+// t_m4x4_f	rotation_z(float angle)
+// {
+// 	t_m4x4_f	res;
 
-	res = identity_matr();
-	res[0][0] = cos(angle);
-	res[0][1] = -sin(angle);
-	res[1][0] = sin(angle);
-	res[1][1] = cos(angle);
-	return (res);
-}
+// 	res = identity_matr();
+// 	res[0][0] = cos(angle);
+// 	res[0][1] = -sin(angle);
+// 	res[1][0] = sin(angle);
+// 	res[1][1] = cos(angle);
+// 	return (res);
+// }
 
 Test(matrix, rotation_z)
 {
@@ -974,19 +975,19 @@ Test(matrix, rotation_z)
 	cr_expect(same_tuple(full_quart_res, aim_2) == 1);
 }
 
-t_m4x4_f	shearing(float	*tab)
-{
-	t_m4x4_f	res;
+// t_m4x4_f	shearing(float	*tab)
+// {
+// 	t_m4x4_f	res;
 
-	res = identity_matr();
-	res[0][1] = tab[0];
-	res[0][2] = tab[1];
-	res[1][0] = tab[2];
-	res[1][2] = tab[3];
-	res[2][0] = tab[4];
-	res[2][1] = tab[5];
-	return (res);
-}
+// 	res = identity_matr();
+// 	res[0][1] = tab[0];
+// 	res[0][2] = tab[1];
+// 	res[1][0] = tab[2];
+// 	res[1][2] = tab[3];
+// 	res[2][0] = tab[4];
+// 	res[2][1] = tab[5];
+// 	return (res);
+// }
 
 Test(matrix, shearing1)
 {
@@ -1043,14 +1044,14 @@ Test(matrix, shearing6)
 	cr_expect(same_tuple(p, aim) == 1);
 }
 
-t_m4x4_f	chained_transfo(t_m4x4_f one, t_m4x4_f two, t_m4x4_f three)
-{
-	t_m4x4_f	res;
+// t_m4x4_f	chained_transfo(t_m4x4_f one, t_m4x4_f two, t_m4x4_f three)
+// {
+// 	t_m4x4_f	res;
 
-	res = matrix_mult(three, two);
-	res = matrix_mult(res, one);
-	return (res);
-}
+// 	res = matrix_mult(three, two);
+// 	res = matrix_mult(res, one);
+// 	return (res);
+// }
 
 Test(matrix, chaining)
 {
