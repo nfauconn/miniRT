@@ -6,11 +6,12 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 12:56:42 by noe               #+#    #+#             */
-/*   Updated: 2022/12/02 13:03:51 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/03 18:11:37 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "tuple.h"
 
 bool	conv_ratio(char *s, t_elem *elem, char *elem_name)
 {
@@ -19,7 +20,8 @@ bool	conv_ratio(char *s, t_elem *elem, char *elem_name)
 	ratio = ft_atof(s);
 	if (ratio < 0.0 || ratio > 1.0)
 		return (error_display2("wrong ratio range for ", elem_name));
-	elem->specs.ratio = ratio;
+	elem->specs.intensity.f = ratio;
+	elem->specs.intensity.f4 = create_point(ratio, ratio, ratio);
 	return (0);
 }
 

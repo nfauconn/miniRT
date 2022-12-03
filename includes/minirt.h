@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/03 17:25:38 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/03 18:52:01 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,15 @@ typedef enum e_elements
 	elm_nb
 }	t_elems;
 
+typedef struct s_lightspecs
+{
+	float		f;
+	t_float4	f4;
+}	t_lightspecs;
+
 typedef union u_specs
 {
-	float				ratio;
+	t_lightspecs		intensity;
 	float				radius;
 	float				fov;
 	float				diam_hght[2];
@@ -43,6 +49,15 @@ typedef struct s_id
 	size_t	no;
 }	t_id;
 
+typedef struct s_material
+{
+	t_rgb	color;
+	float	ambiant;
+	float	diffuse;
+	float	specular;
+	float	shininess;
+}	t_material;
+
 typedef struct s_elem
 {
 	t_id				id;
@@ -51,6 +66,7 @@ typedef struct s_elem
 	t_vector			orientation;
 	t_rgb				color;
 	t_m4x4_f			transform;
+	t_material			material; /* A INIT DANS LE PARSING*/
 	t_specs				specs;
 	struct s_elem		*next;
 }				t_elem;

@@ -22,3 +22,28 @@ t_vector	reflect(t_vector in, t_vector normal)
 	reflect = in - normal * 2 * dot_product(in, normal);
 	return (reflect);
 }
+
+/* ID PARSING : diviser en 1 func set point et une func set light */
+void	point_light(t_elem *light, t_point pos, float ratio)
+{
+	light->w_pos = pos;
+	light->specs.intensity.f = ratio;
+	light->specs.intensity.f4 = create_point(ratio, ratio, ratio);
+}
+
+t_material	default_material()
+{
+	t_material	material;
+
+	material.color = (t_rgb){1, 1, 1, 0};
+	material.ambiant = 0.1;
+	material.diffuse = 0.9;
+	material.specular = 0.9;
+	material.shininess = 200.0;
+	return (material);
+}
+
+t_rgb	lighting(t_material m, t_elem light, t_point pos, t_vector eyev, t_vector normalv)
+{
+
+}

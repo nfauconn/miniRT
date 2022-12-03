@@ -74,3 +74,27 @@ Test(lights, find_reflecting_vector)
 	r = reflect(v, n);
 	cr_expect(same_tuple(r, create_vector(1, 0, 0)));
 }
+
+Test(lights, get_lighting)
+{
+	t_vector	eyev;
+	t_vector	normalv;
+	t_elem		light;
+	t_rgb		res;
+	t_point		position;
+
+	light.material = default_material(&elem);
+	position = create_point(0, 0, 0); /* W_POS OU O_POS ???*/
+
+	eyev = create_vector(0, 0, -1);
+	normalv = create_vector(0, 0, -1);
+	light = point_light(create_point(0, 0, -10), (t_rgb){1, 1, 1, 0});
+	res = lighting(light.material, light, position, eyev, normalv);
+	cr_expect(same_tuple(res, (t_rgb){1.9, 1.9, 1.9, 0}));
+
+	eyev = create_vector(0, sqrt(2)/2, -sqrt(2)/2);
+	normalv = create_vector(0, 0, -1);
+	light = point_light(create_point(0, 0, -10), (t_rgb){1, 1, 1, 0});
+	res = lighting(light.material, light, position, eyev, normalv);
+	cr_expect(same_tuple(res, (t_rgb){1.9, 1.9, 1.9, 0}));
+}
