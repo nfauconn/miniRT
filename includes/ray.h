@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:11:12 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/02 14:01:03 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/03 13:21:58 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ void		free_interlst(t_inter **lst);
 
 /* TRANFORM */
 t_ray		transform_ray(t_ray prev_r, t_m4x4_f matrix);
-t_elem		set_transform(t_elem obj, t_m4x4_f transfo_matrix);
+void		set_transform(t_elem *obj, t_m4x4_f transfo_matrix);
 
 #endif

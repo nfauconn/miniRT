@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:18:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/23 18:00:58 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/03 13:39:05 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_m4x4_f	divide_matr_by_scalar(t_m4x4_f res, float deter);
 /* ??? */
 t_float4	get_vline(int i, t_m4x4_f matrix);
 t_float4	get_vcol(int i, t_m4x4_f matrix2);
-t_m4x4_f	matrix_transpose(t_m4x4_f matrix);
+t_m4x4_f	transpose(t_m4x4_f matrix);
 float		determinant2x2(t_float4 matrix);
 int			isnotinline(int	j, int line);
 int			isnotincol(int	j, int col);
@@ -53,7 +53,7 @@ float		determinant_4xf(t_m4x4_f matrix);
 bool		is_matrice_invertible(t_m4x4_f matrix);;
 t_m4x4_f	cofactor_matrix(t_m4x4_f matr);
 void		printf_4fmatr(t_m4x4_f	matrixaim);
-t_m4x4_f	inversion(t_m4x4_f matr);
+t_m4x4_f	inverse(t_m4x4_f matr);
 t_m4x4_f	translation(float x, float y, float z);
 t_m4x4_f	scaling(float x, float y, float z);
 t_m4x4_f	rotation_x(float angle);

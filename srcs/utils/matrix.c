@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:21:09 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/23 18:41:45 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/03 13:39:05 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,7 +256,7 @@ t_float4	get_vcol(int i, t_m4x4_f matrix2)
 	res.w = matrix2[3][i];
 	return (res);
 }
-t_m4x4_f	matrix_transpose(t_m4x4_f matrix)
+t_m4x4_f	transpose(t_m4x4_f matrix)
 {
 	t_m4x4_f	res;
 	int	i;
@@ -453,14 +453,14 @@ t_m4x4_f	cofactor_matrix(t_m4x4_f matr)
 	}
 	return (res);
 }
-t_m4x4_f	inversion(t_m4x4_f matr)
+t_m4x4_f	inverse(t_m4x4_f matr)
 {
 	t_m4x4_f	res;
 	float		deter;
 
 	res = cofactor_matrix(matr);
 	// printf_4fmatr(res);
-	res = matrix_transpose(res);
+	res = transpose(res);
 	// printf_4fmatr(res);
 	deter = determinant_4xf(matr);
 	// printf ("deter = %f\n", deter);

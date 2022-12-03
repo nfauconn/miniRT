@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:22:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/02 13:26:28 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/03 13:50:49 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_xs	sp_xs(t_elem s, t_ray r)
 	float		discriminant;
 	t_xs		xs;
 
-	sphere_to_ray = r.orig - s.center;
+	sphere_to_ray = r.orig - s.o_pos;
 	a = dot3(r.dest, r.dest);
 	b = 2 * dot3(r.dest, sphere_to_ray);
 	c = dot3(sphere_to_ray, sphere_to_ray) - 1;
@@ -49,10 +49,9 @@ t_ray	transform_ray(t_ray prev_r, t_m4x4_f matrix)
 	return (r);
 }
 
-t_elem	set_transform(t_elem obj, t_m4x4_f transfo_matrix)
+void	set_transform(t_elem *obj, t_m4x4_f transfo_matrix)
 {
-	obj.transform = transfo_matrix;
-	return (obj);
+	obj->transform = transfo_matrix;
 }
 
 /* INTERSECT
@@ -62,7 +61,7 @@ t_xs	intersect(t_elem obj, t_ray r)
 {
 	t_xs	xs;
 
-	r = transform_ray(r, inversion(obj.transform));
+	r = transform_ray(r, inverse(obj.transform));
 	if (obj.id.shape == sphere)
 		xs = sp_xs(obj, r);
 	else
@@ -70,70 +69,3 @@ t_xs	intersect(t_elem obj, t_ray r)
 	xs.obj = obj;
 	return (xs);
 }
-
-/* /!\ !!!!!!! not if transform ray
-** obj = init_sphere()
-** dest = {0, 0, 1, vec}
-** r = ray({0, 0, -5, pt} - dest)  ==> origin before sphere, ray intersect center
-** xs = intersection(r,s)
-	xs.count = 2
-	xs.t[0] = 4
-	xs.t[1] = 6
-
-** same but orig = {0, 1, -5, pt} :   ==> tangent
-	xs.count = 2
-	xs.t[0] = 5
-	xs.t[1] = 5
-
-** same but orig = {0, 2, -5, pt} :   ==> misses sphere
-	xs.count = 0
-	xs.t[0] = 0
-	xs.t[1] = 0
-
-** same but orig = {0, 0, 0, pt} : 	==> origin of ray = center of sphere
-	xs.count = 2
-	xs.t[0] = -1
-	xs.t[1] = 1
-
-** same but orig = {0, 0, 5, pt} : 	==> a sphere is behind a ray
-	xs.count = 2
-	xs.t[0] = -6
-	xs.t[1] = -4
-
-*/
-
-/*
-
-int	main(void)
-{
-	t_point				orig[6] = {{0, 0, -5, pt}, {0, 1, -5, pt}, \
-									{0, 2, -5, pt}, 0, {0, 0, 5, pt}, \
-									{1, 2, 3, pt}};
-	size_t				origins_nb = 6;
-//	size_t				origins_no = 0;
-	t_vector			dest[2] = {{0, 0, 1, vec}, {0, 1, 0, vec}};
-	t_elem				obj;
-	t_inter				*interlst = NULL;
-	t_ray				r[origins_nb];
-	t_xs				xs;
-//	t_ray				r2[origins_nb];
-//	t_inter				*hit;
-
-	obj = init_sphere();
-	obj = set_transform(obj, scaling(2, 2, 2));
-
-	while (origins_no < origins_nb)
-	{
-		r[origins_no] = ray(orig[origins_no], dest[0]);
-		add_obj_inters(obj, r[origins_no], &interlst);
-		origins_no++;
-	}
-//	hit = find_hit(&interlst);
-//	r2[0] = transform_ray(r[5], translation(3, 4, 5));
-//	r2[0] = transform_ray(r[5], scaling(2, 2, 2));
-	r[0] = ray(orig[0], dest[0]);
-	xs = intersect(obj, r[0]);
-	add_obj_inters(xs, &interlst);
-	free_interlst(&interlst);
-	return (0);
-} */

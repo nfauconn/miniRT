@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:58:29 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/02 14:16:52 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/03 13:52:12 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@
 # include "minirt.h"
 # include "extern_libs.h"
 # include "tuple.h"
+# include "matrix.h"
 
-# include "ray.h" //for init_sphere at least so remove after?
+# include "ray.h" //for init_sphere  at least : remove after ?
 
-t_vector	normal_atsphere(t_elem sphere, t_point point);
+t_vector	normal_atsphere(t_elem *sp, t_point point);
 
 #endif
