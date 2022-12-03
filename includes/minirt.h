@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/02 14:14:39 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/03 13:13:25 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ typedef struct s_id
 typedef struct s_elem
 {
 	t_id				id;
-	t_point				center;
-	t_point				pos;
+	t_point				obj_space_pos;
+	t_point				world_space_pos;
 	t_vector			orientation;
 	t_rgb				color;
 	t_m4x4_f			transform;
