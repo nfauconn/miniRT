@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 18:10:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/02 14:14:00 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/03 17:33:47 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,11 @@ void	draw_scene(t_img *img)
 	t_point		ray_origin = {0, 0, -5, pt};
 	t_point		position;
 	int			color_sp = rgbvtoi((t_vector){1, 0, 0, vec});
-	t_elem		shape = init_sphere();
+	t_elem		shape;
 	t_xs		xs;
 	t_inter		xs_hit;
 
+	init_sphere(&shape);
 	y = 0;
 	printf("coucou\n");
 	while (y < width_pixels)

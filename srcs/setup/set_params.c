@@ -6,11 +6,12 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:00:45 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/02 13:29:20 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/03 17:34:07 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "ray.h"
 
 //creer 2 fonctions verif de format (is_coordinates / is_float pour verif
 //chaque str de param puis set, et exit clear se charge de free ce qu il faut
@@ -47,10 +48,10 @@ bool	set_camera(t_scene *scene, char **params)
 	return (0);
 }
 
+/* !!!! no ID cf init_sphere */
 bool	set_lights(t_scene *scene, char **params)
 {
 	bool		ret;
-	static		ssize_t no = -1;
 	t_elem		*newlight;
 
 	if (ft_strarraysize(params) != 4)
@@ -63,15 +64,13 @@ bool	set_lights(t_scene *scene, char **params)
 		|| conv_ratio(params[2], newlight, params[0])
 		|| conv_rgb(params[3], newlight, params[0]))
 		ret = 1;
-	no++;
-	elem_add_back(&scene->lights, newlight, lightsource, no);
+	elem_add_back(&scene->lights, newlight);
 	return (ret);
 }
 
 bool	set_sphere(t_scene *scene, char **params)
 {
 	bool		ret;
-	static		ssize_t no = -1;
 	t_elem		*newsphere;
 
 	if (ft_strarraysize(params) != 4)
@@ -84,15 +83,15 @@ bool	set_sphere(t_scene *scene, char **params)
 		|| conv_radius(params[2], newsphere, params[0])
 		|| conv_rgb(params[3], newsphere, params[0]))
 		ret = 1;
-	no++;
-	elem_add_back(&scene->objs, newsphere, sphere, no);
+	init_sphere(newsphere);
+	elem_add_back(&scene->objs, newsphere);
 	return (ret);
 }
 
+/* !!!! no ID cf init_sphere */
 bool	set_plan(t_scene *scene, char **params)
 {
 	bool		ret;
-	static		ssize_t no = -1;
 	t_elem		*newplan;
 
 	if (ft_strarraysize(params) != 4)
@@ -105,15 +104,14 @@ bool	set_plan(t_scene *scene, char **params)
 		|| conv_orientation(params[2], newplan, params[0])
 		|| conv_rgb(params[3], newplan, params[0]))
 		ret = 1;
-	no++;
-	elem_add_back(&scene->objs, newplan, plan, no);
+	elem_add_back(&scene->objs, newplan);
 	return (ret);
 }
 
+/* !!!! no ID cf init_sphere */
 bool	set_cylinder(t_scene *scene, char **params)
 {
 	bool		ret;
-	static		ssize_t no = -1;
 	t_elem		*newcylinder;
 
 	if (ft_strarraysize(params) != 6)
@@ -127,8 +125,7 @@ bool	set_cylinder(t_scene *scene, char **params)
 		|| conv_diam_height(params[3], params[4], newcylinder, params[0])
 		|| conv_rgb(params[5], newcylinder, params[0]))
 		ret = 1;
-	no++;
-	elem_add_back(&scene->objs, newcylinder, cylinder, no);
+	elem_add_back(&scene->objs, newcylinder);
 	return (ret);
 }
 

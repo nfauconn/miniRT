@@ -14,7 +14,11 @@ t_vector	normal_atsphere(t_elem *sp, t_point world_pt)
 	return (normalize(w_normal));
 }
 
-/*
-** to compute the normal on a translated sphere : test(lights, normal_2)
-**
-*/
+/* find the result of reflecting the in vector around the normal vector */
+t_vector	reflect(t_vector in, t_vector normal)
+{
+	t_vector	reflect;
+
+	reflect = in - normal * 2 * dot_product(in, normal);
+	return (reflect);
+}

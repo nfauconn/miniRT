@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chap5_sphere_tests.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 18:32:43 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/02 14:01:55 by rokerjea         ###   ########.fr       */
+/*   Updated: 2022/12/03 17:31:00 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ Test (ray, create2)
 Test (ray, intersect1)
 {
 	t_ray	r = ray(create_point(0, 0, -5), create_vector(0, 0, 1));
-	t_elem	s = init_sphere();
+	t_elem	s;
+	init_sphere(&s);
 	t_xs	xs = intersect(s, r);
 
 	cr_expect(xs.count == 2);
@@ -80,7 +81,8 @@ Test (ray, intersect1)
 Test (ray, intersect2)
 {
 	t_ray	r = ray(create_point(0, 1, -5), create_vector(0, 0, 1));
-	t_elem	s = init_sphere();
+	t_elem	s;
+	init_sphere(&s);
 	t_xs	xs = intersect(s, r);
 
 	cr_expect(xs.count == 2);
@@ -91,7 +93,8 @@ Test (ray, intersect2)
 Test (ray, intersect3)
 {
 	t_ray	r = ray(create_point(0, 2, -5), create_vector(0, 0, 1));
-	t_elem	s = init_sphere();
+	t_elem	s;
+	init_sphere(&s);
 	t_xs	xs = intersect(s, r);
 
 	cr_expect(xs.count == 0);
@@ -102,7 +105,8 @@ Test (ray, intersect3)
 Test (ray, intersect4)
 {
 	t_ray	r = ray(create_point(0, 0, 0), create_vector(0, 0, 1));
-	t_elem	s = init_sphere();
+	t_elem	s;
+	init_sphere(&s);
 	t_xs	xs = intersect(s, r);
 
 	cr_expect(xs.count == 2);
@@ -113,7 +117,8 @@ Test (ray, intersect4)
 Test (ray, intersect5)
 {
 	t_ray	r = ray(create_point(0, 0, 5), create_vector(0, 0, 1));
-	t_elem	s = init_sphere();
+	t_elem	s;
+	init_sphere(&s);
 	t_xs	xs = intersect(s, r);
 
 	cr_expect(xs.count == 2);
@@ -123,7 +128,8 @@ Test (ray, intersect5)
 
 Test (ray, intersection1)
 {
-	t_elem	s = init_sphere();
+	t_elem	s;
+	init_sphere(&s);
 	t_inter	i1 = intersection(3.5, s);
 
 	cr_expect(same_float(i1.t, 3.5));
@@ -133,7 +139,8 @@ Test (ray, intersection1)
 
 // Test (ray, intersection_aggreg)
 // {
-// 	t_elem	s = init_sphere();
+// 	t_elem
+init_sphere(&s);	s;
 // 	t_inter	i1 = intersection(1, s);
 // 	t_inter	i2 = intersection(2, s);
 
