@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   elem_add.c                                         :+:      :+:    :+:   */
+/*   lights.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 13:02:04 by noe               #+#    #+#             */
-/*   Updated: 2022/12/02 15:31:25 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/12/02 13:58:29 by nfauconn          #+#    #+#             */
+/*   Updated: 2022/12/02 14:16:52 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
-#include "tuple.h"
+#ifndef LIGHTS_H
+# define LIGHTS_H
 
-void	elem_add_back(t_elem **head, t_elem *to_add, uint8_t shape, ssize_t no)
-{
-	t_elem *elem;
+# include "minirt.h"
+# include "extern_libs.h"
+# include "tuple.h"
 
-	if (!*head)
-	{
-		*head = to_add;
-		to_add->next = NULL;
-		return ;
-	}
-	elem = *head;
-	while (elem->next)
-		elem = elem->next;
-	elem->next = to_add;
-	to_add->id.shape = shape;
-	to_add->id.no = no;
-	to_add->center = create_point(0, 0, 0);
-	to_add->next = NULL;
-}
+# include "ray.h" //for init_sphere at least so remove after?
+
+t_vector	normal_atsphere(t_elem sphere, t_point point);
+
+#endif

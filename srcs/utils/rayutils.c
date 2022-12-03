@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:08:51 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/02 13:27:34 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/02 18:36:49 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_elem	init_sphere(void)
 	no++;
 	s.id.shape = sphere;
 	s.id.no = no;
-	s.center = (t_point){0, 0, 0};
+	s.center = (t_point){0, 0, 0, 1};
 	s.transform = identity_matr();
 	return (s);
 }

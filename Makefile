@@ -19,7 +19,6 @@ LIBFT_INC_DIR = ./libft/includes
 INIT_DIR = setup
 UTILS_DIR = utils
 SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
-		main \
 		error \
 		exit_clear \
 		display \
@@ -36,17 +35,22 @@ SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		ray \
 		rayutils \
 		interlst \
+		lights \
 		matrix} \
 		}}
 DEPS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.d}}
 OBJS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.o}}
 VPATH = ${SRC_DIR}
 
+MAIN_SRC = srcs/main.c
+MAIN_DEPS = objs/main.d
+MAIN_OBJ = objs/main.o
+
 #COMPILING
 CC = clang
 CFLAGS = -Wall -Wextra -Werror -fenable-matrix -mavx -g3 -fsanitize=address
 LD_FLAGS = -L ${LIBFT_DIR} -L ${MLX_DIR}
-LIBS_FLAGS = -lmlx -lXext -lX11 -lm -lft
+LN_FLAGS = -lmlx -lXext -lX11 -lm -lft
 INCLUDES = -I ${INC_DIR} -I ${LIBFT_INC_DIR} -I ${MLX_DIR}
 RM = rm -rf
 
@@ -55,11 +59,12 @@ RM = rm -rf
 ################################################################################
 all: ${NAME}
 
-${NAME}: libftcreat ${OBJS}
+${NAME}: libftcreat ${OBJS} ${MAIN_OBJ}
 	@make -C ${MLX_DIR} --no-print-directory
-	@${CC} ${CFLAGS} ${LD_FLAGS} ${OBJS} -o ${NAME} ${LIBS_FLAGS}
+	@${CC} ${CFLAGS} ${OBJS} ${MAIN_OBJ} -o ${NAME} ${LD_FLAGS} ${LN_FLAGS}
 
 -include ${DEPS}
+-include ${MAIN_DEPS}
 
 libftcreat:
 	@make -C ${LIBFT_DIR} --no-print-directory
@@ -67,6 +72,9 @@ libftcreat:
 ${BUILD_DIR}/%.o: %.c
 	@mkdir -p ${dir $@}
 	@echo create: ${@:%=%}
+	@${CC} ${CFLAGS} -MMD ${INCLUDES} -o $@ -c $<
+
+main.o: main.c
 	@${CC} ${CFLAGS} -MMD ${INCLUDES} -o $@ -c $<
 
 ################################################################################
@@ -108,44 +116,38 @@ r: littleclean all
 #                              		TESTS							   		   #
 ################################################################################
 
-CRITERION_DIR = /mnt/nfs/homes/rokerjea/sgoinfre/Criterion/
+CR_DIR = ~/Criterion
+CR_INC_DIR = ${CR_DIR}/include/criterion
+CR_INCLUDES = -I ${CR_INC_DIR}
+LD_CR_FLAGS = -L ${CR_DIR}/build/src
+LN_CR_FLAGS = -lcriterion
 
-test: libftcreat
-	clear
-	@${CC} -o matrix srcs/utils/matrix.c sandbox/chap3_matrix.c ${INCLUDES} -I${CRITERION_DIR}include -L${CRITERION_DIR}build/src ${CFLAGS} -lm -lcriterion
-	@./matrix
-	@rm matrix
+TEST_DIR = ${SRC_DIR}/TESTS
+TEST_NAME = lights
+TEST_FILE = ${TEST_DIR}/chap6_lights
+TEST_SRC = ${TEST_FILE}.c
+TEST_DEPS = ${TEST_FILE}.d
+TEST_OBJ = ${TEST_FILE}.o
+TEST_INC = ${CR_INCLUDES} ${INCLUDES}
+TEST_LDFLAGS = ${LD_CR_FLAGS} ${LD_FLAGS}
+TEST_LNFLAGS = ${LN_CR_FLAGS} ${LN_FLAGS}
 
-test2: libftcreat
-	clear
-	@${CC} -o ray srcs/utils/ray.c srcs/utils/interlst.c libft/libft.a srcs/utils/tuple.c srcs/utils/matrix.c srcs/utils/rayutils.c sandbox/chap5_sphere_tests.c ${INCLUDES} -I${CRITERION_DIR}include -L${CRITERION_DIR}build/src ${CFLAGS} -lm -lcriterion
-	@./ray
-	@rm ray
+test: libftcreat ${OBJS} ${TEST_OBJ}
+	@make -C ${MLX_DIR} --no-print-directory
+	@${CC} ${CFLAGS} ${OBJS} ${TEST_OBJ} -o ${TEST_NAME} ${TEST_LDFLAGS} ${TEST_LNFLAGS}
+	@./${TEST_NAME}
+	@${RM} {TEST_NAME} ${TEST_DEPS} ${TEST_OBJ}
 
-TEST3_SRC = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
-		error \
-		exit_clear \
-		display \
-		${addprefix ${INIT_DIR}/, \
-		setup_scene \
-		parse_file \
-		set_params \
-		conv_to_tuple \
-		conv_to_float \
-		elem_add} \
-		${addprefix ${UTILS_DIR}/, \
-		tuple \
-		ray \
-		rayutils \
-		interlst \
-		matrix} \
-		}\
-		sandbox/chap7_scene}
+-include ${DEPS}
+-include ${TEST_DEPS}
 
-test3:	libftcreat
-	clear
-	@${CC} -o world ${TEST3_SRC} ${LD_FLAGS} ${INCLUDES} -I${CRITERION_DIR}include -L${CRITERION_DIR}build/src ${CFLAGS} -lcriterion ${LIBS_FLAGS}
-	@./world
-	@rm world
+${TEST_FILE}.o: ${TEST_FILE}.c
+	@${CC} ${CFLAGS} ${TEST_INC} -I includes -MMD -o $@ -c $<
 
-.PHONY: all clean fclean re libftcreat val norm littleclean r
+testlittleclean: littleclean
+	@${RM} ${TEST_NAME}
+	@echo "deleted test program"
+
+testr: testlittleclean test
+
+.PHONY: all clean fclean re libftcreat val norm littleclean r test testlittleclean testr
