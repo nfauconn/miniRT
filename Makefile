@@ -122,9 +122,9 @@ CR_INCLUDES = -I ${CR_INC_DIR}
 LD_CR_FLAGS = -L ${CR_DIR}/build/src
 LN_CR_FLAGS = -lcriterion
 
-TEST_DIR = sandbox
+TEST_DIR = ${SRC_DIR}/TESTS
 TEST_NAME = lights
-TEST_FILE = ${SRC_DIR}/chap6_lights
+TEST_FILE = ${TEST_DIR}/chap6_lights
 TEST_SRC = ${TEST_FILE}.c
 TEST_DEPS = ${TEST_FILE}.d
 TEST_OBJ = ${TEST_FILE}.o
