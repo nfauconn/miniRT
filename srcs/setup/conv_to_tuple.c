@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:19:07 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/03 13:13:17 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/03 13:50:11 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,9 @@ bool	conv_pos(char *s, t_elem *elem, char *elem_name)
 		ret = error_display2("wrong pos value for ", elem_name);
 	else
 	{
-		elem->world_space_pos.x = ft_atof(pos[0]);
-		elem->world_space_pos.y = ft_atof(pos[1]);
-		elem->world_space_pos.z = ft_atof(pos[2]);
+		elem->w_pos.x = ft_atof(pos[0]);
+		elem->w_pos.y = ft_atof(pos[1]);
+		elem->w_pos.z = ft_atof(pos[2]);
 		ret = 0;
 	}
 	ft_strarrayclear(&pos);

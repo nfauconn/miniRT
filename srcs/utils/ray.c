@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:22:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/03 13:39:05 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/03 13:50:49 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_xs	sp_xs(t_elem s, t_ray r)
 	float		discriminant;
 	t_xs		xs;
 
-	sphere_to_ray = r.orig - s.obj_space_pos;
+	sphere_to_ray = r.orig - s.o_pos;
 	a = dot3(r.dest, r.dest);
 	b = 2 * dot3(r.dest, sphere_to_ray);
 	c = dot3(sphere_to_ray, sphere_to_ray) - 1;
@@ -52,7 +52,6 @@ t_ray	transform_ray(t_ray prev_r, t_m4x4_f matrix)
 void	set_transform(t_elem *obj, t_m4x4_f transfo_matrix)
 {
 	obj->transform = transfo_matrix;
-	return (obj);
 }
 
 /* INTERSECT

@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 13:02:04 by noe               #+#    #+#             */
-/*   Updated: 2022/12/03 13:11:38 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/03 13:49:57 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ void	elem_add_back(t_elem **head, t_elem *to_add, uint8_t shape, ssize_t no)
 	elem->next = to_add;
 	to_add->id.shape = shape;
 	to_add->id.no = no;
-	to_add->obj_space_pos = create_point(0, 0, 0);
+	to_add->o_pos = create_point(0, 0, 0);
 	to_add->next = NULL;
 }
