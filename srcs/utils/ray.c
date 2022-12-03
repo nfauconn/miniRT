@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:22:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/03 13:22:00 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/03 13:39:05 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_xs	intersect(t_elem obj, t_ray r)
 {
 	t_xs	xs;
 
-	r = transform_ray(r, inversion(obj.transform));
+	r = transform_ray(r, inverse(obj.transform));
 	if (obj.id.shape == sphere)
 		xs = sp_xs(obj, r);
 	else

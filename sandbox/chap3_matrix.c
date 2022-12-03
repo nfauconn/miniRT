@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chap3_matrix.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:12:44 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/11/25 21:37:32 by rokerjea         ###   ########.fr       */
+/*   Updated: 2022/12/03 13:38:55 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,7 +271,7 @@ Test(matrix, identity_matrix)
 	cr_expect(same_tuple(test2, res) == 1, "multiplication of identity mtrx by tuple");
 }
 
-// t_m4x4_f	matrix_transpose(t_m4x4_f matrix)
+// t_m4x4_f	transpose(t_m4x4_f matrix)
 // {
 // 	t_m4x4_f	res;
 // 	int	i;
@@ -298,14 +298,14 @@ Test(matrix, transposing_matrix)
 	t_m4x4_f matrixres;
 	float tabf2[16] = {0, 9, 1, 0, 9, 8, 8, 0, 3, 0, 5, 5, 0, 8, 3, 8};
 	t_m4x4_f matrixaim = matrix_4xf_create(tabf2);
-	matrixres = matrix_transpose(matrix);
+	matrixres = transpose(matrix);
 	cr_expect(same_matrix(matrixres, matrixaim) == 1);
 	float tabf3[16] = {0, 9, 1, 0, 9, 8, 8, 0, 3, 0, 5, 5, 0, 8, 5, 8};
 	t_m4x4_f matrixaim2 = matrix_4xf_create(tabf3);
 	cr_expect(same_matrix(matrixres, matrixaim2) == 0);
 	float tabf4[16] = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
 	t_m4x4_f matrix2 = matrix_4xf_create(tabf4);
-	t_m4x4_f matrixres2 = matrix_transpose(matrix2);
+	t_m4x4_f matrixres2 = transpose(matrix2);
 	cr_expect(same_matrix(matrixres2, matrix2) == 1);
 }
 
@@ -749,14 +749,14 @@ Test(matrix, is_invertible)
 // 	}
 // }
 
-// t_m4x4_f	inversion(t_m4x4_f matr)
+// t_m4x4_f	inverse(t_m4x4_f matr)
 // {
 // 	t_m4x4_f	res;
 // 	float		deter;
 
 // 	res = cofactor_matrix(matr);
 // 	// printf_4fmatr(res);
-// 	res = matrix_transpose(res);
+// 	res = transpose(res);
 // 	// printf_4fmatr(res);
 // 	deter = determinant_4xf(matr);
 // 	// printf ("deter = %f\n", deter);
@@ -764,7 +764,7 @@ Test(matrix, is_invertible)
 // 	return (res);
 // }
 
-Test(matrix, inversion)
+Test(matrix, inverse)
 {
 	float tabf[16] = {-5, 2, 6, -8, 1, -5, 1, 8, 7, 7, -6, -7, 1, -3, 7, 4};
 	t_m4x4_f matrix = matrix_4xf_create(tabf);
@@ -773,7 +773,7 @@ Test(matrix, inversion)
 	cr_expect(same_float(-24, cofactor4) == 1);
 	float tabf2[16] = {0.21805, 0.45113, 0.24060, -0.04511, -0.80827, -1.45677, -0.44361, 0.52068, -0.07895, -0.22368, -0.05263, 0.19737, -0.52256, -0.81391, -0.30075, 0.30639};
 	t_m4x4_f matrix2 = matrix_4xf_create(tabf2);
-	t_m4x4_f res = inversion(matrix);
+	t_m4x4_f res = inverse(matrix);
 	// printf_4fmatr(res);
 	cr_expect(same_matrix(res, matrix2) == 1);
 }
@@ -784,12 +784,12 @@ Test(matrix, inversion2)
 	t_m4x4_f matrix = matrix_4xf_create(tabf);
 	float tabf2[16] = {-0.15385, -0.15385, -0.28205, -0.53846, -0.07692, 0.12308, 0.02564, 0.03077, 0.35897, 0.35897, 0.43590, 0.92308, -0.69231, -0.69231, -0.76923, -1.92308};
 	t_m4x4_f matrix2 = matrix_4xf_create(tabf2);
-	cr_expect(same_matrix(matrix2, inversion(matrix)));
+	cr_expect(same_matrix(matrix2, inverse(matrix)));
 	float tabf3[16] = {9, 3, 0, 9, -5, -2, -6, -3, -4, 9, 6, 4, -7, 6, 6, 2};
 	t_m4x4_f matrix3 = matrix_4xf_create(tabf3);
 	float tabf4[16] = {-0.04074, -0.07778, 0.14444, -0.22222, -0.07778, 0.03333, 0.36667, -0.33333, -0.02901, -0.14630, -0.10926, 0.12963, 0.17778, 0.06667, -0.26667, 0.33333};
 	t_m4x4_f matrix4 = matrix_4xf_create(tabf4);
-	cr_expect(same_matrix(matrix4, inversion(matrix3)));
+	cr_expect(same_matrix(matrix4, inverse(matrix3)));
 }
 
 Test(matrix, inversion3)
@@ -799,7 +799,7 @@ Test(matrix, inversion3)
 	float tabf2[16] = {8, 2, 2, 2, 3, -1, 7, 0, 7, 0, 5, 4, 6, -2, 0, 5};
 	t_m4x4_f matrix2 = matrix_4xf_create(tabf2);
 	t_m4x4_f matrix3 = matrix * matrix2;
-	cr_expect(same_matrix(matrix, matrix3 * inversion(matrix2)));
+	cr_expect(same_matrix(matrix, matrix3 * inverse(matrix2)));
 }
 
 // t_m4x4_f	identity_matr(void)
@@ -823,7 +823,7 @@ Test(matrix, inversion3)
 Test(matrix, translation)
 {
 	t_m4x4_f	matr_transf = translation(5, -3, 2);
-	// t_m4x4_f	matr_inv = inversion(matr_transf);
+	// t_m4x4_f	matr_inv = inverse(matr_transf);
 	float4	test = (float4){-3, 4, 5, 1};
 	float4	res = matrix_tuple_mult(matr_transf, test);
 	float4	point = (float4){2, 1, 7, 1};
@@ -834,7 +834,7 @@ Test(matrix, translation)
 Test(matrix, translation2)
 {
 	t_m4x4_f	matr_transf = translation(5, -3, 2);
-	t_m4x4_f	matr_inv = inversion(matr_transf);
+	t_m4x4_f	matr_inv = inverse(matr_transf);
 	float4	test = (float4){-3, 4, 5, 1};
 	float4	res = matrix_tuple_mult(matr_inv, test);
 	float4	point = (float4){-8, 7, 3, 1};
@@ -884,7 +884,7 @@ Test(matrix, scaling2)
 Test(matrix, scaling3)
 {
 	t_m4x4_f	matr_scale = scaling(2, 3, 4);
-	t_m4x4_f	matr_inv = inversion(matr_scale);
+	t_m4x4_f	matr_inv = inverse(matr_scale);
 	float4	mult = (float4){-4, 6, 8, 1};
 	float4	res = matrix_tuple_mult(matr_inv, mult);
 	float4	aim = (float4){-2, 2, 2, 1};
