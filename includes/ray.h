@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:11:12 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/03 13:21:58 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/03 17:23:20 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_ray		ray(t_point orig, t_vector dest);
 t_point		position(t_ray ray, float t);
 
 /* SPHERE */
-t_elem		init_sphere(void);
+void		init_sphere(t_elem *s);
 t_xs		sp_xs(t_elem s, t_ray r);
 
 /* INTERSECTION */

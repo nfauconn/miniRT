@@ -9,8 +9,10 @@
 
 Test(lights, normal_1)
 {
-	t_elem		sp = init_sphere();
+	t_elem		sp;
 	t_vector	normal;
+
+	init_sphere(&sp);
 
 	normal = normal_atsphere(&sp, create_point(1, 0, 0));
 	cr_expect(same_tuple(normal, create_vector(1, 0, 0)));
@@ -32,10 +34,10 @@ Test(lights, normal_translated_sp)
 	t_vector	w_normal;
 	t_m4x4_f	transfo_mx;
 
-	sp = init_sphere();
+	init_sphere(&sp);
 	transfo_mx = translation(0, 1, 0);
 	set_transform(&sp, transfo_mx);
-	w_pt = create_point(0, sqrt(2)/2, -sqrt(2)/2);
+	w_pt = create_point(0, 1.70711, -0.70711);
 	w_normal = normal_atsphere(&sp, w_pt);
 	cr_expect(same_tuple(w_normal, create_vector(0, 0.70711, -0.70711)));
 }
@@ -47,10 +49,28 @@ Test(lights, normal_transformed_sp)
 	t_vector	w_normal;
 	t_m4x4_f	transfo_mx;
 
-	sp = init_sphere();
+	init_sphere(&sp);
 	transfo_mx = scaling(1, 0.5, 1) * rotation_z(M_PI/5);
 	set_transform(&sp, transfo_mx);
 	w_pt = create_point(0, sqrt(2)/2, -sqrt(2)/2);
 	w_normal = normal_atsphere(&sp, w_pt);
 	cr_expect(same_tuple(w_normal, create_vector(0, 0.97014, -0.24254)));
+}
+
+/* Reflecting a vector approaching the normal at 45° */
+Test(lights, find_reflecting_vector)
+{
+	t_vector	v;
+	t_vector	n;
+	t_vector	r;
+
+	v = create_vector(1, -1, 0);
+	n = create_vector(0, 1, 0);
+	r = reflect(v, n);
+	cr_expect(same_tuple(r, create_vector(1, 1, 0)));
+
+	v = create_vector(0, -1, 0);
+	n = create_vector(sqrt(2)/2, sqrt(2)/2, 0);
+	r = reflect(v, n);
+	cr_expect(same_tuple(r, create_vector(1, 0, 0)));
 }

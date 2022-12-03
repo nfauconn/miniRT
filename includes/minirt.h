@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/03 13:50:11 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/03 17:25:38 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ bool	conv_ratio(char *s, t_elem *elem, char *elem_name);
 bool	conv_fov(char *s, t_elem *elem, char *elem_name);
 bool	conv_radius(char *s, t_elem *elem, char *elem_name);
 bool	conv_diam_height(char *s1, char *s2, t_elem *elem, char *elem_name);
-void	elem_add_back(t_elem **head, t_elem *to_add, uint8_t shape, ssize_t no);
+void	elem_add_back(t_elem **head, t_elem *to_add);
 
 /* SCENE */
 void	setup_scene(t_scene *scene, char *file);
