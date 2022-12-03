@@ -22,3 +22,10 @@ t_vector	reflect(t_vector in, t_vector normal)
 	reflect = in - normal * 2 * dot_product(in, normal);
 	return (reflect);
 }
+
+void	point_light(t_elem *light, t_point pos, float ratio)
+{
+	light->w_pos = pos;
+	light->specs.intensity.f = ratio;
+	light->specs.intensity.f4 = create_point(ratio, ratio, ratio);
+}

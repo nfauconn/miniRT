@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/03 17:25:38 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/03 17:55:30 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,15 @@ typedef enum e_elements
 	elm_nb
 }	t_elems;
 
+typedef struct s_lightspecs
+{
+	float		f;
+	t_float4	f4;
+}	t_lightspecs;
+
 typedef union u_specs
 {
-	float				ratio;
+	t_lightspecs		intensity;
 	float				radius;
 	float				fov;
 	float				diam_hght[2];
