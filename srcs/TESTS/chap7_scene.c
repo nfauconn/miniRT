@@ -6,7 +6,7 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:29:05 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/03 19:07:25 by rokerjea         ###   ########.fr       */
+/*   Updated: 2022/12/04 20:54:19 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "tuple.h"
 #include "ray.h"
 #include "lights.h"
+#include "clang_attr.h"
 
 Test(scene, world)
 {
@@ -213,4 +214,161 @@ Test(scene, shade_in)
 	t_rgb	c = shade_hit(world, comps);
 
 	cr_expect(same_tuple(c, create_vector(0.90498, 0.90498, 0.90498)));
+}
+
+Test(scene, ray_misses)
+{
+	t_scene	world;
+	setup_scene(&world, "./scenes/default.rt");
+	t_ray	r = ray(create_point(0, 0, -5), create_vector(0, 1, 0));
+
+	t_rgb c = color_at(world, r);
+
+	cr_expect(same_tuple(c, create_vector(0, 0, 0)));
+}
+
+Test(scene, ray_hits)
+{
+	t_scene	world;
+	setup_scene(&world, "./scenes/default.rt");
+	t_ray	r = ray(create_point(0, 0, -5), create_vector(0, 0, 1));
+
+	t_rgb c = color_at(world, r);
+
+	cr_expect(same_tuple(c, create_vector(0.38066, 0.47583, 0.2855)));
+}
+
+Test(scene, ray_inside)
+{
+	t_scene	world;
+	setup_scene(&world, "./scenes/default.rt");
+	t_elem	*outer = world.objs;
+	outer.material.ambiant = 1.0;
+	t_elem	*inner = outer.next;
+	inner.material.ambiant = 1.0;
+	t_ray	r = ray(create_point(0, 0, 0.75), create_vector(0, 0, -1));
+
+	t_rgb c = color_at(world, r);
+
+	cr_expect(same_tuple(c, inner.material.color));
+}
+
+t_m4x4_f	view_transform(t_point from, t_point to, t_point up)
+{
+	t_m4x4_f	res;
+	t_vector	forward;
+	t_vector	upn;
+	t_vector	left;
+	t_vector	true_up;
+
+	forward = normalize(to - from);
+	upn = normalixe(up);
+	left = cross_product(forward, upn);
+	true_up = cross_product(left, forward);
+	res = identity_matr();
+	res[0][0] = left.x;
+	res[0][1] = left.y;
+	res[0][2] = left.z;
+	res[1][0] = true_up.x;
+	res[1][1] = true_up.y;
+	res[1][2] = true_up.z;
+	res[2][0] = -forward.x;
+	res[2][1] = -forward.y;
+	res[2][2] = -forward.z;
+	return (matrix_mult(res, translation(-from.x, -from.y, -from.z)));
+}
+
+Test(scene, default_orientation)
+{
+	t_point	from = create_point(0, 0, 0);
+	t_point	to = create_point(0, 0, -1);
+	t_point	up = create_vector(0, 1, 0);
+
+	t_m4x4_f	t = view_transform(from, to, up);
+	t_m4x4_f	texpect = identity_matr();
+
+	cr_expect(same_matrix(t, texpect));
+}
+
+Test(scene, opposite_orientation)
+{
+	t_point	from = create_point(0, 0, 0);
+	t_point	to = create_point(0, 0, 1);
+	t_point	up = create_vector(0, 1, 0);
+
+	t_m4x4_f	t = view_transform(from, to, up);
+	t_m4x4_f	texpect = scaling(-1, 1, -1);
+
+	cr_expect(same_matrix(t, texpect));
+}
+
+Test(scene, view1)
+{
+	t_point	from = create_point(0, 0, 8);
+	t_point	to = create_point(0, 0, 0);
+	t_point	up = create_vector(0, 1, 0);
+
+	t_m4x4_f	t = view_transform(from, to, up);
+	t_m4x4_f	texpect = scaling(0, 0, -8);
+
+	cr_expect(same_matrix(t, texpect));
+}
+
+Test(scene, view2)
+{
+	t_point	from = create_point(1, 3, 2);
+	t_point	to = create_point(4, -2, 8);
+	t_point	up = create_vector(1, 1, 0);
+
+	t_m4x4_f	t = view_transform(from, to, up);
+	float tabf4[16] = {-0.50709, 0.50709, 0.67612, -2.36643, 0.76772, 0.60609, 0.12122, -2.82843, -0.35857, 0.59761, -0.71714, 0.00000, 0.00000, 0.00000, 0.00000, 1.00000};
+	t_m4x4_f texpect = matrix_4xf_create(tabf4);
+
+	cr_expect(same_matrix(t, texpect));
+}
+
+typedef	struct	s_camera
+{
+	float		hsize;
+	float		vsize;
+	float		fov;
+	t_m4x4_f	transform;
+}				t_camera;
+
+t_camera	setup_camera(float hsize, float vsize, float fov)
+{
+	t_camera	cam;
+
+	cam.hsize = hsize;
+	cam.vsize = vsize;
+	cam.fov = fov;
+	cam.transform = identity_matr();
+	return (cam);
+}
+
+Test(scene, camera_build)
+{
+	float	hsize = 160;
+	float	vsize = 120;
+	//need to remember this is in radian, but we are given degree
+	float	fov = M_PI / 2;
+	t_camera	c;
+
+	c = setup_camera(hsize, vsize, fov);
+
+	cr_expect(c.hsize == 160);
+	cr_expect(c.vsize == 120);
+	cr_expect(c.fov == M_PI / 2);
+	cr_expect(same_matrix(c.transform, identity_matr()));
+}
+
+Test(scene, camera_pixel_size)
+{
+	t_camera	c = setup_camera(200, 125, M_PI / 2);
+
+	cr_expect(c.pixel_size == 0.01);
+
+	c = setup_camera(125, 200, M_PI / 2);
+
+	cr_expect(c.pixel_size == 0.01);
 }
