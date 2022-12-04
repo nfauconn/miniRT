@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 18:10:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/04 20:05:20 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/04 20:14:09 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	draw_scene(t_img *img)
 
 	init_sphere(&shape);
 	shape.material = default_material();
-	shape.material.color = create_color(0.2, 0.9, 0);
+	shape.material.color = create_color(1, 0.9, 0);
 	light.w_pos = create_point(-10, 10, -10);
 	light.color = create_color(1, 1, 1);	y = 0;
 	printf("coucou\n");
@@ -81,7 +81,7 @@ void	draw_scene(t_img *img)
 			r = ray(ray_origin, normalize(pos - ray_origin));
 			//IS THE RAY NORMALIZED ?????
 
-			shape.transform = shearing((float[6]){1, 0, 0, 0, 0, 0}) * scaling(0.5, 1, 1); //LINE TO TRANFDORM SPHERE
+//			shape.transform = shearing((float[6]){1, 0, 0, 0, 0, 0}) * scaling(0.5, 1, 1); //LINE TO TRANFDORM SPHERE
 			xs = intersect(shape, r);
 			if (xs.count > 0)
 			{
