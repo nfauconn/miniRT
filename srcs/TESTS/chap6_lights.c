@@ -83,18 +83,42 @@ Test(lights, get_lighting)
 	t_rgb		res;
 	t_point		position;
 
-	light.material = default_material(&elem);
+	light.material = default_material(&light);
 	position = create_point(0, 0, 0); /* W_POS OU O_POS ???*/
 
+/*	lighting with the eye btw the light and the surface, eye offset 90° (perpendicular to surface) */
 	eyev = create_vector(0, 0, -1);
 	normalv = create_vector(0, 0, -1);
-	light = point_light(create_point(0, 0, -10), (t_rgb){1, 1, 1, 0});
-	res = lighting(light.material, light, position, eyev, normalv);
-	cr_expect(same_tuple(res, (t_rgb){1.9, 1.9, 1.9, 0}));
+	point_light(&light, create_point(0, 0, -10), create_color(1, 1, 1));
+	res = lighting(light.material, &light, position, eyev, normalv);
+	cr_expect(same_tuple(res, create_color(1.9, 1.9, 1.9)));
 
+/*	lighting with the eye btw light & surface, eye offset 45°*/
 	eyev = create_vector(0, sqrt(2)/2, -sqrt(2)/2);
 	normalv = create_vector(0, 0, -1);
-	light = point_light(create_point(0, 0, -10), (t_rgb){1, 1, 1, 0});
-	res = lighting(light.material, light, position, eyev, normalv);
-	cr_expect(same_tuple(res, (t_rgb){1.9, 1.9, 1.9, 0}));
+	point_light(&light, create_point(0, 0, -10), create_color(1, 1, 1));
+	res = lighting(light.material, &light, position, eyev, normalv);
+	cr_expect(same_tuple(res, create_color(1.0, 1.0, 1.0)));
+
+/*	lighting with eye offset 90° , light offset 45°*/
+	eyev = create_vector(0, 0, -1);
+	normalv = create_vector(0, 0, -1);
+	point_light(&light, create_point(0, 10, -10), create_color(1, 1, 1));
+	res = lighting(light.material, &light, position, eyev, normalv);
+	cr_expect(same_tuple(res, create_color(0.7364, 0.7364, 0.7364)));
+
+/*	lighting with the eye in the path of the reflection vector */
+	eyev = create_vector(0, -sqrt(2)/2, -sqrt(2)/2);
+	normalv = create_vector(0, 0, -1);
+	point_light(&light, create_point(0, 10, -10), create_color(1, 1, 1));
+	res = lighting(light.material, &light, position, eyev, normalv);
+//	printf("lighting = {%f, %f, %f, %f}\n", res.x, res.y, res.z, res.w);
+	cr_expect(same_tuple(res, create_color(1.636385, 1.636385, 1.636385)));
+
+/*	lighting with the light behind the surface and light beyond */
+	eyev = create_vector(0, 0, -1);
+	normalv = create_vector(0, 0, -1);
+	point_light(&light, create_point(0, 0, 10), create_color(1, 1, 1));
+	res = lighting(light.material, &light, position, eyev, normalv);
+	cr_expect(same_tuple(res, create_color(0.1, 0.1, 0.1)));
 }

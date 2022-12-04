@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/03 18:52:01 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/04 19:31:28 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define WIDTH 300
 # define HEIGHT 300
+# define BLACK (t_rgb){0, 0, 0, 0}
 
 # include "extern_libs.h"
 
@@ -29,15 +30,9 @@ typedef enum e_elements
 	elm_nb
 }	t_elems;
 
-typedef struct s_lightspecs
-{
-	float		f;
-	t_float4	f4;
-}	t_lightspecs;
-
 typedef union u_specs
 {
-	t_lightspecs		intensity;
+	float				ratio;
 	float				radius;
 	float				fov;
 	float				diam_hght[2];
@@ -52,7 +47,7 @@ typedef struct s_id
 typedef struct s_material
 {
 	t_rgb	color;
-	float	ambiant;
+	float	ambient;
 	float	diffuse;
 	float	specular;
 	float	shininess;
