@@ -30,7 +30,8 @@ typedef	struct	s_camera
 }				t_camera;
 
 int			nearer_point(t_xs res, t_xs newres);
-t_xs		intersect_world(t_scene world, t_ray ray);
+t_inter		*intersect_world(t_scene *world, t_ray ray);
+//t_xs		intersect_world(t_scene *world, t_ray ray);
 t_comps		prepare_computations(t_inter i, t_ray ray);
 t_rgb		shade_hit(t_scene *world, t_comps comps);
 t_m4x4_f	view_transform(t_point from, t_point to, t_point up);

@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:29:05 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/07 18:08:28 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/07 18:34:21 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -297,7 +297,7 @@ Test(scene, transformed_ray)
 	cr_expect(same_tuple(ray.dest, create_vector(sqrt(2) / 2, 0, -(sqrt(2) / 2))));
 }
 
-Test(scene, full_scene)
+/* Test(scene, full_scene)
 {
 	t_scene	w;
 	setup_scene(&w, "./scenes/default.rt");
@@ -309,4 +309,5 @@ Test(scene, full_scene)
 	c.transform = view_transform(from, to, up);
 	image = render(c, w);
 	cr_expect(same_tuple(pixel_at(image, 5, 5), create_vector(0.38066, 0.47583, 0.2855)));
-}
+//	free(image);
+} */
