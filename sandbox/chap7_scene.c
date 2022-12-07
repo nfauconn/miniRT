@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   chap7_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:29:05 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/02 20:30:33 by rokerjea         ###   ########.fr       */
+/*   Updated: 2022/12/07 16:54:02 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "/mnt/nfs/homes/rokerjea/sgoinfre/Criterion/include/criterion/criterion.h"
+#include "/mnt/nfs/homes/nfauconn/Criterion/include/criterion/criterion.h"
 #include "matrix.h"
 #include "minirt.h"
 #include "extern_libs.h"

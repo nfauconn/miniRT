@@ -6,12 +6,14 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:12:44 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/03 13:38:55 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/07 17:18:02 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "/mnt/nfs/homes/rokerjea/sgoinfre/Criterion/include/criterion/criterion.h"
+#include "/mnt/nfs/homes/nfauconn/Criterion/include/criterion/criterion.h"
+//#include "/mnt/nfs/homes/rokerjea/sgoinfre/Criterion/include/criterion/criterion.h"
 #include "matrix.h"
+#include "tuple.h"
 # include <math.h>
 # include <stdio.h>
 # include <signal.h>
@@ -27,16 +29,6 @@ typedef int t_m4x4_i __attribute__((matrix_type(4, 4)));
 // typedef int	int9	__attribute__((ext_vector_type(9)));
 typedef float float4 __attribute__((ext_vector_type(4)));
 typedef int	int4 __attribute__((ext_vector_type(4)));
-
-bool	same_float(float f1, float f2)
-{
-	float	epsilon;
-
-	epsilon = 0.00001;
-	if (fabs(f1 - f2) > epsilon)
-		return (0);
-	return (1);
-}
 
 // int	any_matrix(t_m4x4_i bool_matrix)
 // {
@@ -166,14 +158,6 @@ Test(matrix, matrix_compare)
 // 	return (res);
 // }
 
-float	dot_product(float4 tuple1, float4 tuple2)
-{
-	return ((tuple1.x * tuple2.x) \
-		+ (tuple1.y * tuple2.y) \
-		+ (tuple1.z * tuple2.z) \
-		+ (tuple1.w * tuple2.w));
-}
-
 // float	dot_product_ma(t_m4x4_f matrix, int line, t_m4x4_f matrix2, int col)
 // {
 // 	float4	tuple1;
@@ -217,17 +201,6 @@ Test(matrix, matrix_mult)
 	float tabf3[16] = {20, 22, 50, 48, 44, 54, 114, 108, 40, 58, 110, 102, 16, 26, 46, 42};
 	t_m4x4_f matrix4 = matrix_4xf_create(tabf3);
 	cr_expect(same_matrix(matrix3, matrix4) == 1, "multiplication of full matrix");
-}
-
-bool	same_tuple(float4 tup1, float4 tup2)
-{
-	float	epsilon;
-
-	epsilon = 0.00001;
-	if (fabs(tup1.x - tup2.x) > epsilon || fabs(tup1.y - tup2.y) > epsilon
-		|| fabs(tup1.z - tup2.z) > epsilon || fabs(tup1.w - tup2.w) > epsilon)
-		return (0);
-	return (1);
 }
 
 // float4	matrix_tuple_mult(t_m4x4_f matrix, float4 tup)

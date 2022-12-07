@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   chap2_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 15:10:17 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/11/13 20:16:39 by rokerjea         ###   ########.fr       */
+/*   Updated: 2022/12/07 17:17:51 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "/mnt/nfs/homes/rokerjea/sgoinfre/Criterion/include/criterion/criterion.h"
+#include "/mnt/nfs/homes/nfauconn/Criterion/include/criterion/criterion.h"
+//#include "/mnt/nfs/homes/rokerjea/sgoinfre/Criterion/include/criterion/criterion.h"
 # include <math.h>
 # include <stdio.h>
 # include <errno.h>
+#include "tuple.h"
 
 typedef float	t_float3	__attribute__((ext_vector_type(3)));
 
@@ -25,16 +27,6 @@ t_float3	color_create(float r, float g, float b)
 	color_tup.y = g;
 	color_tup.z = b;
 	return (color_tup);
-}
-
-bool	same_float(float f1, float f2)
-{
-	float	epsilon;
-
-	epsilon = 0.00001;
-	if (fabs(f1 - f2) > epsilon)
-		return (0);
-	return (1);
 }
 
 bool	same_color(t_float3 tup1, t_float3 tup2)

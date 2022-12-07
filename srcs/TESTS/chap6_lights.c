@@ -4,6 +4,7 @@
 #include "/mnt/nfs/homes/nfauconn/miniRT/includes/tuple.h"
 #include "/mnt/nfs/homes/nfauconn/miniRT/includes/matrix.h"
 #include "/mnt/nfs/homes/nfauconn/Criterion/include/criterion/criterion.h"
+//#include "/mnt/nfs/homes/rokerjea/sgoinfre/Criterion/include/criterion/criterion.h"
 
 //	printf("normal = {%f, %f, %f, %f}\normal", normal.x, normal.y, normal.z, normal.w);
 

@@ -6,37 +6,16 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 18:32:43 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/03 17:31:00 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/07 17:18:08 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "/mnt/nfs/homes/rokerjea/sgoinfre/Criterion/include/criterion/criterion.h"
+#include "/mnt/nfs/homes/nfauconn/Criterion/include/criterion/criterion.h"
+//#include "/mnt/nfs/homes/rokerjea/sgoinfre/Criterion/include/criterion/criterion.h"
 #include "matrix.h"
 #include "extern_libs.h"
 #include "tuple.h"
 #include "ray.h"
-
-t_float4	create_point(float x, float y, float z)
-{
-	t_float4	point;
-
-	point.x = x;
-	point.y = y;
-	point.z = z;
-	point.w = 1.0;
-	return (point);
-}
-
-t_float4	create_vector(float x, float y, float z)
-{
-	t_float4	point;
-
-	point.x = x;
-	point.y = y;
-	point.z = z;
-	point.w = 0.0;
-	return (point);
-}
 
 Test (ray, create)
 {
@@ -140,7 +119,7 @@ Test (ray, intersection1)
 // Test (ray, intersection_aggreg)
 // {
 // 	t_elem
-init_sphere(&s);	s;
+//  init_sphere(&s);	s;
 // 	t_inter	i1 = intersection(1, s);
 // 	t_inter	i2 = intersection(2, s);
 

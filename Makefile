@@ -36,7 +36,8 @@ SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		rayutils \
 		interlst \
 		lights \
-		matrix} \
+		matrix \
+		scene} \
 		}}
 DEPS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.d}}
 OBJS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.o}}
@@ -122,30 +123,50 @@ CR_INCLUDES = -I ${CR_INC_DIR}
 LD_CR_FLAGS = -L ${CR_DIR}/build/src
 LN_CR_FLAGS = -lcriterion
 
-TEST_DIR = ${SRC_DIR}/TESTS
+T_INCLUDES = ${CR_INCLUDES} ${INCLUDES}
+T_LDFLAGS = ${LD_CR_FLAGS} ${LD_FLAGS}
+T_LNFLAGS = ${LN_CR_FLAGS} ${LN_FLAGS}
+
+T_SRC_DIR = ${SRC_DIR}/TESTS
+T_BUILD_DIR = ${BUILD_DIR}/TESTS
+
+T_NAME = all_tests
+T_SRCS = ${addsuffix ${S_EXT}, ${addprefix ${T_SRC_DIR}/, \
+	chap2_color \
+	chap3_matrix \
+	chap5_sphere_tests \
+	chap6_lights \
+	chap7_scene}}
+T_DEPS = ${subst ${T_SRC_DIR}, ${T_BUILD_DIR}, ${T_SRCS:%.c=%.d}}
+T_OBJS = ${subst ${T_SRC_DIR}, ${T_BUILD_DIR}, ${T_SRCS:%.c=%.o}}
+T_VPATH = ${T_SRC_DIR}
+
 TEST_NAME = lights
-TEST_FILE = ${TEST_DIR}/chap6_lights
+TEST_FILE = ${T_SRC_DIR}/chap6_lights
 TEST_SRC = ${TEST_FILE}.c
 TEST_DEPS = ${TEST_FILE}.d
 TEST_OBJ = ${TEST_FILE}.o
-TEST_INC = ${CR_INCLUDES} ${INCLUDES}
-TEST_LDFLAGS = ${LD_CR_FLAGS} ${LD_FLAGS}
-TEST_LNFLAGS = ${LN_CR_FLAGS} ${LN_FLAGS}
+
+tests: libftcreat ${OBJS} ${T_OBJS}
+	@make -C ${MLX_DIR} --no-print-directory
+	@${CC} ${CFLAGS} ${OBJS} ${T_OBJS} -o ${T_NAME} ${T_LDFLAGS} ${T_LNFLAGS}
+	@./${T_NAME}
+	@${RM} ${T_NAME}
 
 test: libftcreat ${OBJS} ${TEST_OBJ}
 	@make -C ${MLX_DIR} --no-print-directory
-	@${CC} ${CFLAGS} ${OBJS} ${TEST_OBJ} -o ${TEST_NAME} ${TEST_LDFLAGS} ${TEST_LNFLAGS}
+	@${CC} ${CFLAGS} ${OBJS} ${TEST_OBJ} -o ${TEST_NAME} ${T_LDFLAGS} ${T_LNFLAGS}
 	@./${TEST_NAME}
-	@${RM} {TEST_NAME} ${TEST_DEPS} ${TEST_OBJ}
+	@${RM} {TEST_NAME}
 
 -include ${DEPS}
 -include ${TEST_DEPS}
 
 ${TEST_FILE}.o: ${TEST_FILE}.c
-	@${CC} ${CFLAGS} ${TEST_INC} -I includes -MMD -o $@ -c $<
+	@${CC} ${CFLAGS} ${T_INCLUDES} -I includes -MMD -o $@ -c $<
 
 testlittleclean: littleclean
-	@${RM} ${TEST_NAME}
+	@${RM} ${TEST_NAME}${TEST_DEPS} ${TEST_OBJ}
 	@echo "deleted test program"
 
 testr: testlittleclean test
