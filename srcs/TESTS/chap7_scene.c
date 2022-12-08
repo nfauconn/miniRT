@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chap7_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:29:05 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/07 18:34:21 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/08 14:46:53 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	print_tuple(t_float4 var)
 	printf("%f, %f, %f, %f \n", var.x, var.y, var.z, var.w);
 }
 
+// implementable intelligemment avec notre parsing
 Test(scene, default)
 {
 	t_scene	world;
@@ -65,6 +66,10 @@ void	print_shape(t_elem *shape)
 	printf("specs = %f\n", shape->specs.radius);
 }
 
+// world ray rendra une liste chainee de t_inter.
+// MAIS faut il vraiment la creer ?
+// ou suffit il de parcourir dans une fonction statique n enregistrant que
+// l intersection la plus proche, et ne renvoyer qu elle
 Test(scene, world_ray)
 {
 	t_scene	world;
@@ -79,6 +84,7 @@ Test(scene, world_ray)
 	clear (&world);
 }
 
+//utile pour reflection et refraction --> inutile
 Test(scene, precompute)
 {
 	t_ray	r = ray(create_point(0, 0, -5), create_vector(0, 0, 1));
@@ -95,6 +101,8 @@ Test(scene, precompute)
 	cr_expect(same_tuple(comps.normalv , create_vector(0, 0, -1)));
 }
 
+//pas compris a quoi ca servait, de definir si ray intersect dans ou a l exterieur ?
+// c est quoi l exterieur ?
 Test(scene, outside)
 {
 	t_ray	r = ray(create_point(0, 0, -5), create_vector(0, 0, 1));
@@ -107,7 +115,7 @@ Test(scene, outside)
 	cr_expect(!comps.inside);
 }
 
-Test(scene, inside)
+Test(scene, inside) // same
 {
 	t_ray	r = ray(create_point(0, 0, 0), create_vector(0, 0, 1));
 	t_elem	shape;
@@ -151,6 +159,7 @@ Test(scene, shade_in)
 	cr_expect(same_tuple(c, create_color(0.90498, 0.90498, 0.90498)));
 }
 
+/* important : fonction color_at, qui determine couleur du pixel touche par le ray */
 Test(scene, ray_misses)
 {
 	t_scene	world;
@@ -310,4 +319,4 @@ Test(scene, transformed_ray)
 	image = render(c, w);
 	cr_expect(same_tuple(pixel_at(image, 5, 5), create_vector(0.38066, 0.47583, 0.2855)));
 //	free(image);
-} */
+} *

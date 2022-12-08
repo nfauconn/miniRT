@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:21:41 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/11/12 13:17:09 by rokerjea         ###   ########.fr       */
+/*   Updated: 2022/11/30 16:11:25 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ static float	small(char *str)
 	j = 1;
 	res = 0;
 	while (ft_isdigit(str[0]))
-	{		
+	{
 		res += (str[0] - '0') * neg_exponant(j++);
 		str++;
-	}	
+	}
 	return (res);
 }
 
