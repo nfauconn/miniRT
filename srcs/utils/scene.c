@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:04:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/10 16:06:10 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/10 19:33:39 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,34 +104,7 @@ t_m4x4_f	view_transform(t_point from, t_point to, t_point up)
 	return (matrix_mult(res, translation(-from.x, -from.y, -from.z)));
 }
 
-//aspect is the aspect ratio, like 16:9
-t_camera	setup_camera(float hsize, float vsize, float fov)
-{
-	t_camera	cam;
-	float		half_view;
-	float		aspect;
-
-	cam.hsize = hsize;
-	cam.vsize = vsize;
-	cam.fov = fov;
-	cam.transform = identity_matr();
-	half_view = tan(fov / 2);
-	aspect = cam.hsize / cam.vsize;
-	if (aspect >= 1)
-	{
-		cam.half_width = half_view;
-		cam.half_height = half_view / aspect;
-	}
-	else
-	{
-		cam.half_width = half_view * aspect;
-		cam.half_height = half_view;
-	}
-	cam.pixel_size = (cam.half_width * 2) / cam.hsize;
-	return (cam);
-}
-
-t_ray	ray_for_pixel(t_camera cam, float px, float py)
+t_ray	ray_for_pixel(t_elem cam, float px, float py)
 {
 	float	x_offset;
 	float	y_offset;

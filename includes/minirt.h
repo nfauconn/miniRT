@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/10 16:06:10 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/10 19:02:46 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "matrix.h"
 # include "lights.h"
 # include "color.h"
+# include "scene.h"
 
 /* PARSING */
 bool	parse_file(char *file, t_scene *scene);

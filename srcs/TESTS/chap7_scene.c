@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:29:05 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/10 17:38:07 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/10 19:33:03 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,8 +193,6 @@ Test(scene, color_at)
 	clear(&world);
 }
 
-
-/*
 Test(scene, default_orientation)
 {
 	t_point	from = create_point(0, 0, 0);
@@ -226,7 +224,7 @@ Test(scene, view1)
 	t_point	up = create_vector(0, 1, 0);
 
 	t_m4x4_f	t = view_transform(from, to, up);
-	t_m4x4_f	texpect = scaling(0, 0, -8);
+	t_m4x4_f	texpect = translation(0, 0, -8);
 
 	cr_expect(same_matrix(t, texpect));
 }
@@ -243,7 +241,7 @@ Test(scene, view2)
 
 	cr_expect(same_matrix(t, texpect));
 }
-
+/* 
 Test(scene, camera_build)
 {
 	float	hsize = 160;
@@ -256,7 +254,7 @@ Test(scene, camera_build)
 
 	cr_expect(c.hsize == 160);
 	cr_expect(c.vsize == 120);
-	cr_expect(c.fov == M_PI / 2);
+	cr_expect(same_float(c.fov, M_PI / 2));
 	cr_expect(same_matrix(c.transform, identity_matr()));
 }
 
@@ -280,8 +278,42 @@ Test(scene, center_ray)
 
 	cr_expect(same_tuple(ray.orig, create_point(0, 0, 0)));
 	cr_expect(same_tuple(ray.dest, create_vector(0, 0, -1)));
+} */
+Test(scene, camera_pixel_size)
+{
+	t_scene		scene;
+	float		hsize;
+	float		vsize;
+	float		fov;
+	t_ray		ray;
+
+	setup_scene(&scene, "./scenes/2spheres1light.rt");
+	fov = M_PI / 2;
+
+	hsize = 160;
+	vsize = 120;
+	setup_camera(scene.cam, hsize, vsize, fov);
+	cr_expect(scene.cam.hsize == 160);
+	cr_expect(scene.cam.vsize == 120);
+	cr_expect(same_float(c.fov, M_PI / 2));
+	cr_expect(same_matrix(c.transform, identity_matr()));
+
+	hsize = 200;
+	vsize = 125;
+	setup_camera(scene.cam, hsize, vsize, fov);
+	cr_expect(same_float(scene.cam.pixel_size, 0.01));
+
+	hsize = 201;
+	vsize = 101;
+	setup_camera(scene.cam, hsize, vsize, fov);
+	ray = ray_for_pixel(c, 100, 50);
+	cr_expect(same_tuple(ray.orig, create_point(0, 0, 0)));
+	cr_expect(same_tuple(ray.dest, create_vector(0, 0, -1)));
+
+	clear(&scene);
 }
 
+/*
 Test(scene, corner_ray)
 {
 	t_camera	c;

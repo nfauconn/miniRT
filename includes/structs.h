@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 15:24:24 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/10 15:26:03 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/10 19:17:54 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,6 @@ typedef struct s_scene
 	void			*mlx;
 	void			*win;
 	t_img			*img;
-	float			ratio;
-	float			height_float;
-	float			width_float;
-	t_float4		focal_length;
-	t_float4		origin;
-	t_float4		width_vec;
-	t_float4		height_vec;
-	t_float4		ll_corner;
 	t_elem			*cam;
 	t_elem			*amblight;
 	t_elem			*lights;
