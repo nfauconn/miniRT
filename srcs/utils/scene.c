@@ -6,28 +6,15 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:04:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/07 19:39:34 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/10 13:24:21 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scene.h"
 
-int	nearer_point(t_xs res, t_xs newres)
-{
-	if(newres.t[0] >= 0)
-	{
-		if(newres.t[0] < res.t[0] && newres.t[0] < res.t[1])
-		return (1);
-	}
-	if(newres.t[1] >= 0)
-	{
-		if(newres.t[1] < res.t[0] && newres.t[1] < res.t[1])
-		return (1);
-	}
-	return (0);
-}
-
-/* find hits of objects */
+/* find hits of objects
+RETURN PEUT ETRE NEG OU 0 !! CHECKER
+parcourir liste chainee d objets : */
 t_inter	intersect_world(t_scene *world, t_ray ray)
 {
 	t_elem		obj;
@@ -47,47 +34,22 @@ t_inter	intersect_world(t_scene *world, t_ray ray)
 			res = i;
 		obj = obj->next;
 	}
+	return (res);
 }
 
-/* t_xs	intersect_world(t_scene *world, t_ray ray) //t_inter *intersect_world ??? like list of t_inter with every shapes
+t_inter	prepare_computations(t_inter i, t_ray ray)
 {
-	t_elem	*shape;
-	t_xs	res;
-	// t_xs	new_res;
-
-	shape = world->objs;
-	res = intersect(*shape, ray);
-	printf("%f\n", res.t[0]);
-	printf("%f\n", res.t[1]);
-	// while (shape.next != NULL)
-	// {
-	// 	new_res = intersect(shape, ray);
-	// 	if (nearer_point(res, new_res))
-	// 		res = new_res;
-	// 	shape = *shape.next;
-	// }
-	// if (res.t[1] >= 0 && res.t[1] < res.t[0])
-	// 	res.t[0] = res.t[1];
-	return (res);
-} */
-
-t_comps	prepare_computations(t_inter i, t_ray ray)
-{
-	t_comps	compres;
-
-	compres.t = i.t;
-	compres.obj = i.obj;
-	compres.point = position(ray, compres.t);
-	compres.eyev = -ray.dest;
-	compres.normalv = normal_atsphere(&compres.obj, compres.point);
-	if (dot_product(compres.normalv, compres.eyev) < 0)
+	i.point = position(ray, i.t);
+	i.eyev = -ray.dest;
+	i.normalv = normal_atsphere(&i.obj, i.point);
+	if (dot_product(i.normalv, i.eyev) < 0)
 	{
-		compres.inside = 1;
-		compres.normalv = -compres.normalv;
+		i.inside = 1;
+		i.normalv = -i.normalv;
 	}
 	else
-		compres.inside = 0;
-	return(compres);
+		i.inside = 0;
+	return (i);
 }
 
 /*
@@ -98,15 +60,23 @@ especially when you get to Chapter 8, Shadows, on page 109. But if you have CPU
 cycles to burn, having more than one light can make some neat effects possible, like
 overlapping shadows"
 */
-t_rgb	shade_hit(t_scene *world, t_comps comps)
+t_rgb	shade_hit(t_scene *world, t_inter inter)
 {
-	return (lighting(comps.obj.material, world->lights, comps.point, comps.eyev, comps.normalv));
+	return (lighting(inter.obj.material, world->lights, inter.point, inter.eyev, inter.normalv));
 }
 
 /* intersect the world with the given ray and return the color at the given intersection */
 t_rgb	color_at(t_scene *world, t_ray ray)
 {
+	t_inter	i;
+	t_rgb	color;
 
+	i = intersect_world(world, ray);
+	if (i.t <= 0)
+		return (BLACK);
+	i = prepare_computations(i, ray);
+	color = shade_hit(world, i);
+	return (color);
 }
 
 t_m4x4_f	view_transform(t_point from, t_point to, t_point up)

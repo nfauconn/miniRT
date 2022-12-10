@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/04 19:31:28 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/10 13:29:04 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 # define WIDTH 300
 # define HEIGHT 300
-# define BLACK (t_rgb){0, 0, 0, 0}
+# define BLACK "(t_rgb){0, 0, 0, 0}"
+# define WHITE "(t_rgb){1, 1, 1, 1}"
 
 # include "extern_libs.h"
 
@@ -92,7 +93,7 @@ typedef struct s_scene
 	t_elem			*amblight;
 	t_elem			*lights;
 	t_elem			*objs;
-	bool			(*fill_params[6])(struct s_scene *, char **);
+	int				(*fill_params[6])(struct s_scene *, char **);
 }				t_scene;
 
 /* PARSING */
