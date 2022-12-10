@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:04:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/10 13:24:21 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/10 13:48:45 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@ RETURN PEUT ETRE NEG OU 0 !! CHECKER
 parcourir liste chainee d objets : */
 t_inter	intersect_world(t_scene *world, t_ray ray)
 {
-	t_elem		obj;
+	t_elem		*obj;
 	t_xs		xs;
 	t_inter		i;
 	t_inter		res;
 
 	obj = world->objs;
-	xs = intersect(obj, ray);
+	xs = intersect(*obj, ray);
 	i = hit(xs);
 	res = i;
 	while (obj)
 	{
-		xs = intersect(obj, ray);
+		xs = intersect(*obj, ray);
 		i = hit(xs);
 		if (i.t > 0 && i.t < res.t)
 			res = i;
@@ -73,7 +73,7 @@ t_rgb	color_at(t_scene *world, t_ray ray)
 
 	i = intersect_world(world, ray);
 	if (i.t <= 0)
-		return (BLACK);
+		return ((t_rgb)BLACK);
 	i = prepare_computations(i, ray);
 	color = shade_hit(world, i);
 	return (color);

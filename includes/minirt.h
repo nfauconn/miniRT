@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/10 13:29:04 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/10 14:05:51 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # define WIDTH 300
 # define HEIGHT 300
-# define BLACK "(t_rgb){0, 0, 0, 0}"
-# define WHITE "(t_rgb){1, 1, 1, 1}"
+# define BLACK {0, 0, 0, 0}
+# define WHITE {1, 1, 1, 0}
 
 # include "extern_libs.h"
 

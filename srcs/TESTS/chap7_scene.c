@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chap7_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:29:05 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/08 14:46:53 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2022/12/10 13:52:15 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ void	print_tuple(t_float4 var)
 }
 
 // implementable intelligemment avec notre parsing
-Test(scene, default)
+Test(scene, setup2sp)
 {
 	t_scene	world;
-	setup_scene(&world, "./scenes/default.rt");
+	setup_scene(&world, "./scenes/2spheres1light.rt");
 	cr_expect(same_tuple(world.lights->color, (t_float4){255, 255, 255, 0}));
 	cr_expect(same_tuple(world.lights->w_pos, (t_float4){-10, 10, -10, 1}));
 	// print_tuple(world.lights->w_pos);
@@ -66,14 +66,10 @@ void	print_shape(t_elem *shape)
 	printf("specs = %f\n", shape->specs.radius);
 }
 
-// world ray rendra une liste chainee de t_inter.
-// MAIS faut il vraiment la creer ?
-// ou suffit il de parcourir dans une fonction statique n enregistrant que
-// l intersection la plus proche, et ne renvoyer qu elle
 Test(scene, world_ray)
 {
 	t_scene	world;
-	setup_scene(&world, "./scenes/default.rt");
+	setup_scene(&world, "./scenes/2spheres1light.rt");
 	world.objs->transform = identity_matr();
 	// print_shape(world.objs);
 	t_ray r = ray(create_point(0, 0, -5), create_vector(0, 0, 1));
@@ -84,7 +80,6 @@ Test(scene, world_ray)
 	clear (&world);
 }
 
-//utile pour reflection et refraction --> inutile
 Test(scene, precompute)
 {
 	t_ray	r = ray(create_point(0, 0, -5), create_vector(0, 0, 1));
@@ -92,17 +87,15 @@ Test(scene, precompute)
 	init_sphere(&shape);
 	t_inter	i = intersection(4, shape);
 
-	t_comps	comps = prepare_computations(i, r);
+	i = prepare_computations(i, r);
 
-	cr_expect(same_float(comps.t, i.t) == 1);
-	// cr_expect(&comps.obj == &i.obj);
-	cr_expect(same_tuple(comps.point , create_point(0, 0, -1)));
-	cr_expect(same_tuple(comps.eyev , create_vector(0, 0, -1)));
-	cr_expect(same_tuple(comps.normalv , create_vector(0, 0, -1)));
+	cr_expect(same_float(i.t, i.t) == 1);
+	// cr_expect(&i.obj == &i.obj);
+	cr_expect(same_tuple(i.point , create_point(0, 0, -1)));
+	cr_expect(same_tuple(i.eyev , create_vector(0, 0, -1)));
+	cr_expect(same_tuple(i.normalv , create_vector(0, 0, -1)));
 }
 
-//pas compris a quoi ca servait, de definir si ray intersect dans ou a l exterieur ?
-// c est quoi l exterieur ?
 Test(scene, outside)
 {
 	t_ray	r = ray(create_point(0, 0, -5), create_vector(0, 0, 1));
@@ -110,36 +103,36 @@ Test(scene, outside)
 	init_sphere(&shape);
 	t_inter	i = intersection(4, shape);
 
-	t_comps	comps = prepare_computations(i, r);
+	i = prepare_computations(i, r);
 
-	cr_expect(!comps.inside);
+	cr_expect(!i.inside);
 }
 
-Test(scene, inside) // same
+Test(scene, inside)
 {
 	t_ray	r = ray(create_point(0, 0, 0), create_vector(0, 0, 1));
 	t_elem	shape;
 	init_sphere(&shape);
 	t_inter	i = intersection(1, shape);
 
-	t_comps	comps = prepare_computations(i, r);
+	i = prepare_computations(i, r);
 
-	cr_expect(same_tuple(comps.point , create_point(0, 0, 1)));
-	cr_expect(same_tuple(comps.eyev , create_vector(0, 0, -1)));
-	cr_expect(comps.inside);
-	cr_expect(same_tuple(comps.normalv , create_vector(0, 0, -1)));
+	cr_expect(same_tuple(i.point , create_point(0, 0, 1)));
+	cr_expect(same_tuple(i.eyev , create_vector(0, 0, -1)));
+	cr_expect(i.inside);
+	cr_expect(same_tuple(i.normalv , create_vector(0, 0, -1)));
 }
 
 Test(scene, shade_out)
 {
 	t_scene	world;
-	setup_scene(&world, "./scenes/default.rt");
+	setup_scene(&world, "./scenes/2spheres1light.rt");
 	t_ray	r = ray(create_point(0, 0, -5), create_vector(0, 0, 1));
 	t_elem	*shape = world.objs;
 	t_inter	i = intersection(4, *shape);
-	t_comps	comps = prepare_computations(i, r);
+	i = prepare_computations(i, r);
 
-	t_rgb	c = shade_hit(&world, comps);
+	t_rgb	c = shade_hit(&world, i);
 
 	cr_expect(same_tuple(c, create_vector(0.38066, 0.47583, 0.2855)));
 }
@@ -147,14 +140,14 @@ Test(scene, shade_out)
 Test(scene, shade_in)
 {
 	t_scene	world;
-	setup_scene(&world, "./scenes/default.rt");
+	setup_scene(&world, "./scenes/2spheres1light.rt");
 	point_light(world.lights, create_point(0, 0.25, 0), create_color(255, 255, 255));
 	t_ray	r = ray(create_point(0, 0, -5), create_vector(0, 0, 1));
 	t_elem	*shape = world.objs->next;
 	t_inter	i = intersection(0.5, *shape);
-	t_comps	comps = prepare_computations(i, r);
+	i = prepare_computations(i, r);
 
-	t_rgb	c = shade_hit(&world, comps);
+	t_rgb	c = shade_hit(&world, i);
 
 	cr_expect(same_tuple(c, create_color(0.90498, 0.90498, 0.90498)));
 }
@@ -163,10 +156,10 @@ Test(scene, shade_in)
 Test(scene, ray_misses)
 {
 	t_scene	world;
-	setup_scene(&world, "./scenes/default.rt");
+	setup_scene(&world, "./scenes/2spheres1light.rt");
 	t_ray	r = ray(create_point(0, 0, -5), create_vector(0, 1, 0));
 
-	t_rgb c = color_at(world, r);
+	t_rgb c = color_at(&world, r);
 
 	cr_expect(same_tuple(c, create_color(0, 0, 0)));
 }
@@ -174,10 +167,10 @@ Test(scene, ray_misses)
 Test(scene, ray_hits)
 {
 	t_scene	world;
-	setup_scene(&world, "./scenes/default.rt");
+	setup_scene(&world, "./scenes/2spheres1light.rt");
 	t_ray	r = ray(create_point(0, 0, -5), create_vector(0, 0, 1));
 
-	t_rgb c = color_at(world, r);
+	t_rgb c = color_at(&world, r);
 
 	cr_expect(same_tuple(c, create_color(0.38066, 0.47583, 0.2855)));
 }
@@ -185,18 +178,19 @@ Test(scene, ray_hits)
 Test(scene, ray_inside)
 {
 	t_scene	world;
-	setup_scene(&world, "./scenes/default.rt");
+	setup_scene(&world, "./scenes/2spheres1light.rt");
 	t_elem	*outer = world.objs;
 	outer->material.ambient = 1.0;
-	t_elem	*inner = outer.next;
+	t_elem	*inner = outer->next;
 	inner->material.ambient = 1.0;
 	t_ray	r = ray(create_point(0, 0, 0.75), create_vector(0, 0, -1));
 
-	t_rgb c = color_at(world, r);
+	t_rgb c = color_at(&world, r);
 
 	cr_expect(same_tuple(c, inner->material.color));
 }
 
+/*
 Test(scene, default_orientation)
 {
 	t_point	from = create_point(0, 0, 0);
@@ -306,10 +300,10 @@ Test(scene, transformed_ray)
 	cr_expect(same_tuple(ray.dest, create_vector(sqrt(2) / 2, 0, -(sqrt(2) / 2))));
 }
 
-/* Test(scene, full_scene)
+Test(scene, full_scene)
 {
 	t_scene	w;
-	setup_scene(&w, "./scenes/default.rt");
+	setup_scene(&w, "./scenes/2spheres1light.rt");
 	t_camera	c;
 	c = setup_camera(11, 11, M_PI / 2);
 	t_float4	from = create_point(0, 0, -5);
@@ -319,4 +313,7 @@ Test(scene, transformed_ray)
 	image = render(c, w);
 	cr_expect(same_tuple(pixel_at(image, 5, 5), create_vector(0.38066, 0.47583, 0.2855)));
 //	free(image);
-} *
+}
+
+
+*/

@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:00:45 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/03 17:34:07 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/10 13:44:43 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 //chaque str de param puis set, et exit clear se charge de free ce qu il faut
 //anyway)
 
-bool	set_ambiantlight(t_scene *scene, char **params)
+int	set_ambiantlight(t_scene *scene, char **params)
 {
 	if (ft_strarraysize(params) != 3)
 		return (error_display("wrong number of elements for ambiant light"));
@@ -32,7 +32,7 @@ bool	set_ambiantlight(t_scene *scene, char **params)
 	return (0);
 }
 
-bool	set_camera(t_scene *scene, char **params)
+int	set_camera(t_scene *scene, char **params)
 {
 	if (ft_strarraysize(params) != 4)
 		return (error_display("wrong number of elements for camera"));
@@ -49,9 +49,9 @@ bool	set_camera(t_scene *scene, char **params)
 }
 
 /* !!!! no ID cf init_sphere */
-bool	set_lights(t_scene *scene, char **params)
+int	set_lights(t_scene *scene, char **params)
 {
-	bool		ret;
+	int		ret;
 	t_elem		*newlight;
 
 	if (ft_strarraysize(params) != 4)
@@ -68,9 +68,9 @@ bool	set_lights(t_scene *scene, char **params)
 	return (ret);
 }
 
-bool	set_sphere(t_scene *scene, char **params)
+int	set_sphere(t_scene *scene, char **params)
 {
-	bool		ret;
+	int		ret;
 	t_elem		*newsphere;
 
 	if (ft_strarraysize(params) != 4)
@@ -89,9 +89,9 @@ bool	set_sphere(t_scene *scene, char **params)
 }
 
 /* !!!! no ID cf init_sphere */
-bool	set_plan(t_scene *scene, char **params)
+int	set_plan(t_scene *scene, char **params)
 {
-	bool		ret;
+	int		ret;
 	t_elem		*newplan;
 
 	if (ft_strarraysize(params) != 4)
@@ -109,9 +109,9 @@ bool	set_plan(t_scene *scene, char **params)
 }
 
 /* !!!! no ID cf init_sphere */
-bool	set_cylinder(t_scene *scene, char **params)
+int	set_cylinder(t_scene *scene, char **params)
 {
-	bool		ret;
+	int		ret;
 	t_elem		*newcylinder;
 
 	if (ft_strarraysize(params) != 6)

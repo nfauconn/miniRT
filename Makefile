@@ -36,7 +36,9 @@ SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		rayutils \
 		interlst \
 		lights \
-		matrix}}}
+		matrix \
+		scene} \
+		}}
 DEPS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.d}}
 OBJS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.o}}
 VPATH = ${SRC_DIR}
@@ -47,7 +49,7 @@ MAIN_OBJ = objs/main.o
 
 #COMPILING
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -fenable-matrix -mavx -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -fenable-matrix -mavx -g3 #-fsanitize=address
 LD_FLAGS = -L ${LIBFT_DIR} -L ${MLX_DIR}
 LN_FLAGS = -lmlx -lXext -lX11 -lm -lft
 INCLUDES = -I ${INC_DIR} -I ${LIBFT_INC_DIR} -I ${MLX_DIR}
@@ -164,9 +166,10 @@ ${TEST_FILE}.o: ${TEST_FILE}.c
 	@${CC} ${CFLAGS} ${T_INCLUDES} -I includes -MMD -o $@ -c $<
 
 testlittleclean: littleclean
-	@${RM} ${TEST_NAME}${TEST_DEPS} ${TEST_OBJ}
+	@${RM} ${TEST_NAME}${TEST_DEPS} ${TEST_OBJ} ${OBJS}
 	@echo "deleted test program"
 
 testr: testlittleclean test
+testsr: testlittleclean tests
 
 .PHONY: all clean fclean re libftcreat val norm littleclean r test testlittleclean testr

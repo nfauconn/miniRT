@@ -73,8 +73,8 @@ t_rgb	lighting(t_material m, t_elem *light, t_point pos, t_vector eyev, t_vector
 	light_dot_normal = dot_product(lightv, normalv);
 	if (light_dot_normal < 0)
 	{
-		diffuse = create_color(0, 0, 0); //BLACK define
-		specular = create_color(0, 0, 0);
+		diffuse = (t_rgb)BLACK;
+		specular = (t_rgb)BLACK;
 	}
 	else
 	{
@@ -82,7 +82,7 @@ t_rgb	lighting(t_material m, t_elem *light, t_point pos, t_vector eyev, t_vector
 		reflectv = reflect(-lightv, normalv);
 		reflect_dot_eye = dot_product(reflectv, eyev);
 		if (reflect_dot_eye <= 0)
-			specular = BLACK;
+			specular = (t_rgb)BLACK;
 		else
 		{
 			factor = pow(reflect_dot_eye, m.shininess);
