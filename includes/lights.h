@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:58:29 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/04 19:29:53 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/10 16:10:09 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 t_vector	normal_atsphere(t_elem *sp, t_point point);
 t_vector	reflect(t_vector in, t_vector normal);
 void		point_light(t_elem *light, t_point pos, t_rgb color);
-t_material	default_material();
+t_material	default_material(t_elem *elem);
 t_rgb		lighting(t_material m, t_elem *light, t_point pos, t_vector eyev, t_vector normalv);
 t_rgb		create_color(float red, float green, float blue);
 

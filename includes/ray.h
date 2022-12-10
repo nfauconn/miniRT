@@ -6,39 +6,16 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:11:12 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/10 13:15:04 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/10 15:26:56 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAY_H
 #define RAY_H
 
-# include "minirt.h"
+# include "extern_libs.h"
+# include "structs.h"
 # include "tuple.h"
-
-typedef struct s_ray
-{
-	t_point		orig;
-	t_point		dest;
-}	t_ray;
-
-typedef struct s_xs
-{
-	size_t		count;
-	float		t[2];
-	t_elem		obj;
-}	t_xs;
-
-typedef struct s_inter
-{
-	float				t;
-	t_elem				obj;
-	t_point				point;
-	t_vector			eyev;
-	t_vector			normalv;
-	bool				inside;
-	struct s_inter		*next;
-}	t_inter;
 
 /* RAY */
 t_ray		ray(t_point orig, t_vector dest);

@@ -7,6 +7,7 @@
 # include "matrix.h"
 # include "lights.h"
 # include "ray.h"
+# include "color.h"
 
 typedef	struct	s_camera
 {

@@ -42,18 +42,6 @@ void	point_light(t_elem *light, t_point pos, t_rgb color)//A MON AVIS ON VA POUV
 	//A REFACTO ABSOLU<EMT avec le parsing
 }
 
-t_material	default_material()
-{
-	t_material	material;
-
-	material.color = create_color(1, 1, 1);
-	material.ambient = 0.1;
-	material.diffuse = 0.9;
-	material.specular = 0;
-	material.shininess = 200.0;
-	return (material);
-}
-
 t_rgb	lighting(t_material m, t_elem *light, t_point pos, t_vector eyev, t_vector normalv)
 {
 	t_rgb		effective_color;

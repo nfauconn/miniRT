@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:19:07 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/03 13:50:11 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/10 15:48:32 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,13 @@ bool	conv_rgb(char *s, t_elem *elem, char *elem_name)
 		elem->color.x = ft_atof(rgb[0]);
 		elem->color.y = ft_atof(rgb[1]);
 		elem->color.z = ft_atof(rgb[2]);
+		elem->color.w = 0;
 	 	if (check_rgb_range(elem->color))
 			ret = error_display2("wrong rgb value for ", elem_name);
 	}
+	elem->color.x = convert_color_to_unit(elem->color.x);
+	elem->color.y = convert_color_to_unit(elem->color.y);
+	elem->color.z = convert_color_to_unit(elem->color.z);
 	ft_strarrayclear(&rgb);
 	return (ret);
 }
@@ -77,6 +81,7 @@ bool	conv_orientation(char *s, t_elem *elem, char *elem_name)
 		elem->orientation.x = ft_atof(or[0]);
 		elem->orientation.y = ft_atof(or[1]);
 		elem->orientation.z = ft_atof(or[2]);
+		elem->orientation.w = 0;
 		if (check_orientation_range(elem->orientation))
 			ret = error_display2("wrong orientation range for ", elem_name);
 	}
@@ -99,6 +104,7 @@ bool	conv_pos(char *s, t_elem *elem, char *elem_name)
 		elem->w_pos.x = ft_atof(pos[0]);
 		elem->w_pos.y = ft_atof(pos[1]);
 		elem->w_pos.z = ft_atof(pos[2]);
+		elem->w_pos.w = 1;
 		ret = 0;
 	}
 	ft_strarrayclear(&pos);

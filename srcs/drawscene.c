@@ -6,40 +6,11 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 18:10:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/04 20:14:09 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/10 16:10:44 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-#include "ray.h"
-#include "matrix.h"
-#include "lights.h"
-
-int	convert_float_to_int(float hexa)
-{
-	int	res;
-
-	res = hexa * 255;
-	if (hexa * 255 - res >= 0.5)
-		res += 1;
-	if (res > 255)
-		res = 255;
-	if (res < 0)
-		res = 0;
-	return (res);
-}
-
-int rgbvtoi(t_float4 color_vec)
-{
-	int	r;
-	int	g;
-	int	b;
-
-	r = convert_float_to_int(color_vec.x);
-	g = convert_float_to_int(color_vec.y);
-	b = convert_float_to_int(color_vec.z);
-	return (r << 16 | g << 8 | b);
-}
 
 void	draw_scene(t_img *img)
 {
@@ -65,7 +36,6 @@ void	draw_scene(t_img *img)
 	t_vector	normal;
 
 	init_sphere(&shape);
-	shape.material = default_material();
 	shape.material.color = create_color(1, 0.9, 0);
 	light.w_pos = create_point(-10, 10, -10);
 	light.color = create_color(1, 1, 1);	y = 0;
