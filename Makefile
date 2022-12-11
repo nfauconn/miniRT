@@ -52,7 +52,7 @@ MAIN_OBJ = objs/main.o
 
 #COMPILING
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -fenable-matrix -mavx -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -fenable-matrix -mavx -g3 #-fsanitize=address
 LD_FLAGS = -L ${LIBFT_DIR} -L ${MLX_DIR}
 LN_FLAGS = -lmlx -lXext -lX11 -lm -lft
 INCLUDES = -I ${INC_DIR} -I ${LIBFT_INC_DIR} -I ${MLX_DIR}

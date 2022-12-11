@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:29:05 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/11 18:55:48 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/11 19:02:23 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,14 +247,12 @@ Test(scene, camera_pixel_size)
 	t_scene		scene;
 	float		hsize;
 	float		vsize;
-	float		fov;
 	t_ray		ray;
 /* 	t_point		from;
 	t_point		to;
 	t_point		up; */
 
 	setup_scene(&scene, "./scenes/2spheres1light.rt");
-	fov = M_PI / 2;
 
 	hsize = 160;
 	vsize = 120;
