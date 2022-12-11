@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:29:05 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/11 16:13:57 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/11 17:18:52 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,6 +286,9 @@ Test(scene, camera_pixel_size)
 	float		vsize;
 	float		fov;
 	t_ray		ray;
+	t_point		from;
+	t_point		to;
+	t_point		up;
 
 	setup_scene(&scene, "./scenes/2spheres1light.rt");
 	fov = M_PI / 2;
@@ -310,46 +313,27 @@ Test(scene, camera_pixel_size)
 	cr_expect(same_tuple(ray.orig, create_point(0, 0, 0)));
 	cr_expect(same_tuple(ray.dest, create_vector(0, 0, -1)));
 
-	clear(&scene);
-}
-
-/*
-Test(scene, corner_ray)
-{
-	t_camera	c;
-	c = setup_camera(201, 101, M_PI / 2);
-	t_ray	ray;
-	ray = ray_for_pixel(c, 0, 0);
-
+	hsize = 201;
+	vsize = 101;
+	setup_camera(scene.cam, hsize, vsize);
+	ray = ray_for_pixel(*scene.cam, 0, 0);
 	cr_expect(same_tuple(ray.orig, create_point(0, 0, 0)));
 	cr_expect(same_tuple(ray.dest, create_vector(0.66519, 0.33259, -0.66851)));
-}
 
-Test(scene, transformed_ray)
-{
-	t_camera	c;
-	c = setup_camera(201, 101, M_PI / 2);
-	t_ray	ray;
-	ray = ray_for_pixel(c, 100, 50);
-	c.transform = rotation_y(M_PI / 4) * translation(0, -2, 5);
+	scene.cam->transform = rotation_y(M_PI / 4) * translation(0, -2, 5);
+	ray = ray_for_pixel(*scene.cam, 100, 50);
 	cr_expect(same_tuple(ray.orig, create_point(0, 2, -5)));
-	cr_expect(same_tuple(ray.dest, create_vector(sqrt(2) / 2, 0, -(sqrt(2) / 2))));
-}
+	cr_expect(same_tuple(ray.dest, create_vector(sqrt(2) / 2, 0, -sqrt(2) / 2)));
 
-Test(scene, full_scene)
-{
-	t_scene	w;
-	setup_scene(&w, "./scenes/2spheres1light.rt");
-	t_camera	c;
-	c = setup_camera(11, 11, M_PI / 2);
-	t_float4	from = create_point(0, 0, -5);
-	t_float4	to = create_point(0, 0, 0);
-	t_float4	up = create_vector(0, 1, 0);
-	c.transform = view_transform(from, to, up);
+	hsize = 11;
+	vsize = 11;
+	setup_camera(scene.cam, hsize, vsize);
+	from = create_point(0, 0, -5);
+	to = create_point(0, 0, 0);
+	up = create_vector(0, 1, 0);
+	scene.cam->transform = view_transform(from, to, up);
 	image = render(c, w);
 	cr_expect(same_tuple(pixel_at(image, 5, 5), create_vector(0.38066, 0.47583, 0.2855)));
-//	free(image);
+
+  	clear(&scene);
 }
-
-
-*/
