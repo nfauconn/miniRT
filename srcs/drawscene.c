@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 18:10:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/11 20:07:29 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/11 20:11:20 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	draw_scene(t_scene *scene, t_img *img)
 	t_elem	*right = scene->objs->next;
 	t_elem	*left = scene->objs->next->next;
 
-	middle->transform = translation(-0.5, 1, -3.5);
-	right->transform = translation(0.7, 1, -3.8);//matrix_mult(translation(1.5, 0.5, -0.5), scaling(0.5, 0.5, 0.5));
+	middle->transform = translation(-0.5, 1, 0.5);
+	right->transform = matrix_mult(translation(1.5, 0.5, -0.5), scaling(0.5, 0.5, 0.5));
 	left->transform = matrix_mult(translation(-1.5, 0.33, -0.75), scaling(0.33, 0.33, 0.33));
  	scene->cam->transform = view_transform(create_point(0, 1.5, -5), \
 												create_point(0, 1, 0), \
