@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:29:05 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/10 19:33:03 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/11 16:13:57 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,7 +250,7 @@ Test(scene, camera_build)
 	float	fov = M_PI / 2;
 	t_camera	c;
 
-	c = setup_camera(hsize, vsize, fov);
+	c = setup_camera(hsize, vsize);
 
 	cr_expect(c.hsize == 160);
 	cr_expect(c.vsize == 120);
@@ -292,21 +292,21 @@ Test(scene, camera_pixel_size)
 
 	hsize = 160;
 	vsize = 120;
-	setup_camera(scene.cam, hsize, vsize, fov);
-	cr_expect(scene.cam.hsize == 160);
-	cr_expect(scene.cam.vsize == 120);
-	cr_expect(same_float(c.fov, M_PI / 2));
-	cr_expect(same_matrix(c.transform, identity_matr()));
+	setup_camera(scene.cam, hsize, vsize);
+	cr_expect(scene.cam->hsize == 160);
+	cr_expect(scene.cam->vsize == 120);
+	cr_expect(same_float(scene.cam->fov, M_PI / 2));
+	cr_expect(same_matrix(scene.cam->transform, identity_matr()));
 
 	hsize = 200;
 	vsize = 125;
-	setup_camera(scene.cam, hsize, vsize, fov);
-	cr_expect(same_float(scene.cam.pixel_size, 0.01));
+	setup_camera(scene.cam, hsize, vsize);
+	cr_expect(same_float(scene.cam->pixel_size, 0.01));
 
 	hsize = 201;
 	vsize = 101;
-	setup_camera(scene.cam, hsize, vsize, fov);
-	ray = ray_for_pixel(c, 100, 50);
+	setup_camera(scene.cam, hsize, vsize);
+	ray = ray_for_pixel(*scene.cam, 100, 50);
 	cr_expect(same_tuple(ray.orig, create_point(0, 0, 0)));
 	cr_expect(same_tuple(ray.dest, create_vector(0, 0, -1)));
 

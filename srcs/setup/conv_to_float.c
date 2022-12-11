@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 12:56:42 by noe               #+#    #+#             */
-/*   Updated: 2022/12/04 19:33:00 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/11 15:59:55 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ bool	conv_ratio(char *s, t_elem *elem, char *elem_name)
 	return (0);
 }
 
-bool	conv_fov(char *s, t_elem *elem, char *elem_name)
+bool	conv_fov(char *s, t_camera *cam, char *elem_name)
 {
 	float	fov;
 
 	fov = ft_atof(s);
 	if (fov < 0 || fov > 180)
 		return (error_display2("wrong fov range for ", elem_name));
-	elem->specs.fov = fov;
+	cam->fov = fov;
 	return (0);
 }
 

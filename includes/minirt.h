@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/10 19:02:46 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/11 16:00:55 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool	conv_pos(char *s, t_elem *elem, char *elem_name);
 bool	conv_orientation(char *s, t_elem *elem, char *elem_name);
 bool	conv_rgb(char *s, t_elem *elem, char *elem_name);
 bool	conv_ratio(char *s, t_elem *elem, char *elem_name);
-bool	conv_fov(char *s, t_elem *elem, char *elem_name);
+bool	conv_fov(char *s, t_camera *cam, char *elem_name);
 bool	conv_radius(char *s, t_elem *elem, char *elem_name);
 bool	conv_diam_height(char *s1, char *s2, t_elem *elem, char *elem_name);
 void	elem_add_back(t_elem **head, t_elem *to_add);

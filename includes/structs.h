@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 15:24:24 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/10 19:17:54 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/11 16:01:45 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,17 @@ typedef struct s_elem
 	struct s_elem		*next;
 }				t_elem;
 
+typedef	struct	s_camera //attention !! position et orientation cam a mettre dans le parsing ?
+{
+	float		fov;
+	float		hsize;
+	float		vsize;
+	float		half_height;
+	float		half_width;
+	float		pixel_size;
+	t_m4x4_f	transform;
+}				t_camera;
+
 typedef struct s_img
 {
 	void				*ptr;
@@ -80,7 +91,7 @@ typedef struct s_scene
 	void			*mlx;
 	void			*win;
 	t_img			*img;
-	t_elem			*cam;
+	t_camera		*cam;
 	t_elem			*amblight;
 	t_elem			*lights;
 	t_elem			*objs;

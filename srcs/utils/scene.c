@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:04:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/10 19:33:39 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/11 16:09:32 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ t_m4x4_f	view_transform(t_point from, t_point to, t_point up)
 	return (matrix_mult(res, translation(-from.x, -from.y, -from.z)));
 }
 
-t_ray	ray_for_pixel(t_elem cam, float px, float py)
+t_ray	ray_for_pixel(t_camera cam, float px, float py)
 {
 	float	x_offset;
 	float	y_offset;
@@ -136,14 +136,14 @@ t_ray	ray_for_pixel(t_elem cam, float px, float py)
 	t_rgb	**image;
 	//image could be the mlx image in th final version
 	//canvas doesn't even exist yet, it should be a kind of big malloc, i guess
-	image = (cam.hsize, cam.vsize);
+	image = (cam->hsize, cam->vsize);
 	//it write color in the image, line by line, column by column
 	//depending from what the new ray touch in the world
 	y = 0;
-	while(y < cam.vsize - 1)
+	while(y < cam->vsize - 1)
 	{
 		x = 0;
-		while (x < cam.hsize - 1)
+		while (x < cam->hsize - 1)
 		{
 			ray = ray_for_pixel(cam, x, y);
 			color = color_at(world, ray);

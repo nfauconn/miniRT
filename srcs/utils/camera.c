@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 18:41:43 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/10 19:31:18 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/11 16:10:15 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,15 @@ void	setup_camera(t_scene *scene, t_elem *cam)
 	cam->pixel_size = (cam->half_width * 2) / cam->hsize;
 } */
 
-void	setup_camera(t_elem *cam, float hsize, float vsize, float fov)
+void	setup_camera(t_camera *cam, float hsize, float vsize)
 {
-	t_camera	cam;
 	float		half_view;
 	float		aspect;
 
 	cam->hsize = hsize;
 	cam->vsize = vsize;
-	cam->fov = fov;
 	cam->transform = identity_matr();
-	half_view = tan(fov / 2);
+	half_view = tan(cam->fov / 2);
 	aspect = cam->hsize / cam->vsize;
 	if (aspect >= 1)
 	{
@@ -57,5 +55,4 @@ void	setup_camera(t_elem *cam, float hsize, float vsize, float fov)
 		cam->half_height = half_view;
 	}
 	cam->pixel_size = (cam->half_width * 2) / cam->hsize;
-	return (cam);
 }
