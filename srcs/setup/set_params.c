@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:00:45 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/11 17:02:00 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/11 17:29:17 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,9 @@ int	set_camera(t_scene *scene, char **params)
 	scene->cam = ft_calloc(1, sizeof(t_elem));
 	if (!scene->cam)
 		return (error_display("malloc error"));
-/*  	if (conv_pos(params[1], scene->cam, params[0])
-		|| conv_orientation(params[2], scene->cam, params[0])
-		|| conv_fov(params[3], scene->cam, params[0])) */
-	if (conv_fov(params[3], scene->cam, params[0]))
+ 	if (conv_campos(params[1], scene->cam, params[0])
+		|| conv_camorientation(params[2], scene->cam, params[0])
+		|| conv_fov(params[3], scene->cam, params[0]))
 		return (1);
 	setup_camera(scene->cam, HEIGHT, WIDTH);
 	scene->cam->fov *= M_PI / 180;

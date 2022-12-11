@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:04:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/11 16:09:32 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/11 18:53:53 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,18 @@ t_inter	intersect_world(t_scene *world, t_ray ray)
 	return (res);
 }
 
-t_inter	prepare_computations(t_inter i, t_ray ray)
+void	prepare_computations(t_inter *i, t_ray ray)
 {
-	i.point = position(ray, i.t);
-	i.eyev = -ray.dest;
-	i.normalv = normal_atsphere(&i.obj, i.point);
-	if (dot_product(i.normalv, i.eyev) < 0)
+	i->point = position(ray, i->t);
+	i->eyev = -ray.dest;
+	i->normalv = normal_atsphere(&i->obj, i->point);
+	if (dot_product(i->normalv, i->eyev) < 0)
 	{
-		i.inside = 1;
-		i.normalv = -i.normalv;
+		i->inside = 1;
+		i->normalv = -i->normalv;
 	}
 	else
-		i.inside = 0;
-	return (i);
+		i->inside = 0;
 }
 
 /*
@@ -74,7 +73,7 @@ t_rgb	color_at(t_scene *world, t_ray ray)
 	i = intersect_world(world, ray);
 	if (i.t <= 0)
 		return ((t_rgb)BLACK);
-	i = prepare_computations(i, ray);
+	prepare_computations(&i, ray);
 	color = shade_hit(world, i);
 	return (color);
 }

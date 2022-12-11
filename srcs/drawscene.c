@@ -6,11 +6,58 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 18:10:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/10 16:10:44 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/11 18:49:40 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void	render(t_scene *scene, t_img *img)
+{
+	size_t		x;
+	size_t		y;
+	t_ray		r;
+	t_rgb		color;
+
+	y = 0;
+	while (y < scene->cam->vsize)
+	{
+		x = 0;
+		while (x < scene->cam->hsize)
+		{
+			r = ray_for_pixel(*(scene->cam), x, y);
+			color = color_at(scene, r);
+			my_mlx_pixel_put(img, x, y, rgbvtoi(color));
+			x++;
+		}
+		y++;
+	}
+	printf("finish\n");
+}
+
+void	draw_scene(t_scene *scene, t_img *img)
+{
+	t_elem	*middle = scene->objs;
+	t_elem	*left = scene->objs->next;
+	t_elem	*right = scene->objs->next->next;
+
+	middle->transform = translation(-0.5, 1, 0.5);
+	right->transform = matrix_mult(translation(-0.5, 1, 0.5), scaling(0.5, 0.5, 0.5));
+	left->transform = matrix_mult(translation(-1.5, 0.33, -0.75), scaling(0.33, 0.33, 0.33));
+	scene->cam->transform = view_transform(create_point(0, 1.5, -5), \
+												create_point(0, 1, 0), \
+												create_vector(0, 1, 0));
+	render(scene, img);
+}
+
+/* 
+	scene->objs->material = test_default_material2(scene->objs);
+
+//	left
+	scene->objs->next->material = test_default_material(scene->objs->next);
+	scene->objs->next->transform = scaling(0.5, 0.5, 0.5);
+
+//	right
 
 void	draw_scene(t_img *img)
 {
@@ -71,4 +118,4 @@ void	draw_scene(t_img *img)
 		y++;
 	}
 	printf("finish\n");
-}
+} */

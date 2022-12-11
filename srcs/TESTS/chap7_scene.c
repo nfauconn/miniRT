@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:29:05 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/11 17:18:52 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/11 18:55:48 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ Test(scene, precompute)
 	t_elem	shape;
 	init_sphere(&shape);
 	t_inter	i = intersection(4, shape);
-	i = prepare_computations(i, r);
+	prepare_computations(&i, r);
 	cr_expect(same_float(i.t, i.t) == 1);
 	cr_expect(same_tuple(i.point , create_point(0, 0, -1)));
 	cr_expect(same_tuple(i.eyev , create_vector(0, 0, -1)));
@@ -111,7 +111,7 @@ Test(scene, outside)
 	t_elem	shape;
 	init_sphere(&shape);
 	t_inter	i = intersection(4, shape);
-	i = prepare_computations(i, r);
+	prepare_computations(&i, r);
 	cr_expect(!i.inside);
 }
 
@@ -121,7 +121,7 @@ Test(scene, inside)
 	t_elem	shape;
 	init_sphere(&shape);
 	t_inter	i = intersection(1, shape);
-	i = prepare_computations(i, r);
+	prepare_computations(&i, r);
 	cr_expect(same_tuple(i.point , create_point(0, 0, 1)));
 	cr_expect(same_tuple(i.eyev , create_vector(0, 0, -1)));
 	cr_expect(i.inside);
@@ -147,7 +147,7 @@ Test(scene, shade_hit)
 	/* shade out */
 	r = ray(create_point(0, 0, -5), create_vector(0, 0, 1));
 	i = intersection(4, *shape);
-	i = prepare_computations(i, r);
+	prepare_computations(&i, r);
 	c = shade_hit(&world, i);
 	cr_expect(same_tuple(c, create_vector(0.38066, 0.47583, 0.2855)));
 
@@ -155,7 +155,7 @@ Test(scene, shade_hit)
 	point_light(world.lights, create_point(0, 0.25, 0), create_color(1, 1, 1));
 	r = ray(create_point(0, 0, 0), create_vector(0, 0, 1));
 	i = intersection(0.5, *shape2);
-	i = prepare_computations(i, r);
+	prepare_computations(&i, r);
 	c = shade_hit(&world, i);
 	cr_expect(same_tuple(c, create_color(0.90498, 0.90498, 0.90498)));
 
@@ -241,44 +241,7 @@ Test(scene, view2)
 
 	cr_expect(same_matrix(t, texpect));
 }
-/* 
-Test(scene, camera_build)
-{
-	float	hsize = 160;
-	float	vsize = 120;
-	//need to remember this is in radian, but we are given degree
-	float	fov = M_PI / 2;
-	t_camera	c;
 
-	c = setup_camera(hsize, vsize);
-
-	cr_expect(c.hsize == 160);
-	cr_expect(c.vsize == 120);
-	cr_expect(same_float(c.fov, M_PI / 2));
-	cr_expect(same_matrix(c.transform, identity_matr()));
-}
-
-Test(scene, camera_pixel_size)
-{
-	t_camera	c = setup_camera(200, 125, M_PI / 2);
-
-	cr_expect(c.pixel_size == 0.01);
-
-	c = setup_camera(125, 200, M_PI / 2);
-
-	cr_expect(c.pixel_size == 0.01);
-}
-
-Test(scene, center_ray)
-{
-	t_camera	c;
-	c = setup_camera(201, 101, M_PI / 2);
-	t_ray	ray;
-	ray = ray_for_pixel(c, 100, 50);
-
-	cr_expect(same_tuple(ray.orig, create_point(0, 0, 0)));
-	cr_expect(same_tuple(ray.dest, create_vector(0, 0, -1)));
-} */
 Test(scene, camera_pixel_size)
 {
 	t_scene		scene;
@@ -286,9 +249,9 @@ Test(scene, camera_pixel_size)
 	float		vsize;
 	float		fov;
 	t_ray		ray;
-	t_point		from;
+/* 	t_point		from;
 	t_point		to;
-	t_point		up;
+	t_point		up; */
 
 	setup_scene(&scene, "./scenes/2spheres1light.rt");
 	fov = M_PI / 2;
@@ -325,7 +288,7 @@ Test(scene, camera_pixel_size)
 	cr_expect(same_tuple(ray.orig, create_point(0, 2, -5)));
 	cr_expect(same_tuple(ray.dest, create_vector(sqrt(2) / 2, 0, -sqrt(2) / 2)));
 
-	hsize = 11;
+/* 	hsize = 11;
 	vsize = 11;
 	setup_camera(scene.cam, hsize, vsize);
 	from = create_point(0, 0, -5);
@@ -333,7 +296,7 @@ Test(scene, camera_pixel_size)
 	up = create_vector(0, 1, 0);
 	scene.cam->transform = view_transform(from, to, up);
 	image = render(c, w);
-	cr_expect(same_tuple(pixel_at(image, 5, 5), create_vector(0.38066, 0.47583, 0.2855)));
+	cr_expect(same_tuple(pixel_at(image, 5, 5), create_vector(0.38066, 0.47583, 0.2855))); */
 
   	clear(&scene);
 }

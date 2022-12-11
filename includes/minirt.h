@@ -6,15 +6,15 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/11 16:24:06 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/11 18:45:23 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define WIDTH 300
-# define HEIGHT 300
+# define WIDTH 100
+# define HEIGHT 50
 # define BLACK {0, 0, 0, 0}
 # define WHITE {1, 1, 1, 0}
 
@@ -30,7 +30,9 @@
 bool	parse_file(char *file, t_scene *scene);
 void	init_paramsetter(t_scene *scene);
 bool	conv_pos(char *s, t_elem *elem, char *elem_name);
+bool	conv_campos(char *s, t_camera *cam, char *elem_name);
 bool	conv_orientation(char *s, t_elem *elem, char *elem_name);
+bool	conv_camorientation(char *s, t_camera *cam, char *elem_name);
 bool	conv_rgb(char *s, t_elem *elem, char *elem_name);
 bool	conv_ratio(char *s, t_elem *elem, char *elem_name);
 bool	conv_fov(char *s, t_camera *cam, char *elem_name);
@@ -40,7 +42,7 @@ void	elem_add_back(t_elem **head, t_elem *to_add);
 
 /* SCENE */
 void	setup_scene(t_scene *scene, char *file);
-void	draw_scene(t_img *img);
+void	draw_scene(t_scene *scene, t_img *img);
 void	display_scene(t_scene *scene);
 
 /* DISPLAY */

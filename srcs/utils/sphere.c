@@ -6,8 +6,8 @@ t_material	default_material(t_elem *elem)
 
 	material.color = elem->color;
 	material.ambient = 0.1;
-	material.diffuse = 0.9;
-	material.specular = 0.9;
+	material.diffuse = 0.7;
+	material.specular = 0.3;
 	material.shininess = 200.0;
 	return (material);
 }

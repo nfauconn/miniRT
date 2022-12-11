@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 15:24:24 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/11 16:01:45 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/11 17:35:50 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,26 +55,29 @@ typedef struct s_material
 
 typedef struct s_elem
 {
-	t_id				id;
-	t_point				o_pos;
-	t_point				w_pos;
-	t_vector			orientation;
-	t_rgb				color;
-	t_m4x4_f			transform;
-	t_material			material; /* A INIT DANS LE PARSING*/
-	t_specs				specs;
-	struct s_elem		*next;
+	t_id			id;
+	t_point			o_pos;
+	t_point			w_pos;
+	t_vector		orientation;
+	t_rgb			color;
+	t_m4x4_f		transform;
+	t_material		material; /* A INIT DANS LE PARSING*/
+	t_specs			specs;
+	struct s_elem	*next;
 }				t_elem;
 
 typedef	struct	s_camera //attention !! position et orientation cam a mettre dans le parsing ?
 {
-	float		fov;
-	float		hsize;
-	float		vsize;
-	float		half_height;
-	float		half_width;
-	float		pixel_size;
-	t_m4x4_f	transform;
+	float			fov;
+	t_point			o_pos;
+	t_point			w_pos;
+	t_vector		orientation;
+	t_m4x4_f		transform;
+	float			hsize;
+	float			vsize;
+	float			half_height;
+	float			half_width;
+	float			pixel_size;
 }				t_camera;
 
 typedef struct s_img

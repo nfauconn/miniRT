@@ -46,7 +46,7 @@ void	display_scene(t_scene *scene)
 	scene->img->addr = mlx_get_data_addr(scene->img->ptr, \
 		&scene->img->bpp, &scene->img->line_length, \
 		&scene->img->endian);
-	draw_scene(scene->img);
+	draw_scene(scene, scene->img);
 //	my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
 //	mlx_loop_hook(scene->mlx, render_next_frame, scene);
 	mlx_put_image_to_window(scene->mlx, scene->win, scene->img->ptr, 0, 0);
