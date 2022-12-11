@@ -6,15 +6,15 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/11 19:13:31 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/11 19:51:29 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define WIDTH 100
-# define HEIGHT 50
+# define WIDTH 300
+# define HEIGHT 150
 # define BLACK {0, 0, 0, 0}
 # define WHITE {1, 1, 1, 0}
 
