@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/12 16:09:51 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/12 19:01:51 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define HEIGHT 150
 # define BLACK {0, 0, 0, 0}
 # define WHITE {1, 1, 1, 0}
+# define EPSILON 0,00001
 
 # include "extern_libs.h"
 # include "structs.h"

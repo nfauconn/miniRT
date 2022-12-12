@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 15:24:24 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/11 17:35:50 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/12 19:00:34 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ typedef struct s_inter
 	t_vector			eyev;
 	t_vector			normalv;
 	bool				inside;
+	t_point				over_point;
 	struct s_inter		*next;
 }	t_inter;
 

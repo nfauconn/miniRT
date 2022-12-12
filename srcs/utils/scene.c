@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:04:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/12 18:32:44 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/12 19:01:58 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	prepare_computations(t_inter *i, t_ray ray)
 	}
 	else
 		i->inside = 0;
+	i->over_point = i->point + i->normalv * EPSILON;
 }
 
 /*
