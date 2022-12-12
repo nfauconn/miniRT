@@ -109,28 +109,28 @@ Test(lights, get_lighting)
 	eyev = create_vector(0, 0, -1);
 	normalv = create_vector(0, 0, -1);
 	point_light(&light, create_point(0, 0, -10), (t_rgb)WHITE);
-	res = lighting(light.material, &light, position, eyev, normalv);
+	res = lighting(light.material, &light, position, eyev, normalv, 0);
 	cr_expect(same_tuple(res, create_color(1.9, 1.9, 1.9)));
 
 /*	lighting with the eye btw light & surface, eye offset 45°*/
 	eyev = create_vector(0, sqrt(2)/2, -sqrt(2)/2);
 	normalv = create_vector(0, 0, -1);
 	point_light(&light, create_point(0, 0, -10), (t_rgb)WHITE);
-	res = lighting(light.material, &light, position, eyev, normalv);
+	res = lighting(light.material, &light, position, eyev, normalv, 0);
 	cr_expect(same_tuple(res, create_color(1.0, 1.0, 1.0)));
 
 /*	lighting with eye offset 90° , light offset 45°*/
 	eyev = create_vector(0, 0, -1);
 	normalv = create_vector(0, 0, -1);
 	point_light(&light, create_point(0, 10, -10), (t_rgb)WHITE);
-	res = lighting(light.material, &light, position, eyev, normalv);
+	res = lighting(light.material, &light, position, eyev, normalv, 0);
 	cr_expect(same_tuple(res, create_color(0.7364, 0.7364, 0.7364)));
 
 /*	lighting with the eye in the path of the reflection vector */
 	eyev = create_vector(0, -sqrt(2)/2, -sqrt(2)/2);
 	normalv = create_vector(0, 0, -1);
 	point_light(&light, create_point(0, 10, -10), (t_rgb)WHITE);
-	res = lighting(light.material, &light, position, eyev, normalv);
+	res = lighting(light.material, &light, position, eyev, normalv, 0);
 //	printf("lighting = {%f, %f, %f, %f}\n", res.x, res.y, res.z, res.w);
 	cr_expect(same_tuple(res, create_color(1.636385, 1.636385, 1.636385)));
 
@@ -138,6 +138,6 @@ Test(lights, get_lighting)
 	eyev = create_vector(0, 0, -1);
 	normalv = create_vector(0, 0, -1);
 	point_light(&light, create_point(0, 0, 10), (t_rgb)WHITE);
-	res = lighting(light.material, &light, position, eyev, normalv);
+	res = lighting(light.material, &light, position, eyev, normalv, 0);
 	cr_expect(same_tuple(res, create_color(0.1, 0.1, 0.1)));
 }
