@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:04:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/11 18:53:53 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/12 15:58:00 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@ t_inter	intersect_world(t_scene *world, t_ray ray)
 	xs = intersect(*obj, ray);
 	i = hit(xs);
 	res = i;
+	obj = obj->next;
 	while (obj)
 	{
 		xs = intersect(*obj, ray);
 		i = hit(xs);
-		if (i.t > 0 && i.t < res.t)
+		if (i.t > 0 && (i.t < res.t || res.t < 0))
 			res = i;
 		obj = obj->next;
 	}
