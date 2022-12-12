@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:58:29 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/12 17:44:54 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/12 18:05:54 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ t_material	default_material(t_elem *elem);
 t_rgb		lighting(t_material m, t_elem *light, t_point pos, t_vector eyev, \
 											t_vector normalv, bool in_shadow);
 t_rgb		create_color(float red, float green, float blue);
+
+bool	is_shadowed(t_scene *scene, t_point	point);
 
 #endif

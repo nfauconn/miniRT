@@ -84,3 +84,21 @@ t_rgb	lighting(t_material m, t_elem *light, t_point pos, t_vector eyev, \
 		res = ambient + diffuse + specular;
 	return (res);
 }
+
+bool	is_shadowed(t_scene *scene, t_point	point)
+{
+	t_vector	v;
+	float		distance;
+	float		direction;
+	t_ray		r;
+	t_inter		i;
+
+	v = scene->lights->w_pos - point;
+	distance = magnitude(v);
+	direction = normalize(v);
+	r = ray(point, direction);
+	i = intersect_world(scene, r);
+	if (i.t > 0 && i.t < distance)
+		return (true);
+	return (false);
+}
