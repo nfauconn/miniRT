@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:00:45 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/11 19:12:56 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/12 17:17:48 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int	set_camera(t_scene *scene, char **params)
 		|| conv_camorientation(params[2], scene->cam, params[0])
 		|| conv_fov(params[3], scene->cam, params[0]))
 		return (1);
-	setup_camera(scene->cam, WIDTH, HEIGHT);
 	scene->cam->fov *= M_PI / 180;
+	setup_camera(scene->cam, WIDTH, HEIGHT);
 	return (0);
 }
 
