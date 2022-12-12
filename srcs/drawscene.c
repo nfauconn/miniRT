@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 18:10:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/12 16:18:53 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/12 17:31:20 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,18 @@ void	render(t_scene *scene, t_img *img)
 void	draw_scene(t_scene *scene, t_img *img)
 {
 	t_elem	*middle = scene->objs;
-	t_elem	*right = scene->objs->next;
-	t_elem	*left = scene->objs->next->next;
-
+//	float	rM = middle->specs.ratio;
 	middle->transform = translation(-0.5, 1, 0.5);
-	right->transform = matrix_mult(translation(1.5, 0.5, -0.5), scaling(0.5, 0.5, 0.5));
+
+	t_elem	*right = scene->objs->next;
+//	right->transform = matrix_mult(translation(1.5, 0.5, -0.5), scaling(0.5, 0.5, 0.5));
+	float	rR = right->specs.ratio;
+	right->transform = matrix_mult(translation(1.5, 0.5, -0.5), scaling(rR, rR, rR));
+
+	t_elem	*left = scene->objs->next->next;
+//	float	rL = left->specs.ratio;
 	left->transform = matrix_mult(translation(-1.5, 0.33, -0.75), scaling(0.33, 0.33, 0.33));
+
  	scene->cam->transform = view_transform(create_point(0, 1.5, -5), \
 												create_point(0, 1, 0), \
 												create_vector(0, 1, 0));

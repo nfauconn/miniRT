@@ -42,7 +42,8 @@ void	point_light(t_elem *light, t_point pos, t_rgb color)//A MON AVIS ON VA POUV
 	//A REFACTO ABSOLU<EMT avec le parsing
 }
 
-t_rgb	lighting(t_material m, t_elem *light, t_point pos, t_vector eyev, t_vector normalv)
+t_rgb	lighting(t_material m, t_elem *light, t_point pos, t_vector eyev, \
+												t_vector normalv, bool in_shadow)
 {
 	t_rgb		effective_color;
 	t_vector	reflectv;
@@ -77,6 +78,9 @@ t_rgb	lighting(t_material m, t_elem *light, t_point pos, t_vector eyev, t_vector
 			specular = light->color * m.specular * factor;
 		}
 	}
-	res = ambient + diffuse + specular;
+	if (in_shadow)
+		res = ambient;
+	else
+		res = ambient + diffuse + specular;
 	return (res);
 }
