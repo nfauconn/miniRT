@@ -6,7 +6,7 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 17:39:16 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/12 18:01:12 by rokerjea         ###   ########.fr       */
+/*   Updated: 2022/12/12 18:32:45 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,29 @@ Test(shadows, yes_no)
 	sphere.material.color = create_color(1, 1, 1);
 	t_rgb	res = lighting(sphere.material, &light, create_point(0, 0, 0), eyev, normalv, in_shadow);
 	cr_expect(same_tuple(res, create_color(0.1, 0.1, 0.1)));
+}
+
+Test(shadows, no_shadow1)
+{
+	t_scene	world;
+	setup_scene(&world, "./scenes/2spheres1light.rt");
+	t_point	p = create_point(0, 10, 0);
+	cr_expect(is_shadowed(&world, p) == 0);
+	t_point	p2 = create_point(10, -10, 10);
+	cr_expect(is_shadowed(&world, p2) == 1);
+	t_point	p3 = create_point(-20, 20, -20);
+	cr_expect(is_shadowed(&world, p3) == 0);
+	t_point	p4 = create_point(-2, 2, -2);
+	cr_expect(is_shadowed(&world, p4) == 0);
+}
+
+Test(shadows, intersect_shadow)
+{
+	t_scene	world;
+	setup_scene(&world, "./scenes/2spheres1light.rt");
+	t_ray r = ray(create_point(0, 0, 5), create_vector(0, 0, 1))
+	t_inter	i = intersection(4, world.objs->next);
+	prepare_computations(&i, r);
+	t_color	c  = shade_hit(world, i);
+	cr_expect(same_tuple(c, create_color(0.1, 0.1, 0.1)));
 }
