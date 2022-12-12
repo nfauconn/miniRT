@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   chap8_shadows.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 17:39:16 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/12 18:32:45 by rokerjea         ###   ########.fr       */
+/*   Updated: 2022/12/12 18:49:20 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "/mnt/nfs/homes/nfauconn/Criterion/include/criterion/criterion.h"
-#include "/mnt/nfs/homes/rokerjea/sgoinfre/Criterion/include/criterion/criterion.h"
+#include "/mnt/nfs/homes/nfauconn/Criterion/include/criterion/criterion.h"
+//#include "/mnt/nfs/homes/rokerjea/sgoinfre/Criterion/include/criterion/criterion.h"
 #include "matrix.h"
 #include "minirt.h"
 #include "extern_libs.h"
@@ -53,10 +53,10 @@ Test(shadows, no_shadow1)
 Test(shadows, intersect_shadow)
 {
 	t_scene	world;
-	setup_scene(&world, "./scenes/2spheres1light.rt");
-	t_ray r = ray(create_point(0, 0, 5), create_vector(0, 0, 1))
-	t_inter	i = intersection(4, world.objs->next);
+	setup_scene(&world, "./scenes/shadowtest.rt");
+	t_ray r = ray(create_point(0, 0, 5), create_vector(0, 0, 1));
+	t_inter	i = intersection(4, *(world.objs->next));
 	prepare_computations(&i, r);
-	t_color	c  = shade_hit(world, i);
+	t_rgb	c  = shade_hit(&world, i);
 	cr_expect(same_tuple(c, create_color(0.1, 0.1, 0.1)));
 }

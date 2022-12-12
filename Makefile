@@ -139,7 +139,8 @@ T_SRCS = ${addsuffix ${S_EXT}, ${addprefix ${T_SRC_DIR}/, \
 	chap3_matrix \
 	chap5_sphere_tests \
 	chap6_lights \
-	chap7_scene}}
+	chap7_scene \
+	chap8_shadows}}
 T_DEPS = ${subst ${T_SRC_DIR}, ${T_BUILD_DIR}, ${T_SRCS:%.c=%.d}}
 T_OBJS = ${subst ${T_SRC_DIR}, ${T_BUILD_DIR}, ${T_SRCS:%.c=%.o}}
 T_VPATH = ${T_SRC_DIR}
