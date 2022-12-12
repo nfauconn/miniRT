@@ -1,0 +1,22 @@
+#	position			orientation		specs			rgb
+
+C	0,0,0				0.0,0.0,0.0		90
+
+A										0.2				255,255,255
+
+L	-10.0,10.0,-10.0					0.6				255,255,255
+
+#	middle purple
+sp	10,10,10							3				95,0,255
+
+#	right green
+sp	7.0,9.0,-17.0						2.0				95,255,0
+
+#	left yellwo
+sp	0.0,0.0,0.0							1.0				255,215,0
+
+#floor
+
+#left_wall
+
+#rigth_wall

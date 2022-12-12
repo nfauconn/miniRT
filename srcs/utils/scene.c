@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:04:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/12 19:01:58 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/12 19:42:36 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,14 @@ t_inter	intersect_world(t_scene *world, t_ray ray)
 	return (res);
 }
 
+t_point	over_point(t_point ori, t_vector normalv)
+{
+	t_point	res;
+
+	res = ori + normalv * EPSILON;
+	return (res);
+}
+
 void	prepare_computations(t_inter *i, t_ray ray)
 {
 	i->point = position(ray, i->t);
@@ -50,7 +58,7 @@ void	prepare_computations(t_inter *i, t_ray ray)
 	}
 	else
 		i->inside = 0;
-	i->over_point = i->point + i->normalv * EPSILON;
+	i->over_point = over_point(i->point, i->normalv);
 }
 
 /*
@@ -65,8 +73,8 @@ t_rgb	shade_hit(t_scene *world, t_inter inter)
 {
 	bool	shadowed;
 
-	shadowed = is_shadowed(world, inter.point);
-	return (lighting(inter.obj.material, world->lights, inter.point, inter.eyev, inter.normalv, shadowed));
+	shadowed = is_shadowed(world, inter.over_point);
+	return (lighting(inter.obj.material, world->lights, inter.over_point, inter.eyev, inter.normalv, shadowed));
 }
 
 /* intersect the world with the given ray and return the color at the given intersection */
