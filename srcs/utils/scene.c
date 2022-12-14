@@ -6,7 +6,7 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:04:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/14 16:00:41 by rokerjea         ###   ########.fr       */
+/*   Updated: 2022/12/14 17:02:12 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ t_point	over_point(t_point ori, t_vector normalv)
 {
 	t_point	res;
 
-	res = ori + normalv;
-	res.z = ori.z + normalv.z * EPSILON;
+	res = ori + normalv * 0.1;
 	return (res);
 }
 
@@ -52,7 +51,6 @@ void	prepare_computations(t_inter *i, t_ray ray)
 	i->point = position(ray, i->t);
 	i->eyev = -ray.dest;
 	i->normalv = normal_atsphere(&i->obj, i->point);
-	i->over_point = over_point(i->point, i->normalv);
 	if (dot_product(i->normalv, i->eyev) < 0)
 	{
 		i->inside = 1;

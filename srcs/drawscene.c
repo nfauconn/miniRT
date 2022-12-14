@@ -6,7 +6,7 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 18:10:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/14 16:20:21 by rokerjea         ###   ########.fr       */
+/*   Updated: 2022/12/14 16:31:19 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,17 @@ void	draw_scene(t_scene *scene, t_img *img)
 	t_elem	*floor = left->next;
 	floor->material.specular = 0;
 	floor->transform = scaling(10.0, 0.01, 10);
-	// floor->transform = matrix_mult(rotation_x(-M_PI / 10), floor->transform);
 
 	t_elem	*left_wall = floor->next;
-	// t_m4x4_f	rotate = matrix_mult(rotation_y(-M_PI / 4), rotation_x(M_PI / 2));
 	left_wall->transform = matrix_mult(translation(0, 0, 5), rotation_y(-M_PI / 4));
 	left_wall->transform = matrix_mult(left_wall->transform, rotation_x(M_PI / 2));
 	left_wall->transform = matrix_mult(left_wall->transform, scaling(10.0, 0.01, 10));
-	// left_wall->transform = chained_transfo(translation(0, 0, 5), rotate, scaling(10.0, 0.01, 10));
 	left_wall->material.specular = 0;
-	// t_elem	*right_wall = left_wall->next;
-	// right_wall->transform = matrix_mult(scaling(10.0, 0.01, 10), translation(0, 0, 5));
-	// right_wall->transform = matrix_mult(right_wall->transform, rotation_y(M_PI / 4));
-	// right_wall->transform = matrix_mult(right_wall->transform, rotation_x(M_PI / 2));
-	// right_wall->material.specular = 0;
+	t_elem	*right_wall = left_wall->next;
+	right_wall->transform = matrix_mult(translation(0, 0, 5), rotation_y(M_PI / 4));
+	right_wall->transform = matrix_mult(right_wall->transform, rotation_x(M_PI / 2));
+	right_wall->transform = matrix_mult(right_wall->transform, scaling(10.0, 0.01, 10));
+	right_wall->material.specular = 0;
 
  	scene->cam->transform = view_transform(create_point(0, 1.5, -5), \
 												create_point(0, 1, 0), \
