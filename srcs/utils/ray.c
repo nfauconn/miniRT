@@ -6,13 +6,69 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:22:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/12 15:41:23 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/14 18:05:26 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "ray.h"
 #include "matrix.h"
+
+/* create a ray struct with his origin point & his dest vector */
+t_ray	ray(t_point orig, t_vector dest)
+{
+	t_ray	ray;
+
+	ray.orig = orig;
+	ray.dest = dest;
+	return (ray);
+}
+
+/* position after t iterations of vector r.dest on point r.origin
+=>> util for light and shading
+--> turning intersections into actual surface informations */
+t_point	position(t_ray ray, float t)
+{
+	return (ray.orig + ray.dest * t);
+}
+
+
+t_inter	intersection(float t, t_elem obj)
+{
+	t_inter	i;
+
+	i.t = t;
+	i.obj = obj;
+	return (i);
+}
+
+/*  find the intersection that has the lowest nonnegative t value*/
+t_inter	hit(t_xs xs)
+{
+	size_t	i;
+	t_inter	hit;
+
+	if (!xs.count)
+		hit.t = -1;
+	else
+	{
+		i = 0;
+		while (i < xs.count && xs.t[i] < 0)
+			i++;
+		if (i == xs.count)
+			hit.t = -1;
+		else
+		{
+			hit = intersection(xs.t[i], xs.obj);
+			while (++i < xs.count)
+			{
+				if (xs.t[i] >= 0 && xs.t[i] < hit.t)
+				hit = intersection(xs.t[i], xs.obj);
+			}
+		}
+	}
+	return (hit);
+}
 
 /* find inter of the given ray with a sphere */
 t_xs	sp_xs(t_elem s, t_ray r)
@@ -62,6 +118,7 @@ t_xs	intersect(t_elem obj, t_ray r)
 	t_xs	xs;
 
 	r = transform_ray(r, inverse(obj.transform));
+	//obj_to_ray ?? cf sp_xs !!!!!!!!!!!!!!!!!!!!!!!
 	if (obj.id.shape == sphere)
 		xs = sp_xs(obj, r);
 	else

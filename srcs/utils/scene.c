@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:04:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/14 17:02:12 by rokerjea         ###   ########.fr       */
+/*   Updated: 2022/12/14 18:15:06 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_point	over_point(t_point ori, t_vector normalv)
 {
 	t_point	res;
 
-	res = ori + normalv * 0.1;
+	res = ori + normalv * EPSILON * 200;
 	return (res);
 }
 
@@ -50,7 +50,7 @@ void	prepare_computations(t_inter *i, t_ray ray)
 {
 	i->point = position(ray, i->t);
 	i->eyev = -ray.dest;
-	i->normalv = normal_atsphere(&i->obj, i->point);
+	i->normalv = normal_at(&i->obj, i->point);
 	if (dot_product(i->normalv, i->eyev) < 0)
 	{
 		i->inside = 1;
@@ -135,36 +135,3 @@ t_ray	ray_for_pixel(t_camera cam, float px, float py)
 	res.dest = normalize(pixel - res.orig);
 	return (res);
 }
-
-//t_rgb ** as return type is probably a bad idea
-//because it would need to malloc a biiig amount of memory
-//but it would work as an idea and produce a tab of color, pixel by pixel
-/* t_rgb	**render(t_camera cam, t_scene world)
-{
-	int		x;
-	int		y;
-	t_ray	ray;
-	t_rgb	color;
-	t_rgb	**image;
-	//image could be the mlx image in th final version
-	//canvas doesn't even exist yet, it should be a kind of big malloc, i guess
-	image = (cam->hsize, cam->vsize);
-	//it write color in the image, line by line, column by column
-	//depending from what the new ray touch in the world
-	y = 0;
-	while(y < cam->vsize - 1)
-	{
-		x = 0;
-		while (x < cam->hsize - 1)
-		{
-			ray = ray_for_pixel(cam, x, y);
-			color = color_at(world, ray);
-			//this should be replaced by my_mlx_pixelput
-			image[y][x] = color;
-			x++;
-		}
-		y++;
-	}
-	return (image);
-}
- */

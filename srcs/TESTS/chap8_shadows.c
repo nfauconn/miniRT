@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   chap8_shadows.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 17:39:16 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/12 19:35:04 by rokerjea         ###   ########.fr       */
+/*   Updated: 2022/12/14 17:17:42 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "/mnt/nfs/homes/nfauconn/Criterion/include/criterion/criterion.h"
-#include "/mnt/nfs/homes/rokerjea/sgoinfre/Criterion/include/criterion/criterion.h"
+#include "/mnt/nfs/homes/nfauconn/Criterion/include/criterion/criterion.h"
+//#include "/mnt/nfs/homes/rokerjea/sgoinfre/Criterion/include/criterion/criterion.h"
 #include "matrix.h"
 #include "minirt.h"
 #include "extern_libs.h"

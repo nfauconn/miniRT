@@ -33,7 +33,6 @@ SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 		${addprefix ${UTILS_DIR}/, \
 		tuple \
 		ray \
-		rayutils \
 		interlst \
 		lights \
 		matrix \

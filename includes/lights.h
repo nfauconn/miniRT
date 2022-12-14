@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:58:29 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/12 18:05:54 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/14 18:15:27 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 # include "ray.h" //for init_sphere  at least : remove after ?
 
-t_vector	normal_atsphere(t_elem *sp, t_point point);
+t_vector	normal_at(t_elem *obj, t_point point);
 t_vector	reflect(t_vector in, t_vector normal);
 void		point_light(t_elem *light, t_point pos, t_rgb color);
 t_material	default_material(t_elem *elem);

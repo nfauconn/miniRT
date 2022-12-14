@@ -12,15 +12,15 @@ t_rgb	create_color(float red, float green, float blue)
 }
 
 /* find the perpendicular vector to sphere at point */
-t_vector	normal_atsphere(t_elem *sp, t_point world_pt)
+t_vector	normal_at(t_elem *obj, t_point world_pt)
 {
 	t_point		o_pt;
 	t_vector	o_normal;
 	t_vector	w_normal;
 
-	o_pt = matrix_tuple_mult(inverse(sp->transform), world_pt);
-	o_normal = o_pt - sp->o_pos;
-	w_normal = matrix_tuple_mult(transpose(inverse(sp->transform)), o_normal);
+	o_pt = matrix_tuple_mult(inverse(obj->transform), world_pt);
+	o_normal = o_pt - obj->o_pos;
+	w_normal = matrix_tuple_mult(transpose(inverse(obj->transform)), o_normal);
 	w_normal.w = 0;
 	return (normalize(w_normal));
 }
@@ -93,12 +93,12 @@ bool	is_shadowed(t_scene *scene, t_point	point)
 	t_ray		r;
 	t_inter		i;
 
-	v = scene->lights->w_pos - point;
-	distance = length(v);
-	direction = normalize(v);
+	v = scene->lights->w_pos - point;	// vector from light to point
+	distance = length(v);				// distance from light to point
+	direction = normalize(v);			// normalized distance
 	r = ray(point, direction);
-	i = intersect_world(scene, r);
-	if (i.t > 0 && i.t < distance)
+	i = intersect_world(scene, r);		// check if object btw light and point
+	if (i.t > 0 && i.t < distance)		// if yes -> shadow
 		return (true);
 	return (false);
 }

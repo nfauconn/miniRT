@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawscene.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 18:10:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/14 16:31:19 by rokerjea         ###   ########.fr       */
+/*   Updated: 2022/12/14 18:15:06 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ void	draw_scene(t_img *img)
 				if (xs_hit.t >= 0)
 				{
 					point = position(r, xs_hit.t);
-					normal = normal_atsphere(&xs_hit.obj, point);
+					normal = normal_at(&xs_hit.obj, point);
 					eye = -r.dest;
 					color_sp = lighting (xs_hit.obj.material, &light, point, eye, normal);
 
