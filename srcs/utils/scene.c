@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:04:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/14 18:15:06 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/14 19:26:03 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,23 +72,10 @@ overlapping shadows"
 t_rgb	shade_hit(t_scene *world, t_inter inter)
 {
 	bool	shadowed;
-
-	shadowed = is_shadowed(world, inter.over_point);
-	return (lighting(inter.obj.material, world->lights, inter.over_point, inter.eyev, inter.normalv, shadowed));
-}
-
-/* intersect the world with the given ray and return the color at the given intersection */
-t_rgb	color_at(t_scene *world, t_ray ray)
-{
-	t_inter	i;
-	t_rgb	color;
-
-	i = intersect_world(world, ray);
-	if (i.t <= 0)
-		return ((t_rgb)BLACK);
-	prepare_computations(&i, ray);
-	color = shade_hit(world, i);
-	return (color);
+shadowed = 0;
+//	shadowed = is_shadowed(world, inter.over_point);
+//	return (lighting(inter.obj.material, world->lights, inter.over_point, inter.eyev, inter.normalv, shadowed));
+	return (lighting(inter.obj.material, world->lights, inter.point, inter.eyev, inter.normalv, shadowed));
 }
 
 t_m4x4_f	view_transform(t_point from, t_point to, t_point up)

@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 15:10:17 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/14 17:16:32 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/14 18:39:26 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,8 @@ t_float3	color_create(float r, float g, float b)
 
 bool	same_color(t_float3 tup1, t_float3 tup2)
 {
-	float	epsilon;
-
-	epsilon = 0.00001;
-	if (fabs(tup1.x - tup2.x) > epsilon || fabs(tup1.y - tup2.y) > epsilon
-		|| fabs(tup1.z - tup2.z) > epsilon)
+	if (fabs(tup1.x - tup2.x) > EPSILON || fabs(tup1.y - tup2.y) > EPSILON
+		|| fabs(tup1.z - tup2.z) > EPSILON)
 		return (0);
 	return (1);
 }

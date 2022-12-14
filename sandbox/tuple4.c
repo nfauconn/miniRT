@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:34:33 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/14 17:16:32 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/14 18:39:14 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,8 @@ bool	is_vector(t_float4 tuple)
 //a une precision de 0.00001
 bool	same_tuple(t_float4 tup1, t_float4 tup2)
 {
-	float	epsilon;
-
-	epsilon = 0.00001;
-	if (fabs(tup1.x - tup2.x) > epsilon || fabs(tup1.y - tup2.y) > epsilon
-		|| fabs(tup1.z - tup2.z) > epsilon || fabs(tup1.w - tup2.w) > epsilon)
+	if (fabs(tup1.x - tup2.x) > EPSILON || fabs(tup1.y - tup2.y) > EPSILON
+		|| fabs(tup1.z - tup2.z) > EPSILON || fabs(tup1.w - tup2.w) > EPSILON)
 		return (0);
 	return (1);
 }
@@ -88,13 +85,10 @@ float	length(t_float4 vector)
 }
 
 //verifie que les deux arguments float ont la meme valeur,
-//avec 0.00001 de precision(epsilon)
+//avec 0.00001 de precision(EPSILON)
 bool	same_float(float f1, float f2)
 {
-	float	epsilon;
-
-	epsilon = 0.00001;
-	if (fabs(f1 - f2) > epsilon)
+	if (fabs(f1 - f2) > EPSILON)
 		return (0);
 	return (1);
 }

@@ -1,4 +1,4 @@
-#include "minirt.h"
+#include "display.h"
 
 int	close_window(t_scene *scene)
 {

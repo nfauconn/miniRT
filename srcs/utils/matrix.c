@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:21:09 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/14 17:16:32 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/14 18:40:14 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,17 +130,14 @@ bool	same_matrix(t_m4x4_f matrix1, t_m4x4_f matrix2)
 {
 	int	j;
 	int	k;
-	float	epsilon;
-
-	epsilon = 0.00001;
 	j = 0;
 	while (j < 4)
 	{
 		k = 0;
 		while (k < 4)
 		{
-			if (matrix1[j][k] >= matrix2[j][k] + epsilon
-				|| matrix1[j][k] <= matrix2[j][k] - epsilon)
+			if (matrix1[j][k] >= matrix2[j][k] + EPSILON
+				|| matrix1[j][k] <= matrix2[j][k] - EPSILON)
 					return(0);
 			k++;
 		}

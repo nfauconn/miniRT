@@ -31,11 +31,8 @@ bool	is_vector(float4 tuple)
 
 bool	same_tuple(float4 tup1, float4 tup2)
 {
-	float	epsilon;
-
-	epsilon = 0.00001;
-	if (fabs(tup1.x - tup2.x) > epsilon || fabs(tup1.y - tup2.y) > epsilon
-		|| fabs(tup1.z - tup2.z) > epsilon || fabs(tup1.w - tup2.w) > epsilon)
+	if (fabs(tup1.x - tup2.x) > EPSILON || fabs(tup1.y - tup2.y) > EPSION
+		|| fabs(tup1.z - tup2.z) > EPSILON || fabs(tup1.w - tup2.w) > EPSILON)
 		return (0);
 	return (1);
 }
@@ -217,10 +214,7 @@ float length(float4 vector)
 
 bool	same_float(float f1, float f2)
 {
-	float	epsilon;
-
-	epsilon = 0.00001;
-	if (fabs(f1 - f2) > epsilon)
+	if (fabs(f1 - f2) > EPSILON)
 		return (0);
 	return (1);
 }

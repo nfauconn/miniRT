@@ -33,3 +33,15 @@ int rgbvtoi(t_float4 color_vec)
 	b = convert_unit_to_rgb(color_vec.z);
 	return (r << 16 | g << 8 | b);
 }
+
+t_rgb	create_color(float red, float green, float blue)
+{
+	t_rgb	color;
+
+	color.x = red;
+	color.y = green;
+	color.z = blue;
+	color.w = 0;
+	return (color);
+}
+
