@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 18:10:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/14 18:53:50 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/14 19:59:31 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	draw_scene(t_scene *scene, t_img *img)
 	// float	rR = right->specs.ratio;
 	right->transform = matrix_mult(translation(1.5, 0.5, -0.5), scaling(0.5, 0.5, 0.5));
 
-/* 	t_elem	*left = scene->objs->next->next;
+	t_elem	*left = scene->objs->next->next;
 	// float	rL = left->specs.ratio;
 	left->transform = matrix_mult(translation(-1.5, 0.33, -0.75), scaling(0.33, 0.33, 0.33));
 
@@ -63,7 +63,7 @@ void	draw_scene(t_scene *scene, t_img *img)
 	right_wall->transform = matrix_mult(translation(0, 0, 5), rotation_y(M_PI / 4));
 	right_wall->transform = matrix_mult(right_wall->transform, rotation_x(M_PI / 2));
 	right_wall->transform = matrix_mult(right_wall->transform, scaling(10.0, 0.01, 10));
-	right_wall->material.specular = 0; */
+	right_wall->material.specular = 0;
 
  	scene->cam->transform = view_transform(create_point(0, 1.5, -5), \
 												create_point(0, 1, 0), \

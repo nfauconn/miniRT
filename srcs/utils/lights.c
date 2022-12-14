@@ -100,7 +100,7 @@ t_rgb	color_at(t_scene *world, t_ray ray)
 
 	i = intersect_world(world, ray);
 	if (i.t <= 0)
-		return ((t_rgb)WHITE);
+		return ((t_rgb)BLACK);
 	prepare_computations(&i, ray);
 	color = shade_hit(world, i);
 	return (color);
