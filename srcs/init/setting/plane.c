@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:30:09 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2022/12/16 17:39:19 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/16 19:53:12 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ int	set_plane(t_scene *scene, char **params)
 		|| conv_rgb(params[3], newplane, params[0]))
 		ret = 1;
 	elem_add_back(&scene->objs, newplane);
+	init_plane(newplane);
 	return (ret);
 }
