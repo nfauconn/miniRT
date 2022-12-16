@@ -33,7 +33,6 @@ SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 \
 						${addprefix ${PARSING_DIR}/, \
 							parse_file \
-							set_params \
 							conv_to_tuple \
 							conv_to_float \
 							elem_add \

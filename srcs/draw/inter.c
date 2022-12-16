@@ -1,25 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersections.c                                    :+:      :+:    :+:   */
+/*   inter.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:44:24 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2022/12/16 11:58:56 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2022/12/16 13:43:34 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inter.h"
-
-/* position after t iterations of vector r.dest on point r.origin
-=>> util for light and shading
---> turning intersections into actual surface informations */
-t_point	position(t_ray ray, float t)
-{
-	return (ray.orig + ray.dest * t);
-}
-
 
 t_inter	intersection(float t, t_elem obj)
 {

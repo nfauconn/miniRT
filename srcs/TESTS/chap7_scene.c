@@ -6,7 +6,7 @@
 /*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:29:05 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/16 13:02:43 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2022/12/16 13:38:56 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,7 +267,7 @@ Test(scene, camera_pixel_size)
 
 	hsize = 160;
 	vsize = 120;
-	setup_camera(scene.cam, hsize, vsize);
+	init_camera(scene.cam, hsize, vsize);
 	cr_expect(scene.cam->hsize == 160);
 	cr_expect(scene.cam->vsize == 120);
 	cr_expect(same_float(scene.cam->fov, M_PI / 2));
@@ -275,19 +275,19 @@ Test(scene, camera_pixel_size)
 
 	hsize = 200;
 	vsize = 125;
-	setup_camera(scene.cam, hsize, vsize);
+	init_camera(scene.cam, hsize, vsize);
 	cr_expect(same_float(scene.cam->pixel_size, 0.01));
 
 	hsize = 201;
 	vsize = 101;
-	setup_camera(scene.cam, hsize, vsize);
+	init_camera(scene.cam, hsize, vsize);
 	ray = ray_for_pixel(*scene.cam, 100, 50);
 	cr_expect(same_tuple(ray.orig, create_point(0, 0, 0)));
 	cr_expect(same_tuple(ray.dest, create_vector(0, 0, -1)));
 
 	hsize = 201;
 	vsize = 101;
-	setup_camera(scene.cam, hsize, vsize);
+	init_camera(scene.cam, hsize, vsize);
 	ray = ray_for_pixel(*scene.cam, 0, 0);
 	cr_expect(same_tuple(ray.orig, create_point(0, 0, 0)));
 	cr_expect(same_tuple(ray.dest, create_vector(0.66519, 0.33259, -0.66851)));
@@ -299,7 +299,7 @@ Test(scene, camera_pixel_size)
 
 /* 	hsize = 11;
 	vsize = 11;
-	setup_camera(scene.cam, hsize, vsize);
+	init_camera(scene.cam, hsize, vsize);
 	from = create_point(0, 0, -5);
 	to = create_point(0, 0, 0);
 	up = create_vector(0, 1, 0);
