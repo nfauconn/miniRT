@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inter.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:44:24 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2022/12/16 13:43:34 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2022/12/16 18:37:57 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_inter	hit(t_xs xs)
 }
 
 /* find inter of the given ray with a sphere */
-t_xs	sp_xs(t_elem s, t_ray r)
+t_xs	sp_intersect(t_elem s, t_ray r)
 {
 	t_vector	sphere_to_ray;
 	float		a;
@@ -82,9 +82,11 @@ t_xs	intersect(t_elem obj, t_ray r)
 	t_xs	xs;
 
 	r = transform_ray(r, inverse(obj.transform));
-	//obj_to_ray ?? cf sp_xs !!!!!!!!!!!!!!!!!!!!!!!
+	//obj_to_ray ?? cf sp_intersect !!!!!!!!!!!!!!!!!!!!!!!
 	if (obj.id.shape == sphere)
-		xs = sp_xs(obj, r);
+		xs = sp_intersect(obj, r);
+	else if (obj.id.shape == plane)
+		xs = pl_intersect(obj, r);
 	else
 		ft_bzero(&xs, sizeof(xs));
 	xs.obj = obj;

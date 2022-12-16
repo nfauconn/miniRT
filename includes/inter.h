@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inter.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:45:03 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2022/12/16 12:17:39 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2022/12/16 18:37:35 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ t_point	position(t_ray ray, float t);
 t_inter	intersection(float t, t_elem obj);
 t_inter	hit(t_xs xs);
 t_xs	intersect(t_elem obj, t_ray r);
-t_xs	sp_xs(t_elem s, t_ray r);
+t_xs	sp_intersect(t_elem s, t_ray r);
 
 #endif
