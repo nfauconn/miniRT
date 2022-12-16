@@ -1,15 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lights.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/16 17:21:52 by nfauconn          #+#    #+#             */
+/*   Updated: 2022/12/16 18:21:32 by nfauconn         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lights.h"
 
 /* find the perpendicular vector to sphere at point */
-t_vector	normal_at(t_elem *obj, t_point world_pt)
+t_vector	normal_at(t_elem *obj, t_point w_pt)
 {
-	t_point		o_pt;
-	t_vector	o_normal;
+	t_point		local_pt;
+	t_vector	local_normal;
 	t_vector	w_normal;
 
-	o_pt = matrix_tuple_mult(inverse(obj->transform), world_pt);
-	o_normal = o_pt - obj->o_pos;
-	w_normal = matrix_tuple_mult(transpose(inverse(obj->transform)), o_normal);
+	local_pt = matrix_tuple_mult(inverse(obj->transform), w_pt);
+	if (obj->id.shape == sphere)
+		local_normal = local_pt - obj->o_pos;
+	if (obj->id.shape == plane)
+		local_normal = create_vector(obj->o_pos.x, obj->o_pos.y, obj->o_pos.z);
+	w_normal = matrix_tuple_mult(transpose(inverse(obj->transform)), local_normal);
 	w_normal.w = 0;
 	return (normalize(w_normal));
 }

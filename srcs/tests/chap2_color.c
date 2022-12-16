@@ -6,18 +6,16 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 15:10:17 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/16 16:55:34 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:30:03 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "/home/fjeiwjifeoh/Criterion/include/criterion/criterion.h"
-#include "/mnt/nfs/homes/nfauconn/Criterion/include/criterion/criterion.h"
-//#include "/mnt/nfs/homes/rokerjea/sgoinfre/Criterion/include/criterion/criterion.h"
-# include <math.h>
-# include <stdio.h>
-# include <errno.h>
-# include "tuple.h"
-# include "color.h"
+#include "mycriterion.h"
+#include <math.h>
+#include <stdio.h>
+#include <errno.h>
+#include "tuple.h"
+#include "color.h"
 
 bool	same_color(t_float4 tup1, t_float4 tup2)
 {

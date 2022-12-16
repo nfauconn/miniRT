@@ -6,13 +6,11 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 17:39:16 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/16 16:58:24 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:29:17 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "/home/fjeiwjifeoh/Criterion/include/criterion/criterion.h"
-#include "/mnt/nfs/homes/nfauconn/Criterion/include/criterion/criterion.h"
-//#include "/mnt/nfs/homes/rokerjea/sgoinfre/Criterion/include/criterion/criterion.h"
+#include "mycriterion.h"
 #include "matrix.h"
 #include "minirt.h"
 #include "tuple.h"

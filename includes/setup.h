@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:18:36 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/16 17:18:38 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/16 17:38:35 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,9 @@ int			set_cylinder(t_scene *scene, char **params);
 /* LIGHTSOURCE */
 int			set_lights(t_scene *scene, char **params);
 
-/* PLAN */
-int			set_plan(t_scene *scene, char **params);
+/* plane */
+int			set_plane(t_scene *scene, char **params);
+void		init_plane(t_elem *pl);
 
 /* MATERIAL */
 t_material	default_material(t_elem *elem);

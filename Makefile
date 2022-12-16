@@ -44,7 +44,7 @@ SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 							lightsource \
 							sphere \
 							cylinder \
-							plan \
+							plane \
 							material \
 						} \
 				} \
@@ -162,7 +162,9 @@ T_SRCS = ${addsuffix ${S_EXT}, ${addprefix ${T_SRC_DIR}/, \
 	chap5_sphere_tests \
 	chap6_lights \
 	chap7_scene \
-	chap8_shadows}}
+	chap8_shadows \
+	chap9_plane \
+	}}
 T_DEPS = ${subst ${T_SRC_DIR}, ${T_BUILD_DIR}, ${T_SRCS:%.c=%.d}}
 T_OBJS = ${subst ${T_SRC_DIR}, ${T_BUILD_DIR}, ${T_SRCS:%.c=%.o}}
 T_VPATH = ${T_SRC_DIR}

@@ -6,19 +6,17 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:12:44 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/16 16:57:02 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:30:12 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "/home/fjeiwjifeoh/Criterion/include/criterion/criterion.h"
-#include "/mnt/nfs/homes/nfauconn/Criterion/include/criterion/criterion.h"
-//#include "/mnt/nfs/homes/rokerjea/sgoinfre/Criterion/include/criterion/criterion.h"
+#include "mycriterion.h"
 #include "matrix.h"
 #include "tuple.h"
-# include <math.h>
-# include <stdio.h>
-# include <signal.h>
-# include <errno.h>
+#include <math.h>
+#include <stdio.h>
+#include <signal.h>
+#include <errno.h>
 
 // typedef float	float16	__attribute__((ext_vector_type(16)));
 typedef float t_m4x4_f  __attribute__((matrix_type(4, 4)));
