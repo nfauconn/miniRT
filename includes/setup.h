@@ -6,7 +6,7 @@
 # include "matrix.h"
 # include "exit.h"
 # include "error.h"
-# include "color.h"
+# include "rgb.h"
 
 void	setup_scene(t_scene *scene, char *file);
 

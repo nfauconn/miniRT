@@ -61,6 +61,7 @@ SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
 				${addprefix ${UTILS_DIR}/, \
 					tuple \
 					matrix \
+					rgb \
 				} \
 		}}
 DEPS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.d}}
@@ -118,7 +119,7 @@ clean:
 	@${RM} ${BUILD_DIR}
 	@echo "objs deleted"
 
-fclean: clean
+fclean: clean testfclean
 	@make fclean -C ${LIBFT_DIR} --no-print-directory
 	@${RM} ${NAME}
 	@echo "libs and program deleted"
@@ -151,8 +152,8 @@ T_INCLUDES = ${CR_INCLUDES} ${INCLUDES}
 T_LDFLAGS = ${LD_CR_FLAGS} ${LD_FLAGS}
 T_LNFLAGS = ${LN_CR_FLAGS} ${LN_FLAGS}
 
-T_SRC_DIR = ${SRC_DIR}/TESTS
-T_BUILD_DIR = ${BUILD_DIR}/TESTS
+T_SRC_DIR = ${SRC_DIR}/tests
+T_BUILD_DIR = ${BUILD_DIR}/tests
 
 T_NAME = all_tests
 T_SRCS = ${addsuffix ${S_EXT}, ${addprefix ${T_SRC_DIR}/, \
@@ -170,7 +171,6 @@ tests: libftcreat ${OBJS} ${T_OBJS}
 	@make -C ${MLX_DIR} --no-print-directory
 	@${CC} ${CFLAGS} ${OBJS} ${T_OBJS} -o ${T_NAME} ${T_LDFLAGS} ${T_LNFLAGS}
 	@./${T_NAME}
-	@${RM} ${T_NAME}
 
 -include ${DEPS}
 -include ${TEST_DEPS}
@@ -178,12 +178,15 @@ tests: libftcreat ${OBJS} ${T_OBJS}
 ${TEST_FILE}.o: ${TEST_FILE}.c
 	@${CC} ${CFLAGS} ${T_INCLUDES} -I includes -MMD -o $@ -c $<
 
-testclean: littleclean
+testfclean: littleclean
 	@${RM} ${T_NAME}
 	@${RM} ${T_BUILD_DIR}
 	@${RM} ${BUILD_DIR}
 	@echo "deleted test program"
 
-testsr: testclean tests
+testr: testclean tests
 
-.PHONY: all clean fclean re libftcreat val norm littleclean r test testlittleclean testr
+.PHONY: all clean fclean re \
+	libftcreat val norm \
+	littleclean r \
+	testfclean testr

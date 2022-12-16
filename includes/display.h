@@ -3,6 +3,7 @@
 
 # include "minirt.h"
 # include "scene.h"
+# include "rgb.h"
 # include "error.h"
 # include "exit.h"
 

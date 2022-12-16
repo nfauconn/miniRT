@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   chap3_matrix.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:12:44 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/16 11:27:57 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2022/12/16 16:57:02 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "/home/fjeiwjifeoh/Criterion/include/criterion/criterion.h"
-//#include "/mnt/nfs/homes/nfauconn/Criterion/include/criterion/criterion.h"
+//#include "/home/fjeiwjifeoh/Criterion/include/criterion/criterion.h"
+#include "/mnt/nfs/homes/nfauconn/Criterion/include/criterion/criterion.h"
 //#include "/mnt/nfs/homes/rokerjea/sgoinfre/Criterion/include/criterion/criterion.h"
 #include "matrix.h"
 #include "tuple.h"
@@ -33,10 +33,10 @@ typedef int	int4 __attribute__((ext_vector_type(4)));
 
 // int	any_matrix(t_m4x4_i bool_matrix)
 // {
-	
+
 // 	int	j;
 // 	int	k;
-	
+
 // 	i = 0;
 // 	j = 0;
 // 	while (j < 4)
@@ -47,7 +47,7 @@ typedef int	int4 __attribute__((ext_vector_type(4)));
 // 			if (bool_matrix[j][k] != 0)
 // 				return(0);
 // 		}
-// 		j++;		
+// 		j++;
 // 	}
 // 	return (1);
 // }
@@ -58,7 +58,7 @@ typedef int	int4 __attribute__((ext_vector_type(4)));
 // 	int	j;
 // 	int	k;
 // 	int	i;
-	
+
 // 	i = 0;
 // 	j = 0;
 // 	while (j < 4)
@@ -69,9 +69,9 @@ typedef int	int4 __attribute__((ext_vector_type(4)));
 // 			matrix[j][k] = f[i++];
 // 			k++;
 // 		}
-// 		j++;		
+// 		j++;
 // 	}
-// 	return (matrix);	
+// 	return (matrix);
 // }
 
 Test(matrix, matrix_create)
@@ -131,7 +131,7 @@ Test(matrix, matrix_compare)
 // // float4	get_line(float16 matrix, int line)
 // // {
 // // 	float4	res;
-	
+
 // // 	if (line / 4 == 0)
 // // 		res = matrix.s0123;
 // // }
@@ -174,8 +174,7 @@ Test(matrix, matrix_compare)
 // 	t_m4x4_f	res;
 // 	int	i;
 // 	int	j;
-	
-// 	i = 0;
+	// 	i = 0;
 // 	j = 0;
 // 	while (i < 4)
 // 	{
@@ -286,7 +285,7 @@ Test(matrix, transposing_matrix)
 // float	determinant2x2(float4 matrix)
 // {
 // 	float	res;
-	
+
 // 	res = matrix.x * matrix.w - matrix.y * matrix.z;
 // 	return (res);
 // }
@@ -354,7 +353,7 @@ Test(matrix, determinant2x2)
 // 	int	i;
 // 	int	j;
 // 	int	k;
-	
+
 // 	i = 0;
 // 	k = 0;
 // 	while (i < 3)
