@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   material.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 15:03:53 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/16 13:06:45 by fjeiwjifeoh      ###   ########.fr       */
+/*   Created: 2022/12/16 12:03:30 by fjeiwjifeoh       #+#    #+#             */
+/*   Updated: 2022/12/16 12:03:32 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
-#include "error.h"
-#include "exit.h"
 #include "setup.h"
-#include "display.h"
 
-int	main(int ac, char **av)
+t_material	default_material(t_elem *elem)
 {
-	t_scene	scene;
+	t_material	material;
 
- 	if (ac != 2)
-		return (error_display("format : ./miniRT <*.rt>"));
-	setup_scene(&scene, av[1]);
-	launch_display(&scene);
-	return (0);
+	material.color = elem->color;
+	material.ambient = 0.1;
+	material.diffuse = 0.7;
+	material.specular = 0.3;
+	material.shininess = 200.0;
+	return (material);
 }
+

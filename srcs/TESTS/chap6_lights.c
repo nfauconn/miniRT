@@ -6,7 +6,7 @@
 /*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:29:49 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2022/12/16 11:30:05 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2022/12/16 13:02:00 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "ray.h"
 #include "tuple.h"
 #include "matrix.h"
+#include "inter.h"
+# include "color.h"
 #include "/home/fjeiwjifeoh/Criterion/include/criterion/criterion.h"
 //#include "/mnt/nfs/homes/nfauconn/Criterion/include/criterion/criterion.h"
 //#include "/mnt/nfs/homes/rokerjea/sgoinfre/Criterion/include/criterion/criterion.h"

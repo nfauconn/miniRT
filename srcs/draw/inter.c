@@ -1,28 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.c                                              :+:      :+:    :+:   */
+/*   intersections.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 13:22:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/14 18:05:26 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/12/16 11:44:24 by fjeiwjifeoh       #+#    #+#             */
+/*   Updated: 2022/12/16 11:58:56 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
-#include "ray.h"
-#include "matrix.h"
-
-/* create a ray struct with his origin point & his dest vector */
-t_ray	ray(t_point orig, t_vector dest)
-{
-	t_ray	ray;
-
-	ray.orig = orig;
-	ray.dest = dest;
-	return (ray);
-}
+#include "inter.h"
 
 /* position after t iterations of vector r.dest on point r.origin
 =>> util for light and shading
@@ -95,21 +83,6 @@ t_xs	sp_xs(t_elem s, t_ray r)
 	}
 	return (xs);
 }
-
-t_ray	transform_ray(t_ray prev_r, t_m4x4_f matrix)
-{
-	t_ray	r;
-
-	r.orig = matrix_tuple_mult(matrix, prev_r.orig);
-	r.dest = matrix_tuple_mult(matrix, prev_r.dest);
-	return (r);
-}
-
-void	set_transform(t_elem *obj, t_m4x4_f transfo_matrix)
-{
-	obj->transform = transfo_matrix;
-}
-
 /* INTERSECT
 ** create a struct containing all intersections of a ray with a given obj
 ** (sphere can only have 2 but maybe more are needed for other objects) */
@@ -125,4 +98,30 @@ t_xs	intersect(t_elem obj, t_ray r)
 		ft_bzero(&xs, sizeof(xs));
 	xs.obj = obj;
 	return (xs);
+}
+
+/* find hits of objects
+RETURN PEUT ETRE NEG OU 0 !! CHECKER
+parcourir liste chainee d objets : */
+t_inter	intersect_world(t_scene *world, t_ray ray)
+{
+	t_elem		*obj;
+	t_xs		xs;
+	t_inter		i;
+	t_inter		res;
+
+	obj = world->objs;
+	xs = intersect(*obj, ray);
+	i = hit(xs);
+	res = i;
+	obj = obj->next;
+	while (obj)
+	{
+		xs = intersect(*obj, ray);
+		i = hit(xs);
+		if (i.t > 0 && (i.t < res.t || res.t < 0))
+			res = i;
+		obj = obj->next;
+	}
+	return (res);
 }

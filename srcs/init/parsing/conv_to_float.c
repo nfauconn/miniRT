@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   conv_to_double.c                                   :+:      :+:    :+:   */
+/*   conv_to_float.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 12:56:42 by noe               #+#    #+#             */
-/*   Updated: 2022/12/14 17:16:32 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/16 12:02:33 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
-#include "tuple.h"
+#include "setup.h"
 
 bool	conv_ratio(char *s, t_elem *elem, char *elem_name)
 {

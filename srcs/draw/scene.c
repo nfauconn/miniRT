@@ -6,80 +6,11 @@
 /*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:04:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/16 11:37:45 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2022/12/16 12:55:29 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scene.h"
-
-/* find hits of objects
-RETURN PEUT ETRE NEG OU 0 !! CHECKER
-parcourir liste chainee d objets : */
-t_inter	intersect_world(t_scene *world, t_ray ray)
-{
-	t_elem		*obj;
-	t_xs		xs;
-	t_inter		i;
-	t_inter		res;
-
-	obj = world->objs;
-	xs = intersect(*obj, ray);
-	i = hit(xs);
-	res = i;
-	obj = obj->next;
-	while (obj)
-	{
-		xs = intersect(*obj, ray);
-		i = hit(xs);
-		if (i.t > 0 && (i.t < res.t || res.t < 0))
-			res = i;
-		obj = obj->next;
-	}
-	return (res);
-}
-
-t_point	over_point(t_point ori, t_vector normalv)
-{
-	t_point	res;
-
-	res = ori + normalv * EPSILON * 200;
-	return (res);
-}
-
-void	prepare_computations(t_inter *i, t_ray ray)
-{
-	i->point = position(ray, i->t);
-	i->eyev = -ray.dest;
-	i->normalv = normal_at(&i->obj, i->point);
-	if (dot_product(i->normalv, i->eyev) < 0)
-	{
-		i->inside = 1;
-		i->normalv = -i->normalv;
-	}
-	else
-		i->inside = 0;
-	i->over_point = over_point(i->point, i->normalv);
-}
-
-/*
-to support multiple light sources : iterate over all the light sources,
-calling lighting() for each one and adding the colors together
-"Be warned, though: adding multiple light sources will slow your renderer down,
-especially when you get to Chapter 8, Shadows, on page 109. But if you have CPU
-cycles to burn, having more than one light can make some neat effects possible, like
-overlapping shadows"
-*/
-t_rgb	shade_hit(t_scene *world, t_inter inter)
-{
-	bool	shadowed;
-/*
-//	to make chap7 tests pass:
-	shadowed = 0;
-	return (lighting(inter.obj.material, world->lights, inter.point, inter.eyev, inter.normalv, shadowed));
-*/
-	shadowed = is_shadowed(world, inter.over_point);
-	return (lighting(inter.obj.material, world->lights, inter.over_point, inter.eyev, inter.normalv, shadowed));
-}
 
 t_m4x4_f	view_transform(t_point from, t_point to, t_point up)
 {

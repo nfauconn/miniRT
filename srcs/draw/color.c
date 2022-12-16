@@ -45,3 +45,16 @@ t_rgb	create_color(float red, float green, float blue)
 	return (color);
 }
 
+/* intersect the world with the given ray and return the color at the given intersection */
+t_rgb	color_at(t_scene *world, t_ray ray)
+{
+	t_inter	i;
+	t_rgb	color;
+
+	i = intersect_world(world, ray);
+	if (i.t <= 0)
+		return ((t_rgb)BLACK);
+	prepare_computations(&i, ray);
+	color = shade_hit(world, i);
+	return (color);
+}

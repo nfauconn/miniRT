@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   tuple.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:12:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/14 18:42:12 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/16 13:17:53 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TUPLE_H
 # define TUPLE_H
 
-# include "extern_libs.h"
-# include "defines.h"
+# include "minirt.h"
+# include "externlibs.h"
 
 enum e_point_vector
 {

@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   setup_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 14:19:18 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/10 19:18:03 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/16 12:04:43 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minirt.h"
-# include "tuple.h"
+# include "setup.h"
 
 static void	init(t_scene *scene)
 {

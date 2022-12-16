@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   conv_to_tuple.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:19:07 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/11 17:30:24 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/16 12:02:46 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "setup.h"
 
 static bool	check_rgb_range(t_rgb color)
 {

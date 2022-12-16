@@ -3,19 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ray.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 23:11:12 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/14 17:16:32 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/16 12:09:17 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAY_H
 #define RAY_H
 
-# include "extern_libs.h"
-# include "structs.h"
-# include "tuple.h"
+# include "minirt.h"
 
 /* RAY */
 t_ray		ray(t_point orig, t_vector dest);

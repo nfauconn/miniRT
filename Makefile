@@ -10,36 +10,59 @@ LIBFT_DIR = libft
 LIBFT = libft/libft.a
 MLX_DIR = ./mlx
 
-#FILES
+#DIRECTORIES
 SRC_DIR  = ./srcs
-S_EXT = .c
 BUILD_DIR  = ./objs
 INC_DIR = ./includes
 LIBFT_INC_DIR = ./libft/includes
-INIT_DIR = setup
+INIT_DIR = init
+PARSING_DIR = parsing
+SETTING_DIR = setting
+DRAW_DIR = draw
 UTILS_DIR = utils
+
+#SOURCES
+S_EXT = .c
 SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
-		error \
-		exit_clear \
-		display \
-		drawscene \
-		${addprefix ${INIT_DIR}/, \
-		setup_scene \
-		parse_file \
-		set_params \
-		conv_to_tuple \
-		conv_to_float \
-		elem_add} \
-		${addprefix ${UTILS_DIR}/, \
-		tuple \
-		ray \
-		interlst \
-		lights \
-		matrix \
-		scene \
-		sphere \
-		camera \
-		color} \
+			display \
+			error \
+			exit_clear \
+\
+				${addprefix ${INIT_DIR}/, \
+					setup_scene \
+\
+						${addprefix ${PARSING_DIR}/, \
+							parse_file \
+							set_params \
+							conv_to_tuple \
+							conv_to_float \
+							elem_add \
+						} \
+\
+						${addprefix ${SETTING_DIR}/, \
+							camera \
+							ambiantlight \
+							lightsource \
+							sphere \
+							cylinder \
+							plan \
+							material \
+						} \
+				} \
+\
+				${addprefix ${DRAW_DIR}/, \
+					drawscene \
+					ray \
+					inter \
+					lights \
+					scene \
+					color \
+				} \
+\
+				${addprefix ${UTILS_DIR}/, \
+					tuple \
+					matrix \
+				} \
 		}}
 DEPS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.d}}
 OBJS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.o}}
@@ -144,23 +167,11 @@ T_DEPS = ${subst ${T_SRC_DIR}, ${T_BUILD_DIR}, ${T_SRCS:%.c=%.d}}
 T_OBJS = ${subst ${T_SRC_DIR}, ${T_BUILD_DIR}, ${T_SRCS:%.c=%.o}}
 T_VPATH = ${T_SRC_DIR}
 
-TEST_NAME = lights
-TEST_FILE = ${T_SRC_DIR}/chap6_lights
-TEST_SRC = ${TEST_FILE}.c
-TEST_DEPS = ${TEST_FILE}.d
-TEST_OBJ = ${TEST_FILE}.o
-
 tests: libftcreat ${OBJS} ${T_OBJS}
 	@make -C ${MLX_DIR} --no-print-directory
 	@${CC} ${CFLAGS} ${OBJS} ${T_OBJS} -o ${T_NAME} ${T_LDFLAGS} ${T_LNFLAGS}
 	@./${T_NAME}
 	@${RM} ${T_NAME}
-
-test: libftcreat ${OBJS} ${TEST_OBJ}
-	@make -C ${MLX_DIR} --no-print-directory
-	@${CC} ${CFLAGS} ${OBJS} ${TEST_OBJ} -o ${TEST_NAME} ${T_LDFLAGS} ${T_LNFLAGS}
-	@./${TEST_NAME}
-	@${RM} {TEST_NAME}
 
 -include ${DEPS}
 -include ${TEST_DEPS}
@@ -168,11 +179,12 @@ test: libftcreat ${OBJS} ${TEST_OBJ}
 ${TEST_FILE}.o: ${TEST_FILE}.c
 	@${CC} ${CFLAGS} ${T_INCLUDES} -I includes -MMD -o $@ -c $<
 
-testlittleclean: littleclean
-	@${RM} ${TEST_NAME}${TEST_DEPS} ${TEST_OBJ} ${OBJS}
+testclean: littleclean
+	@${RM} ${T_NAME}
+	@${RM} ${T_BUILD_DIR}
+	@${RM} ${BUILD_DIR}
 	@echo "deleted test program"
 
-testr: testlittleclean test
-testsr: testlittleclean tests
+testsr: testclean tests
 
 .PHONY: all clean fclean re libftcreat val norm littleclean r test testlittleclean testr

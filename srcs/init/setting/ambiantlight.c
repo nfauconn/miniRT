@@ -1,24 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extern_libs.h                                      :+:      :+:    :+:   */
+/*   ambiantlight.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 16:12:41 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/11/23 16:12:43 by nfauconn         ###   ########.fr       */
+/*   Created: 2022/12/16 12:30:51 by fjeiwjifeoh       #+#    #+#             */
+/*   Updated: 2022/12/16 12:30:52 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXTERN_LIBS_H
-# define EXTERN_LIBS_H
-
-# include "libft.h"
-# include "clang_attr.h"
-# include "mlx.h"
-# include <math.h>
-# include <errno.h>
-# include <sys/types.h>
-# include <stdint.h>
-
-#endif

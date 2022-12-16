@@ -1,9 +1,7 @@
 #ifndef EXIT_H
 # define EXIT_H
 
-# include "extern_libs.h"
-# include "defines.h"
-# include "structs.h"
+# include "minirt.h"
 
 /* END */
 void	clear(t_scene *scene);

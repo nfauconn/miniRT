@@ -6,7 +6,7 @@
 /*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:29:05 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/16 11:39:10 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2022/12/16 13:02:43 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 //#include "/mnt/nfs/homes/nfauconn/Criterion/include/criterion/criterion.h"
 //#include "/mnt/nfs/homes/rokerjea/sgoinfre/Criterion/include/criterion/criterion.h"
 #include "matrix.h"
-#include "minirt.h"
-#include "extern_libs.h"
 #include "tuple.h"
+#include "minirt.h"
 #include "ray.h"
 #include "lights.h"
-#include "clang_attr.h"
 #include "scene.h"
+#include "inter.h"
+#include "setup.h"
 
 void	print_tuple(t_float4 var);
 

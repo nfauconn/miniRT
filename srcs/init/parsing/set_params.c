@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   set_params.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:00:45 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/14 17:16:32 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/16 12:12:21 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
-#include "ray.h"
+#include "setup.h"
 
 //creer 2 fonctions verif de format (is_coordinates / is_float pour verif
 //chaque str de param puis set, et exit clear se charge de free ce qu il faut
@@ -30,6 +29,29 @@ int	set_ambiantlight(t_scene *scene, char **params)
 		|| conv_rgb(params[2], scene->amblight, params[0]))
 		return (1);
 	return (0);
+}
+
+void	setup_camera(t_camera *cam, float hsize, float vsize)
+{
+	float		half_view;
+	float		aspect;
+
+	cam->hsize = hsize;
+	cam->vsize = vsize;
+	cam->transform = identity_matr();
+	half_view = tan(cam->fov / 2);
+	aspect = cam->hsize / cam->vsize;
+	if (aspect >= 1)
+	{
+		cam->half_width = half_view;
+		cam->half_height = half_view / aspect;
+	}
+	else
+	{
+		cam->half_width = half_view * aspect;
+		cam->half_height = half_view;
+	}
+	cam->pixel_size = (cam->half_width * 2) / cam->hsize;
 }
 
 int	set_camera(t_scene *scene, char **params)
@@ -68,6 +90,18 @@ int	set_lights(t_scene *scene, char **params)
 		ret = 1;
 	elem_add_back(&scene->lights, newlight);
 	return (ret);
+}
+
+void	init_sphere(t_elem *s)
+{
+	static ssize_t	no = -1;
+
+	no++;
+	s->id.shape = sphere;
+	s->id.no = no;
+	s->o_pos = create_point(0, 0, 0);
+	s->transform = identity_matr();
+	s->material = default_material(s);
 }
 
 int	set_sphere(t_scene *scene, char **params)

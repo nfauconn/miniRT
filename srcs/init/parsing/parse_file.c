@@ -6,11 +6,11 @@
 /*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 20:18:31 by noe               #+#    #+#             */
-/*   Updated: 2022/12/07 09:15:43 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2022/12/16 12:03:56 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "setup.h"
 
 static ssize_t	find_line_elem(char **line)
 {
