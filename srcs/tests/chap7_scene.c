@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:29:05 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/16 18:28:36 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:44:50 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,19 +281,19 @@ Test(scene, camera_pixel_size)
 	init_camera(scene.cam, hsize, vsize);
 	ray = ray_for_pixel(*scene.cam, 100, 50);
 	cr_expect(same_tuple(ray.orig, create_point(0, 0, 0)));
-	cr_expect(same_tuple(ray.dest, create_vector(0, 0, -1)));
+	cr_expect(same_tuple(ray.dir, create_vector(0, 0, -1)));
 
 	hsize = 201;
 	vsize = 101;
 	init_camera(scene.cam, hsize, vsize);
 	ray = ray_for_pixel(*scene.cam, 0, 0);
 	cr_expect(same_tuple(ray.orig, create_point(0, 0, 0)));
-	cr_expect(same_tuple(ray.dest, create_vector(0.66519, 0.33259, -0.66851)));
+	cr_expect(same_tuple(ray.dir, create_vector(0.66519, 0.33259, -0.66851)));
 
 	scene.cam->transform = rotation_y(M_PI / 4) * translation(0, -2, 5);
 	ray = ray_for_pixel(*scene.cam, 100, 50);
 	cr_expect(same_tuple(ray.orig, create_point(0, 2, -5)));
-	cr_expect(same_tuple(ray.dest, create_vector(sqrt(2) / 2, 0, -sqrt(2) / 2)));
+	cr_expect(same_tuple(ray.dir, create_vector(sqrt(2) / 2, 0, -sqrt(2) / 2)));
 
 /* 	hsize = 11;
 	vsize = 11;

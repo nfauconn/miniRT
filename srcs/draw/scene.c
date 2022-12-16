@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:04:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/16 12:55:29 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2022/12/16 18:44:50 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ t_ray	ray_for_pixel(t_camera cam, float px, float py)
 	t_float4	pixel;
 	pixel = matrix_tuple_mult(inverse(cam.transform), create_point(world_x, world_y, -1));
 	res.orig = matrix_tuple_mult(inverse(cam.transform), create_point(0, 0, 0));
-	res.dest = normalize(pixel - res.orig);
+	res.dir = normalize(pixel - res.orig);
 	return (res);
 }

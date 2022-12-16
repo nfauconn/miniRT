@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:44:24 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2022/12/16 18:37:57 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:44:50 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ t_xs	sp_intersect(t_elem s, t_ray r)
 	t_xs		xs;
 
 	sphere_to_ray = r.orig - s.o_pos;
-	a = dot3(r.dest, r.dest);
-	b = 2 * dot3(r.dest, sphere_to_ray);
+	a = dot3(r.dir, r.dir);
+	b = 2 * dot3(r.dir, sphere_to_ray);
 	c = dot3(sphere_to_ray, sphere_to_ray) - 1;
 	discriminant = pow(b, 2) - 4 * a * c;
 	if (discriminant < 0)
@@ -74,6 +74,15 @@ t_xs	sp_intersect(t_elem s, t_ray r)
 	}
 	return (xs);
 }
+
+t_xs	pl_intersect(t_elem p, t_ray r)
+{
+	float	t;
+
+	if (abs(r.dir.y))
+	t = -r.origin.y / r.direction.y;
+}
+
 /* INTERSECT
 ** create a struct containing all intersections of a ray with a given obj
 ** (sphere can only have 2 but maybe more are needed for other objects) */

@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/16 17:38:13 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:44:50 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ typedef struct s_scene
 typedef struct s_ray
 {
 	t_point		orig;
-	t_point		dest;
+	t_point		dir;
 }	t_ray;
 
 typedef struct s_xs

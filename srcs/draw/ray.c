@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:22:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/16 13:38:22 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2022/12/16 18:44:50 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 #include "ray.h"
 #include "matrix.h"
 
-/* create a ray struct with his origin point & his dest vector */
-t_ray	ray(t_point orig, t_vector dest)
+/* create a ray struct with his origin point & his dir vector */
+t_ray	ray(t_point orig, t_vector dir)
 {
 	t_ray	ray;
 
 	ray.orig = orig;
-	ray.dest = dest;
+	ray.dir = dir;
 	return (ray);
 }
 
-/* position after t iterations of vector r.dest on point r.origin
+/* position after t iterations of vector r.dir on point r.origin
 =>> util for light and shading
 --> turning intersections into actual surface informations */
 t_point	position(t_ray ray, float t)
 {
-	return (ray.orig + ray.dest * t);
+	return (ray.orig + ray.dir * t);
 }
 
 t_ray	transform_ray(t_ray prev_r, t_m4x4_f matrix)
@@ -37,7 +37,7 @@ t_ray	transform_ray(t_ray prev_r, t_m4x4_f matrix)
 	t_ray	r;
 
 	r.orig = matrix_tuple_mult(matrix, prev_r.orig);
-	r.dest = matrix_tuple_mult(matrix, prev_r.dest);
+	r.dir = matrix_tuple_mult(matrix, prev_r.dir);
 	return (r);
 }
 

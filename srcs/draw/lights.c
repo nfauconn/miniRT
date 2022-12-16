@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:21:52 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/16 18:21:32 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:44:50 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ t_point	over_point(t_point ori, t_vector normalv)
 void	prepare_computations(t_inter *i, t_ray ray)
 {
 	i->point = position(ray, i->t);
-	i->eyev = -ray.dest;
+	i->eyev = -ray.dir;
 	i->normalv = normal_at(&i->obj, i->point);
 	if (dot_product(i->normalv, i->eyev) < 0)
 	{
