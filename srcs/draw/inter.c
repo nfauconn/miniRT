@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:44:24 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2022/12/16 18:44:50 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/16 19:21:22 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,17 @@ t_xs	sp_intersect(t_elem s, t_ray r)
 
 t_xs	pl_intersect(t_elem p, t_ray r)
 {
-	float	t;
+	t_xs	xs;
 
-	if (abs(r.dir.y))
-	t = -r.origin.y / r.direction.y;
+	(void)p;
+	if (fabsf(r.dir.y) < EPSILON)
+		xs.count = 0;
+	else
+	{
+		xs.count = 1;
+		xs.t[0] = -r.orig.y / r.dir.y;
+	}
+	return (xs);
 }
 
 /* INTERSECT
@@ -97,7 +104,7 @@ t_xs	intersect(t_elem obj, t_ray r)
 	else if (obj.id.shape == plane)
 		xs = pl_intersect(obj, r);
 	else
-		ft_bzero(&xs, sizeof(xs));
+		xs.count = 0;
 	xs.obj = obj;
 	return (xs);
 }
