@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:04:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/14 19:57:05 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/16 11:37:45 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,13 @@ overlapping shadows"
 t_rgb	shade_hit(t_scene *world, t_inter inter)
 {
 	bool	shadowed;
+/*
+//	to make chap7 tests pass:
 	shadowed = 0;
 	return (lighting(inter.obj.material, world->lights, inter.point, inter.eyev, inter.normalv, shadowed));
-//	shadowed = is_shadowed(world, inter.over_point);
-//	return (lighting(inter.obj.material, world->lights, inter.over_point, inter.eyev, inter.normalv, shadowed));
+*/
+	shadowed = is_shadowed(world, inter.over_point);
+	return (lighting(inter.obj.material, world->lights, inter.over_point, inter.eyev, inter.normalv, shadowed));
 }
 
 t_m4x4_f	view_transform(t_point from, t_point to, t_point up)

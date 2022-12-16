@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   chap7_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:29:05 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/14 18:46:51 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/16 11:39:10 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "/mnt/nfs/homes/nfauconn/Criterion/include/criterion/criterion.h"
+#include "/home/fjeiwjifeoh/Criterion/include/criterion/criterion.h"
+//#include "/mnt/nfs/homes/nfauconn/Criterion/include/criterion/criterion.h"
 //#include "/mnt/nfs/homes/rokerjea/sgoinfre/Criterion/include/criterion/criterion.h"
 #include "matrix.h"
 #include "minirt.h"
@@ -152,7 +153,7 @@ Test(scene, shade_hit)
 	i = intersection(4, *shape);
 	prepare_computations(&i, r);
 	c = shade_hit(&world, i);
-	printf("\n\tTUPLE LINE 185");
+	printf("\n\tTUPLE LINE 159");
 	print_tuple(c);
 	printf("\n");
 	cr_expect(same_tuple(c, create_vector(0.38066, 0.47583, 0.2855)));
@@ -163,7 +164,7 @@ Test(scene, shade_hit)
 	i = intersection(0.5, *shape2);
 	prepare_computations(&i, r);
 	c = shade_hit(&world, i);
-	printf("\n\tTUPLE LINE 185");
+	printf("\n\tTUPLE LINE 170");
 	print_tuple(c);
 	printf("\n");
 	cr_expect(same_tuple(c, create_color(0.90498, 0.90498, 0.90498)));
@@ -186,9 +187,6 @@ Test(scene, shade_hit)
 	// ray misses
 	r = ray(create_point(0, 0, -5), create_vector(0, 1, 0));
 	c = color_at(&world, r);
-	printf("\n\tTUPLE LINE 185");
-	print_tuple(c);
-	printf("\n");
 	cr_expect(same_tuple(c, create_color(0, 0, 0)));
 
 /* 	// ray hits

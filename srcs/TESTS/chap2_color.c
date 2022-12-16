@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   chap2_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 15:10:17 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/14 18:39:26 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/16 11:27:48 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "/mnt/nfs/homes/nfauconn/Criterion/include/criterion/criterion.h"
+#include "/home/fjeiwjifeoh/Criterion/include/criterion/criterion.h"
+//#include "/mnt/nfs/homes/nfauconn/Criterion/include/criterion/criterion.h"
 //#include "/mnt/nfs/homes/rokerjea/sgoinfre/Criterion/include/criterion/criterion.h"
 # include <math.h>
 # include <stdio.h>

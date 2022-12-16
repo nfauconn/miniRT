@@ -1,9 +1,21 @@
-#include "/mnt/nfs/homes/nfauconn/miniRT/includes/minirt.h"
-#include "/mnt/nfs/homes/nfauconn/miniRT/includes/lights.h"
-#include "/mnt/nfs/homes/nfauconn/miniRT/includes/ray.h"
-#include "/mnt/nfs/homes/nfauconn/miniRT/includes/tuple.h"
-#include "/mnt/nfs/homes/nfauconn/miniRT/includes/matrix.h"
-#include "/mnt/nfs/homes/nfauconn/Criterion/include/criterion/criterion.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   chap6_lights.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/16 11:29:49 by fjeiwjifeoh       #+#    #+#             */
+/*   Updated: 2022/12/16 11:30:05 by fjeiwjifeoh      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lights.h"
+#include "ray.h"
+#include "tuple.h"
+#include "matrix.h"
+#include "/home/fjeiwjifeoh/Criterion/include/criterion/criterion.h"
+//#include "/mnt/nfs/homes/nfauconn/Criterion/include/criterion/criterion.h"
 //#include "/mnt/nfs/homes/rokerjea/sgoinfre/Criterion/include/criterion/criterion.h"
 
 //	printf("normal = {%f, %f, %f, %f}\normal", normal.x, normal.y, normal.z, normal.w);
