@@ -56,3 +56,6 @@ objs/
 libft/objs/
 libft/libft.a
 .vscode/
+all_tests
+lights
+sandbox/
