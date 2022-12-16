@@ -6,10 +6,11 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:34:33 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/14 18:40:29 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:31:30 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minirt.h"
 #include "tuple.h"
 
 t_float4	create_point(float x, float y, float z)
