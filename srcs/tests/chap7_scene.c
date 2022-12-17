@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:29:05 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/16 18:44:50 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/17 16:55:20 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ Test(scene, inside)
 	t_ray	r = ray(create_point(0, 0, 0), create_vector(0, 0, 1));
 	t_elem	shape;
 	init_sphere(&shape);
+	shape.transform = identity_matr();
 	t_inter	i = intersection(1, shape);
 	prepare_computations(&i, r);
 	cr_expect(same_tuple(i.point , create_point(0, 0, 1)));

@@ -6,13 +6,13 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:04:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/16 18:44:50 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/17 18:45:00 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scene.h"
 
-t_m4x4_f	view_transform(t_point from, t_point to, t_point up)
+t_m4x4_f	view_transform(t_point from, t_point to, t_vector up)
 {
 	t_m4x4_f	res;
 	t_vector	forward;

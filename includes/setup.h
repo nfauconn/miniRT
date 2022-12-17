@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:18:36 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/16 17:38:35 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/17 18:49:58 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "matrix.h"
 # include "exit.h"
 # include "error.h"
+# include "scene.h"
 # include "rgb.h"
 
 void	setup_scene(t_scene *scene, char *file);

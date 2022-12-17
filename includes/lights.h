@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:58:29 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/16 18:11:35 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/17 18:21:13 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "matrix.h"
 # include "ray.h"
 # include "inter.h"
+# include "color.h"
 
 t_vector	normal_at(t_elem *obj, t_point point);
 void		prepare_computations(t_inter *i, t_ray ray);

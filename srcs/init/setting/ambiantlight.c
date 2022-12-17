@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ambiantlight.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:30:51 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2022/12/16 13:35:07 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2022/12/17 18:11:00 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ int	set_ambiantlight(t_scene *scene, char **params)
 	if (conv_ratio(params[1], scene->amblight, params[0])
 		|| conv_rgb(params[2], scene->amblight, params[0]))
 		return (1);
+	scene->amblight->color *= scene->amblight->specs.ratio;
 	return (0);
 }

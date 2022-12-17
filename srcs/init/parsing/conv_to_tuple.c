@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:19:07 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/16 17:18:20 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/17 17:05:30 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ static bool	check_orientation_range(t_vector v)
 {
 	bool	ret;
 
-	if (v.x >= 0.0 && v.x <= 1.0
-		&& v.y >= 0.0 && v.y <= 1.0
-		&& v.z >= 0.0 && v.z <= 1.0)
+	if (v.x >= -1.0 && v.x <= 1.0
+		&& v.y >= -1.0 && v.y <= 1.0
+		&& v.z >= -1.0 && v.z <= 1.0)
 		ret = 0;
 	else
 		ret = 1;

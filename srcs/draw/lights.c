@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:21:52 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/17 16:21:06 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/17 18:37:53 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ t_vector	reflect(t_vector in, t_vector normal)
 void	point_light(t_elem *light, t_point pos, t_rgb color)//A MON AVIS ON VA POUVOIR SUPPR LE F4 CAR TJRS LES 4MEMES VALEURS (UTILISE SANS DOUTE CA POUR SIOMPLIFIER CALCULS)
 {
 	light->w_pos = pos;
-	light->color = color; //light->intensity dans son jargon
-	//A REFACTO ABSOLU<EMT avec le parsing
+	light->color = color;
 }
 
 t_rgb	lighting(t_material m, t_elem *light, t_point pos, t_vector eyev, \
@@ -118,6 +117,17 @@ especially when you get to Chapter 8, Shadows, on page 109. But if you have CPU
 cycles to burn, having more than one light can make some neat effects possible, like
 overlapping shadows"
 */
+
+/* static void	adjust_light(t_rgb *color)
+{
+	if (color->x > 1)
+		color->x = 1;
+	if (color->y > 1)
+		color->y = 1;
+	if (color->z > 1)
+		color->z = 1;
+}*/
+
 t_rgb	shade_hit(t_scene *world, t_inter inter)
 {
 	bool	shadowed;
@@ -126,8 +136,13 @@ t_rgb	shade_hit(t_scene *world, t_inter inter)
 	shadowed = 0;
 	return (lighting(inter.obj.material, world->lights, inter.point, inter.eyev, inter.normalv, shadowed));
 */
-	shadowed = is_shadowed(world, inter.over_point);
-	return (lighting(inter.obj.material, world->lights, inter.over_point, inter.eyev, inter.normalv, shadowed));
+	if (world->lights)
+	{
+		shadowed = is_shadowed(world, inter.over_point);
+		return (lighting(inter.obj.material, world->lights, inter.over_point, inter.eyev, inter.normalv, shadowed));
+	}
+	else
+		return (create_color(0, 0, 0));
 }
 
 t_point	over_point(t_point ori, t_vector normalv)

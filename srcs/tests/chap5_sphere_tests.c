@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 18:32:43 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/16 18:29:29 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/17 16:55:00 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ Test (ray, intersect3)
 	t_ray	r = ray(create_point(0, 2, -5), create_vector(0, 0, 1));
 	t_elem	s;
 	init_sphere(&s);
+	s.transform = identity_matr();
 	t_xs	xs = intersect(s, r);
 
 	cr_expect(xs.count == 0);

@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:30:09 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2022/12/16 19:53:12 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/17 17:45:35 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,13 @@ void	init_plane(t_elem *pl)
 	pl->id.shape = plane;
 	pl->id.no = no;
 	pl->o_pos = create_point(0, 0, 0);
-	pl->transform = identity_matr();
+	pl->transform = translation(pl->w_pos.x, pl->w_pos.y, pl->w_pos.z);
+		pl->transform = matrix_mult(pl->transform, \
+						rotation_x(M_PI * pl->orientation.x));
+		pl->transform = matrix_mult(pl->transform, \
+						rotation_y(M_PI * pl->orientation.y));
+		pl->transform = matrix_mult(pl->transform, \
+						rotation_z(M_PI * pl->orientation.z));
 	pl->material = default_material(pl);
 }
 

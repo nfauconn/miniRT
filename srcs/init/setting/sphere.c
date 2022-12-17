@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 13:32:28 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2022/12/16 18:35:14 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/17 18:12:45 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	init_sphere(t_elem *s)
 	s->id.shape = sphere;
 	s->id.no = no;
 	s->o_pos = create_point(0, 0, 0);
-	s->transform = identity_matr();
+	s->transform = matrix_mult(translation(s->w_pos.x, s->w_pos.y, s->w_pos.z), \
+								scaling(s->specs.radius, s->specs.radius, s->specs.radius));
 	s->material = default_material(s);
 }
 

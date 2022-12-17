@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:30:55 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2022/12/16 13:38:56 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2022/12/17 18:57:29 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ void	init_camera(t_camera *cam, float hsize, float vsize)
 
 int	set_camera(t_scene *scene, char **params)
 {
+	t_point		from;
+	t_point		to;
+	t_vector	up;
+
 	if (ft_strarraysize(params) != 4)
 		return (error_display("wrong number of elements for camera"));
 	if (scene->cam)
@@ -49,6 +53,10 @@ int	set_camera(t_scene *scene, char **params)
 		|| conv_fov(params[3], scene->cam, params[0]))
 		return (1);
 	scene->cam->fov *= M_PI / 180;
+	from = scene->cam->w_pos;
+	to = from + scene->cam->orientation;//OUI MAIS NORMALISEE
+	up = create_vector(0, 1, 0);
+	scene->cam->transform = view_transform(from, to, up);
 	init_camera(scene->cam, WIDTH, HEIGHT);
 	return (0);
 }

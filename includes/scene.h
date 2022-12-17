@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:09:30 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2022/12/16 13:38:22 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2022/12/17 18:45:00 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include "color.h"
 
 void		drawscene(t_scene *scene, t_img *img);
-t_m4x4_f	view_transform(t_point from, t_point to, t_point up);
+t_m4x4_f	view_transform(t_point from, t_point to, t_vector up);
 t_ray		ray_for_pixel(t_camera cam, float px, float py);
 void		render(t_scene *scene, t_img *img);
 

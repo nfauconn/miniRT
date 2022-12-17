@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lightsource.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:30:47 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2022/12/16 13:40:39 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2022/12/17 17:25:38 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "setup.h"
 
-/* !!!! no ID cf init_sphere == POINT_LIGHT ????????*/
+// RATIO  !!!!!!!!!!!!!!!!!!!!!!!!!!
 int	set_lights(t_scene *scene, char **params)
 {
 	int		ret;
