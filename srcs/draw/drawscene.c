@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 18:10:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/16 19:49:13 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/17 16:27:10 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	drawscene(t_scene *scene, t_img *img)
 	// float	rL = left->specs.ratio;
 	left->transform = matrix_mult(translation(-1.5, 0.33, -0.75), scaling(0.33, 0.33, 0.33));
 
-/* 	t_elem	*pl = left->next;
-	pl->transform = matrix_mult(pl->transform, rotation_x(M_PI / 2));
-	pl->transform = matrix_mult(pl->transform, translation(0, 0, 3)); */
+	t_elem	*pl = left->next;
+	pl->transform = matrix_mult(pl->transform, translation(0, 0, 3));
+//	pl->transform = matrix_mult(pl->transform, rotation_x(M_PI / 2));
 
 	scene->cam->transform = view_transform(create_point(0, 1.5, -5), \
 												create_point(0, 1, 0), \

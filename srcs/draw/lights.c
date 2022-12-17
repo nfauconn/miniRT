@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:21:52 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/16 18:44:50 by nfauconn         ###   ########.fr       */
+/*   Updated: 2022/12/17 16:21:06 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ t_vector	normal_at(t_elem *obj, t_point w_pt)
 	if (obj->id.shape == sphere)
 		local_normal = local_pt - obj->o_pos;
 	if (obj->id.shape == plane)
-		local_normal = create_vector(obj->o_pos.x, obj->o_pos.y, obj->o_pos.z);
+	{
+		local_normal = create_vector(0, 1, 0);
+		//local_normal = create_vector(obj->o_pos.x, obj->o_pos.y, obj->o_pos.z);
+	}
 	w_normal = matrix_tuple_mult(transpose(inverse(obj->transform)), local_normal);
 	w_normal.w = 0;
 	return (normalize(w_normal));
@@ -140,7 +143,7 @@ void	prepare_computations(t_inter *i, t_ray ray)
 	i->point = position(ray, i->t);
 	i->eyev = -ray.dir;
 	i->normalv = normal_at(&i->obj, i->point);
-	if (dot_product(i->normalv, i->eyev) < 0)
+	if (i->obj.id.shape != plane && dot_product(i->normalv, i->eyev) < 0)
 	{
 		i->inside = 1;
 		i->normalv = -i->normalv;
