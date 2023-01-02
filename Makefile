@@ -23,50 +23,50 @@ UTILS_DIR = utils
 
 #SOURCES
 S_EXT = .c
-SRCS = ${addsuffix ${S_EXT}, ${addprefix ${SRC_DIR}/, \
-			display \
-			error \
-			exit_clear \
+SRC_FILES = display.c \
+			error.c \
+			exit_clear.c \
 \
 				${addprefix ${INIT_DIR}/, \
-					setup_scene \
+					setup_scene.c \
 \
 						${addprefix ${PARSING_DIR}/, \
-							parse_file \
-							conv_to_tuple \
-							conv_to_float \
-							elem_add \
+							parse_file.c \
+							conv_to_tuple.c \
+							conv_to_float.c \
+							elem_add.c \
 						} \
 \
 						${addprefix ${SETTING_DIR}/, \
-							camera \
-							ambiantlight \
-							lightsource \
-							sphere \
-							cylinder \
-							plane \
-							material \
+							camera.c \
+							ambiantlight.c \
+							lightsource.c \
+							sphere.c \
+							cylinder.c \
+							plane.c \
+							material.c \
 						} \
 				} \
 \
 				${addprefix ${DRAW_DIR}/, \
-					drawscene \
-					ray \
-					inter \
-					lights \
-					scene \
-					color \
+					drawscene.c \
+					ray.c \
+					inter.c \
+					lights.c \
+					scene.c \
+					color.c \
 				} \
 \
 				${addprefix ${UTILS_DIR}/, \
-					tuple \
-					matrix \
-					rgb \
-				} \
-		}}
-DEPS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.d}}
-OBJS = ${subst ${SRC_DIR}, ${BUILD_DIR}, ${SRCS:%.c=%.o}}
-VPATH = ${SRC_DIR}
+					tuple.c \
+					matrix.c \
+					rgb.c \
+				}
+
+SRCS = ${addprefix ${SRC_DIR}/, ${SRC_FILES}}
+DEPS = ${subst ${SRC_DIR}/, ${BUILD_DIR}/, ${SRCS:%.c=%.d}}
+OBJS = ${subst ${SRC_DIR}/, ${BUILD_DIR}/, ${SRCS:%.c=%.o}}
+#VPATH = ${SRC_DIR}
 
 MAIN_SRC = srcs/main.c
 MAIN_DEPS = objs/main.d
@@ -95,7 +95,7 @@ ${NAME}: libftcreat ${OBJS} ${MAIN_OBJ}
 libftcreat:
 	@make -C ${LIBFT_DIR} --no-print-directory
 
-${BUILD_DIR}/%.o: %.c
+${BUILD_DIR}/%.o: ${SRC_DIR}/%.c
 	@mkdir -p ${dir $@}
 	@echo create: ${@:%=%}
 	@${CC} ${CFLAGS} -MMD ${INCLUDES} -o $@ -c $<
