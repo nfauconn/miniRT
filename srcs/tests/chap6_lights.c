@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:29:49 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2022/12/16 18:29:24 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/02 13:00:32 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,49 +108,53 @@ Test(lights, find_reflecting_vector)
 
 Test(lights, get_lighting)
 {
-	t_vector	eyev;
-	t_vector	normalv;
+	t_elem		amblight;
+	t_scene		scene;
 	t_elem		light;
+	t_inter		inter;
 	t_rgb		res;
-	t_point		position;
 
+	amblight.color = create_color(1, 1, 1);
+	amblight.specs.ratio = 1;
+	scene.amblight = &amblight;
 	light.color = (t_rgb)WHITE;
 	light.material = test_default_material(&light);
-	position = create_point(0, 0, 0); /* W_POS OU O_POS ???*/
+	inter.obj = light;
+	inter.over_point = create_point(0, 0, 0); /* W_POS OU O_POS ???*/
 
 /*	lighting with the eye btw the light and the surface, eye offset 90° (perpendicular to surface) */
-	eyev = create_vector(0, 0, -1);
-	normalv = create_vector(0, 0, -1);
+	inter.eyev = create_vector(0, 0, -1);
+	inter.normalv = create_vector(0, 0, -1);
 	point_light(&light, create_point(0, 0, -10), (t_rgb)WHITE);
-	res = lighting(light.material, &light, position, eyev, normalv, 0);
+	res = lighting(&scene, &light, inter, 0);
 	cr_expect(same_tuple(res, create_color(1.9, 1.9, 1.9)));
 
 /*	lighting with the eye btw light & surface, eye offset 45°*/
-	eyev = create_vector(0, sqrt(2)/2, -sqrt(2)/2);
-	normalv = create_vector(0, 0, -1);
+	inter.eyev = create_vector(0, sqrt(2)/2, -sqrt(2)/2);
+	inter.normalv = create_vector(0, 0, -1);
 	point_light(&light, create_point(0, 0, -10), (t_rgb)WHITE);
-	res = lighting(light.material, &light, position, eyev, normalv, 0);
+	res = lighting(&scene, &light, inter, 0);
 	cr_expect(same_tuple(res, create_color(1.0, 1.0, 1.0)));
 
 /*	lighting with eye offset 90° , light offset 45°*/
-	eyev = create_vector(0, 0, -1);
-	normalv = create_vector(0, 0, -1);
+	inter.eyev = create_vector(0, 0, -1);
+	inter.normalv = create_vector(0, 0, -1);
 	point_light(&light, create_point(0, 10, -10), (t_rgb)WHITE);
-	res = lighting(light.material, &light, position, eyev, normalv, 0);
+	res = lighting(&scene, &light, inter, 0);
 	cr_expect(same_tuple(res, create_color(0.7364, 0.7364, 0.7364)));
 
 /*	lighting with the eye in the path of the reflection vector */
-	eyev = create_vector(0, -sqrt(2)/2, -sqrt(2)/2);
-	normalv = create_vector(0, 0, -1);
+	inter.eyev = create_vector(0, -sqrt(2)/2, -sqrt(2)/2);
+	inter.normalv = create_vector(0, 0, -1);
 	point_light(&light, create_point(0, 10, -10), (t_rgb)WHITE);
-	res = lighting(light.material, &light, position, eyev, normalv, 0);
+	res = lighting(&scene, &light, inter, 0);
 //	printf("lighting = {%f, %f, %f, %f}\n", res.x, res.y, res.z, res.w);
 	cr_expect(same_tuple(res, create_color(1.636385, 1.636385, 1.636385)));
 
 /*	lighting with the light behind the surface and light beyond */
-	eyev = create_vector(0, 0, -1);
-	normalv = create_vector(0, 0, -1);
+	inter.eyev = create_vector(0, 0, -1);
+	inter.normalv = create_vector(0, 0, -1);
 	point_light(&light, create_point(0, 0, 10), (t_rgb)WHITE);
-	res = lighting(light.material, &light, position, eyev, normalv, 0);
+	res = lighting(&scene, &light, inter, 0);
 	cr_expect(same_tuple(res, create_color(0.1, 0.1, 0.1)));
 }

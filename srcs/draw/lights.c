@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:21:52 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/17 18:37:53 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/02 12:59:45 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ void	point_light(t_elem *light, t_point pos, t_rgb color)//A MON AVIS ON VA POUV
 	light->color = color;
 }
 
-t_rgb	lighting(t_material m, t_elem *light, t_point pos, t_vector eyev, \
-												t_vector normalv, bool in_shadow)
+t_rgb	lighting(t_scene *scene, t_elem *light, t_inter inter, bool shadowed)
 {
 	t_rgb		effective_color;
 	t_vector	reflectv;
@@ -62,10 +61,10 @@ t_rgb	lighting(t_material m, t_elem *light, t_point pos, t_vector eyev, \
 	t_rgb		res;
 	float		factor;
 
-	effective_color = m.color * light->color;
-	lightv = normalize(light->w_pos - pos);
-	ambient = effective_color * m.ambient;
-	light_dot_normal = dot_product(lightv, normalv);
+	effective_color = inter.obj.material.color * light->color * scene->amblight->color * scene->amblight->specs.ratio;
+	lightv = normalize(light->w_pos - inter.over_point);
+	ambient = effective_color * inter.obj.material.ambient;
+	light_dot_normal = dot_product(lightv, inter.normalv);
 	if (light_dot_normal < 0)
 	{
 		diffuse = (t_rgb)BLACK;
@@ -73,18 +72,18 @@ t_rgb	lighting(t_material m, t_elem *light, t_point pos, t_vector eyev, \
 	}
 	else
 	{
-		diffuse = effective_color * m.diffuse * light_dot_normal;
-		reflectv = reflect(-lightv, normalv);
-		reflect_dot_eye = dot_product(reflectv, eyev);
+		diffuse = effective_color * inter.obj.material.diffuse * light_dot_normal;
+		reflectv = reflect(-lightv, inter.normalv);
+		reflect_dot_eye = dot_product(reflectv, inter.eyev);
 		if (reflect_dot_eye <= 0)
 			specular = (t_rgb)BLACK;
 		else
 		{
-			factor = pow(reflect_dot_eye, m.shininess);
-			specular = light->color * m.specular * factor;
+			factor = pow(reflect_dot_eye, inter.obj.material.shininess);
+			specular = light->color * inter.obj.material.specular * factor;
 		}
 	}
-	if (in_shadow)
+	if (shadowed)
 		res = ambient;
 	else
 		res = ambient + diffuse + specular;
@@ -134,12 +133,12 @@ t_rgb	shade_hit(t_scene *world, t_inter inter)
 /*
 //	to make chap7 tests pass:
 	shadowed = 0;
-	return (lighting(inter.obj.material, world->lights, inter.point, inter.eyev, inter.normalv, shadowed));
+	return (lighting(world, world->lights, inter, shadowed));
 */
 	if (world->lights)
 	{
 		shadowed = is_shadowed(world, inter.over_point);
-		return (lighting(inter.obj.material, world->lights, inter.over_point, inter.eyev, inter.normalv, shadowed));
+		return (lighting(world, world->lights, inter, shadowed));
 	}
 	else
 		return (create_color(0, 0, 0));

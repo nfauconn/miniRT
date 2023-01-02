@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:29:05 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/02 12:12:01 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/02 13:02:25 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,8 @@ printf("\n!!! tests of color_at in chap7_scene.c:159:170 removed\n\n");
 	t_rgb	c;
 
 	setup_scene(&world, "./scenes/2spheres1light.rt");
+	world.amblight->color = create_color(1, 1, 1);
+	world.amblight->specs.ratio = 1;
 	world.objs->material = test_default_material2(world.objs);
 	world.objs->next->material = test_default_material(world.objs->next);
 	world.objs->next->transform = scaling(0.5, 0.5, 0.5);

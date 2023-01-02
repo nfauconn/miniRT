@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:30:55 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/02 12:08:26 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/02 12:41:11 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	init_camera(t_camera *cam, float hsize, float vsize)
 
 	cam->hsize = hsize;
 	cam->vsize = vsize;
+	cam->transform = identity_matr();
 	half_view = tan(cam->fov / 2);
 	aspect = cam->hsize / cam->vsize;
 	if (aspect >= 1)
@@ -53,11 +54,11 @@ int	set_camera(t_scene *scene, char **params)
 		|| conv_fov(params[3], scene->cam, params[0]))
 		return (1);
 	scene->cam->fov *= M_PI / 180;
+	init_camera(scene->cam, WIDTH, HEIGHT);
 	from = scene->cam->w_pos;
 	r = ray(from, scene->cam->orientation);
 	to = position(r, 1);
 	up = create_vector(0, 1, 0);
 	scene->cam->transform = view_transform(from, to, up);
-	init_camera(scene->cam, WIDTH, HEIGHT);
 	return (0);
 }
