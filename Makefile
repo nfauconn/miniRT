@@ -66,7 +66,6 @@ SRC_FILES = display.c \
 SRCS = ${addprefix ${SRC_DIR}/, ${SRC_FILES}}
 DEPS = ${subst ${SRC_DIR}/, ${BUILD_DIR}/, ${SRCS:%.c=%.d}}
 OBJS = ${subst ${SRC_DIR}/, ${BUILD_DIR}/, ${SRCS:%.c=%.o}}
-#VPATH = ${SRC_DIR}
 
 MAIN_SRC = srcs/main.c
 MAIN_DEPS = objs/main.d
