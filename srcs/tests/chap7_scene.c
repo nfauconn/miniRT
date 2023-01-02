@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:29:05 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/17 16:55:20 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/02 12:12:01 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,6 +267,7 @@ Test(scene, camera_pixel_size)
 	hsize = 160;
 	vsize = 120;
 	init_camera(scene.cam, hsize, vsize);
+	scene.cam->transform = identity_matr();
 	cr_expect(scene.cam->hsize == 160);
 	cr_expect(scene.cam->vsize == 120);
 	cr_expect(same_float(scene.cam->fov, M_PI / 2));

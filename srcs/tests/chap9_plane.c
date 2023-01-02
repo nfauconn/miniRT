@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:32:48 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/17 14:20:47 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/02 12:13:46 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ Test(plane, constant_normal)
 	t_elem		p;
 
 	init_plane(&p);
+	p.transform = identity_matr();
 	n1 = normal_at(&p, create_point(0, 0, 0));
 	n2 = normal_at(&p, create_point(10, 0, -10));
 	n3 = normal_at(&p, create_point(-5, 0, 150));
@@ -44,6 +45,7 @@ Test(plane, intersect)
 	t_xs	xs;
 
 	init_plane(&p);
+	p.transform = identity_matr();
 
 	/* intersect with a ray parallel to the plane */
 	r = ray(create_point(0, 10, 0), create_vector(0, 0, 1));
