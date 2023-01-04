@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:21:52 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/04 18:09:10 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/04 21:05:33 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,12 @@ t_rgb	lighting(t_scene *scene, t_elem *light, t_inter inter, bool shadowed)
 	float		factor;
 
 //	TRY
-/*
-	effective_color = inter.obj.material * light->color;
+/* (void)scene;
+	effective_color = inter.obj.material.color * light->color;
 	lightv = normalize(light->w_pos - inter.over_point);
-	lightsum = light->color + scene->amblight->color;
-	adjust_light(&lightsum);
-	ambient = inter.obj.material * lightsum;
-*/
+
+	ambient = (t_rgb)BLACK;//inter.obj.material.color * inter.obj.material.ambient;
+ */
 
 	//combines the surface color with the light's color/intensity
 	effective_color = inter.obj.material.color * light->color;
@@ -101,13 +100,13 @@ t_rgb	lighting(t_scene *scene, t_elem *light, t_inter inter, bool shadowed)
 	if (shadowed)
 		res = ambient;
 	else
-		res = ambient + diffuse + specular;
+		res = ambient + diffuse + specular;//ambient + diffuse + specular;
 /* 	res += scene->amblight->color;
 	adjust_light(&res); */
 	return (res);
 }
 
-bool	is_shadowed(t_scene *scene, t_point	point)
+bool	is_shadowed(t_scene *scene, t_elem *light, t_point	point)
 {
 	t_vector	v;
 	float		distance;
@@ -115,7 +114,7 @@ bool	is_shadowed(t_scene *scene, t_point	point)
 	t_ray		r;
 	t_inter		i;
 
-	v = scene->lights->w_pos - point;	// vector from light to point
+	v = light->w_pos - point;	// vector from light to point
 	distance = length(v);				// distance from light to point
 	direction = normalize(v);			// normalized distance
 	r = ray(point, direction);
@@ -139,6 +138,7 @@ t_rgb	shade_hit(t_scene *world, t_inter inter)
 {
 	bool	shadowed;
 	t_rgb	color;
+	t_elem	*light;
 /*
 //	to make chap7 tests pass:
 	shadowed = 0;
@@ -149,15 +149,18 @@ t_rgb	shade_hit(t_scene *world, t_inter inter)
 		color = inter.obj.material.color * world->amblight->color;
 		return (color);
 	}
-	shadowed = is_shadowed(world, inter.over_point);
-	color = lighting(world, world->lights, inter, shadowed);
-/*	world->lights = world->lights->next;
- 	while (world->lights)
+	light = world->lights;
+	shadowed = is_shadowed(world, light, inter.over_point);
+	color = lighting(world, light, inter, shadowed);
+	light = light->next;
+ 	while (light)
 	{
-		color += lighting(world, world->lights, inter, shadowed);
-		world->lights = world->lights->next;
+		shadowed = is_shadowed(world, light, inter.over_point);
+		color += lighting(world, light, inter, shadowed);
+//		adjust_light(&color);
+		light = light->next;
 	}
-	adjust_light(&color); */
+	adjust_light(&color);
 	return (color);
 }
 

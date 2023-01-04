@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 17:39:16 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/04 14:39:20 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/04 21:19:55 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ Test(shadows, no_shadow1)
 	t_scene	world;
 	setup_scene(&world, "./scenes/TEST2spheres1light.rt");
 	t_point	p = create_point(0, 10, 0);
-	cr_expect(is_shadowed(&world, p) == 0);
+	cr_expect(is_shadowed(&world, world.lights, p) == 0);
 	t_point	p2 = create_point(10, -10, 10);
-	cr_expect(is_shadowed(&world, p2) == 1);
+	cr_expect(is_shadowed(&world, world.lights, p2) == 1);
 	t_point	p3 = create_point(-20, 20, -20);
-	cr_expect(is_shadowed(&world, p3) == 0);
+	cr_expect(is_shadowed(&world, world.lights, p3) == 0);
 	t_point	p4 = create_point(-2, 2, -2);
-	cr_expect(is_shadowed(&world, p4) == 0);
+	cr_expect(is_shadowed(&world, world.lights, p4) == 0);
 }
 
 Test(shadows, intersect_shadow)

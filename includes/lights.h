@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:58:29 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/04 16:39:59 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/04 20:31:26 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void		prepare_computations(t_inter *i, t_ray ray);
 t_vector	reflect(t_vector in, t_vector normal);
 void		point_light(t_elem *light, t_point pos, t_rgb color);
 t_rgb		lighting(t_scene *scene, t_elem *light, t_inter inter, bool shadowed);
-bool		is_shadowed(t_scene *scene, t_point	point);
+bool		is_shadowed(t_scene *scene, t_elem *light, t_point	point);
 t_rgb		shade_hit(t_scene *world, t_inter inter);
 
 #endif
