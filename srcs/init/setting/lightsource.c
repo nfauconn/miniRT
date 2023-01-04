@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:30:47 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2022/12/17 17:25:38 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/04 14:47:55 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	set_lights(t_scene *scene, char **params)
 		|| conv_ratio(params[2], newlight, params[0])
 		|| conv_rgb(params[3], newlight, params[0]))
 		ret = 1;
+	newlight->color *= newlight->specs.ratio;
 	elem_add_back(&scene->lights, newlight);
 	return (ret);
 }
