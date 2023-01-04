@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:21:52 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/02 15:25:25 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/04 14:26:06 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,9 @@ t_rgb	lighting(t_scene *scene, t_elem *light, t_inter inter, bool shadowed)
 	t_rgb		res;
 	float		factor;
 
-	/*WORK ON AMBLIGHT*/
-/* 	effective_color = light->color + scene->amblight->color;
-	effective_color *= inter.obj.material.color;
-	adjust_light(&effective_color); */
-
-	/*PREVIOUS*/
-	(void)scene;
 	effective_color = inter.obj.material.color * light->color;
-
-	/******************/
 	lightv = normalize(light->w_pos - inter.over_point);
-	ambient = effective_color * inter.obj.material.ambient;
+	ambient = effective_color * scene->amblight->color;
 	light_dot_normal = dot_product(lightv, inter.normalv);
 	if (light_dot_normal < 0)
 	{

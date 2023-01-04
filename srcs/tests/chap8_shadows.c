@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 17:39:16 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/02 13:07:47 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/04 14:39:20 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@
 Test(shadows, yes_no)
 {
 	t_scene		scene;
-	setup_scene(&scene, "./scenes/2spheres1light.rt");
-	scene.amblight->color = create_color(1, 1, 1);
-	scene.amblight->specs.ratio = 1;
-	
+	setup_scene(&scene, "./scenes/TEST2spheres1light.rt");
+
 	t_inter		inter;
 	//ARRANGE
 	inter.eyev = create_vector(0, 0, 1);
@@ -50,7 +48,7 @@ Test(shadows, yes_no)
 Test(shadows, no_shadow1)
 {
 	t_scene	world;
-	setup_scene(&world, "./scenes/2spheres1light.rt");
+	setup_scene(&world, "./scenes/TEST2spheres1light.rt");
 	t_point	p = create_point(0, 10, 0);
 	cr_expect(is_shadowed(&world, p) == 0);
 	t_point	p2 = create_point(10, -10, 10);
@@ -64,9 +62,7 @@ Test(shadows, no_shadow1)
 Test(shadows, intersect_shadow)
 {
 	t_scene	world;
-	setup_scene(&world, "./scenes/shadowtest.rt");
-	world.amblight->color = create_color(1, 1, 1);
-	world.amblight->specs.ratio = 1;
+	setup_scene(&world, "./scenes/TESTshadow.rt");
 	t_ray r = ray(create_point(0, 0, 5), create_vector(0, 0, 1));
 	t_inter	i = intersection(4, *world.objs->next);
 	prepare_computations(&i, r);
@@ -77,7 +73,7 @@ Test(shadows, intersect_shadow)
 Test(shadows, shade_hit_offset)
 {
 	// t_scene	world;
-	// setup_scene(&world, "./scenes/shadowtest.rt");
+	// setup_scene(&world, "./scenes/TESTshadow.rt");
 	t_elem	shape;
 	init_sphere(&shape);
 	shape.transform = translation(0, 0, 1);

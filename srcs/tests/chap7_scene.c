@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:29:05 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/02 13:02:25 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/04 14:39:37 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_material	test_default_material2(t_elem *elem)
 Test(scene, world)
 {
 	t_scene	world;
-	setup_scene(&world, "./scenes/empty.rt");
+	setup_scene(&world, "./scenes/TESTempty.rt");
 	cr_expect(world.objs == NULL);
 	cr_expect(world.lights == NULL);
 	clear (&world);
@@ -52,7 +52,7 @@ Test(scene, setup2sp)
 	t_rgb	color;
 	t_m4x4_f	transform;
 
-	setup_scene(&world, "./scenes/2spheres1light.rt");
+	setup_scene(&world, "./scenes/TEST2spheres1light.rt");
 	sp = world.objs;
 	color = create_color(0.8, 1.0, 0.6);
 
@@ -84,7 +84,7 @@ Test(scene, world_ray)
 	t_ray	r;
 	t_xs	xs;
 
-	setup_scene(&world, "./scenes/2spheres1light.rt");
+	setup_scene(&world, "./scenes/TEST2spheres1light.rt");
 	r = ray(create_point(0, 0, -5), create_vector(0, 0, 1));
 	xs = intersect(*world.objs, r);
 	cr_expect(same_float(xs.t[0], 4.0));
@@ -137,7 +137,7 @@ Test(scene, shade_hit)
 	t_inter	i;
 	t_rgb	c; */
 
-	setup_scene(&world, "./scenes/2spheres1light.rt");
+	setup_scene(&world, "./scenes/TEST2spheres1light.rt");
 	shape = world.objs;
 	shape2 = world.objs->next;
 	shape->material = test_default_material2(shape);
@@ -178,7 +178,7 @@ printf("\n!!! tests of color_at in chap7_scene.c:159:170 removed\n\n");
 	t_ray	r;
 	t_rgb	c;
 
-	setup_scene(&world, "./scenes/2spheres1light.rt");
+	setup_scene(&world, "./scenes/TEST2spheres1light.rt");
 	world.amblight->color = create_color(1, 1, 1);
 	world.amblight->specs.ratio = 1;
 	world.objs->material = test_default_material2(world.objs);
@@ -264,7 +264,7 @@ Test(scene, camera_pixel_size)
 	t_point		to;
 	t_point		up; */
 
-	setup_scene(&scene, "./scenes/2spheres1light.rt");
+	setup_scene(&scene, "./scenes/TEST2spheres1light.rt");
 
 	hsize = 160;
 	vsize = 120;

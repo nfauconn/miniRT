@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:29:49 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/02 13:00:32 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/04 14:39:37 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,19 +108,16 @@ Test(lights, find_reflecting_vector)
 
 Test(lights, get_lighting)
 {
-	t_elem		amblight;
 	t_scene		scene;
 	t_elem		light;
 	t_inter		inter;
 	t_rgb		res;
 
-	amblight.color = create_color(1, 1, 1);
-	amblight.specs.ratio = 1;
-	scene.amblight = &amblight;
+	setup_scene(&scene, "./scenes/TESTempty.rt");
 	light.color = (t_rgb)WHITE;
 	light.material = test_default_material(&light);
 	inter.obj = light;
-	inter.over_point = create_point(0, 0, 0); /* W_POS OU O_POS ???*/
+	inter.over_point = create_point(0, 0, 0);
 
 /*	lighting with the eye btw the light and the surface, eye offset 90° (perpendicular to surface) */
 	inter.eyev = create_vector(0, 0, -1);
