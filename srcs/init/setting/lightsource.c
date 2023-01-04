@@ -6,13 +6,12 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:30:47 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/04 14:47:55 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/04 16:34:47 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "setup.h"
 
-// RATIO  !!!!!!!!!!!!!!!!!!!!!!!!!!
 int	set_lights(t_scene *scene, char **params)
 {
 	int		ret;

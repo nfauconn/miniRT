@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:46:00 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/16 16:46:03 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/04 16:37:07 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,14 @@ int rgbvtoi(t_float4 color_vec)
 	g = convert_unit_to_rgb(color_vec.y);
 	b = convert_unit_to_rgb(color_vec.z);
 	return (r << 16 | g << 8 | b);
+}
+
+void	adjust_light(t_rgb *color)
+{
+	if (color->x > 1)
+		color->x = 1;
+	if (color->y > 1)
+		color->y = 1;
+	if (color->z > 1)
+		color->z = 1;
 }

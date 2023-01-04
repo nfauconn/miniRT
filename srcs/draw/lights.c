@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:21:52 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/04 14:47:21 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/04 18:09:10 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,6 @@ void	point_light(t_elem *light, t_point pos, t_rgb color)//A MON AVIS ON VA POUV
 	light->color = color;
 }
 
-/* static void	adjust_light(t_rgb *color)
-{
-	if (color->x > 1)
-		color->x = 1;
-	if (color->y > 1)
-		color->y = 1;
-	if (color->z > 1)
-		color->z = 1;
-} */
-
 t_rgb	lighting(t_scene *scene, t_elem *light, t_inter inter, bool shadowed)
 {
 	t_rgb		effective_color;
@@ -71,23 +61,38 @@ t_rgb	lighting(t_scene *scene, t_elem *light, t_inter inter, bool shadowed)
 	t_rgb		res;
 	float		factor;
 
-	effective_color = inter.obj.material.color * light->color;
+//	TRY
+/*
+	effective_color = inter.obj.material * light->color;
 	lightv = normalize(light->w_pos - inter.over_point);
+	lightsum = light->color + scene->amblight->color;
+	adjust_light(&lightsum);
+	ambient = inter.obj.material * lightsum;
+*/
+
+	//combines the surface color with the light's color/intensity
+	effective_color = inter.obj.material.color * light->color;
+	//find the direction to the light source
+	lightv = normalize(light->w_pos - inter.over_point);
+	//compute the ambient contribution
 	ambient = effective_color * scene->amblight->color;
+	//light_dot_normal represents cosine of angle btw light vec and the normal vec
 	light_dot_normal = dot_product(lightv, inter.normalv);
+	//a negative number means the light is on the other side of the surface
 	if (light_dot_normal < 0)
 	{
 		diffuse = (t_rgb)BLACK;
 		specular = (t_rgb)BLACK;
 	}
-	else
+	else //compute the diffuse contribution
 	{
 		diffuse = effective_color * inter.obj.material.diffuse * light_dot_normal;
+		//reflect_dot_eye represents cos of angle btw reflection vec and eye vec
 		reflectv = reflect(-lightv, inter.normalv);
 		reflect_dot_eye = dot_product(reflectv, inter.eyev);
 		if (reflect_dot_eye <= 0)
 			specular = (t_rgb)BLACK;
-		else
+		else //compute the specular contribution
 		{
 			factor = pow(reflect_dot_eye, inter.obj.material.shininess);
 			specular = light->color * inter.obj.material.specular * factor;
@@ -133,18 +138,27 @@ overlapping shadows"
 t_rgb	shade_hit(t_scene *world, t_inter inter)
 {
 	bool	shadowed;
+	t_rgb	color;
 /*
 //	to make chap7 tests pass:
 	shadowed = 0;
 	return (lighting(world, world->lights, inter, shadowed));
 */
-	if (world->lights)
+	if (!world->lights)
 	{
-		shadowed = is_shadowed(world, inter.over_point);
-		return (lighting(world, world->lights, inter, shadowed));
+		color = inter.obj.material.color * world->amblight->color;
+		return (color);
 	}
-	else
-		return (create_color(0, 0, 0));
+	shadowed = is_shadowed(world, inter.over_point);
+	color = lighting(world, world->lights, inter, shadowed);
+/*	world->lights = world->lights->next;
+ 	while (world->lights)
+	{
+		color += lighting(world, world->lights, inter, shadowed);
+		world->lights = world->lights->next;
+	}
+	adjust_light(&color); */
+	return (color);
 }
 
 t_point	over_point(t_point ori, t_vector normalv)

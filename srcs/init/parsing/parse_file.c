@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 20:18:31 by noe               #+#    #+#             */
-/*   Updated: 2022/12/16 17:18:09 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/04 18:14:08 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,12 @@ bool	parse_file(char *file, t_scene *scene)
 	}
 	if (!ret && (!scene->amblight || !scene->cam))
 		ret = error_display("scene needs at least ambiant light and camera");
+/* 	while (scene->lights)
+	{
+		scene->lights->color += scene->amblight->color;
+		adjust_light(&scene->lights->color);
+		scene->lights = scene->lights->next;
+	} */
 	close(fd);
 	return (ret);
 }

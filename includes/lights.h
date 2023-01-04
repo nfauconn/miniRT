@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:58:29 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/02 12:35:41 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/04 16:39:59 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "ray.h"
 # include "inter.h"
 # include "color.h"
+# include "rgb.h"
 
 t_vector	normal_at(t_elem *obj, t_point point);
 void		prepare_computations(t_inter *i, t_ray ray);

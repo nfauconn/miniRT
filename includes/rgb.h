@@ -6,5 +6,6 @@
 float		convert_color_to_unit(float unsigned_c);
 float		convert_unit_to_rgb(float unit);
 int			rgbvtoi(t_float4 color_vec);
+void		adjust_light(t_rgb *color);
 
 #endif
