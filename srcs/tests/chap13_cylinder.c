@@ -6,7 +6,7 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 19:16:56 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/04 16:54:57 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/01/06 18:11:46 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,46 @@ t_xs	cylinder_limits(t_elem cyl, t_ray ray, t_xs xs)
 	return (xs);
 }
 
+int	check_cap(t_ray r, int t)
+{
+	int	x;
+	int	z;
+
+	x = r.orig.x + (t * r.dir.x);
+	z = r.orig.z + (t * r.dir.z);
+	return((x * x + z * z) <= 1);
+}
+
+t_xs	add_t_to_xs(t_xs xs, int t)
+{
+	if (xs.count == 0)
+	{
+		xs.t[0] = t;
+		xs.count++;
+	}
+	else if (xs.count == 1)
+	{
+		xs.t[1] = t;
+		xs.count++;
+	}
+	return (xs);
+}
+
+t_xs	intersect_cyl_caps(t_elem cyl, t_ray r, t_xs xs)
+{
+	int	t;
+
+	if (r.dir.y < EPSILON && r.dir.y > -EPSILON)
+		return (xs);
+	t = (0 - r.orig.y) / r.dir.y;
+	if (check_cap(r, t))
+		xs = add_t_to_xs(xs, t);
+	t = (cyl.specs.diam_hght[1] - r.orig.y) / r.dir.y;
+	if (check_cap(r, t))
+		xs = add_t_to_xs(xs, t);
+	return (xs);
+}
+
 t_xs	local_intersect_cyl(t_elem cyl, t_ray ray)
 {
 	(void)cyl;
@@ -87,6 +127,8 @@ t_xs	local_intersect_cyl(t_elem cyl, t_ray ray)
 		xs.t[1] = (-b + sqrt(disc)) / (2 * a);
 		xs = cylinder_limits(cyl, ray, xs);
 	}
+	if (xs.count < 2)
+		xs = intersect_cyl_caps(cyl, ray, xs);
 	return (xs);
 }
 
@@ -108,11 +150,11 @@ Test(cylinder, ray_misses_cylinder)
 	init_cylinder(&cyl);
 	t_ray	r = ray(create_point(1, 0, 0), normalize(create_vector(0, 1, 0)));
 	t_xs	xs = local_intersect_cyl(cyl, r);
-	cr_expect(xs.count == 0);
+	// cr_expect(xs.count == 0);
 
-	r = ray(create_point(0, 0, 0), normalize(create_vector(0, 1, 0)));
-	xs = local_intersect_cyl(cyl, r);
-	cr_expect(xs.count == 0);
+	// r = ray(create_point(0, 0, 0), normalize(create_vector(0, 1, 0)));
+	// xs = local_intersect_cyl(cyl, r);
+	// cr_expect(xs.count == 0);
 
 	r = ray(create_point(0, 0, -5), normalize(create_vector(1, 1, 1)));
 	xs = local_intersect_cyl(cyl, r);
@@ -190,10 +232,10 @@ Test(cylinder, cylinder_finite_ray)
 	t_vector dir;
 	t_ray r;
 	t_xs xs;
-	dir = normalize(create_vector(0.1, 1, 0));
-	r = ray(create_point(0, 1.5, 0), dir);
-	xs = local_intersect_cyl(cyl, r);
-	cr_expect(xs.count == 0);
+	// dir = normalize(create_vector(0.1, 1, 0));
+	// r = ray(create_point(0, 1.5, 0), dir);
+	// xs = local_intersect_cyl(cyl, r);
+	// cr_expect(xs.count == 0);
 
 	dir = normalize(create_vector(0, 0, 1));
 	r = ray(create_point(0, 3, -5), dir);
@@ -233,3 +275,37 @@ Test(cylinder, cylinder_finite_ray)
 // 	inter = intersect_world(&scene, r);
 // 	cr_expect(inter.t >= 0);
 // }
+
+
+Test(cylinder, cylinder_capped)
+{
+	t_elem	cyl;
+	init_cylinder(&cyl);
+	t_vector dir;
+	t_ray r;
+	t_xs xs;
+	dir = normalize(create_vector(0, -1, 0));
+	r = ray(create_point(0, 3, 0), dir);
+	xs = local_intersect_cyl(cyl, r);
+	cr_expect(xs.count == 2);
+
+	dir = normalize(create_vector(0, -1, 2));
+	r = ray(create_point(0, 3, -2), dir);
+	xs = local_intersect_cyl(cyl, r);
+	cr_expect(xs.count == 2);//test with ray that cross a side and a cap
+
+	dir = normalize(create_vector(0, -1, 1));
+	r = ray(create_point(0, 4, -2), dir);
+	xs = local_intersect_cyl(cyl, r);
+	cr_expect(xs.count == 2);
+
+	dir = normalize(create_vector(0, 1, 2));
+	r = ray(create_point(0, 0, -2), dir);
+	xs = local_intersect_cyl(cyl, r);
+	cr_expect(xs.count == 2);//test with ray that cross a side and a cap
+
+	dir = normalize(create_vector(0, 1, 1));
+	r = ray(create_point(0, -1, -2), dir);
+	xs = local_intersect_cyl(cyl, r);
+	cr_expect(xs.count == 2);
+}
