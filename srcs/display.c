@@ -13,8 +13,21 @@ int	close_window(t_scene *scene)
 
 int	parse_key(int keycode, t_scene *scene)
 {
+	static	char input[3] = "  ";
+
 	if (keycode == 65307)
 		close_window(scene);
+	else if (keycode == C_KEY)
+	{
+		input[0] = keycode;
+	}
+	else if (keycode == 121 && input[0] == C_KEY)
+	{
+		printf("CY !!\n");
+		input[0] = ' ';
+	}
+/* 	else
+		printf("keypressed: %d\n", keycode); */
 	return (0);
 }
 
@@ -28,8 +41,12 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 
 /* static int	render_next_frame(t_scene *scene)
 {
-	drawscene(scene->img, scene);
-	mlx_put_image_to_window(scene->mlx, scene->win, scene->img->ptr, 0, 0);
+ 	if (get_input(scene))
+	{
+		get_input(scene);
+		drawscene(scene, scene->img);
+		mlx_put_image_to_window(scene->mlx, scene->win, scene->img->ptr, 0, 0);
+ 	}
 	return (1);
 } */
 
@@ -47,11 +64,10 @@ void	launch_display(t_scene *scene)
 		&scene->img->bpp, &scene->img->line_length, \
 		&scene->img->endian);
 	drawscene(scene, scene->img);
-//	my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
-//	mlx_loop_hook(scene->mlx, render_next_frame, scene);
 	mlx_put_image_to_window(scene->mlx, scene->win, scene->img->ptr, 0, 0);
 	mlx_key_hook(scene->win, parse_key, scene);
 	mlx_hook(scene->win, 17, 0, close_window, scene);
+//	mlx_loop_hook(scene->mlx, render_next_frame, scene);
 	mlx_loop(scene->mlx);
 }
 

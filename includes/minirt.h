@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/17 16:53:30 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/06 16:59:30 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ typedef int __attribute__((matrix_type(4, 4)))		t_m4x4_i;
 # define BLACK {0, 0, 0, 0}
 # define WHITE {1, 1, 1, 0}
 # define EPSILON 0.0001
+
+# define S_KEY 115
+# define P_KEY 112
+# define C_KEY 99
 
 /******************************************************************************/
 /*								SCENE										  */
