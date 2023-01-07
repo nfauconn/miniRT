@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/06 16:59:30 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2023/01/07 17:00:06 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,15 @@ typedef int __attribute__((matrix_type(4, 4)))		t_m4x4_i;
 # define WHITE {1, 1, 1, 0}
 # define EPSILON 0.0001
 
+# define W_KEY 119
+# define A_KEY 97
 # define S_KEY 115
-# define P_KEY 112
-# define C_KEY 99
+# define D_KEY 100
+
+# define LEFT_ARROW 65361
+# define UP_ARROW 65362
+# define RIGHT_ARROW 65363
+# define DOWN_ARROW 65364
 
 /******************************************************************************/
 /*								SCENE										  */
@@ -146,7 +152,6 @@ typedef struct s_inter
 	t_vector			normalv;
 	bool				inside;
 	t_point				over_point;
-	struct s_inter		*next;
 }	t_inter;
 
 #endif

@@ -1,4 +1,6 @@
 #include "display.h"
+#include "ray.h"
+#include "inter.h"
 
 int	close_window(t_scene *scene)
 {
@@ -11,13 +13,90 @@ int	close_window(t_scene *scene)
 	return(0);
 }
 
-int	parse_key(int keycode, t_scene *scene)
+/* static int	render_next_frame(t_scene *scene)
 {
-	static	char input[3] = "  ";
+	int	x;
+	int	y;
+
+	drawscene(scene, scene->img);
+    printf("scene->mlx = %p\n", scene->mlx);
+    printf("scene->win = %p\n", scene->win);
+    int ret = mlx_mouse_get_pos(scene->mlx, scene->win, &x, &y);
+    printf("ret = %d\n", ret);
+    printf("coord : %d, %d\n", x, y);
+	mlx_put_image_to_window(scene->mlx, scene->win, scene->img->ptr, 0, 0);
+	return (1);
+}
+ */
+
+/* int	mouse_click(t_scene *scene)
+{
+	int	ret;
+	int	x;
+	int	y;
+
+	printf("coucou\n");
+	if (keycode == 1)
+	{
+		printf("coucou\n");
+		(void)scene;
+// 		printf("scene->mlx = %p\n", scene->mlx);
+		printf("scene->win = %p\n", scene->win);
+		ret = mlx_mouse_get_pos(scene->mlx, scene->win, &x, &y);
+		printf("ret = %d\n", ret);
+		printf("coord : %d, %d\n", x, y);
+ 	}
+	return (0);
+} */
+
+static void	handle_move(t_scene *scene, int x, int y, int keycode)
+{
+	t_ray	r;
+	t_inter	i;
+
+	r = ray_for_pixel(*(scene->cam), x, y);
+	i = intersect_world(scene, r);
+	if (i.t > 0)
+	{
+		printf("obj.pos.x = %f\n", i.obj.w_pos.x);
+	}
+	if (keycode 
+}
+
+static bool	is_dir_key(int keycode)
+{
+	return (keycode >= LEFT_ARROW && keycode <= DOWN_ARROW || keycode == W_KEY
+		|| keycode == A_KEY || keycode == S_KEY || keycode == D_KEY);
+}
+
+int	key_hook(int keycode, t_scene *scene)
+{
+	static int	x = 0;
+	static int	y = 0;
+	static bool	space = 0;
 
 	if (keycode == 65307)
 		close_window(scene);
-	else if (keycode == C_KEY)
+	else if (keycode == 32)
+	{
+		printf("to translate : use the arrows (1 click to translate the position of 0.1\n");
+		printf("to rotate : use de WASD keys (same scaling)\n");
+		mlx_mouse_get_pos(scene->mlx, scene->win, &x, &y);
+		space = 1;
+	}
+	else if (space)
+	{
+		if (is_dir_key(keycode))
+			handle_move(scene, x, y, keycode);
+		else
+			printf("not a moving key. please restart\n");
+		x = 0;
+		y = 0;
+		space = 0;
+	}
+/*  	else
+		printf("keypressed: %d\n", keycode); */
+/* 	else if (keycode == C_KEY)
 	{
 		input[0] = keycode;
 	}
@@ -25,9 +104,7 @@ int	parse_key(int keycode, t_scene *scene)
 	{
 		printf("CY !!\n");
 		input[0] = ' ';
-	}
-/* 	else
-		printf("keypressed: %d\n", keycode); */
+	} */
 	return (0);
 }
 
@@ -38,17 +115,6 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
 	*(unsigned int *)dst = color;
 }
-
-/* static int	render_next_frame(t_scene *scene)
-{
- 	if (get_input(scene))
-	{
-		get_input(scene);
-		drawscene(scene, scene->img);
-		mlx_put_image_to_window(scene->mlx, scene->win, scene->img->ptr, 0, 0);
- 	}
-	return (1);
-} */
 
 void	launch_display(t_scene *scene)
 {
@@ -65,31 +131,10 @@ void	launch_display(t_scene *scene)
 		&scene->img->endian);
 	drawscene(scene, scene->img);
 	mlx_put_image_to_window(scene->mlx, scene->win, scene->img->ptr, 0, 0);
-	mlx_key_hook(scene->win, parse_key, scene);
 	mlx_hook(scene->win, 17, 0, close_window, scene);
+//	mlx_hook(scene->win, 4, 0, mouse_click, scene);
+	mlx_key_hook(scene->win, key_hook, scene);
+//	mlx_mouse_hook(scene->win, mouse_hook, scene);
 //	mlx_loop_hook(scene->mlx, render_next_frame, scene);
 	mlx_loop(scene->mlx);
-}
-
-void	render(t_scene *scene, t_img *img)
-{
-	size_t		x;
-	size_t		y;
-	t_ray		r;
-	t_rgb		color;
-
-	y = 0;
-	while (y < scene->cam->vsize)
-	{
-		x = 0;
-		while (x < scene->cam->hsize)
-		{
-			r = ray_for_pixel(*(scene->cam), x, y);
-			color = color_at(scene, r);
-			my_mlx_pixel_put(img, x, y, rgbvtoi(color));
-			x++;
-		}
-		y++;
-	}
-	printf("finish\n");
 }

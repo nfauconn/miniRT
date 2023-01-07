@@ -23,7 +23,8 @@ UTILS_DIR = utils
 
 #SOURCES
 S_EXT = .c
-SRC_FILES = display.c \
+SRC_FILES = render.c \
+			display.c \
 			error.c \
 			exit_clear.c \
 \
