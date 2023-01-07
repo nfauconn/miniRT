@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   lights.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:21:52 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/04 21:05:33 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/07 16:01:24 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lights.h"
+
+t_vector	cylinder_normal(t_elem cyl, t_point local_pt)
+{
+	float		dist;
+	t_vector	local_normal;
+
+	dist = (local_pt.x * local_pt.x) + (local_pt.z * local_pt.z);
+	if (dist < 1 && local_pt.y >= (cylinder_max(cyl) - EPSILON))
+		local_normal = create_vector(0, 1, 0);
+	else if (dist < 1 && local_pt.y <= (cylinder_min(cyl) + EPSILON))
+		local_normal = create_vector(0, -1, 0);
+	else
+		local_normal = create_vector(local_pt.x, 0, local_pt.z);
+	return (local_normal);
+}
 
 /* find the perpendicular vector to sphere at point */
 t_vector	normal_at(t_elem *obj, t_point w_pt)
@@ -27,6 +42,8 @@ t_vector	normal_at(t_elem *obj, t_point w_pt)
 		local_normal = create_vector(0, 1, 0);
 		//local_normal = create_vector(obj->o_pos.x, obj->o_pos.y, obj->o_pos.z);
 	}
+	if (obj->id.shape == cylinder)
+		local_normal = cylinder_normal(*obj, local_pt);
 	w_normal = matrix_tuple_mult(transpose(inverse(obj->transform)), local_normal);
 	w_normal.w = 0;
 	return (normalize(w_normal));

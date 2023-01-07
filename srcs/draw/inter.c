@@ -6,7 +6,7 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:44:24 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/04 20:30:58 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/01/07 18:16:56 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ float	cylinder_min(t_elem cyl)
 {
 	t_point	min;
 
-	min = matrix_tuple_mult(cyl.transform, create_point(0, 0, 0));
+	min = matrix_tuple_mult(cyl.transform, create_point(0, -0.5, 0));
+	// printf("min. x,y,z = %f, %f, %f\n", min.x, min.y, min.z);
 	return (min.y);
 }
 
@@ -102,13 +103,12 @@ float	cylinder_max(t_elem cyl)
 {
 	t_point	max;
 
-	max = matrix_tuple_mult(cyl.transform, create_point(0, 1, 0));
+	max = matrix_tuple_mult(cyl.transform, create_point(0, 0.5, 0));
 	return (max.y);
 }
 
 t_xs	cylinder_limits(t_elem cyl, t_ray ray, t_xs xs)
 {
-	(void)cyl;
 	float	ymin;
 	float	ymax;
 	float	y0;
@@ -117,46 +117,90 @@ t_xs	cylinder_limits(t_elem cyl, t_ray ray, t_xs xs)
 	ymax = cylinder_max(cyl);
 	ymin = cylinder_min(cyl);
 	// printf("max = %f, min = %f\n", ymax, ymin);
-	y0 = ray.orig.y + xs.t[0] * ray.dir.y;
-	if (ymin >= y0 || ymax <= y0)
+	y0 = ray.orig.y + (xs.t[0] * ray.dir.y);
+	if (y0 <= ymin || y0 >= ymax)
 	{
-		// printf("y0 = %f\n", y0);
 		xs.count--;
-		xs.t[0] = -1;
+		xs.t[0] = xs.t[1];
 	}
-	y1 = ray.orig.y + xs.t[1] * ray.dir.y;
-	if (ymin >= y1 || ymax <= y1)
+	y1 = ray.orig.y + (xs.t[1] * ray.dir.y);
+	if (y1 <= ymin || y1 >= ymax)
 	{
-		// printf("y1 = %f\n", y1);
 		xs.count--;
 		xs.t[1] = -1;
 	}
 	return (xs);
 }
 
+int	check_cap(t_ray r, int t)
+{
+	int	x;
+	int	z;
+
+	x = r.orig.x + (t * r.dir.x);
+	z = r.orig.z + (t * r.dir.z);
+	return((x * x + z * z) <= 1);
+}
+
+t_xs	add_t_to_xs(t_xs xs, int t)
+{
+	if (xs.count == 0)
+	{
+		xs.t[0] = t;
+		xs.count++;
+	}
+	else if (xs.count == 1)
+	{
+		xs.t[1] = t;
+		xs.count++;
+	}
+	return (xs);
+}
+
+t_xs	intersect_cyl_caps(t_elem cyl, t_ray r, t_xs xs)
+{
+	int	t;
+
+	if (r.dir.y < EPSILON && r.dir.y > -EPSILON)
+		return (xs);
+	t = (cylinder_min(cyl) - r.orig.y) / r.dir.y;
+	if (check_cap(r, t))
+		xs = add_t_to_xs(xs, t);
+	t = (cylinder_max(cyl) - r.orig.y) / r.dir.y;
+	if (check_cap(r, t))
+		xs = add_t_to_xs(xs, t);
+	return (xs);
+}
+
 t_xs	local_intersect_cyl(t_elem cyl, t_ray ray)
 {
-	(void)cyl;
+	t_xs	xs;
 	float	a;
 	float	b;
 	float	c;
 	float	disc;
-	t_xs	xs;
 
-	ray = transform_ray(ray, inverse(cyl.transform));
 	a = (ray.dir.x * ray.dir.x) + (ray.dir.z * ray.dir.z);
-	b = 2 * ray.orig.x * ray.dir.x + 2 * ray.orig.z * ray.dir.z;
+	b = (2 * ray.orig.x * ray.dir.x) + (2 * ray.orig.z * ray.dir.z);
 	c = (ray.orig.x * ray.orig.x) + (ray.orig.z * ray.orig.z) - 1;
-	disc = b * b - 4 * a * c;
+	disc = (b * b) - (4 * a * c);
 	if (disc < 0 || (a > -0.001 && a < 0.001))
 		ft_bzero(&xs, sizeof(xs));
 	else
 	{
 		xs.count = 2;
-		xs.t[0] = (-b - sqrt(disc)) / (2 * a);
-		xs.t[1] = (-b + sqrt(disc)) / (2 * a);
+		xs.t[0] = (-b -sqrt(disc)) / (2 * a);
+		xs.t[1] = (-b +sqrt(disc)) / (2 * a);
+		if (xs.t[0] > xs.t[1])
+		{
+			c = xs.t[0];
+			xs.t[0] = xs.t[1];
+			xs.t[1] = c;
+		}
 		xs = cylinder_limits(cyl, ray, xs);
 	}
+	// if (xs.count < 2)
+	// 	xs = intersect_cyl_caps(cyl, ray, xs);
 	return (xs);
 }
 /* INTERSECT
