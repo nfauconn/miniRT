@@ -60,12 +60,15 @@ static void	handle_move(t_scene *scene, int x, int y, int keycode)
 	{
 		printf("obj.pos.x = %f\n", i.obj.w_pos.x);
 	}
-	if (keycode 
+	if (keycode == UP_ARROW)
+	{
+		printf("up !!\n");
+	}
 }
 
 static bool	is_dir_key(int keycode)
 {
-	return (keycode >= LEFT_ARROW && keycode <= DOWN_ARROW || keycode == W_KEY
+	return ((keycode >= LEFT_ARROW && keycode <= DOWN_ARROW) || keycode == W_KEY
 		|| keycode == A_KEY || keycode == S_KEY || keycode == D_KEY);
 }
 
@@ -75,9 +78,9 @@ int	key_hook(int keycode, t_scene *scene)
 	static int	y = 0;
 	static bool	space = 0;
 
-	if (keycode == 65307)
+	if (keycode == ECHAP_KEY)
 		close_window(scene);
-	else if (keycode == 32)
+	else if (keycode == SPACE_KEY)
 	{
 		printf("to translate : use the arrows (1 click to translate the position of 0.1\n");
 		printf("to rotate : use de WASD keys (same scaling)\n");

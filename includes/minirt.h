@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/07 17:10:08 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/07 17:12:51 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef int __attribute__((matrix_type(4, 4)))		t_m4x4_i;
 # define DOWN_ARROW 65364
 
 # define ECHAP_KEY 65307
+# define SPACE_KEY 32
 
 /******************************************************************************/
 /*								SCENE										  */
