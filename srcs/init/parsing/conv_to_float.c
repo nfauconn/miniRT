@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_to_float.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 12:56:42 by noe               #+#    #+#             */
-/*   Updated: 2022/12/16 17:17:52 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/04 17:11:51 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ bool	conv_diam_height(char *s1, char *s2, t_elem *elem, char *elem_name)
 	elem->specs.diam_hght[0] = diam_hght[0];
 	diam_hght[1] = ft_atof(s2);
 	if (diam_hght[1] <= 0)
-		return (error_display2("wrong diameter value for ", elem_name));
+		return (error_display2("wrong heigth value for ", elem_name));
 	elem->specs.diam_hght[1] = diam_hght[1];
 	return (0);
 }

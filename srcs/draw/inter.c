@@ -6,7 +6,7 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:44:24 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/07 18:16:56 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/01/08 13:36:55 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,19 +92,21 @@ t_xs	pl_intersect(t_elem p, t_ray r)
 
 float	cylinder_min(t_elem cyl)
 {
-	t_point	min;
+	float	min;
 
-	min = matrix_tuple_mult(cyl.transform, create_point(0, -0.5, 0));
+	min = 0 + cyl.w_pos.y;;
+	// min = matrix_tuple_mult(cyl.transform, create_point(0, -0.5, 0));
 	// printf("min. x,y,z = %f, %f, %f\n", min.x, min.y, min.z);
-	return (min.y);
+	return (min);
 }
 
 float	cylinder_max(t_elem cyl)
 {
-	t_point	max;
+	float	max;
 
-	max = matrix_tuple_mult(cyl.transform, create_point(0, 0.5, 0));
-	return (max.y);
+	// max = matrix_tuple_mult(cyl.transform, create_point(0, 0.5, 0));
+	max = cyl.specs.diam_hght[1] + cyl.w_pos.y;
+	return (max);
 }
 
 t_xs	cylinder_limits(t_elem cyl, t_ray ray, t_xs xs)

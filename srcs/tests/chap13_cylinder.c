@@ -6,7 +6,7 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 19:16:56 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/07 15:32:01 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/01/07 15:47:14 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,6 @@ t_xs	intersect_cyl_caps(t_elem cyl, t_ray r, t_xs xs)
 
 t_xs	local_intersect_cyl(t_elem cyl, t_ray ray)
 {
-	(void)cyl;
 	t_xs	xs;
 	float	a;
 	float	b;
@@ -281,9 +280,6 @@ Test(cylinder, cylinder_infinite)
 //if heigth and diameter are 1 by default, then scaling(diamet / 2, height, diamet / 2)
 //should do the size transformation??
 
-
-
-//need to change previous test as this one as same parameters but different expected results...
 Test(cylinder, cylinder_finite_ray)
 {
 	t_elem	cyl;

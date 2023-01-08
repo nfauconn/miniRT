@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inter.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:45:03 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2022/12/16 19:19:54 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/07 15:52:11 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include "matrix.h"
 # include "ray.h"
 
+float	cylinder_min(t_elem cyl);
+float	cylinder_max(t_elem cyl);
 t_inter	intersect_world(t_scene *world, t_ray ray);
 t_point	position(t_ray ray, float t);
 t_inter	intersection(float t, t_elem obj);

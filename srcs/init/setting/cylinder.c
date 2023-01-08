@@ -6,7 +6,7 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 13:33:13 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/07 18:13:21 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/01/08 13:45:47 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ void	init_cylinder(t_elem *s)
 	rotate_matrix = fuse_rotate(s);
 	s->transform = identity_matr();
 	s->transform = rotate_matrix;
-	// s->transform = s->transform * translation(s->w_pos.x, s->w_pos.y, s->w_pos.z);
-	// s->transform = s->transform * scaling(s->specs.diam_hght[0], s->specs.diam_hght[1], s->specs.diam_hght[0]);
+	s->transform = s->transform * translation(s->w_pos.x, s->w_pos.y, s->w_pos.z);
+	s->transform = s->transform * scaling(s->specs.diam_hght[0], 1, s->specs.diam_hght[0]);
 	s->material = default_material(s);
 }
 
