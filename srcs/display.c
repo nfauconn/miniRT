@@ -53,17 +53,27 @@ static void	handle_move(t_scene *scene, int x, int y, int keycode)
 {
 	t_ray	r;
 	t_inter	i;
+	t_elem	*obj;
 
 	r = ray_for_pixel(*(scene->cam), x, y);
 	i = intersect_world(scene, r);
-	if (i.t > 0)
+	if (i.t < 0)
 	{
-		printf("obj.pos.x = %f\n", i.obj.w_pos.x);
+		return ;
 	}
+	obj = i.obj;
+	printf("obj.pos.y = %f\n", i.obj->w_pos.y);
 	if (keycode == UP_ARROW)
 	{
-		printf("up !!\n");
+		// obj doit etre un pointeur pour recup l adresse de lobjet et relancer draw avec sa nouvelle position
+		//dereferencer et envoyer copies pour les calculs, ou envoyer a chaque fois l'adresse et dereferencer dans chaque calcul
+		++obj->w_pos.y;
+		if (obj->id.shape == sphere)
+			obj->transform = matrix_mult(translation(obj->w_pos.x, obj->w_pos.y, obj->w_pos.z), \
+									scaling(obj->specs.radius, obj->specs.radius, obj->specs.radius));
 	}
+	drawscene(scene, scene->img);
+	mlx_put_image_to_window(scene->mlx, scene->win, scene->img->ptr, 0, 0);
 }
 
 static bool	is_dir_key(int keycode)

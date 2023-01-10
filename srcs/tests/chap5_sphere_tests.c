@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chap5_sphere_tests.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 18:32:43 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/17 16:55:00 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/10 19:09:49 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,71 +51,46 @@ Test (ray, intersect1)
 	t_ray	r = ray(create_point(0, 0, -5), create_vector(0, 0, 1));
 	t_elem	s;
 	init_sphere(&s);
-	t_xs	xs = intersect(s, r);
+	t_xs	xs = intersect(&s, r);
 
 	cr_expect(xs.count == 2);
 	cr_expect(same_float(xs.t[0], 4.0));
 	cr_expect(same_float(xs.t[1], 6.0));
-}
 
-Test (ray, intersect2)
-{
-	t_ray	r = ray(create_point(0, 1, -5), create_vector(0, 0, 1));
-	t_elem	s;
-	init_sphere(&s);
-	t_xs	xs = intersect(s, r);
+	r = ray(create_point(0, 1, -5), create_vector(0, 0, 1));
+	xs = intersect(&s, r);
 
 	cr_expect(xs.count == 2);
 	cr_expect(same_float(xs.t[0], 5.0));
 	cr_expect(same_float(xs.t[1], 5.0));
-}
 
-Test (ray, intersect3)
-{
-	t_ray	r = ray(create_point(0, 2, -5), create_vector(0, 0, 1));
-	t_elem	s;
-	init_sphere(&s);
+	r = ray(create_point(0, 2, -5), create_vector(0, 0, 1));
 	s.transform = identity_matr();
-	t_xs	xs = intersect(s, r);
+	xs = intersect(&s, r);
 
 	cr_expect(xs.count == 0);
 	cr_expect(same_float(xs.t[0], 0.0));
 	cr_expect(same_float(xs.t[1], 0.0));
-}
 
-Test (ray, intersect4)
-{
-	t_ray	r = ray(create_point(0, 0, 0), create_vector(0, 0, 1));
-	t_elem	s;
-	init_sphere(&s);
-	t_xs	xs = intersect(s, r);
+	r = ray(create_point(0, 0, 0), create_vector(0, 0, 1));
+	xs = intersect(&s, r);
 
 	cr_expect(xs.count == 2);
 	cr_expect(same_float(xs.t[0], -1.0));
 	cr_expect(same_float(xs.t[1], 1.0));
-}
 
-Test (ray, intersect5)
-{
-	t_ray	r = ray(create_point(0, 0, 5), create_vector(0, 0, 1));
-	t_elem	s;
-	init_sphere(&s);
-	t_xs	xs = intersect(s, r);
+	r = ray(create_point(0, 0, 5), create_vector(0, 0, 1));
+	xs = intersect(&s, r);
 
 	cr_expect(xs.count == 2);
 	cr_expect(same_float(xs.t[0], -6.0));
 	cr_expect(same_float(xs.t[1], -4.0));
-}
 
-Test (ray, intersection1)
-{
-	t_elem	s;
-	init_sphere(&s);
-	t_inter	i1 = intersection(3.5, s);
+	t_inter	i1 = intersection(3.5, &s);
 
 	cr_expect(same_float(i1.t, 3.5));
-	cr_expect(i1.obj.id.shape == s.id.shape);
-	cr_expect(i1.obj.id.no == s.id.no);
+	cr_expect(i1.obj->id.shape == s.id.shape);
+	cr_expect(i1.obj->id.no == s.id.no);
 }
 
 // Test (ray, intersection_aggreg)

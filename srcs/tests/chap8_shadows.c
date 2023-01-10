@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chap8_shadows.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 17:39:16 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/04 21:19:55 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/10 19:13:59 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ Test(shadows, yes_no)
 	init_sphere(&sphere);
 	sphere.material.color = create_color(1, 1, 1);
 
-	inter.obj = sphere;
+	inter.obj = &sphere;
 	t_rgb	res = lighting(&scene, &light, inter, shadowed);
 	cr_expect(same_tuple(res, create_color(0.1, 0.1, 0.1)));
 }
@@ -64,7 +64,7 @@ Test(shadows, intersect_shadow)
 	t_scene	world;
 	setup_scene(&world, "./scenes/TESTshadow.rt");
 	t_ray r = ray(create_point(0, 0, 5), create_vector(0, 0, 1));
-	t_inter	i = intersection(4, *world.objs->next);
+	t_inter	i = intersection(4, world.objs->next);
 	prepare_computations(&i, r);
 	t_rgb	c  = shade_hit(&world, i);
 	cr_expect(same_tuple(c, create_color(0.1, 0.1, 0.1)));
@@ -78,7 +78,7 @@ Test(shadows, shade_hit_offset)
 	init_sphere(&shape);
 	shape.transform = translation(0, 0, 1);
 	t_ray r = ray(create_point(0, 0, -5), create_vector(0, 0, 1));
-	t_inter	i = intersection(5, shape);
+	t_inter	i = intersection(5, &shape);
 	prepare_computations(&i, r);
 	cr_expect(i.over_point.z < (-0.00001 / 2));
 	cr_expect(i.point.z > i.over_point.z);

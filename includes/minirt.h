@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/07 17:12:51 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/10 18:56:48 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,13 +143,13 @@ typedef struct s_xs
 {
 	size_t		count;
 	float		t[2];
-	t_elem		obj;
+	t_elem		*obj;
 }	t_xs;
 
 typedef struct s_inter
 {
 	float				t;
-	t_elem				obj;
+	t_elem				*obj;
 	t_point				point;
 	t_vector			eyev;
 	t_vector			normalv;

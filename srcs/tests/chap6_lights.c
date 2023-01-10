@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chap6_lights.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:29:49 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/04 14:44:29 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/10 19:13:08 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ Test(lights, get_lighting)
 	light.color = (t_rgb)WHITE;
 	light.specs.ratio = 1;
 	light.material = test_default_material(&light);
-	inter.obj = light;
+	inter.obj = &light;
 	inter.over_point = create_point(0, 0, 0);
 
 /*	lighting with the eye btw the light and the surface, eye offset 90° (perpendicular to surface) */

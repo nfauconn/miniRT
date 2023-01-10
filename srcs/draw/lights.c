@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lights.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:21:52 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/08 13:33:42 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/01/10 19:01:53 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,14 @@ t_rgb	lighting(t_scene *scene, t_elem *light, t_inter inter, bool shadowed)
 
 //	TRY
 /* (void)scene;
-	effective_color = inter.obj.material.color * light->color;
+	effective_color = inter.obj->material.color * light->color;
 	lightv = normalize(light->w_pos - inter.over_point);
 
-	ambient = (t_rgb)BLACK;//inter.obj.material.color * inter.obj.material.ambient;
+	ambient = (t_rgb)BLACK;//inter.obj->material.color * inter.obj->material.ambient;
  */
 
 	//combines the surface color with the light's color/intensity
-	effective_color = inter.obj.material.color * light->color;
+	effective_color = inter.obj->material.color * light->color;
 	//find the direction to the light source
 	lightv = normalize(light->w_pos - inter.over_point);
 	//compute the ambient contribution
@@ -102,7 +102,7 @@ t_rgb	lighting(t_scene *scene, t_elem *light, t_inter inter, bool shadowed)
 	}
 	else //compute the diffuse contribution
 	{
-		diffuse = effective_color * inter.obj.material.diffuse * light_dot_normal;
+		diffuse = effective_color * inter.obj->material.diffuse * light_dot_normal;
 		//reflect_dot_eye represents cos of angle btw reflection vec and eye vec
 		reflectv = reflect(-lightv, inter.normalv);
 		reflect_dot_eye = dot_product(reflectv, inter.eyev);
@@ -110,8 +110,8 @@ t_rgb	lighting(t_scene *scene, t_elem *light, t_inter inter, bool shadowed)
 			specular = (t_rgb)BLACK;
 		else //compute the specular contribution
 		{
-			factor = pow(reflect_dot_eye, inter.obj.material.shininess);
-			specular = light->color * inter.obj.material.specular * factor;
+			factor = pow(reflect_dot_eye, inter.obj->material.shininess);
+			specular = light->color * inter.obj->material.specular * factor;
 		}
 	}
 	if (shadowed)
@@ -163,7 +163,7 @@ t_rgb	shade_hit(t_scene *world, t_inter inter)
 */
 	if (!world->lights)
 	{
-		color = inter.obj.material.color * world->amblight->color;
+		color = inter.obj->material.color * world->amblight->color;
 		return (color);
 	}
 	light = world->lights;
@@ -193,8 +193,8 @@ void	prepare_computations(t_inter *i, t_ray ray)
 {
 	i->point = position(ray, i->t);
 	i->eyev = -ray.dir;
-	i->normalv = normal_at(&i->obj, i->point);
-	if (i->obj.id.shape != plane && dot_product(i->normalv, i->eyev) < 0)
+	i->normalv = normal_at(i->obj, i->point);
+	if (i->obj->id.shape != plane && dot_product(i->normalv, i->eyev) < 0)
 	{
 		i->inside = 1;
 		i->normalv = -i->normalv;

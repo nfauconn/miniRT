@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chap9_plane.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:32:48 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/02 12:13:46 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/10 19:21:40 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,23 +49,23 @@ Test(plane, intersect)
 
 	/* intersect with a ray parallel to the plane */
 	r = ray(create_point(0, 10, 0), create_vector(0, 0, 1));
-	xs = intersect(p, r);
+	xs = intersect(&p, r);
 	cr_expect(xs.count == 0);
 
 	/* intersect with a coplanar ray */
 	r = ray(create_point(0, 0, 0), create_vector(0, 0, 1));
-	xs = intersect(p, r);
+	xs = intersect(&p, r);
 	cr_expect(xs.count == 0);
 
 	/* intersect a plane from below */
 	r = ray(create_point(0, 1, 0), create_vector(0, -1, 0));
-	xs = intersect(p, r);
+	xs = intersect(&p, r);
 	cr_expect(xs.count == 1);
 	cr_expect(xs.t[0] == 1);
 
 	/* intersect a plane from above */
 	r = ray(create_point(0, -1, 0), create_vector(0, 1, 0));
-	xs = intersect(p, r);
+	xs = intersect(&p, r);
 	cr_expect(xs.count == 1);
 	cr_expect(xs.t[0] == 1);
 }

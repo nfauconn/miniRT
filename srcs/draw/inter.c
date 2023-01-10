@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   inter.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:44:24 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/08 13:36:55 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/01/10 19:00:23 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inter.h"
 
-t_inter	intersection(float t, t_elem obj)
+t_inter	intersection(float t, t_elem *obj)
 {
 	t_inter	i;
 
@@ -208,18 +208,18 @@ t_xs	local_intersect_cyl(t_elem cyl, t_ray ray)
 /* INTERSECT
 ** create a struct containing all intersections of a ray with a given obj
 ** (sphere can only have 2 but maybe more are needed for other objects) */
-t_xs	intersect(t_elem obj, t_ray r)
+t_xs	intersect(t_elem *obj, t_ray r)
 {
 	t_xs	xs;
 
-	r = transform_ray(r, inverse(obj.transform));
+	r = transform_ray(r, inverse(obj->transform));
 	//obj_to_ray ?? cf sp_intersect !!!!!!!!!!!!!!!!!!!!!!!
-	if (obj.id.shape == sphere)
-		xs = sp_intersect(obj, r);
-	else if (obj.id.shape == plane)
-		xs = pl_intersect(obj, r);
-	else if (obj.id.shape == cylinder)
-		xs = local_intersect_cyl(obj, r);
+	if (obj->id.shape == sphere)
+		xs = sp_intersect(*obj, r);
+	else if (obj->id.shape == plane)
+		xs = pl_intersect(*obj, r);
+	else if (obj->id.shape == cylinder)
+		xs = local_intersect_cyl(*obj, r);
 	else
 		xs.count = 0;
 	xs.obj = obj;
@@ -237,13 +237,13 @@ t_inter	intersect_world(t_scene *world, t_ray ray)
 	t_inter		res;
 
 	obj = world->objs;
-	xs = intersect(*obj, ray);
+	xs = intersect(obj, ray);
 	i = hit(xs);
 	res = i;
 	obj = obj->next;
 	while (obj)
 	{
-		xs = intersect(*obj, ray);
+		xs = intersect(obj, ray);
 		i = hit(xs);
 		if (i.t > 0 && (i.t < res.t || res.t < 0))
 			res = i;

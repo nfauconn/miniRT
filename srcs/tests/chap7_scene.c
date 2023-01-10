@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chap7_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:29:05 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/04 14:39:37 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/10 19:12:35 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ Test(scene, world_ray)
 
 	setup_scene(&world, "./scenes/TEST2spheres1light.rt");
 	r = ray(create_point(0, 0, -5), create_vector(0, 0, 1));
-	xs = intersect(*world.objs, r);
+	xs = intersect(world.objs, r);
 	cr_expect(same_float(xs.t[0], 4.0));
 	clear (&world);
 }
@@ -96,7 +96,7 @@ Test(scene, precompute)
 	t_ray	r = ray(create_point(0, 0, -5), create_vector(0, 0, 1));
 	t_elem	shape;
 	init_sphere(&shape);
-	t_inter	i = intersection(4, shape);
+	t_inter	i = intersection(4, &shape);
 	prepare_computations(&i, r);
 	cr_expect(same_float(i.t, i.t) == 1);
 	cr_expect(same_tuple(i.point , create_point(0, 0, -1)));
@@ -109,7 +109,7 @@ Test(scene, outside)
 	t_ray	r = ray(create_point(0, 0, -5), create_vector(0, 0, 1));
 	t_elem	shape;
 	init_sphere(&shape);
-	t_inter	i = intersection(4, shape);
+	t_inter	i = intersection(4, &shape);
 	prepare_computations(&i, r);
 	cr_expect(!i.inside);
 }
@@ -120,7 +120,7 @@ Test(scene, inside)
 	t_elem	shape;
 	init_sphere(&shape);
 	shape.transform = identity_matr();
-	t_inter	i = intersection(1, shape);
+	t_inter	i = intersection(1, &shape);
 	prepare_computations(&i, r);
 	cr_expect(same_tuple(i.point , create_point(0, 0, 1)));
 	cr_expect(same_tuple(i.eyev , create_vector(0, 0, -1)));
