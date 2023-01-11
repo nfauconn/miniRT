@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:21:09 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/14 18:40:14 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:14:13 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 t_m4x4_f	matrix_4xf_create(float *f)
 {
-	t_m4x4_f matrix;
-	int	j;
-	int	k;
-	int	i;
+	t_m4x4_f	matrix;
+	int			j;
+	int			k;
+	int			i;
 
 	i = 0;
 	j = 0;
@@ -36,10 +36,10 @@ t_m4x4_f	matrix_4xf_create(float *f)
 
 t_m3x3_f	matrix_3xf_create(float *f)
 {
-	t_m3x3_f matrix;
-	int	j;
-	int	k;
-	int	i;
+	t_m3x3_f	matrix;
+	int			j;
+	int			k;
+	int			i;
 
 	i = 0;
 	j = 0;
@@ -66,23 +66,23 @@ static t_float4	add_f_to_tuple(int i, float val, t_float4 res)
 		res.z = val;
 	if (i == 3)
 		res.w = val;
-	return(res);
+	return (res);
 }
 
 //matr[0][0] to matr[3][3]
 t_float4	submatrix3_to_2(t_m3x3_f matr, int line, int col)
 {
 	t_float4	res;
-	int	i;
-	int	j;
-	int	k;
+	int			i;
+	int			j;
+	int			k;
 
 	i = 0;
 	k = 0;
 	while (i < 3)
 	{
 		j = 0;
-		while (j< 3)
+		while (j < 3)
 		{
 			if (i != line && j != col)
 				res = add_f_to_tuple(k++, matr[i][j], res);
@@ -102,27 +102,23 @@ static t_m3x3_f	add_f_to_matrice_3f(int i, float val, t_m3x3_f res)
 t_m3x3_f	submatrix4_to_3(t_m4x4_f matr, int line, int col)
 {
 	t_m3x3_f	res;
-	int	i;
-	int	j;
-	int	k;
+	int			i;
+	int			j;
+	int			k;
 
 	i = 0;
 	k = 0;
-	while(i < 4)
+	while (i < 4)
 	{
 		j = 0;
 		while (j < 4)
 		{
-			// printf ("%f\n", tab[j]);
 			if (i != line && j != col)
-			{
 				res = add_f_to_matrice_3f(k++, matr[i][j], res);
-			}
 			j++;
 		}
 		i++;
 	}
-	// printf_3fmatr(res);
 	return (res);
 }
 
@@ -130,6 +126,7 @@ bool	same_matrix(t_m4x4_f matrix1, t_m4x4_f matrix2)
 {
 	int	j;
 	int	k;
+
 	j = 0;
 	while (j < 4)
 	{
@@ -138,7 +135,7 @@ bool	same_matrix(t_m4x4_f matrix1, t_m4x4_f matrix2)
 		{
 			if (matrix1[j][k] >= matrix2[j][k] + EPSILON
 				|| matrix1[j][k] <= matrix2[j][k] - EPSILON)
-					return(0);
+				return (0);
 			k++;
 		}
 		j++;
@@ -159,8 +156,8 @@ float	dot_product_ma(t_m4x4_f matrix, int line, t_m4x4_f matrix2, int col)
 t_m4x4_f	matrix_mult(t_m4x4_f matrix, t_m4x4_f matrix2)
 {
 	t_m4x4_f	res;
-	int	i;
-	int	j;
+	int			i;
+	int			j;
 
 	i = 0;
 	j = 0;
@@ -181,7 +178,7 @@ t_float4	matrix_tuple_mult(t_m4x4_f matrix, t_float4 tup)
 {
 	t_float4	res;
 	t_float4	line;
-	int	i;
+	int			i;
 
 	i = 0;
 	while (i < 16)
@@ -199,14 +196,12 @@ t_m4x4_f	divide_matr_by_scalar(t_m4x4_f res, float deter)
 	int	j;
 
 	i = 0;
-	while(i < 4)
+	while (i < 4)
 	{
 		j = 0;
 		while (j < 4)
 		{
-			// printf ("line %d, col %d, val was = %f ", i, j, res[i][j]);
 			res[i][j] = res[i][j] / deter;
-			// printf ("val is = %f\n", res[i][j]);
 			j++;
 		}
 		i++;
@@ -253,11 +248,12 @@ t_float4	get_vcol(int i, t_m4x4_f matrix2)
 	res.w = matrix2[3][i];
 	return (res);
 }
+
 t_m4x4_f	transpose(t_m4x4_f matrix)
 {
 	t_m4x4_f	res;
-	int	i;
-	int	j;
+	int			i;
+	int			j;
 
 	i = 0;
 	while (i < 4)
@@ -283,7 +279,7 @@ float	determinant2x2(t_float4 matrix)
 
 //0 <= j <= 8
 //0 <= line <= 2
-int	isnotinline(int	j, int line)
+int	isnotinline(int j, int line)
 {
 	if (j >= 0 && j <= 2 && line == 0)
 		return (0);
@@ -297,16 +293,16 @@ int	isnotinline(int	j, int line)
 //0 3 6  (col 0)
 //1 4 7  (col 1)
 //2 5 8  (col 2)
-int	isnotincol(int	j, int col)
+int	isnotincol(int j, int col)
 {
-	if (j % 3  == col)
+	if (j % 3 == col)
 		return (0);
 	return (1);
 }
 
 //0 <= j <= 15
 //0 <= line <= 3
-int	isnotinline_4x4(int	j, int line)
+int	isnotinline_4x4(int j, int line)
 {
 	if (j >= 0 && j <= 3 && line == 0)
 		return (0);
@@ -319,9 +315,9 @@ int	isnotinline_4x4(int	j, int line)
 	return (1);
 }
 
-int	isnotincol_4x4(int	j, int col)
+int	isnotincol_4x4(int j, int col)
 {
-	if (j % 4  == col)
+	if (j % 4 == col)
 		return (0);
 	return (1);
 }
@@ -346,9 +342,6 @@ void	printf_3fmatr(t_m3x3_f	matrixaim)
 
 bool	same_matrix_3x3(t_m3x3_f matrixaim, t_m3x3_f res)
 {
-
-	// printf_3fmatr(matrixaim);
-	// printf_3fmatr(res);
 	int	i;
 	int	j;
 
@@ -359,10 +352,7 @@ bool	same_matrix_3x3(t_m3x3_f matrixaim, t_m3x3_f res)
 		while (j < 3)
 		{
 			if (matrixaim[i][j] != res[i][j])
-			{
-				// printf ("fail at line %d, col %d, 1 = %f, 2 = %f\n", i, j, matrixaim[i][j], res[i][j]);
-				return(0);
-			}
+				return (0);
 			j++;
 		}
 		i++;
@@ -381,7 +371,7 @@ float	minor_of_3x3(t_m3x3_f matrix, int line, int col)
 float	cofactor(t_m3x3_f matrix, int line, int col)
 {
 	t_float4	sub;
-	float	res;
+	float		res;
 
 	sub = submatrix3_to_2(matrix, line, col);
 	res = determinant2x2(sub);
@@ -403,10 +393,9 @@ float	determinant3x3(t_m3x3_f matrix)
 float	cofactor4x(t_m4x4_f matrix, int line, int col)
 {
 	t_m3x3_f	sub;
-	float	res;
+	float		res;
 
 	sub = submatrix4_to_3(matrix, line, col);
-	// printf_3fmatr(sub);
 	res = determinant3x3(sub);
 	if ((line + col) % 2 == 1)
 		res *= -1;
@@ -450,25 +439,30 @@ t_m4x4_f	cofactor_matrix(t_m4x4_f matr)
 	}
 	return (res);
 }
+
 t_m4x4_f	inverse(t_m4x4_f matr)
 {
 	t_m4x4_f	res;
 	float		deter;
 
 	res = cofactor_matrix(matr);
-	// printf_4fmatr(res);
 	res = transpose(res);
-	// printf_4fmatr(res);
 	deter = determinant_4xf(matr);
-	// printf ("deter = %f\n", deter);
 	res = divide_matr_by_scalar(res, deter);
 	return (res);
 }
 
 t_m4x4_f	identity_matr(void)
 {
-	float tabf[16] = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
-	t_m4x4_f matrix = matrix_4xf_create(tabf);
+	float		tabf[16];
+	t_m4x4_f	matrix;
+
+	ft_bzero(tabf, sizeof(tabf));
+	matrix = matrix_4xf_create(tabf);
+	matrix[0][0] = 1;
+	matrix[1][1] = 1;
+	matrix[2][2] = 1;
+	matrix[3][3] = 1;
 	return (matrix);
 }
 

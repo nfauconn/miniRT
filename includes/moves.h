@@ -6,8 +6,12 @@
 # include "error.h"
 
 void	change_obj_transform_matr(t_elem *obj);
-bool	change_obj_pos(t_elem *obj, int keycode);
+bool	translate_obj(t_elem *obj, int keycode);
 void	handle_move(t_scene *scene, int keycode);
 void	set_move(t_scene *scene, int x, int y);
+
+/* UTILS */
+bool	is_dir_key(int keycode);
+
 
 #endif

@@ -27,8 +27,6 @@ bool	is_vector(float4 tuple)
 	return(1);
 }
 
-
-
 bool	same_tuple(float4 tup1, float4 tup2)
 {
 	if (fabs(tup1.x - tup2.x) > EPSILON || fabs(tup1.y - tup2.y) > EPSION
@@ -299,7 +297,3 @@ Test(tuple_test, cross_product)
 	cr_expect(same_tuple(cross_product(v, v2), v3) == 1);
 	cr_expect(same_tuple(cross_product(v2, v), v4) == 1);
 }
-// Test (tuple_test, test1)
-// {
-// 	cr_expect(ft_isalnum('a') == 1, "\'a\' est alphanumerique");
-// }

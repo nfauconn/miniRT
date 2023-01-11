@@ -10,7 +10,7 @@ void	change_obj_transform_matr(t_elem *obj)
 		obj->transform = pl_transform_matr(obj);
 }
 
-bool	change_obj_pos(t_elem *obj, int keycode)
+bool	translate_obj(t_elem *obj, int keycode)
 {
 	if (keycode == UP_ARROW)
 		obj->w_pos.y += 0.1;
@@ -25,10 +25,20 @@ bool	change_obj_pos(t_elem *obj, int keycode)
 	return (0);
 }
 
+bool	rotate_obj(t_elem *obj, int keycode)
+{
+	(void)obj;
+	(void)keycode;
+	return (0);
+}
+
 void	handle_move(t_scene *scene, int keycode)
 {
-	if (change_obj_pos(scene->move.obj, keycode))
-		return ;
+	(void)keycode;
+/* 	if (is_translate(keycode) && translate_obj(scene->move.obj, keycode))
+		return ; */
+/* 	else if (is_rotate(keycode) && rotate_obj(scene->move.obj, keycode))
+		return ; */
 	change_obj_transform_matr(scene->move.obj);
 	printf("drawing...\n");
 	drawscene(scene, scene->img);

@@ -50,12 +50,6 @@ int	mouse_click(int keycode, int x, int y, t_scene *scene)
 	return (0);
 }
 
-static bool	is_dir_key(int keycode)
-{
-	return ((keycode >= LEFT_ARROW && keycode <= DOWN_ARROW) || keycode == W_KEY
-		|| keycode == A_KEY || keycode == S_KEY || keycode == D_KEY);
-}
-
 int	key_hook(int keycode, t_scene *scene)
 {
 	if (keycode == ECHAP_KEY)
@@ -76,11 +70,12 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 static void	print_instructions(void)
 {
 	printf("\nwelcome\n");
-	printf("left click on an object to move it\n");
-	printf("\t- arrows for translation\n");
-	printf("\t- WASD keys for rotation\n");
+	printf("left click on an object to :\n");
+	printf("\t- resize it (+/- keys)\n");
+	printf("\t- translate it (arrow keys)\n");
+	printf("\t- rotate it (WASD keys)\n");
 	printf("use any other mouse click to unselect the object\n\n");
-	printf("drawing...\n");
+	printf("drawing initial scene...\n");
 }
 
 void	launch_display(t_scene *scene)

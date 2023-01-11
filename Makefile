@@ -26,6 +26,7 @@ S_EXT = .c
 SRC_FILES = render.c \
 			display.c \
 			moves.c \
+			moves_utils.c \
 			error.c \
 			exit_clear.c \
 \

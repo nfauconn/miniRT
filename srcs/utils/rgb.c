@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rgb.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:46:00 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/04 16:37:07 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/11 14:59:23 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ float	convert_unit_to_rgb(float unit)
 	return (res);
 }
 
-int rgbvtoi(t_float4 color_vec)
+int	rgbvtoi(t_float4 color_vec)
 {
 	int	r;
 	int	g;
 	int	b;
 
- 	r = convert_unit_to_rgb(color_vec.x);
+	r = convert_unit_to_rgb(color_vec.x);
 	g = convert_unit_to_rgb(color_vec.y);
 	b = convert_unit_to_rgb(color_vec.z);
 	return (r << 16 | g << 8 | b);
