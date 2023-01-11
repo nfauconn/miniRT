@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lights.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:21:52 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/10 19:01:53 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2023/01/11 14:01:28 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ t_vector	normal_at(t_elem *obj, t_point w_pt)
 	t_vector	w_normal;
 
 	local_pt = matrix_tuple_mult(inverse(obj->transform), w_pt);
-	if (obj->id.shape == sphere)
+	if (obj->shape == sphere)
 		local_normal = local_pt - obj->o_pos;
-	if (obj->id.shape == plane)
+	if (obj->shape == plane)
 	{
 		local_normal = create_vector(0, 1, 0);
 		//local_normal = create_vector(obj->o_pos.x, obj->o_pos.y, obj->o_pos.z);
 	}
-	if (obj->id.shape == cylinder)
+	if (obj->shape == cylinder)
 		local_normal = cylinder_normal(*obj, local_pt);
 	w_normal = matrix_tuple_mult(transpose(inverse(obj->transform)), local_normal);
 	w_normal.w = 0;
@@ -194,7 +194,7 @@ void	prepare_computations(t_inter *i, t_ray ray)
 	i->point = position(ray, i->t);
 	i->eyev = -ray.dir;
 	i->normalv = normal_at(i->obj, i->point);
-	if (i->obj->id.shape != plane && dot_product(i->normalv, i->eyev) < 0)
+	if (i->obj->shape != plane && dot_product(i->normalv, i->eyev) < 0)
 	{
 		i->inside = 1;
 		i->normalv = -i->normalv;

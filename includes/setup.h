@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:18:36 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/17 18:49:58 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:02:00 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int			set_ambiantlight(t_scene *scene, char **params);
 /* SPHERE */
 int			set_sphere(t_scene *scene, char **params);
 void		init_sphere(t_elem *s);
+t_m4x4_f	sp_transform_matr(t_elem *s);
 
 /* CAMERA */
 int			set_camera(t_scene *scene, char **params);
@@ -49,6 +50,7 @@ void		init_camera(t_camera *cam, float hsize, float vsize);
 
 /* CYLINDER */
 int			set_cylinder(t_scene *scene, char **params);
+t_m4x4_f	cyl_transfo_matr(t_elem *cyl);
 
 /* LIGHTSOURCE */
 int			set_lights(t_scene *scene, char **params);
@@ -56,6 +58,7 @@ int			set_lights(t_scene *scene, char **params);
 /* plane */
 int			set_plane(t_scene *scene, char **params);
 void		init_plane(t_elem *pl);
+t_m4x4_f	pl_transform_matr(t_elem *pl);
 
 /* MATERIAL */
 t_material	default_material(t_elem *elem);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chap13_cylinder.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 19:16:56 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/07 15:47:14 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/01/11 14:02:45 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,11 +166,7 @@ t_xs	local_intersect_cyl(t_elem cyl, t_ray ray)
 
 void	init_cylinder(t_elem *s)
 {
-	static ssize_t	no = -1;
-
-	no++;
-	s->id.shape = cylinder;
-	s->id.no = no;
+	s->shape = cylinder;
 	s->specs.fov = 0;
 	s->o_pos = create_point(0, 0, 0);
 	s->transform = identity_matr();

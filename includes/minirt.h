@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/10 18:56:48 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2023/01/11 15:37:51 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ typedef int __attribute__((matrix_type(4, 4)))		t_m4x4_i;
 # define DOWN_ARROW 65364
 
 # define ECHAP_KEY 65307
-# define SPACE_KEY 32
+
+# define LEFT_CLICK 1
 
 /******************************************************************************/
 /*								SCENE										  */
@@ -66,12 +67,6 @@ typedef union u_specs
 	float				diam_hght[2];
 }	t_specs;
 
-typedef struct s_id
-{
-	uint8_t	shape;
-	size_t	no;
-}	t_id;
-
 typedef struct s_material
 {
 	t_rgb	color;
@@ -83,7 +78,7 @@ typedef struct s_material
 
 typedef struct s_elem
 {
-	t_id			id;
+	uint8_t			shape;
 	t_point			o_pos;
 	t_point			w_pos;
 	t_vector		orientation;
@@ -117,6 +112,12 @@ typedef struct s_img
 	int					endian;
 }				t_img;
 
+typedef struct s_move
+{
+	bool	asked;
+	t_elem	*obj;
+}	t_move;
+
 typedef struct s_scene
 {
 	void			*mlx;
@@ -126,6 +127,7 @@ typedef struct s_scene
 	t_elem			*amblight;
 	t_elem			*lights;
 	t_elem			*objs;
+	t_move			move;
 	int				(*fill_params[6])(struct s_scene *, char **);
 }				t_scene;
 

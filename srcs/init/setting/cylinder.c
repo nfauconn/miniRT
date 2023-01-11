@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 13:33:13 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/08 13:45:47 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/01/11 14:34:39 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "setup.h"
 
-// t_m4x4_f	rotate_mat(t_elem	*s)
+// t_m4x4_f	rotate_mat(t_elem	*cyl)
 // {
 // 	t_m4x4_f	res;
-// 	float	x = s->orientation.x;
-// 	float	y = s->orientation.y;
-// 	float	z = s->orientation.z;
+// 	float	x = cyl->orientation.x;
+// 	float	y = cyl->orientation.y;
+// 	float	z = cyl->orientation.z;
 
 // 	res = identity_matr;
 // 	res[0][0] = x * x * (1 - cos)
@@ -32,53 +32,57 @@
 // 	return (res);
 // }
 
-t_m4x4_f	fuse_rotate(t_elem	*s)
+t_m4x4_f	fuse_rotate(t_elem	*cyl)
 {
 	// t_m4x4_f	matrix;
 	// t_m4x4_f	matrix1;
 	// t_m4x4_f	matrix2;
 	t_m4x4_f	matrix3;
 
-	// matrix1 = rotation_x((M_PI * s->orientation.x) / 2);
-	// matrix2 = rotation_y((M_PI * s->orientation.y) / 2);
-	matrix3 = rotation_z((M_PI * s->orientation.z) / 2);
+	// matrix1 = rotation_x((M_PI * cyl->orientation.x) / 2);
+	// matrix2 = rotation_y((M_PI * cyl->orientation.y) / 2);
+	matrix3 = rotation_z((M_PI * cyl->orientation.z) / 2);
 	// matrix = matrix1 * matrix2 * matrix3;
 	return (matrix3);
 }
-// void	init_cylinder(t_elem *s)
+// void	init_cylinder(t_elem *cyl)
 // {
 // 	static ssize_t	no = -1;
-// 	// float	tab[6] = {0, s->orientation.z, 0, -s->orientation.z, 0, 0};
+// 	// float	tab[6] = {0, cyl->orientation.z, 0, -cyl->orientation.z, 0, 0};
 // 	no++;
-// 	s->id.shape = cylinder;
-// 	s->id.no = no;
-// 	s->o_pos = create_point(0, 0, 0);
+// 	cyl->shape = cylinder;
+// 	cyl->o_pos = create_point(0, 0, 0);
 
 // 	t_m4x4_f	rotate_mat;
 // 	t_m4x4_f	translate_mat;
 // 	t_m4x4_f	scale_mat;
 
-// 	rotate_mat = fuse_rotate(s);
-// 	scale_mat = scaling(s->specs.diam_hght[0], s->specs.diam_hght[1], s->specs.diam_hght[0]);
-// 	translate_mat = translation(s->w_pos.x, s->w_pos.y, s->w_pos.z);
-// 	s->transform = translate_mat * (scale_mat * (rotate_mat));
-// 	s->material = default_material(s);
+// 	rotate_mat = fuse_rotate(cyl);
+// 	scale_mat = scaling(cyl->specs.diam_hght[0], cyl->specs.diam_hght[1], cyl->specs.diam_hght[0]);
+// 	translate_mat = translation(cyl->w_pos.x, cyl->w_pos.y, cyl->w_pos.z);
+// 	cyl->transform = translate_mat * (scale_mat * (rotate_mat));
+// 	cyl->material = default_material(cyl);
 // }
-void	init_cylinder(t_elem *s)
+
+t_m4x4_f	cyl_transfo_matr(t_elem *cyl)
 {
-	static ssize_t	no = -1;
-	// float	tab[6] = {0, s->orientation.z, 0, -s->orientation.z, 0, 0};
-	no++;
-	s->id.shape = cylinder;
-	s->id.no = no;
-	s->o_pos = create_point(0, 0, 0);
+	t_m4x4_f	res;
 	t_m4x4_f	rotate_matrix;
-	rotate_matrix = fuse_rotate(s);
-	s->transform = identity_matr();
-	s->transform = rotate_matrix;
-	s->transform = s->transform * translation(s->w_pos.x, s->w_pos.y, s->w_pos.z);
-	s->transform = s->transform * scaling(s->specs.diam_hght[0], 1, s->specs.diam_hght[0]);
-	s->material = default_material(s);
+
+	rotate_matrix = fuse_rotate(cyl);
+	res = identity_matr();
+	res = rotate_matrix;
+	res = res * scaling(cyl->specs.diam_hght[0], 1, cyl->specs.diam_hght[0]);
+	res = res * translation(cyl->w_pos.x, cyl->w_pos.y, cyl->w_pos.z);
+	return (res);
+}
+
+void	init_cylinder(t_elem *cyl)
+{
+	cyl->shape = cylinder;
+	cyl->o_pos = create_point(0, 0, 0);
+	cyl->transform = cyl_transfo_matr(cyl);
+	cyl->material = default_material(cyl);
 }
 
 /* !!!! no ID cf init_sphere */

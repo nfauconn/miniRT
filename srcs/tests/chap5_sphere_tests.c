@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chap5_sphere_tests.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 18:32:43 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/10 19:09:49 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2023/01/11 14:02:24 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,7 @@ Test (ray, intersect1)
 	t_inter	i1 = intersection(3.5, &s);
 
 	cr_expect(same_float(i1.t, 3.5));
-	cr_expect(i1.obj->id.shape == s.id.shape);
-	cr_expect(i1.obj->id.no == s.id.no);
+	cr_expect(i1.obj->shape == s.shape);
 }
 
 // Test (ray, intersection_aggreg)

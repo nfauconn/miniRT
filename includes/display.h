@@ -6,6 +6,7 @@
 # include "rgb.h"
 # include "error.h"
 # include "exit.h"
+# include "moves.h"
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 int		close_window(t_scene *scene);

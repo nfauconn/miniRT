@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inter.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:44:24 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/10 19:00:23 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2023/01/11 14:01:28 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,11 +214,11 @@ t_xs	intersect(t_elem *obj, t_ray r)
 
 	r = transform_ray(r, inverse(obj->transform));
 	//obj_to_ray ?? cf sp_intersect !!!!!!!!!!!!!!!!!!!!!!!
-	if (obj->id.shape == sphere)
+	if (obj->shape == sphere)
 		xs = sp_intersect(*obj, r);
-	else if (obj->id.shape == plane)
+	else if (obj->shape == plane)
 		xs = pl_intersect(*obj, r);
-	else if (obj->id.shape == cylinder)
+	else if (obj->shape == cylinder)
 		xs = local_intersect_cyl(*obj, r);
 	else
 		xs.count = 0;

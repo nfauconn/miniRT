@@ -6,33 +6,37 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:30:09 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2022/12/17 17:45:35 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/11 14:28:20 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "setup.h"
 
+t_m4x4_f	pl_transform_matr(t_elem *pl)
+{
+	t_m4x4_f	res;
+
+	res = translation(pl->w_pos.x, pl->w_pos.y, pl->w_pos.z);
+	res = matrix_mult(res, \
+					rotation_x(M_PI * pl->orientation.x));
+	res = matrix_mult(res, \
+					rotation_y(M_PI * pl->orientation.y));
+	res = matrix_mult(res, \
+					rotation_z(M_PI * pl->orientation.z));
+	return (res);
+}
+
 void	init_plane(t_elem *pl)
 {
-	static ssize_t	no = -1;
-
-	no++;
-	pl->id.shape = plane;
-	pl->id.no = no;
+	pl->shape = plane;
 	pl->o_pos = create_point(0, 0, 0);
-	pl->transform = translation(pl->w_pos.x, pl->w_pos.y, pl->w_pos.z);
-		pl->transform = matrix_mult(pl->transform, \
-						rotation_x(M_PI * pl->orientation.x));
-		pl->transform = matrix_mult(pl->transform, \
-						rotation_y(M_PI * pl->orientation.y));
-		pl->transform = matrix_mult(pl->transform, \
-						rotation_z(M_PI * pl->orientation.z));
+	pl->transform = pl_transform_matr(pl);
 	pl->material = default_material(pl);
 }
 
 int	set_plane(t_scene *scene, char **params)
 {
-	int		ret;
+	int			ret;
 	t_elem		*newplane;
 
 	if (ft_strarraysize(params) != 4)
