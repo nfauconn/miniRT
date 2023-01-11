@@ -29,7 +29,7 @@ int	close_window(t_scene *scene)
 }
  */
 
-static void	reset_move(t_scene *scene)
+static void	reset_click_hit(t_scene *scene)
 {
 	scene->move.asked = 0;
 	scene->move.obj = NULL;
@@ -39,13 +39,14 @@ int	mouse_click(int keycode, int x, int y, t_scene *scene)
 {
 	if (keycode == LEFT_CLICK)
 	{
-		set_move(scene, x, y);
-		printf("\nobject selected\n");
+		if (click_hits(scene, x, y))
+			printf("\nobject selected\n");
 	}
 	else
 	{
-		reset_move(scene);
-		printf("object unselected\n");
+		if (scene->move.asked)
+			printf("object unselected\n");
+		reset_click_hit(scene);
 	}
 	return (0);
 }
@@ -54,7 +55,7 @@ int	key_hook(int keycode, t_scene *scene)
 {
 	if (keycode == ECHAP_KEY)
 		close_window(scene);
-	else if (scene->move.asked && is_dir_key(keycode))
+	else if (scene->move.asked && is_valid_key(keycode))
 		handle_move(scene, keycode);
 	return (0);
 }
