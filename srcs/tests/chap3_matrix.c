@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chap3_matrix.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:12:44 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/16 18:30:12 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/11 19:43:25 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1015,14 +1015,13 @@ Test(matrix, shearing6)
 	cr_expect(same_tuple(p, aim) == 1);
 }
 
-// t_m4x4_f	chained_transfo(t_m4x4_f one, t_m4x4_f two, t_m4x4_f three)
-// {
-// 	t_m4x4_f	res;
+t_m4x4_f	chained_transfo2(t_m4x4_f one, t_m4x4_f two, t_m4x4_f three)
+{
+	t_m4x4_f	res;
 
-// 	res = matrix_mult(three, two);
-// 	res = matrix_mult(res, one);
-// 	return (res);
-// }
+	res = one * two * three;
+	return (res);
+}
 
 Test(matrix, chaining)
 {
@@ -1047,4 +1046,40 @@ Test(matrix, chaining)
 	t_m4x4_f	fuse = chained_transfo(A, B, C);
 	float4	pres = matrix_tuple_mult(fuse, p);
 	cr_expect(same_tuple(pres, p4aim) == 1);
+}
+
+// int	same_matrix (t_m4x4_f one, t_m4x4_f two)
+// {
+// 	t_m3x3_f	res;
+// 	int			i;
+// 	int			j;
+// 	int			k;
+
+// 	i = 0;
+// 	k = 0;
+// 	while (i < 4)
+// 	{
+// 		j = 0;
+// 		while (j < 4)
+// 		{
+// 			if (same_float(one[i][j], two[i][j]) == 0)
+// 				return (0);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	return (1);
+// }
+
+/*Shiiiiit, matrix multiplication are included inplicitly with clang!!
+i wasted wayyyyy too much time*/
+Test(matrix, multi)
+{
+	t_m4x4_f	res;
+	t_m4x4_f	aim;
+	t_m4x4_f	B = scaling(5, 5, 5);
+	t_m4x4_f	C = translation(10, 5, 7);
+	res = matrix_mult (B, C);
+	aim = B * C;
+	cr_expect(same_matrix(res, aim) == 1);
 }

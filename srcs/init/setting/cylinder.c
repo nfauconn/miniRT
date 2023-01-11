@@ -6,7 +6,7 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 13:33:13 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/11 18:32:59 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/01/11 20:05:16 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_m4x4_f	fuse_rotate(t_elem	*cyl)
 	matrix2 = rotation_y((M_PI * cyl->orientation.y) / 2);
 	matrix3 = rotation_z((M_PI * cyl->orientation.z) / 2);
 	matrix = matrix1 * matrix2 * matrix3;
-	return (matrix3);
+	return (matrix);
 }
 
 t_m4x4_f	cyl_transfo_matr(t_elem *cyl)
@@ -32,7 +32,7 @@ t_m4x4_f	cyl_transfo_matr(t_elem *cyl)
 	t_m4x4_f	rotate_matrix;
 
 	rotate_matrix = fuse_rotate(cyl);
-	res = identity_matr();
+	// res = identity_matr();
 	res = rotate_matrix;
 	res = res * scaling(cyl->specs.diam_hght[0], 1, cyl->specs.diam_hght[0]);
 	res = res * translation(cyl->w_pos.x, cyl->w_pos.y, cyl->w_pos.z);
