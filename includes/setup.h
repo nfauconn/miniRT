@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:18:36 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/11 15:02:00 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/12 16:58:18 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "scene.h"
 # include "rgb.h"
 
-void	setup_scene(t_scene *scene, char *file);
+void		setup_scene(t_scene *scene, char *file);
 
 /* PARSING */
 bool		parse_file(char *file, t_scene *scene);

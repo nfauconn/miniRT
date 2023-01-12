@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:40:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/12 16:06:56 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/01/12 16:56:48 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ t_rgb	color_at(t_scene *world, t_ray ray)
 
 	i = intersect_world(world, ray);
 	if (i.t <= 0)
-		return ((t_rgb)BLACK);
+	{
+		color = create_color(0, 0, 0);
+		return (color);
+	}
 	prepare_computations(&i, ray);
 	color = shade_hit(world, i);
 	return (color);

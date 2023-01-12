@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   user_input.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/12 16:58:40 by fjeiwjifeoh       #+#    #+#             */
+/*   Updated: 2023/01/12 16:58:48 by fjeiwjifeoh      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef USER_INPUT_H
 # define USER_INPUT_H
 
@@ -17,6 +29,5 @@ bool	click_hits(t_scene *scene, int x, int y);
 bool	is_valid_key(int keycode);
 bool	is_translate(int keycode);
 bool	is_rotate(int keycode);
-
 
 #endif

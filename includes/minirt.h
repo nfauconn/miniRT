@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/11 15:37:51 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/12 16:55:59 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ typedef int __attribute__((matrix_type(4, 4)))		t_m4x4_i;
 
 # define WIDTH 300
 # define HEIGHT 150
-# define BLACK {0, 0, 0, 0}
-# define WHITE {1, 1, 1, 0}
 # define EPSILON 0.0001
 
 # define W_KEY 119
@@ -84,12 +82,12 @@ typedef struct s_elem
 	t_vector		orientation;
 	t_rgb			color;
 	t_m4x4_f		transform;
-	t_material		material; /* A INIT DANS LE PARSING*/
+	t_material		material;
 	t_specs			specs;
 	struct s_elem	*next;
 }				t_elem;
 
-typedef	struct	s_camera //attention !! position et orientation cam a mettre dans le parsing ?
+typedef struct s_camera
 {
 	float			fov;
 	t_point			o_pos;
@@ -131,9 +129,9 @@ typedef struct s_scene
 	int				(*fill_params[6])(struct s_scene *, char **);
 }				t_scene;
 
-/*******************************************************************************
-* 										 RAY								   *
-*******************************************************************************/
+/******************************************************************************/
+/* 										 RAY								  */
+/******************************************************************************/
 
 typedef struct s_ray
 {
