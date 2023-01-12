@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lightsource.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:30:47 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/04 16:34:47 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/12 16:41:58 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	set_lights(t_scene *scene, char **params)
 {
 	int		ret;
-	t_elem		*newlight;
+	t_elem	*newlight;
 
 	if (ft_strarraysize(params) != 4)
 		return (error_display("wrong number of elements for light"));
@@ -31,4 +31,3 @@ int	set_lights(t_scene *scene, char **params)
 	elem_add_back(&scene->lights, newlight);
 	return (ret);
 }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   material.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:03:30 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2022/12/17 18:12:15 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/12 16:41:44 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,3 @@ t_material	default_material(t_elem *elem)
 	material.shininess = 200.0;
 	return (material);
 }
-

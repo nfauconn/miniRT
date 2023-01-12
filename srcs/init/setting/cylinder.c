@@ -6,7 +6,7 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 13:33:13 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/11 20:05:16 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/01/12 16:42:14 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ t_m4x4_f	cyl_transfo_matr(t_elem *cyl)
 	t_m4x4_f	rotate_matrix;
 
 	rotate_matrix = fuse_rotate(cyl);
-	// res = identity_matr();
 	res = rotate_matrix;
 	res = res * scaling(cyl->specs.diam_hght[0], 1, cyl->specs.diam_hght[0]);
 	res = res * translation(cyl->w_pos.x, cyl->w_pos.y, cyl->w_pos.z);
@@ -51,7 +50,7 @@ void	init_cylinder(t_elem *cyl)
 int	set_cylinder(t_scene *scene, char **params)
 {
 	int		ret;
-	t_elem		*newcylinder;
+	t_elem	*newcylinder;
 
 	if (ft_strarraysize(params) != 6)
 		return (error_display("wrong number of elements for cylinder"));

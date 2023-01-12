@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:30:55 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/02 12:41:11 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/12 16:42:44 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	set_camera(t_scene *scene, char **params)
 	scene->cam = ft_calloc(1, sizeof(t_elem));
 	if (!scene->cam)
 		return (error_display("malloc error"));
- 	if (conv_campos(params[1], scene->cam, params[0])
+	if (conv_campos(params[1], scene->cam, params[0])
 		|| conv_camorientation(params[2], scene->cam, params[0])
 		|| conv_fov(params[3], scene->cam, params[0]))
 		return (1);
