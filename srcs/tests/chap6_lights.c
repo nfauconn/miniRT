@@ -6,7 +6,7 @@
 /*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:29:49 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/10 19:13:08 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2023/01/12 16:28:53 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ Test(lights, normal_1)
 	t_vector	normal;
 
 	init_sphere(&sp);
+	sp.transform = identity_matr();
 
 	normal = normal_at(&sp, create_point(1, 0, 0));
 	cr_expect(same_tuple(normal, create_vector(1, 0, 0)));
