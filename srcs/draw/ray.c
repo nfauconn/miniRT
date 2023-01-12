@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:22:19 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/16 18:44:50 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/12 16:08:04 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,3 @@ void	set_transform(t_elem *obj, t_m4x4_f transfo_matrix)
 {
 	obj->transform = transfo_matrix;
 }
-

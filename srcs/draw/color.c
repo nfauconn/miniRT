@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:40:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/16 16:43:34 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/12 16:06:56 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ t_rgb	create_color(float red, float green, float blue)
 	return (color);
 }
 
-/* intersect the world with the given ray and return the color at the given intersection */
+/* intersect the world with the given ray
+and return the color at the given intersection */
 t_rgb	color_at(t_scene *world, t_ray ray)
 {
 	t_inter	i;

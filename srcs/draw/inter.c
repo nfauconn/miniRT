@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inter.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:44:24 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/11 14:01:28 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/12 16:06:17 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,13 @@ t_xs	sp_intersect(t_elem s, t_ray r)
 	t_vector	sphere_to_ray;
 	float		a;
 	float		b;
-	float		c;
 	float		discriminant;
 	t_xs		xs;
 
 	sphere_to_ray = r.orig - s.o_pos;
 	a = dot3(r.dir, r.dir);
 	b = 2 * dot3(r.dir, sphere_to_ray);
-	c = dot3(sphere_to_ray, sphere_to_ray) - 1;
-	discriminant = pow(b, 2) - 4 * a * c;
+	discriminant = pow(b, 2) - 4 * a * (dot3(sphere_to_ray, sphere_to_ray) - 1);
 	if (discriminant < 0)
 		ft_bzero(&xs, sizeof(xs));
 	else
@@ -94,9 +92,7 @@ float	cylinder_min(t_elem cyl)
 {
 	float	min;
 
-	min = 0 + cyl.w_pos.y;;
-	// min = matrix_tuple_mult(cyl.transform, create_point(0, -0.5, 0));
-	// printf("min. x,y,z = %f, %f, %f\n", min.x, min.y, min.z);
+	min = 0 + cyl.w_pos.y;
 	return (min);
 }
 
@@ -104,7 +100,6 @@ float	cylinder_max(t_elem cyl)
 {
 	float	max;
 
-	// max = matrix_tuple_mult(cyl.transform, create_point(0, 0.5, 0));
 	max = cyl.specs.diam_hght[1] + cyl.w_pos.y;
 	return (max);
 }
@@ -118,7 +113,6 @@ t_xs	cylinder_limits(t_elem cyl, t_ray ray, t_xs xs)
 
 	ymax = cylinder_max(cyl);
 	ymin = cylinder_min(cyl);
-	// printf("max = %f, min = %f\n", ymax, ymin);
 	y0 = ray.orig.y + (xs.t[0] * ray.dir.y);
 	if (y0 <= ymin || y0 >= ymax)
 	{
@@ -141,7 +135,7 @@ int	check_cap(t_ray r, int t)
 
 	x = r.orig.x + (t * r.dir.x);
 	z = r.orig.z + (t * r.dir.z);
-	return((x * x + z * z) <= 1);
+	return ((x * x + z * z) <= 1);
 }
 
 t_xs	add_t_to_xs(t_xs xs, int t)
@@ -156,21 +150,6 @@ t_xs	add_t_to_xs(t_xs xs, int t)
 		xs.t[1] = t;
 		xs.count++;
 	}
-	return (xs);
-}
-
-t_xs	intersect_cyl_caps(t_elem cyl, t_ray r, t_xs xs)
-{
-	int	t;
-
-	if (r.dir.y < EPSILON && r.dir.y > -EPSILON)
-		return (xs);
-	t = (cylinder_min(cyl) - r.orig.y) / r.dir.y;
-	if (check_cap(r, t))
-		xs = add_t_to_xs(xs, t);
-	t = (cylinder_max(cyl) - r.orig.y) / r.dir.y;
-	if (check_cap(r, t))
-		xs = add_t_to_xs(xs, t);
 	return (xs);
 }
 
@@ -191,20 +170,13 @@ t_xs	local_intersect_cyl(t_elem cyl, t_ray ray)
 	else
 	{
 		xs.count = 2;
-		xs.t[0] = (-b -sqrt(disc)) / (2 * a);
-		xs.t[1] = (-b +sqrt(disc)) / (2 * a);
-		if (xs.t[0] > xs.t[1])
-		{
-			c = xs.t[0];
-			xs.t[0] = xs.t[1];
-			xs.t[1] = c;
-		}
+		xs.t[0] = (-b - sqrt(disc)) / (2 * a);
+		xs.t[1] = (-b + sqrt(disc)) / (2 * a);
 		xs = cylinder_limits(cyl, ray, xs);
 	}
-	// if (xs.count < 2)
-	// 	xs = intersect_cyl_caps(cyl, ray, xs);
 	return (xs);
 }
+
 /* INTERSECT
 ** create a struct containing all intersections of a ray with a given obj
 ** (sphere can only have 2 but maybe more are needed for other objects) */
@@ -213,7 +185,6 @@ t_xs	intersect(t_elem *obj, t_ray r)
 	t_xs	xs;
 
 	r = transform_ray(r, inverse(obj->transform));
-	//obj_to_ray ?? cf sp_intersect !!!!!!!!!!!!!!!!!!!!!!!
 	if (obj->shape == sphere)
 		xs = sp_intersect(*obj, r);
 	else if (obj->shape == plane)

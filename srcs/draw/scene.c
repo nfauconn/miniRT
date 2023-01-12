@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:04:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/17 18:45:00 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/12 16:21:21 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,15 @@ t_m4x4_f	view_transform(t_point from, t_point to, t_vector up)
 
 t_ray	ray_for_pixel(t_camera cam, float px, float py)
 {
-	float	x_offset;
-	float	y_offset;
-	float	world_x;
-	float	world_y;
-
-	x_offset = (px + 0.5) * cam.pixel_size;
-	y_offset = (py + 0.5) * cam.pixel_size;
-	world_x = cam.half_width - x_offset;
-	world_y = cam.half_height - y_offset;
-
-	t_ray	res;
+	float		world_x;
+	float		world_y;
+	t_ray		res;
 	t_float4	pixel;
-	pixel = matrix_tuple_mult(inverse(cam.transform), create_point(world_x, world_y, -1));
+
+	world_x = cam.half_width - ((px + 0.5) * cam.pixel_size);
+	world_y = cam.half_height - ((py + 0.5) * cam.pixel_size);
+	pixel = matrix_tuple_mult(inverse(cam.transform),
+			create_point(world_x, world_y, -1));
 	res.orig = matrix_tuple_mult(inverse(cam.transform), create_point(0, 0, 0));
 	res.dir = normalize(pixel - res.orig);
 	return (res);
