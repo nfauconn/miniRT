@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   user_input.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/12 16:39:47 by fjeiwjifeoh       #+#    #+#             */
+/*   Updated: 2023/01/12 16:40:40 by fjeiwjifeoh      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "user_input.h"
 
 bool	is_rotate(int keycode)
@@ -28,9 +40,9 @@ void	change_obj_transform_matr(t_elem *obj)
 		obj->transform = pl_transform_matr(obj);
 }
 
-bool	rotate_obj(t_elem *obj, int keycode)//A REVOIR
+bool	rotate_obj(t_elem *obj, int keycode)
 {
-	if (obj->shape == sphere)//OU LIGHTS??
+	if (obj->shape == sphere)
 		return (1);
 	if (keycode == W_KEY)
 		obj->orientation.x += 0.01;
@@ -96,7 +108,6 @@ bool	change_obj(t_elem *obj, int keycode)
 		return (resize_obj(obj, keycode));
 	return (1);
 }
-
 
 void	handle_move(t_scene *scene, int keycode)
 {

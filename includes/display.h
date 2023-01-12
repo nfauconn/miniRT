@@ -7,6 +7,8 @@
 # include "error.h"
 # include "exit.h"
 # include "user_input.h"
+# include "ray.h"
+# include "inter.h"
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 int		close_window(t_scene *scene);

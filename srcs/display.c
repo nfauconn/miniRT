@@ -1,6 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   display.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/12 16:44:19 by fjeiwjifeoh       #+#    #+#             */
+/*   Updated: 2023/01/12 16:45:20 by fjeiwjifeoh      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "display.h"
-#include "ray.h"
-#include "inter.h"
 
 int	close_window(t_scene *scene)
 {
@@ -10,24 +20,8 @@ int	close_window(t_scene *scene)
 		mlx_destroy_window(scene->mlx, scene->win);
 	mlx_destroy_display(scene->mlx);
 	exit_clear(0, scene);
-	return(0);
+	return (0);
 }
-
-/* static int	render_next_frame(t_scene *scene)
-{
-	int	x;
-	int	y;
-
-	drawscene(scene, scene->img);
-    printf("scene->mlx = %p\n", scene->mlx);
-    printf("scene->win = %p\n", scene->win);
-    int ret = mlx_mouse_get_pos(scene->mlx, scene->win, &x, &y);
-    printf("ret = %d\n", ret);
-    printf("coord : %d, %d\n", x, y);
-	mlx_put_image_to_window(scene->mlx, scene->win, scene->img->ptr, 0, 0);
-	return (1);
-}
- */
 
 static void	reset_click_hit(t_scene *scene)
 {
