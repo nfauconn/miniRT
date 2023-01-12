@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   elem_add.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 13:02:04 by noe               #+#    #+#             */
-/*   Updated: 2022/12/16 17:18:09 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/12 16:36:54 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	elem_add_back(t_elem **head, t_elem *to_add)
 {
-	t_elem *elem;
+	t_elem	*elem;
 
 	if (!*head)
 	{

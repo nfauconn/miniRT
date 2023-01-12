@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 20:18:31 by noe               #+#    #+#             */
-/*   Updated: 2023/01/04 18:14:08 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/12 16:36:32 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static ssize_t	find_line_elem(char **line)
 	while (elems[i])
 	{
 		if ((i < 3 && !ft_strncmp(*line, elems[i], 1)
-			&& ft_iswhitespace((*line)[1]))
-			|| (i >= 3 && !ft_strncmp(*line, elems[i], 2)
-			&& ft_iswhitespace((*line)[2])))
+				&& ft_iswhitespace((*line)[1]))
+				|| (i >= 3 && !ft_strncmp(*line, elems[i], 2)
+				&& ft_iswhitespace((*line)[2])))
 		{
 			while (ft_isalpha(**line))
 				(*line)++;
@@ -90,7 +90,7 @@ bool	parse_line(char *line, t_scene *scene)
 	line = start;
 	params = ft_split_whitespace(line);
 	if (!params)
-		return(error_display("malloc error"));
+		return (error_display("malloc error"));
 	ret = scene->fill_params[elem_index](scene, params);
 	ft_strarrayclear(&params);
 	return (ret);
@@ -119,12 +119,6 @@ bool	parse_file(char *file, t_scene *scene)
 	}
 	if (!ret && (!scene->amblight || !scene->cam))
 		ret = error_display("scene needs at least ambiant light and camera");
-/* 	while (scene->lights)
-	{
-		scene->lights->color += scene->amblight->color;
-		adjust_light(&scene->lights->color);
-		scene->lights = scene->lights->next;
-	} */
 	close(fd);
 	return (ret);
 }

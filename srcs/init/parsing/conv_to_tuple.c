@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_to_tuple.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:19:07 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/17 17:05:30 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/12 16:34:43 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ bool	conv_rgb(char *s, t_elem *elem, char *elem_name)
 		elem->color.y = ft_atof(rgb[1]);
 		elem->color.z = ft_atof(rgb[2]);
 		elem->color.w = 0;
-	 	if (check_rgb_range(elem->color))
+		if (check_rgb_range(elem->color))
 			ret = error_display2("wrong rgb value for ", elem_name);
 	}
 	elem->color.x = convert_color_to_unit(elem->color.x);
