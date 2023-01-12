@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:18:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/16 13:17:30 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2023/01/12 16:53:03 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ bool		same_matrix(t_m4x4_f matrix1, t_m4x4_f matrix2);
 bool		same_matrix_3x3(t_m3x3_f matrixaim, t_m3x3_f res);
 
 /* MATHS */
-float		dot_product_ma(t_m4x4_f matrix, int line, t_m4x4_f matrix2, int col);
+float		dot_product_ma(t_m4x4_f mat1, int line, t_m4x4_f mat2, int col);
 t_m4x4_f	matrix_mult(t_m4x4_f matrix, t_m4x4_f matrix2);
 t_float4	matrix_tuple_mult(t_m4x4_f matrix, t_float4 tup);
 t_m4x4_f	divide_matr_by_scalar(t_m4x4_f res, float deter);
@@ -40,11 +40,11 @@ t_float4	get_vline(int i, t_m4x4_f matrix);
 t_float4	get_vcol(int i, t_m4x4_f matrix2);
 t_m4x4_f	transpose(t_m4x4_f matrix);
 float		determinant2x2(t_float4 matrix);
-int			isnotinline(int	j, int line);
-int			isnotincol(int	j, int col);
-int			isnotinline_4x4(int	j, int line);
-int			isnotincol_4x4(int	j, int col);
-void		printf_3fmatr(t_m3x3_f	matrixaim);
+int			isnotinline(int j, int line);
+int			isnotincol(int j, int col);
+int			isnotinline_4x4(int j, int line);
+int			isnotincol_4x4(int j, int col);
+void		printf_3fmatr(t_m3x3_f matrixaim);
 float		minor_of_3x3(t_m3x3_f matrix, int line, int col);
 float		cofactor(t_m3x3_f matrix, int line, int col);
 float		determinant3x3(t_m3x3_f matrix);
