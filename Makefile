@@ -25,7 +25,8 @@ UTILS_DIR = utils
 S_EXT = .c
 SRC_FILES = render.c \
 			display.c \
-			user_input.c \
+			parse_input.c \
+			apply_input.c \
 			error.c \
 			exit_clear.c \
 \
@@ -46,7 +47,7 @@ SRC_FILES = render.c \
 							sphere.c \
 							cylinder.c \
 							plane.c \
-							material.c \
+							object_params.c \
 						} \
 				} \
 \
@@ -54,14 +55,23 @@ SRC_FILES = render.c \
 					drawscene.c \
 					ray.c \
 					inter.c \
+					inter_cy.c \
+					inter_sp_pl.c \
 					lights.c \
+					lights_normal.c \
 					scene.c \
 					color.c \
 				} \
 \
 				${addprefix ${UTILS_DIR}/, \
 					tuple.c \
-					matrix.c \
+					tuple_create.c \
+					matrix_utils.c \
+					matrix_create.c \
+					matrix_mult.c \
+					matrix_submatrix.c \
+					matrix_transform.c \
+					matrix_inverse.c \
 					rgb.c \
 				}
 
@@ -158,6 +168,7 @@ T_BUILD_DIR = ${BUILD_DIR}/tests
 
 T_NAME = all_tests
 T_SRCS = ${addsuffix ${S_EXT}, ${addprefix ${T_SRC_DIR}/, \
+	tests_utils \
 	chap2_color \
 	chap3_matrix \
 	chap5_sphere_tests \
@@ -187,7 +198,7 @@ testfclean: littleclean
 	@${RM} ${BUILD_DIR}
 	@echo "deleted test program"
 
-testr: testclean tests
+testr: testfclean tests
 
 .PHONY: all clean fclean re \
 	libftcreat val norm \

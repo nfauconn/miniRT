@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   chap3_matrix.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:12:44 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/11 19:43:25 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/01/13 16:42:17 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mycriterion.h"
-#include "matrix.h"
-#include "tuple.h"
-#include <math.h>
-#include <stdio.h>
-#include <signal.h>
-#include <errno.h>
+#include "criterion_utils.h"
 
 // typedef float	float16	__attribute__((ext_vector_type(16)));
 typedef float t_m4x4_f  __attribute__((matrix_type(4, 4)));

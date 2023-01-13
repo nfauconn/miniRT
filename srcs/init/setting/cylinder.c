@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 13:33:13 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/12 16:42:14 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/01/13 13:57:09 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	init_cylinder(t_elem *cyl)
 	cyl->material = default_material(cyl);
 }
 
-/* !!!! no ID cf init_sphere */
 int	set_cylinder(t_scene *scene, char **params)
 {
 	int		ret;

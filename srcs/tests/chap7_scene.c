@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   chap7_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 13:29:05 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/10 19:12:35 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2023/01/13 16:43:20 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mycriterion.h"
-#include "matrix.h"
-#include "tuple.h"
-#include "minirt.h"
-#include "ray.h"
-#include "lights.h"
-#include "scene.h"
-#include "inter.h"
-#include "setup.h"
+#include "criterion_utils.h"
 
 void	print_tuple(t_float4 var);
 
@@ -133,9 +125,6 @@ Test(scene, shade_hit)
 	t_scene	world;
 	t_elem	*shape;
 	t_elem	*shape2;
-/* 	t_ray	r;
-	t_inter	i;
-	t_rgb	c; */
 
 	setup_scene(&world, "./scenes/TEST2spheres1light.rt");
 	shape = world.objs;
@@ -144,30 +133,6 @@ Test(scene, shade_hit)
 	shape2->material = test_default_material(shape2);
 	shape2->transform = scaling(0.5, 0.5, 0.5);
 
-printf("\n!!! tests of color_at in chap7_scene.c:159:170 removed\n\n");
-//because shadowed didnt exist so supposed to be set to 0 all the time
-/*
- 	// shade out
-	r = ray(create_point(0, 0, -5), create_vector(0, 0, 1));
-	i = intersection(4, *shape);
-	prepare_computations(&i, r);
-	c = shade_hit(&world, i);
-	printf("\n\tTUPLE LINE 159");
-	print_tuple(c);
-	printf("\n");
-	cr_expect(same_tuple(c, create_vector(0.38066, 0.47583, 0.2855)));
-
-	// shade in
-	point_light(world.lights, create_point(0, 0.25, 0), create_color(1, 1, 1));
-	r = ray(create_point(0, 0, 0), create_vector(0, 0, 1));
-	i = intersection(0.5, *shape2);
-	prepare_computations(&i, r);
-	c = shade_hit(&world, i);
-	printf("\n\tTUPLE LINE 170");
-	print_tuple(c);
-	printf("\n");
-	cr_expect(same_tuple(c, create_color(0.90498, 0.90498, 0.90498)));
- */
 	clear(&world);
 }
 

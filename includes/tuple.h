@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tuple.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:12:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2022/12/16 13:17:53 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2023/01/13 16:18:22 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ float		addition_of_squared_elements(t_float4 vector);
 float		length(t_float4 vector);
 t_float4	normalize(t_float4 vector);
 float		dot_product(t_float4 tup1, t_float4 tup2);
-float		dot3(t_float4 tup1, t_float4 tup2);
+float		dot_product(t_float4 tup1, t_float4 tup2);
 t_float4	cross_product(t_float4 tup1, t_float4 tup2);
 
 #endif

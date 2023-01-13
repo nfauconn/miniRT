@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   chap6_lights.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:29:49 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/12 16:28:53 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2023/01/13 15:59:36 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mycriterion.h"
-#include "tuple.h"
-#include "matrix.h"
-#include "setup.h"
-#include "ray.h"
-#include "inter.h"
-#include "lights.h"
-#include "color.h"
+#include "criterion_utils.h"
 
 //	printf("normal = {%f, %f, %f, %f}\normal", normal.x, normal.y, normal.z, normal.w);
 

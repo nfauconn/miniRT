@@ -6,11 +6,11 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 15:10:17 by rokerjea          #+#    #+#             */
-/*   Updated: 2022/12/16 18:30:03 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/13 15:54:00 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mycriterion.h"
+#include "criterion_header.h"
 #include <math.h>
 #include <stdio.h>
 #include <errno.h>

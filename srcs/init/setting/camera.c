@@ -3,14 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:30:55 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/12 16:42:44 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/01/13 15:28:21 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "setup.h"
+
+static bool	conv_camorientation(char *s, t_camera *cam, char *elem_name)
+{
+	bool	ret;
+	char	**or;
+
+	or = ft_split(s, ',');
+	if (!or)
+		return (error_display("malloc error"));
+	ret = 0;
+	if (ft_strarraysize(or) != 3)
+		ret = error_display2("wrong orientation value for ", elem_name);
+	else
+	{
+		cam->orientation.x = ft_atof(or[0]);
+		cam->orientation.y = ft_atof(or[1]);
+		cam->orientation.z = ft_atof(or[2]);
+		cam->orientation.w = 0;
+		if (check_orientation_range(cam->orientation))
+			ret = error_display2("wrong orientation range for ", elem_name);
+	}
+	ft_strarrayclear(&or);
+	return (ret);
+}
+
+static bool	conv_campos(char *s, t_camera *cam, char *elem_name)
+{
+	bool	ret;
+	char	**pos;
+
+	pos = ft_split(s, ',');
+	if (!pos)
+		return (error_display("malloc error"));
+	if (ft_strarraysize(pos) != 3)
+		ret = error_display2("wrong pos value for ", elem_name);
+	else
+	{
+		cam->w_pos.x = ft_atof(pos[0]);
+		cam->w_pos.y = ft_atof(pos[1]);
+		cam->w_pos.z = ft_atof(pos[2]);
+		cam->w_pos.w = 1;
+		ret = 0;
+	}
+	ft_strarrayclear(&pos);
+	return (ret);
+}
 
 void	init_camera(t_camera *cam, float hsize, float vsize)
 {

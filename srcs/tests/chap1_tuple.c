@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   chap1_tuple.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 18:09:47 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/11 19:22:02 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/01/13 16:18:22 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "/mnt/nfs/homes/rokerjea/Criterion/include/criterion/criterion.h"
-#include <math.h>
-#include <stdio.h>
-#include <errno.h>
-#include "tuple.h"
-#include "color.h"
+#include "criterion_utils.h"
 
 typedef float t_float4 __attribute__((ext_vector_type(4)));
 typedef int	int4 __attribute__((ext_vector_type(4)));

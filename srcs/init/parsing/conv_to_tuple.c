@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conv_to_tuple.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:19:07 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/12 16:34:43 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2023/01/13 15:28:55 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ bool	conv_rgb(char *s, t_elem *elem, char *elem_name)
 	return (ret);
 }
 
-static bool	check_orientation_range(t_vector v)
+bool	check_orientation_range(t_vector v)
 {
 	bool	ret;
 
@@ -62,30 +62,6 @@ static bool	check_orientation_range(t_vector v)
 		ret = 0;
 	else
 		ret = 1;
-	return (ret);
-}
-
-bool	conv_camorientation(char *s, t_camera *cam, char *elem_name)
-{
-	bool	ret;
-	char	**or;
-
-	or = ft_split(s, ',');
-	if (!or)
-		return (error_display("malloc error"));
-	ret = 0;
-	if (ft_strarraysize(or) != 3)
-		ret = error_display2("wrong orientation value for ", elem_name);
-	else
-	{
-		cam->orientation.x = ft_atof(or[0]);
-		cam->orientation.y = ft_atof(or[1]);
-		cam->orientation.z = ft_atof(or[2]);
-		cam->orientation.w = 0;
-		if (check_orientation_range(cam->orientation))
-			ret = error_display2("wrong orientation range for ", elem_name);
-	}
-	ft_strarrayclear(&or);
 	return (ret);
 }
 
@@ -129,28 +105,6 @@ bool	conv_pos(char *s, t_elem *elem, char *elem_name)
 		elem->w_pos.y = ft_atof(pos[1]);
 		elem->w_pos.z = ft_atof(pos[2]);
 		elem->w_pos.w = 1;
-		ret = 0;
-	}
-	ft_strarrayclear(&pos);
-	return (ret);
-}
-
-bool	conv_campos(char *s, t_camera *cam, char *elem_name)
-{
-	bool	ret;
-	char	**pos;
-
-	pos = ft_split(s, ',');
-	if (!pos)
-		return (error_display("malloc error"));
-	if (ft_strarraysize(pos) != 3)
-		ret = error_display2("wrong pos value for ", elem_name);
-	else
-	{
-		cam->w_pos.x = ft_atof(pos[0]);
-		cam->w_pos.y = ft_atof(pos[1]);
-		cam->w_pos.z = ft_atof(pos[2]);
-		cam->w_pos.w = 1;
 		ret = 0;
 	}
 	ft_strarrayclear(&pos);

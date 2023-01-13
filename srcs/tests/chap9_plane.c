@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   chap9_plane.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:32:48 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/10 19:21:40 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2023/01/13 16:43:29 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mycriterion.h"
-#include "minirt.h"
-#include "tuple.h"
-#include "matrix.h"
-#include "ray.h"
-#include "lights.h"
-#include "scene.h"
-#include "inter.h"
-#include "setup.h"
+#include "criterion_utils.h"
 
 Test(plane, constant_normal)
 {

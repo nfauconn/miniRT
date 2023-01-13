@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   material.c                                         :+:      :+:    :+:   */
+/*   object_params.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:03:30 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/12 16:41:44 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/01/13 15:35:45 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,14 @@ t_material	default_material(t_elem *elem)
 	material.specular = 0.3;
 	material.shininess = 200.0;
 	return (material);
+}
+
+void	change_obj_transform_matr(t_elem *obj)
+{
+	if (obj->shape == sphere)
+		obj->transform = sp_transform_matr(obj);
+	else if (obj->shape == cylinder)
+		obj->transform = cyl_transfo_matr(obj);
+	else if (obj->shape == plane)
+		obj->transform = pl_transform_matr(obj);
 }

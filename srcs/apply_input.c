@@ -1,44 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   user_input.c                                       :+:      :+:    :+:   */
+/*   apply_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:39:47 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/12 16:40:40 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2023/01/13 15:38:01 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "user_input.h"
-
-bool	is_rotate(int keycode)
-{
-	return (keycode == W_KEY || keycode == A_KEY
-		|| keycode == S_KEY || keycode == D_KEY);
-}
-
-bool	is_translate(int keycode)
-{
-	return (keycode >= LEFT_ARROW && keycode <= DOWN_ARROW);
-}
-
-bool	is_valid_key(int keycode)
-{
-	return ((keycode >= LEFT_ARROW && keycode <= DOWN_ARROW) || keycode == W_KEY
-		|| keycode == A_KEY || keycode == S_KEY || keycode == D_KEY
-		|| keycode == '=' || keycode == '-');
-}
-
-void	change_obj_transform_matr(t_elem *obj)
-{
-	if (obj->shape == sphere)
-		obj->transform = sp_transform_matr(obj);
-	else if (obj->shape == cylinder)
-		obj->transform = cyl_transfo_matr(obj);
-	else if (obj->shape == plane)
-		obj->transform = pl_transform_matr(obj);
-}
 
 bool	rotate_obj(t_elem *obj, int keycode)
 {
@@ -116,18 +88,4 @@ void	handle_move(t_scene *scene, int keycode)
 	change_obj_transform_matr(scene->move.obj);
 	drawscene(scene, scene->img);
 	mlx_put_image_to_window(scene->mlx, scene->win, scene->img->ptr, 0, 0);
-}
-
-bool	click_hits(t_scene *scene, int x, int y)
-{
-	t_ray	r;
-	t_inter	i;
-
-	r = ray_for_pixel(*(scene->cam), x, y);
-	i = intersect_world(scene, r);
-	if (i.t < 0)
-		return (0);
-	scene->move.asked = 1;
-	scene->move.obj = i.obj;
-	return (1);
 }

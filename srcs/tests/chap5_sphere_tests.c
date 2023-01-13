@@ -6,17 +6,11 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 18:32:43 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/11 14:02:24 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/13 16:43:06 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mycriterion.h"
-#include "matrix.h"
-#include "externlibs.h"
-#include "tuple.h"
-#include "setup.h"
-#include "ray.h"
-#include "inter.h"
+#include "criterion_utils.h"
 
 Test (ray, create)
 {

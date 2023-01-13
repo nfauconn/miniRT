@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   chap8_shadows.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 17:39:16 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/10 19:13:59 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2023/01/13 15:59:59 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mycriterion.h"
-#include "matrix.h"
-#include "minirt.h"
-#include "tuple.h"
-#include "ray.h"
-#include "lights.h"
-#include "scene.h"
-#include "inter.h"
-#include "setup.h"
+#include "criterion_utils.h"
 
 Test(shadows, yes_no)
 {

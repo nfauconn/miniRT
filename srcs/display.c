@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:44:19 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/12 16:45:20 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2023/01/13 15:40:12 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,6 @@ int	close_window(t_scene *scene)
 		mlx_destroy_window(scene->mlx, scene->win);
 	mlx_destroy_display(scene->mlx);
 	exit_clear(0, scene);
-	return (0);
-}
-
-static void	reset_click_hit(t_scene *scene)
-{
-	scene->move.asked = 0;
-	scene->move.obj = NULL;
-}
-
-int	mouse_click(int keycode, int x, int y, t_scene *scene)
-{
-	if (keycode == LEFT_CLICK)
-	{
-		if (click_hits(scene, x, y))
-			printf("\nobject selected\n");
-	}
-	else
-	{
-		if (scene->move.asked)
-			printf("object unselected\n");
-		reset_click_hit(scene);
-	}
 	return (0);
 }
 

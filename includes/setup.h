@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:18:36 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/12 16:58:18 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2023/01/13 15:36:27 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,9 @@ void		setup_scene(t_scene *scene, char *file);
 
 /* PARSING */
 bool		parse_file(char *file, t_scene *scene);
+bool		check_orientation_range(t_vector v);
 bool		conv_pos(char *s, t_elem *elem, char *elem_name);
-bool		conv_campos(char *s, t_camera *cam, char *elem_name);
 bool		conv_orientation(char *s, t_elem *elem, char *elem_name);
-bool		conv_camorientation(char *s, t_camera *cam, char *elem_name);
 bool		conv_rgb(char *s, t_elem *elem, char *elem_name);
 bool		conv_ratio(char *s, t_elem *elem, char *elem_name);
 bool		conv_fov(char *s, t_camera *cam, char *elem_name);
@@ -55,12 +54,13 @@ t_m4x4_f	cyl_transfo_matr(t_elem *cyl);
 /* LIGHTSOURCE */
 int			set_lights(t_scene *scene, char **params);
 
-/* plane */
+/* PLANE */
 int			set_plane(t_scene *scene, char **params);
 void		init_plane(t_elem *pl);
 t_m4x4_f	pl_transform_matr(t_elem *pl);
 
-/* MATERIAL */
+/* OBJECT PARAMS */
 t_material	default_material(t_elem *elem);
+void		change_obj_transform_matr(t_elem *obj);
 
 #endif

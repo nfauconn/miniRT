@@ -6,19 +6,11 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 19:16:56 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/11 14:02:45 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/13 16:43:37 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mycriterion.h"
-#include "minirt.h"
-#include "tuple.h"
-#include "matrix.h"
-#include "ray.h"
-#include "lights.h"
-#include "scene.h"
-#include "inter.h"
-#include "setup.h"
+#include "criterion_utils.h"
 
 float	cylinder_min(t_elem cyl)
 {
