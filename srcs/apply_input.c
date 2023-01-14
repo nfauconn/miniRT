@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:39:47 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/14 17:13:55 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/14 17:39:15 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ bool	rotate_obj(t_elem *obj, int dir_key, int size)
 	if (obj->shape == sphere)
 		return (1);
 	if (dir_key == W_KEY)
-		obj->orientation.x += 0.01 * size;
+		obj->orientation.x += 0.1 * size;
 	else if (dir_key == S_KEY)
-		obj->orientation.x -= 0.01 * size;
+		obj->orientation.x -= 0.1 * size;
 	else if (dir_key == A_KEY)
-		obj->orientation.z += 0.01 * size;
+		obj->orientation.z += 0.1 * size;
 	else if (dir_key == D_KEY)
-		obj->orientation.z -= 0.01 * size;
+		obj->orientation.z -= 0.1 * size;
 	printf("rotating by %d units...\n", size);
 	return (0);
 }

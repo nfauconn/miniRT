@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:30:09 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/12 16:41:35 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/01/14 18:12:12 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	init_plane(t_elem *pl)
 	pl->o_pos = create_point(0, 0, 0);
 	pl->transform = pl_transform_matr(pl);
 	pl->material = default_material(pl);
+	pl->material.specular = 0;
 }
 
 int	set_plane(t_scene *scene, char **params)
