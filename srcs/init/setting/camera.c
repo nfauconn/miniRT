@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:30:55 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/14 14:51:16 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/14 20:01:48 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	set_camera(t_scene *scene, char **params)
 	from = scene->cam->w_pos;
 	r = ray(from, scene->cam->orientation);
 	r.dir = normalize(r.dir);
-	to = position(r, 1);
+	to = scene->cam->orientation;
 	up = create_vector(0, 1, 0);
 	scene->cam->transform = view_transform(from, to, up);
 	return (0);
