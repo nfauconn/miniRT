@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:29:49 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/13 15:59:36 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/14 14:32:49 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,4 +149,6 @@ Test(lights, get_lighting)
 	point_light(&light, create_point(0, 0, 10), (t_rgb)WHITE);
 	res = lighting(&scene, &light, inter, 0);
 	cr_expect(same_tuple(res, create_color(0.1, 0.1, 0.1)));
+
+	clear(&scene);
 }

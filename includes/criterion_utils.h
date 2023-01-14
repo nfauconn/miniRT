@@ -5,6 +5,8 @@
 
 #include "criterion_header.h"
 #include "minirt.h"
+#include "error.h"
+#include "exit.h"
 #include "tuple.h"
 #include "matrix.h"
 #include "ray.h"

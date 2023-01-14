@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:40:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/13 16:18:22 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/14 14:26:55 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,18 @@ void	prepare_computations(t_inter *i, t_ray ray)
 and return the color at the given intersection */
 t_rgb	color_at(t_scene *world, t_ray ray)
 {
+	bool	is_void;
 	t_inter	i;
 	t_rgb	color;
 
-	i = intersect_world(world, ray);
-	if (i.t <= 0)
+	if (!world->objs)
+		is_void = 1;
+	else
+	{
+		is_void = 0;
+		i = intersect_world(world, ray);
+	}
+	if (is_void || i.t <= 0)
 	{
 		color = create_color(0, 0, 0);
 		return (color);

@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 15:31:58 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/13 15:40:32 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/14 14:28:43 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ bool	click_hits(t_scene *scene, int x, int y)
 
 int	mouse_click(int keycode, int x, int y, t_scene *scene)
 {
+	if (!scene->objs)
+		return (0);
 	if (keycode == LEFT_CLICK)
 	{
 		if (click_hits(scene, x, y))

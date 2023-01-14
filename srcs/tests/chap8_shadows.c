@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 17:39:16 by rokerjea          #+#    #+#             */
-/*   Updated: 2023/01/13 15:59:59 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/14 14:31:53 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ Test(shadows, yes_no)
 	inter.obj = &sphere;
 	t_rgb	res = lighting(&scene, &light, inter, shadowed);
 	cr_expect(same_tuple(res, create_color(0.1, 0.1, 0.1)));
+	clear(&scene);
 }
 
 Test(shadows, no_shadow1)
@@ -49,6 +50,7 @@ Test(shadows, no_shadow1)
 	cr_expect(is_shadowed(&world, world.lights, p3) == 0);
 	t_point	p4 = create_point(-2, 2, -2);
 	cr_expect(is_shadowed(&world, world.lights, p4) == 0);
+	clear(&world);
 }
 
 Test(shadows, intersect_shadow)
@@ -60,6 +62,7 @@ Test(shadows, intersect_shadow)
 	prepare_computations(&i, r);
 	t_rgb	c  = shade_hit(&world, i);
 	cr_expect(same_tuple(c, create_color(0.1, 0.1, 0.1)));
+	clear(&world);
 }
 
 Test(shadows, shade_hit_offset)
