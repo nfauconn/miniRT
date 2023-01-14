@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:30:55 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/14 20:01:48 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/01/14 21:53:18 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static bool	conv_camorientation(char *s, t_camera *cam, char *elem_name)
 		cam->orientation.x = ft_atof(or[0]);
 		cam->orientation.y = ft_atof(or[1]);
 		cam->orientation.z = ft_atof(or[2]);
+		if (cam->orientation.z == 0)
+			cam->orientation.z = EPSILON;
 		cam->orientation.w = 0;
 		if (check_orientation_range(cam->orientation))
 			ret = error_display2("wrong orientation range for ", elem_name);
@@ -61,21 +63,21 @@ static bool	conv_campos(char *s, t_camera *cam, char *elem_name)
 void	init_camera(t_camera *cam, float hsize, float vsize)
 {
 	float		half_view;
-	float		aspect;
+	float		aspect_ratio;
 
 	cam->hsize = hsize;
 	cam->vsize = vsize;
 	cam->transform = identity_matr();
 	half_view = tan(cam->fov / 2);
-	aspect = cam->hsize / cam->vsize;
-	if (aspect >= 1)
+	aspect_ratio = cam->hsize / cam->vsize;
+	if (aspect_ratio >= 1)
 	{
 		cam->half_width = half_view;
-		cam->half_height = half_view / aspect;
+		cam->half_height = half_view / aspect_ratio;
 	}
 	else
 	{
-		cam->half_width = half_view * aspect;
+		cam->half_width = half_view * aspect_ratio;
 		cam->half_height = half_view;
 	}
 	cam->pixel_size = (cam->half_width * 2) / cam->hsize;
@@ -86,7 +88,6 @@ int	set_camera(t_scene *scene, char **params)
 	t_point		from;
 	t_point		to;
 	t_vector	up;
-	t_ray		r;
 
 	if (ft_strarraysize(params) != 4)
 		return (error_display("wrong number of elements for camera"));
@@ -102,8 +103,6 @@ int	set_camera(t_scene *scene, char **params)
 	scene->cam->fov *= M_PI / 180;
 	init_camera(scene->cam, WIDTH, HEIGHT);
 	from = scene->cam->w_pos;
-	r = ray(from, scene->cam->orientation);
-	r.dir = normalize(r.dir);
 	to = scene->cam->orientation;
 	up = create_vector(0, 1, 0);
 	scene->cam->transform = view_transform(from, to, up);
