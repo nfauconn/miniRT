@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:44:19 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/13 15:40:12 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/14 17:05:14 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,18 @@ int	close_window(t_scene *scene)
 
 int	key_hook(int keycode, t_scene *scene)
 {
+	static int	dir_key = 0;
+
 	if (keycode == ECHAP_KEY)
 		close_window(scene);
-	else if (scene->move.asked && is_valid_key(keycode))
-		handle_move(scene, keycode);
+	else if (scene->move.asked && is_dir_key(keycode))
+		dir_key = keycode;
+	else if (scene->move.asked && dir_key && ft_isdigit(keycode))
+	{
+		keycode -= 48;
+		handle_move(scene, dir_key, keycode);
+		dir_key = 0;
+	}
 	return (0);
 }
 

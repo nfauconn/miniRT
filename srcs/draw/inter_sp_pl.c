@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 15:46:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/13 16:18:22 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/14 17:18:06 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ t_xs	sp_intersect(t_elem s, t_ray r)
 	sphere_to_ray = r.orig - s.o_pos;
 	a = dot_product(r.dir, r.dir);
 	b = 2 * dot_product(r.dir, sphere_to_ray);
-	discriminant = pow(b, 2) - 4 * a * (dot_product(sphere_to_ray, sphere_to_ray) - 1);
+	discriminant = pow(b, 2) - 4 * a * \
+							(dot_product(sphere_to_ray, sphere_to_ray) - 1);
 	if (discriminant < 0)
 		ft_bzero(&xs, sizeof(xs));
 	else

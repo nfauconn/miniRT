@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 15:31:58 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/14 14:28:43 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/14 16:48:34 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	is_translate(int keycode)
 	return (keycode >= LEFT_ARROW && keycode <= DOWN_ARROW);
 }
 
-bool	is_valid_key(int keycode)
+bool	is_dir_key(int keycode)
 {
 	return ((keycode >= LEFT_ARROW && keycode <= DOWN_ARROW) || keycode == W_KEY
 		|| keycode == A_KEY || keycode == S_KEY || keycode == D_KEY
