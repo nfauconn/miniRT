@@ -6,7 +6,7 @@
 /*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:04:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/12 16:21:21 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/01/14 20:06:38 by rokerjea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ t_m4x4_f	view_transform(t_point from, t_point to, t_vector up)
 	t_vector	left;
 	t_vector	true_up;
 
-	forward = normalize(to - from);
+	forward = normalize(to);
 	upn = normalize(up);
-	left = cross_product(forward, upn);
-	true_up = cross_product(left, forward);
+	left = normalize(cross_product(forward, upn));
+	true_up = normalize(cross_product(left, forward));
 	res = identity_matr();
 	res[0][0] = left.x;
 	res[0][1] = left.y;
