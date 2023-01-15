@@ -23,11 +23,8 @@ UTILS_DIR = utils
 
 #SOURCES
 S_EXT = .c
-SRC_FILES = render.c \
-			display.c \
-			move_parse.c \
-			move_parse_utils.c \
-			move_apply.c \
+SRC_FILES = display.c \
+			drawscene.c \
 			error.c \
 			exit_clear.c \
 \
@@ -53,7 +50,6 @@ SRC_FILES = render.c \
 				} \
 \
 				${addprefix ${DRAW_DIR}/, \
-					drawscene.c \
 					ray.c \
 					inter.c \
 					inter_cy.c \

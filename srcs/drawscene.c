@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_parse_utils.c                                 :+:      :+:    :+:   */
+/*   drawscene.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/15 22:40:37 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/15 22:56:07 by fjeiwjifeoh      ###   ########.fr       */
+/*   Created: 2022/11/13 18:10:19 by nfauconn          #+#    #+#             */
+/*   Updated: 2023/01/15 23:06:40 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "user_input.h"
+#include "scene.h"
 
-bool	is_value_key(int keycode)
+void	drawscene(t_scene *scene, t_img *img)
 {
-	return (keycode >= '0' && keycode <= '9');
-}
+	size_t		x;
+	size_t		y;
+	t_ray		r;
+	t_rgb		color;
 
-bool	is_axis_key(int keycode)
-{
-	return (keycode == 'x' || keycode == 'y' || keycode == 'z');
-}
-
-bool	is_id_key(int keycode)
-{
-	return (keycode == 'r' || keycode == 't' || keycode == 's');
+	y = 0;
+	while (y < scene->cam->vsize)
+	{
+		x = 0;
+		while (x < scene->cam->hsize)
+		{
+			r = ray_for_pixel(*(scene->cam), x, y);
+			color = color_at(scene, r);
+			my_mlx_pixel_put(img, x, y, rgbvtoi(color));
+			x++;
+		}
+		y++;
+	}
+	printf("finish\n\n");
 }

@@ -6,7 +6,7 @@
 /*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:44:19 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/15 22:42:45 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2023/01/15 23:05:11 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int	key_hook(int keycode, t_scene *scene)
 {
 	if (keycode == ECHAP_KEY)
 		close_window(scene);
-	if (scene->move.asked)
-		move_parse(scene, keycode);
 	return (0);
 }
 
@@ -38,14 +36,6 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 
 	dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
 	*(unsigned int *)dst = color;
-}
-
-static void	print_instructions(void)
-{
-	printf("\nwelcome\n");
-	printf("\t-left click on an object to apply changes\n");
-	printf("\t-right click to cancel\n");
-	printf("drawing initial scene...\n");
 }
 
 void	launch_display(t_scene *scene)
@@ -61,11 +51,10 @@ void	launch_display(t_scene *scene)
 	scene->img->addr = mlx_get_data_addr(scene->img->ptr, \
 		&scene->img->bpp, &scene->img->line_length, \
 		&scene->img->endian);
-	print_instructions();
+	printf("drawing...\n");
 	drawscene(scene, scene->img);
 	mlx_put_image_to_window(scene->mlx, scene->win, scene->img->ptr, 0, 0);
 	mlx_hook(scene->win, 17, 0, close_window, scene);
 	mlx_key_hook(scene->win, key_hook, scene);
-	mlx_mouse_hook(scene->win, mouse_click, scene);
 	mlx_loop(scene->mlx);
 }
