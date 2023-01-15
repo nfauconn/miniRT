@@ -25,8 +25,9 @@ UTILS_DIR = utils
 S_EXT = .c
 SRC_FILES = render.c \
 			display.c \
-			parse_input.c \
-			apply_input.c \
+			move_parse.c \
+			move_apply_obj.c \
+			move_apply_cam.c \
 			error.c \
 			exit_clear.c \
 \

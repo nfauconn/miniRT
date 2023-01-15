@@ -1,36 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   move_apply_cam.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/07 13:29:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/15 19:47:35 by nfauconn         ###   ########.fr       */
+/*   Created: 2023/01/15 15:57:36 by nfauconn          #+#    #+#             */
+/*   Updated: 2023/01/15 19:34:59 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "display.h"
+#include "user_input.h"
 
-void	render(t_scene *scene, t_img *img)
+void	handle_cam_move(t_scene *scene)
 {
-	size_t		x;
-	size_t		y;
-	t_ray		r;
-	t_rgb		color;
-
-	y = 0;
-	while (y < scene->cam->vsize)
-	{
-		x = 0;
-		while (x < scene->cam->hsize)
-		{
-			r = ray_for_pixel(*(scene->cam), x, y);
-			color = color_at(scene, r);
-			my_mlx_pixel_put(img, x, y, rgbvtoi(color));
-			x++;
-		}
-		y++;
-	}
-	printf("finish\n\n");
+	(void)scene;
 }

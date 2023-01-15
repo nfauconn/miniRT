@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/12 16:55:59 by fjeiwjifeoh      ###   ########.fr       */
+/*   Updated: 2023/01/15 19:21:13 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ typedef int __attribute__((matrix_type(4, 4)))		t_m4x4_i;
 
 # define LEFT_CLICK 1
 
+# define ROTATE 'r'
+# define TRANSLATE 't'
+# define RESIZE 's'
+# define CAMERA 'c'
+
 /******************************************************************************/
 /*								SCENE										  */
 /******************************************************************************/
@@ -59,19 +64,19 @@ typedef enum e_elements
 
 typedef union u_specs
 {
-	float				ratio;
-	float				radius;
-	float				fov;
-	float				diam_hght[2];
+	float			ratio;
+	float			radius;
+	float			fov;
+	float			diam_hght[2];
 }	t_specs;
 
 typedef struct s_material
 {
-	t_rgb	color;
-	float	ambient;
-	float	diffuse;
-	float	specular;
-	float	shininess;
+	t_rgb	        color;
+	float	        ambient;
+	float	        diffuse;
+	float	        specular;
+	float	        shininess;
 }	t_material;
 
 typedef struct s_elem
@@ -103,17 +108,22 @@ typedef struct s_camera
 
 typedef struct s_img
 {
-	void				*ptr;
-	char				*addr;
-	int					bpp;
-	int					line_length;
-	int					endian;
+	void			*ptr;
+	char			*addr;
+	int				bpp;
+	int				line_length;
+	int				endian;
 }				t_img;
 
 typedef struct s_move
 {
-	bool	asked;
-	t_elem	*obj;
+	bool			asked;
+	t_elem			*obj;
+	t_camera		*cam;
+	int				id;
+	int				axis;
+	char			neg;
+	int				value;
 }	t_move;
 
 typedef struct s_scene
@@ -135,26 +145,26 @@ typedef struct s_scene
 
 typedef struct s_ray
 {
-	t_point		orig;
-	t_point		dir;
+	t_point			orig;
+	t_point			dir;
 }	t_ray;
 
 typedef struct s_xs
 {
-	size_t		count;
-	float		t[2];
-	t_elem		*obj;
+	size_t			count;
+	float			t[2];
+	t_elem			*obj;
 }	t_xs;
 
 typedef struct s_inter
 {
-	float				t;
-	t_elem				*obj;
-	t_point				point;
-	t_vector			eyev;
-	t_vector			normalv;
-	bool				inside;
-	t_point				over_point;
+	float			t;
+	t_elem			*obj;
+	t_point			point;
+	t_vector		eyev;
+	t_vector		normalv;
+	bool			inside;
+	t_point			over_point;
 }	t_inter;
 
 #endif
