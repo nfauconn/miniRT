@@ -26,8 +26,8 @@ S_EXT = .c
 SRC_FILES = render.c \
 			display.c \
 			move_parse.c \
-			move_apply_obj.c \
-			move_apply_cam.c \
+			move_parse_utils.c \
+			move_apply.c \
 			error.c \
 			exit_clear.c \
 \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/15 19:21:13 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/15 22:49:49 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ typedef int __attribute__((matrix_type(4, 4)))		t_m4x4_i;
 # define ROTATE 'r'
 # define TRANSLATE 't'
 # define RESIZE 's'
-# define CAMERA 'c'
 
 /******************************************************************************/
 /*								SCENE										  */
@@ -119,7 +118,6 @@ typedef struct s_move
 {
 	bool			asked;
 	t_elem			*obj;
-	t_camera		*cam;
 	int				id;
 	int				axis;
 	char			neg;

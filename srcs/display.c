@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:44:19 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/15 20:44:25 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/15 22:42:45 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,51 +27,8 @@ int	key_hook(int keycode, t_scene *scene)
 {
 	if (keycode == ECHAP_KEY)
 		close_window(scene);
-	if (keycode == CAMERA)
-	{
-		scene->move.asked = 1;
-		scene->move.cam = scene->cam;
-		scene->move.obj = NULL;
-		printf("camera selected\nchoose your move:\n");
-		printf("\t-translation (t)\n");
-		printf("\t-rotation (r)\n");
-	}
-	else if (scene->move.asked && is_id_key(keycode))
-	{
-		if (scene->move.cam && keycode == 's')
-			scene->move.id = 0;
-		else
-		{
-			scene->move.id = keycode;
-			if (scene->move.id == 's')
-				printf("s selected. please choose the value\n");
-			else
-				printf("%c selected. you can now choose the axis x, y or z\n", keycode);
-		}
-	}
-	else if (scene->move.asked && scene->move.id && is_axis_key(keycode))
-	{
-		scene->move.axis = keycode;
-		printf("%c selected. you can now choose the value btw -9 & 9 units\n", keycode);
-	}
-	else if (scene->move.asked && scene->move.id && (scene->move.axis || scene->move.id == 's')
-		&& keycode == '-')
-	{
-		scene->move.neg = '-';
-	}
-	else if (scene->move.asked && scene->move.id && (scene->move.axis || scene->move.id == 's')
-		&& is_value_key(keycode))
-	{
-		scene->move.value = keycode - 48;
-		if (scene->move.neg)
-			scene->move.value = -scene->move.value;
-		printf("%c%c chosen\n", scene->move.neg, keycode);
-		scene->move.neg = 0;
-		if (scene->move.obj)
-			handle_obj_move(scene);
-		else if (scene->move.cam)
-			handle_cam_move(scene);
-	}
+	if (scene->move.asked)
+		move_parse(scene, keycode);
 	return (0);
 }
 
@@ -87,8 +44,7 @@ static void	print_instructions(void)
 {
 	printf("\nwelcome\n");
 	printf("\t-left click on an object to apply changes\n");
-	printf("\t-tap C to change camera\n");
-	printf("\t-use mouse right click to cancel\n");
+	printf("\t-right click to cancel\n");
 	printf("drawing initial scene...\n");
 }
 

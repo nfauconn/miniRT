@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_apply_obj.c                                   :+:      :+:    :+:   */
+/*   move_apply.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:39:47 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/15 20:44:56 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/15 22:45:36 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ bool	translate_obj(t_scene *scene)
 	if (scene->move.axis == 'x')
 		scene->move.obj->w_pos.x += scene->move.value;
 	if (scene->move.axis == 'y')
-		scene->move.obj->w_pos.y += scene->move.value;
+		scene->move.obj->w_pos.y *= scene->move.value;
 	if (scene->move.axis == 'z')
 		scene->move.obj->w_pos.z += scene->move.value;
 	return (0);

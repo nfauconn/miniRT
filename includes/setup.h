@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fjeiwjifeoh <fjeiwjifeoh@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:18:36 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/15 20:27:00 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/15 22:49:21 by fjeiwjifeoh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,5 @@ t_m4x4_f	pl_transform_matr(t_elem *pl);
 /* OBJECT PARAMS */
 t_material	default_material(t_elem *elem);
 void		change_obj_transform_matr(t_elem *obj);
-void		change_cam_transform_matr(t_camera *cam);
 
 #endif
