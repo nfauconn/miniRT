@@ -1,7 +1,7 @@
 #	position			orientation		specs	specs2	rgb
 
 
-C	0.0,0.0,0.0				0.0,0.0,1.0		90
+C	0,0,0				0.0,0.0,1.0		90
 #       ^this is the z axis, if you change it,
 #your view goes in(if positive), or out(if negative)
 

@@ -2,7 +2,7 @@
 
 
 C	0,0,-5				0.0,0.0,1.0		90
-#     ^this is the x axis, if you change it,
+#     ^this is the y axis, if you change it,
 #your view goes up(if positive), or down(if negative)
 
 A										0.5				255,255,255
