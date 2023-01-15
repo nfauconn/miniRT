@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rokerjea <rokerjea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:04:15 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/14 20:06:38 by rokerjea         ###   ########.fr       */
+/*   Updated: 2023/01/15 21:00:19 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_m4x4_f	view_transform(t_point from, t_point to, t_vector up)
 	t_vector	left;
 	t_vector	true_up;
 
+	to = create_vector(to.x, to.y, to.z);
 	forward = normalize(to);
 	upn = normalize(up);
 	left = normalize(cross_product(forward, upn));

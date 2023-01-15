@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 12:03:30 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/13 15:35:45 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/15 20:27:33 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,16 @@ void	change_obj_transform_matr(t_elem *obj)
 		obj->transform = cyl_transfo_matr(obj);
 	else if (obj->shape == plane)
 		obj->transform = pl_transform_matr(obj);
+}
+
+void	change_cam_transform_matr(t_camera *cam)
+{
+	t_point		from;
+	t_point		to;
+	t_vector	up;
+
+	from = cam->w_pos;
+	to = cam->orientation;
+	up = create_vector(0, 1, 0);
+	cam->transform = view_transform(from, to, up);
 }

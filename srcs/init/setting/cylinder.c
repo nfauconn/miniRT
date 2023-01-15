@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 13:33:13 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/13 13:57:09 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/15 20:51:38 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ t_m4x4_f	fuse_rotate(t_elem	*cyl)
 	t_m4x4_f	matrix2;
 	t_m4x4_f	matrix3;
 
-	matrix1 = rotation_x((M_PI * cyl->orientation.x) / 2);
-	matrix2 = rotation_y((M_PI * cyl->orientation.y) / 2);
-	matrix3 = rotation_z((M_PI * cyl->orientation.z) / 2);
+	matrix1 = rotation_x((M_PI * cyl->orientation.x));
+	matrix2 = rotation_y((M_PI * cyl->orientation.y));
+	matrix3 = rotation_z((M_PI * cyl->orientation.z));
 	matrix = matrix1 * matrix2 * matrix3;
 	return (matrix);
 }

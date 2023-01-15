@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:44:19 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/15 19:52:20 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/15 20:44:25 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	key_hook(int keycode, t_scene *scene)
 		scene->move.asked = 1;
 		scene->move.cam = scene->cam;
 		scene->move.obj = NULL;
-		printf("\ncamera selected\nchoose your move:\n");
+		printf("camera selected\nchoose your move:\n");
 		printf("\t-translation (t)\n");
 		printf("\t-rotation (r)\n");
 	}
@@ -46,7 +46,7 @@ int	key_hook(int keycode, t_scene *scene)
 			if (scene->move.id == 's')
 				printf("s selected. please choose the value\n");
 			else
-			printf("%c selected. you can now choose the axis x, y or z\n", keycode);
+				printf("%c selected. you can now choose the axis x, y or z\n", keycode);
 		}
 	}
 	else if (scene->move.asked && scene->move.id && is_axis_key(keycode))
@@ -65,7 +65,6 @@ int	key_hook(int keycode, t_scene *scene)
 		scene->move.value = keycode - 48;
 		if (scene->move.neg)
 			scene->move.value = -scene->move.value;
-		scene->move.value /= 2;
 		printf("%c%c chosen\n", scene->move.neg, keycode);
 		scene->move.neg = 0;
 		if (scene->move.obj)

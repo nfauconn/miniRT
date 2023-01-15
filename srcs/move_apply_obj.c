@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:39:47 by fjeiwjifeoh       #+#    #+#             */
-/*   Updated: 2023/01/15 20:13:07 by nfauconn         ###   ########.fr       */
+/*   Updated: 2023/01/15 20:44:56 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,21 @@
 
 bool	rotate_obj(t_scene *scene)
 {
+	scene->move.value /= 10;
 	if (scene->move.obj->shape == sphere)
 		return (error_display("sphere wont rotate visibly\n"));
 	if (scene->move.axis == 'x')
-		scene->move.obj->orientation.x += scene->move.value;
+		scene->move.obj->orientation.x = scene->move.value;
 	else if (scene->move.axis == 'y')
-		scene->move.obj->orientation.y += scene->move.value;
+		scene->move.obj->orientation.y = scene->move.value;
 	else if (scene->move.axis == 'z')
-		scene->move.obj->orientation.z += scene->move.value;
+		scene->move.obj->orientation.z = scene->move.value;
 	return (0);
 }
 
 bool	resize_obj(t_scene *scene)
 {
+	scene->move.value /= 10;
 	if (scene->move.obj->shape == plane)
 		return (error_display("plane dont have a size to change\n"));
 	if (scene->move.obj->shape == sphere)
@@ -41,6 +43,7 @@ bool	resize_obj(t_scene *scene)
 
 bool	translate_obj(t_scene *scene)
 {
+//	scene->move.value /= 2;
 	if (scene->move.axis == 'x')
 		scene->move.obj->w_pos.x += scene->move.value;
 	if (scene->move.axis == 'y')
