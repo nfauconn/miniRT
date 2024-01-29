@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:58:49 by nfauconn          #+#    #+#             */
-/*   Updated: 2023/01/16 13:24:20 by nfauconn         ###   ########.fr       */
+/*   Updated: 2024/01/29 16:35:39 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ typedef float __attribute__((matrix_type(4, 4)))	t_m4x4_f;
 typedef t_m4x4_f									t_m3x3_f;
 typedef int __attribute__((matrix_type(4, 4)))		t_m4x4_i;
 
-# define WIDTH 300
-# define HEIGHT 150
+# define WIDTH 900
+# define HEIGHT 450
 # define EPSILON 0.0001
 
 # define W_KEY 119
