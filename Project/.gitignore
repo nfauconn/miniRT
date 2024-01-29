@@ -59,3 +59,4 @@ libft/libft.a
 all_tests
 lights
 sandbox/
+mlx/test/mlx-test
