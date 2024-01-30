@@ -1,13 +1,11 @@
 [![en](https://img.shields.io/badge/lang-en-pink.svg)](https://github.com/nfauconn/miniRT/blob/master/README.md)
 [![fr](https://img.shields.io/badge/lang-fr-purple.svg)](https://github.com/nfauconn/miniRT/blob/master/README.fr.md)
 
-# Project: MiniRT
-
-## 🏁 Goal 🏁
+# MiniRT
 
 The goal of the program is to generate images using the Raytracing protocol. Those computer-generated images will each represent a scene, as seen from a specific angle and position, defined by simple geometric objects, and each with its own lighting system.
 
-## 🚀 Usage 🚀
+## Usage
 
 ```shell
 git clone git@github.com:nfauconn/miniRT.git
@@ -87,7 +85,22 @@ If you want to create your own scene, here are the specifications:
 	- the cylinder height: 21.42
 	- R,G,B colors in range [0,255]: 10, 0, 255
 
-## 💡 Skills 💡
+
+## Description
+
+| Program name | miniRT |
+|--|--|
+Language | C
+Turn in files | `Makefile`, `*.h`, `*.c`
+Makefile  | `NAME`, `all`, `clean`, `fclean`, `re` 
+Arguments | a scene in format `*.rt`
+External functs. | `open`, `close`, `read`, `write`, `printf`, `malloc`, `free`, `perror`, `strerror`, `exit` - all functions of the math library (`-lm man man 3 math`) - all functions of the MinilibX
+
+### Graphics Library
+
+For graphical display management and window manipulation, this project utilizes the `minilibX` graphics library. This library, specifically developed for students at École 42, offers a straightforward interface for creating graphic windows and managing keyboard/mouse events.
+
+## Skills
 
 - **3D Graphics Rendering**:
    - Fundamentals of ray tracing for generating realistic images
@@ -130,29 +143,3 @@ If you want to create your own scene, here are the specifications:
 - **Unit Testing and Debugging**:
     - Writing and maintaining unit tests through the whole building of the project using Criterion for robust and reliable code
     - Debugging complex systems and ensuring the correctness of the implementation
-
-## 📋 Project Instructions 📋
-
-### Rules
-
-| | |
-|--|--|
-| Program name | miniRT |
-Turn in files | `Makefile`, `*.h`, `*.c`
-Makefile  | `NAME`, `all`, `clean`, `fclean`, `re` 
-Arguments | a scene in format `*.rt`
-External functs. | `open`, `close`, `read`, `write`, `printf`, `malloc`, `free`, `perror`, `strerror`, `exit` - all functions of the math library (`-lm man man 3 math`) - all functions of the MinilibX
-
-### Graphics Library
-
-For graphical display management and window manipulation, this project utilizes the `minilibX` graphics library. This library, specifically developed for students at École 42, offers a straightforward interface for creating graphic windows and managing keyboard/mouse events.
-
-### Common Instructions
-
-- **Language**: The project must be written in C.
-- **Norm Compliance**: Code must adhere to the Norm of the school.
-- **Error Handling**: Programs should not exit unexpectedly (e.g., segmentation fault, bus error, double free). Such incidents will render the project non-functional and result in a score of 0.
-- **Memory Management**: All heap allocated memory must be properly freed. Memory leaks are not tolerated.
-- **Makefile Requirements**:
-   - Must compile source files to the required output with flags `-Wall`, `-Wextra`, and `-Werror`.
-   - Must not relink.
