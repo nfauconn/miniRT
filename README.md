@@ -9,8 +9,8 @@ The goal of the program is to generate images using the Raytracing protocol. Tho
 
 >For graphical display management and window manipulation, this project utilizes the `minilibX` graphics library. This library, specifically developed for students at École 42, offers a straightforward interface for creating graphic windows and managing keyboard/mouse events.
 
-| Program name | miniRT |
 |--|--|
+Program name | miniRT |
 Language | C
 Turn in files | `Makefile`, `*.h`, `*.c`
 Makefile  | `NAME`, `all`, `clean`, `fclean`, `re` 
