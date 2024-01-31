@@ -1,9 +1,21 @@
 [![en](https://img.shields.io/badge/lang-en-pink.svg)](https://github.com/nfauconn/miniRT/blob/master/README.md)
 [![fr](https://img.shields.io/badge/lang-fr-purple.svg)](https://github.com/nfauconn/miniRT/blob/master/README.fr.md)
 
+*C Programming Language* • *3D Graphics Rendering* • *Geometric Computation* • *Graphics Programming* • *Lighting and Shading* • *Data Management* • *Parsing and File I/O* • *Math Library Utilization* • *Memory Management* • *Error Handling and Validation* • *Makefile and Compilation* • *Unit Testing and Debugging With Criterion*
+
 # MiniRT
 
 The goal of the program is to generate images using the Raytracing protocol. Those computer-generated images will each represent a scene, as seen from a specific angle and position, defined by simple geometric objects, and each with its own lighting system.
+
+>For graphical display management and window manipulation, this project utilizes the `minilibX` graphics library. This library, specifically developed for students at École 42, offers a straightforward interface for creating graphic windows and managing keyboard/mouse events.
+
+| Program name | miniRT |
+|--|--|
+Language | C
+Turn in files | `Makefile`, `*.h`, `*.c`
+Makefile  | `NAME`, `all`, `clean`, `fclean`, `re` 
+Arguments | a scene in format `*.rt`
+External functs. | `open`, `close`, `read`, `write`, `printf`, `malloc`, `free`, `perror`, `strerror`, `exit` - all functions of the math library (`-lm man man 3 math`) - all functions of the MinilibX
 
 ## Usage
 
@@ -19,10 +31,10 @@ make
 
 Scenes examples are located in `scenes/`
 
+<img src="./.pics/2sp1pl.png">
 <img src="./.pics/multi_colo_lights_from_up.png">
 <img src="./.pics/cylindre.png">
 <img src="./.pics/multicolorlightsdhadows.png">
-<img src="./.pics/2sp1pl.png">
 
 If you want to change the ratio, you can change the `WIDTH` and `HEIGHT` values in `includes/miniRT.h`
 
@@ -85,61 +97,11 @@ If you want to create your own scene, here are the specifications:
 	- the cylinder height: 21.42
 	- R,G,B colors in range [0,255]: 10, 0, 255
 
+### Criterion Unit Tests
 
-## Description
+*Requirements:* `criterion` package. You can also [build it from source](https://criterion.readthedocs.io/en/master/setup.html).
 
-| Program name | miniRT |
-|--|--|
-Language | C
-Turn in files | `Makefile`, `*.h`, `*.c`
-Makefile  | `NAME`, `all`, `clean`, `fclean`, `re` 
-Arguments | a scene in format `*.rt`
-External functs. | `open`, `close`, `read`, `write`, `printf`, `malloc`, `free`, `perror`, `strerror`, `exit` - all functions of the math library (`-lm man man 3 math`) - all functions of the MinilibX
-
-### Graphics Library
-
-For graphical display management and window manipulation, this project utilizes the `minilibX` graphics library. This library, specifically developed for students at École 42, offers a straightforward interface for creating graphic windows and managing keyboard/mouse events.
-
-## Skills
-
-- **3D Graphics Rendering**:
-   - Fundamentals of ray tracing for generating realistic images
-   - The Phong reflection model for realistic lighting and shading
-
-- **Geometric Computation**:
-   - Mathematical concepts of geometry and linear algebra
-   - Geometric transformations such as translation and rotation using matrices
-
-- **Graphics Programming**:
-   - Graphic librarie (miniLibX) to create and manage windows
-   - Pixel manipulation to render images on the screen
-
-- **Lighting and Shading**:
-   - Different lighting models, including ambient, diffuse, and specular lighting
-   - Multiple light sources and colored lighting to enhance realism
-
-- **Data Management**:
-   - Organized data structures to represent 3D objects, lights, and cameras
-
-- **Parsing and File I/O**:
-   - Scene description files parsing
-   - I/O operations to read scene configurations and manage errors
-
-- **Math Library Utilization**:
-    - Proficiency in utilizing math library functions for complex mathematical operations and transformations
-
-- **Memory Management**:
-   - In-depth understanding of dynamic memory allocation and deallocation
-   - Ability to manage memory efficiently and prevent leaks in a complex application
-
-- **Error Handling and Validation**:
-   - Error handling and meaningful error messages
-   - Validating and sanitizing input data to ensure the stability of the application
-
-- **Makefile and Compilation**:
-   - Project compilation, cleaning, and recompilation
-   - No relinkage of object files
-
-- **Unit Testing and Debugging**:
-    - Writing and maintaining unit tests through the whole building of the project using Criterion for robust and reliable code
-    - Debugging complex systems and ensuring the correctness of the implementation
+```shell
+cd miniRT/Project
+make tests
+```
