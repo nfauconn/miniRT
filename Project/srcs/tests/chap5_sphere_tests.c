@@ -48,15 +48,15 @@ Test (ray, intersect1)
 	t_xs	xs = intersect(&s, r);
 
 	cr_expect(xs.count == 2);
-	cr_expect(same_float(xs.t[0], 4.0));
-	cr_expect(same_float(xs.t[1], 6.0));
+	cr_expect_float_eq(xs.t[0], 4.0, EPSILON);
+	cr_expect_float_eq(xs.t[1], 6.0, EPSILON);
 
 	r = ray(create_point(0, 1, -5), create_vector(0, 0, 1));
 	xs = intersect(&s, r);
 
 	cr_expect(xs.count == 2);
-	cr_expect(same_float(xs.t[0], 5.0));
-	cr_expect(same_float(xs.t[1], 5.0));
+	cr_expect_float_eq(xs.t[0], 5.0, EPSILON);
+	cr_expect_float_eq(xs.t[1], 5.0, EPSILON);
 
 	r = ray(create_point(0, 2, -5), create_vector(0, 0, 1));
 	s.transform = identity_matr();
