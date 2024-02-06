@@ -7,7 +7,7 @@
 
 The goal of the program is to generate images using the Raytracing protocol. Those computer-generated images will each represent a scene, as seen from a specific angle and position, defined by simple geometric objects, and each with its own lighting system.
 
->For graphical display management and window manipulation, this project utilizes the `minilibX` graphics library. This library, specifically developed for students at École 42, offers a straightforward interface for creating graphic windows and managing keyboard/mouse events.
+> For graphical display management and window manipulation, this project utilizes the `minilibX` graphics library. This library, specifically developed for students at École 42, offers a straightforward interface for creating graphic windows and managing keyboard/mouse events.
 
 | Key | Value |
 |--|--|
@@ -17,6 +17,7 @@ Turn in files | `Makefile`, `*.h`, `*.c`
 Makefile  | `NAME`, `all`, `clean`, `fclean`, `re` 
 Arguments | a scene in format `*.rt`
 External functs. | `open`, `close`, `read`, `write`, `printf`, `malloc`, `free`, `perror`, `strerror`, `exit` - all functions of the math library (`-lm man man 3 math`) - all functions of the MinilibX
+Global variables | None
 
 ## Usage
 
