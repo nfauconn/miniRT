@@ -23,7 +23,7 @@ Variables globales | Aucune
 
 ```shell
 git clone git@github.com:nfauconn/miniRT.git
-cd miniRT/Projet
+cd miniRT/Project
 make
 ```
 
@@ -105,6 +105,6 @@ Si vous souhaitez créer votre propre scène, voici les spécifications :
 *Prérequis :* le paquet `criterion`. Vous pouvez également [le construire à partir des sources](https://criterion.readthedocs.io/en/master/setup.html).
 
 ```shell
-cd miniRT/Projet
+cd miniRT/Project
 make tests
 ```
